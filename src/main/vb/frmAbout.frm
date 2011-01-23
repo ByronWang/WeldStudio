@@ -1,8 +1,8 @@
 VERSION 5.00
 Begin VB.Form FrmAbout 
    BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "关于我的应用程序"
-   ClientHeight    =   3555
+   Caption         =   "About"
+   ClientHeight    =   3195
    ClientLeft      =   2340
    ClientTop       =   1935
    ClientWidth     =   5730
@@ -11,11 +11,12 @@ Begin VB.Form FrmAbout
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2453.724
+   ScaleHeight     =   2205.246
    ScaleMode       =   0  'User
    ScaleWidth      =   5380.766
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  '所有者中心
+   Tag             =   "23000"
    Begin VB.PictureBox picIcon 
       AutoSize        =   -1  'True
       ClipControls    =   0   'False
@@ -36,16 +37,9 @@ Begin VB.Form FrmAbout
       Height          =   345
       Left            =   4125
       TabIndex        =   0
-      Top             =   2625
+      Tag             =   "23400"
+      Top             =   2640
       Width           =   1500
-   End
-   Begin VB.CommandButton cmdSysInfo 
-      Caption         =   "系统信息(&S)..."
-      Height          =   345
-      Left            =   4140
-      TabIndex        =   2
-      Top             =   3075
-      Width           =   1485
    End
    Begin VB.Line Line1 
       BorderColor     =   &H00808080&
@@ -60,8 +54,9 @@ Begin VB.Form FrmAbout
       Caption         =   "About"
       ForeColor       =   &H00000000&
       Height          =   1170
-      Left            =   1050
-      TabIndex        =   3
+      Left            =   1080
+      TabIndex        =   2
+      Tag             =   "23200"
       Top             =   1125
       Width           =   3885
    End
@@ -70,7 +65,8 @@ Begin VB.Form FrmAbout
       ForeColor       =   &H00000000&
       Height          =   480
       Left            =   1050
-      TabIndex        =   5
+      TabIndex        =   3
+      Tag             =   "23100"
       Top             =   240
       Width           =   3885
    End
@@ -87,18 +83,9 @@ Begin VB.Form FrmAbout
       Caption         =   "0.91"
       Height          =   225
       Left            =   1050
-      TabIndex        =   6
+      TabIndex        =   4
       Top             =   780
       Width           =   3885
-   End
-   Begin VB.Label lblDisclaimer 
-      Caption         =   "警告: ..."
-      ForeColor       =   &H00000000&
-      Height          =   825
-      Left            =   240
-      TabIndex        =   4
-      Top             =   2625
-      Width           =   3630
    End
 End
 Attribute VB_Name = "FrmAbout"
@@ -148,7 +135,7 @@ Private Sub Form_Load()
 PlcRes.LoadResFor Me
 
     'Me.Caption = "关于 " & App.Title
-    lblVersion.Caption = "版本 " & App.Major & "." & App.Minor & "." & App.Revision
+    lblVersion.Caption = " " & App.Major & "." & App.Minor & "." & App.Revision
     lblTitle.Caption = App.Title
 End Sub
 
@@ -235,3 +222,4 @@ GetKeyError:      ' 错误发生后将其清除...
     GetKeyValue = False                                     ' 返回失败
     rc = RegCloseKey(hKey)                                  ' 关闭注册表关键字
 End Function
+

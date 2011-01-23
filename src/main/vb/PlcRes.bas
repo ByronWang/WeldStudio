@@ -80,7 +80,7 @@ Dim s As String
         If s <> "" Then
             c.Caption = s '& "="
         Else
-            c.Caption
+           ' c.Caption
             'c.Caption = id & "=" & c.Caption
         End If
     Else

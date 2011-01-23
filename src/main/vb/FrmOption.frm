@@ -46,11 +46,12 @@ Begin VB.Form FrmOption
       _Version        =   393216
       Style           =   1
       Tabs            =   7
+      Tab             =   3
       TabsPerRow      =   10
       TabHeight       =   520
       TabCaption(0)   =   "General"
       TabPicture(0)   =   "FrmOption.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "lblLanguage"
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "chkOnlineOnStartUp"
@@ -68,30 +69,35 @@ Begin VB.Form FrmOption
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame2(2)"
-      Tab(2).Control(1)=   "Frame2(3)"
-      Tab(2).Control(2)=   "Frame2(0)"
-      Tab(2).Control(3)=   "Frame2(1)"
+      Tab(2).Control(0)=   "Frame2(1)"
+      Tab(2).Control(0).Enabled=   0   'False
+      Tab(2).Control(1)=   "Frame2(0)"
+      Tab(2).Control(1).Enabled=   0   'False
+      Tab(2).Control(2)=   "Frame2(3)"
+      Tab(2).Control(2).Enabled=   0   'False
+      Tab(2).Control(3)=   "Frame2(2)"
+      Tab(2).Control(3).Enabled=   0   'False
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
-      Tab(3).ControlEnabled=   0   'False
+      Tab(3).ControlEnabled=   -1  'True
       Tab(3).Control(0)=   "Frame3"
+      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).ControlCount=   1
       TabCaption(4)   =   "Weld Chart"
       TabPicture(4)   =   "FrmOption.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Frame1(1)"
-      Tab(4).Control(1)=   "Frame1(0)"
-      Tab(4).Control(2)=   "Frame1(2)"
-      Tab(4).Control(3)=   "chkFilterData"
+      Tab(4).Control(0)=   "chkFilterData"
+      Tab(4).Control(1)=   "Frame1(2)"
+      Tab(4).Control(2)=   "Frame1(0)"
+      Tab(4).Control(3)=   "Frame1(1)"
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Label1"
+      Tab(5).Control(0)=   "Frame1(11)"
       Tab(5).Control(1)=   "Frame6"
-      Tab(5).Control(2)=   "Frame1(11)"
+      Tab(5).Control(2)=   "Label1"
       Tab(5).ControlCount=   3
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
@@ -1063,7 +1069,7 @@ Begin VB.Form FrmOption
          End
       End
       Begin MSComDlg.CommonDialog CommonDialog1 
-         Left            =   1560
+         Left            =   -73440
          Top             =   5520
          _ExtentX        =   847
          _ExtentY        =   847
@@ -1254,7 +1260,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame3 
          Caption         =   "Limits"
          Height          =   1215
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   35
          Tag             =   "19100"
          Top             =   480
@@ -1343,7 +1349,7 @@ Begin VB.Form FrmOption
       Begin VB.ComboBox cboLanguage 
          Height          =   300
          ItemData        =   "FrmOption.frx":0106
-         Left            =   1440
+         Left            =   -73560
          List            =   "FrmOption.frx":0113
          Style           =   2  'Dropdown List
          TabIndex        =   34
@@ -1353,7 +1359,7 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkOnlineOnStartUp 
          Caption         =   "OnlineOnStartup"
          Height          =   375
-         Left            =   3600
+         Left            =   -71400
          TabIndex        =   33
          Tag             =   "16120"
          Top             =   600
@@ -1759,7 +1765,7 @@ Begin VB.Form FrmOption
       Begin VB.Label lblLanguage 
          Caption         =   "Language:"
          Height          =   255
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   63
          Tag             =   "16110"
          Top             =   680
@@ -1980,7 +1986,7 @@ WeldChart_Data(7) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeIncr",
 SRB_Data(0) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Amp", 1000))
 SRB_Data(1) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Dist", 100))
 SRB_Data(2) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Volt", 500))
-SRB_Data(3) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Press", 3000))
+SRB_Data(3) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Press", 50))
 
 
 WeldAnalysisEnable_Data(0) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "FlashEnable", 1))

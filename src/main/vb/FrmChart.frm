@@ -1356,7 +1356,7 @@ Dim posStart As Long
 bOk = False
 
 For i = 0 To UBound(EmulateData)
-    If EmulateData(i).PlcStage >= BOOST_STAGE Then
+    If EmulateData(i).WeldStage >= BOOST_STAGE Then
         posStart = i
         bOk = True
         Exit For
