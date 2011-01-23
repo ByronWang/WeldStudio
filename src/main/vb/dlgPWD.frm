@@ -12,11 +12,13 @@ Begin VB.Form dlgPWD
    ScaleHeight     =   1740
    ScaleWidth      =   6000
    ShowInTaskbar   =   0   'False
+   Tag             =   "24000"
    Begin VB.CommandButton cmdChangePwd 
       Caption         =   "Change Password"
       Height          =   375
       Left            =   4080
       TabIndex        =   3
+      Tag             =   "24030"
       Top             =   1200
       Width           =   1815
    End
@@ -34,6 +36,7 @@ Begin VB.Form dlgPWD
       Height          =   375
       Left            =   4680
       TabIndex        =   1
+      Tag             =   "24020"
       Top             =   600
       Width           =   1215
    End
@@ -42,6 +45,7 @@ Begin VB.Form dlgPWD
       Height          =   375
       Left            =   4680
       TabIndex        =   0
+      Tag             =   "24010"
       Top             =   120
       Width           =   1215
    End
@@ -56,6 +60,10 @@ Option Explicit
 
 Public pass As Boolean
 
+Public Sub clear()
+    pass = False
+    txtPWD.Text = ""
+End Sub
 
 Private Sub CancelButton_Click()
     pass = False
@@ -66,7 +74,20 @@ Private Sub cmdChangePwd_Click()
     dlgChangePwd.Show vbModal, Me
 End Sub
 
+Private Sub Form_Load()
+PlcRes.LoadResFor Me
+
+End Sub
+
 Private Sub OKButton_Click()
-    pass = True
-    Me.Hide
+
+Dim pwd As String
+    pwd = GetSetting(App.EXEName, "Setting", "PWD", "123456")
+    If Trim(Me.txtPWD.Text) = pwd Then
+        pass = True
+        Me.Hide
+    Else
+        MsgBox "Incorrect password."
+    End If
+    
 End Sub

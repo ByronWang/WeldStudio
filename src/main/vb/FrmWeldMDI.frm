@@ -130,11 +130,21 @@ Private Sub mnuOptions_Click()
 End Sub
 
 Private Sub mnuPulseProcess_Click()
-    FrmPulseSetting.Show vbModal, Me
+    dlgPWD.clear
+    dlgPWD.Show vbModal, Me
+    
+    If dlgPWD.pass Then
+        FrmPulseSetting.Show vbModal, Me
+    End If
 End Sub
 
 Private Sub mnuRegularProcess_Click()
-    FrmRegularSetting.Show vbModal, Me
+    dlgPWD.clear
+    dlgPWD.Show vbModal, Me
+    
+    If dlgPWD.pass Then
+       FrmRegularSetting.Show vbModal, Me
+    End If
 End Sub
 
 Private Sub mnuStartEmulate_Click()
