@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin VB.Form FrmGraph 
    Appearance      =   0  'Flat
-   BackColor       =   &H00000000&
+   BackColor       =   &H00C00000&
    Caption         =   "FormGraph"
    ClientHeight    =   9795
    ClientLeft      =   165
@@ -20,7 +20,7 @@ Begin VB.Form FrmGraph
    End
    Begin VB.PictureBox picPsi 
       Appearance      =   0  'Flat
-      BackColor       =   &H0000C0C0&
+      BackColor       =   &H00FF00FF&
       ForeColor       =   &H80000008&
       Height          =   750
       Left            =   2040
@@ -32,7 +32,7 @@ Begin VB.Form FrmGraph
    End
    Begin VB.PictureBox picAmp 
       Appearance      =   0  'Flat
-      BackColor       =   &H0000C0C0&
+      BackColor       =   &H0080C0FF&
       ForeColor       =   &H80000008&
       Height          =   750
       Left            =   2040
@@ -44,7 +44,7 @@ Begin VB.Form FrmGraph
    End
    Begin VB.PictureBox picVolt 
       Appearance      =   0  'Flat
-      BackColor       =   &H0000C0C0&
+      BackColor       =   &H000000FF&
       ForeColor       =   &H80000008&
       Height          =   750
       Left            =   2040
@@ -61,7 +61,7 @@ Begin VB.Form FrmGraph
    End
    Begin VB.PictureBox picDist 
       Appearance      =   0  'Flat
-      BackColor       =   &H0000C0C0&
+      BackColor       =   &H0000FFFF&
       ForeColor       =   &H80000008&
       Height          =   750
       Left            =   2040
@@ -74,6 +74,7 @@ Begin VB.Form FrmGraph
    Begin VB.Label lblTop 
       Alignment       =   2  'Center
       BackColor       =   &H80000008&
+      BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
          Name            =   "宋体"
@@ -94,6 +95,7 @@ Begin VB.Form FrmGraph
    Begin VB.Label lblParameter 
       Alignment       =   2  'Center
       BackColor       =   &H80000008&
+      BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
          Name            =   "宋体"
@@ -114,6 +116,7 @@ Begin VB.Form FrmGraph
    Begin VB.Label lblTime 
       Alignment       =   2  'Center
       BackColor       =   &H80000008&
+      BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
          Name            =   "宋体"
@@ -133,7 +136,9 @@ Begin VB.Form FrmGraph
    End
    Begin VB.Label lblDate 
       Alignment       =   2  'Center
-      BackColor       =   &H80000008&
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000005&
+      BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
          Name            =   "宋体"
@@ -154,6 +159,7 @@ Begin VB.Form FrmGraph
    Begin VB.Label lblBigCenter 
       Alignment       =   2  'Center
       BackColor       =   &H80000008&
+      BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
          Name            =   "宋体"
@@ -166,27 +172,31 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H8000000E&
       Height          =   2295
-      Left            =   3720
+      Left            =   2280
       TabIndex        =   14
       Top             =   3840
-      Width           =   7815
+      Width           =   10575
    End
    Begin VB.Label lblWeldStage 
       BackColor       =   &H80000008&
+      BackStyle       =   0  'Transparent
       Caption         =   "Label6"
+      ForeColor       =   &H00C00000&
       Height          =   255
-      Left            =   1320
+      Left            =   1080
       TabIndex        =   13
-      Top             =   3840
+      Top             =   4560
       Width           =   1935
    End
    Begin VB.Label lblPlcStage 
       BackColor       =   &H80000008&
+      BackStyle       =   0  'Transparent
       Caption         =   "Label5"
+      ForeColor       =   &H00C00000&
       Height          =   255
-      Left            =   1320
+      Left            =   960
       TabIndex        =   12
-      Top             =   4320
+      Top             =   5040
       Width           =   1935
    End
    Begin VB.Line Line2 
