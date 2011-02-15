@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin VB.Form FrmGraph 
    Appearance      =   0  'Flat
-   BackColor       =   &H00C00000&
+   BackColor       =   &H80000006&
    Caption         =   "FormGraph"
    ClientHeight    =   9795
    ClientLeft      =   165
@@ -20,7 +20,7 @@ Begin VB.Form FrmGraph
    End
    Begin VB.PictureBox picPsi 
       Appearance      =   0  'Flat
-      BackColor       =   &H00FF00FF&
+      BackColor       =   &H0000FFFF&
       ForeColor       =   &H80000008&
       Height          =   750
       Left            =   2040
@@ -32,7 +32,7 @@ Begin VB.Form FrmGraph
    End
    Begin VB.PictureBox picAmp 
       Appearance      =   0  'Flat
-      BackColor       =   &H0080C0FF&
+      BackColor       =   &H0000FFFF&
       ForeColor       =   &H80000008&
       Height          =   750
       Left            =   2040
@@ -44,7 +44,7 @@ Begin VB.Form FrmGraph
    End
    Begin VB.PictureBox picVolt 
       Appearance      =   0  'Flat
-      BackColor       =   &H000000FF&
+      BackColor       =   &H0000FFFF&
       ForeColor       =   &H80000008&
       Height          =   750
       Left            =   2040
@@ -85,7 +85,7 @@ Begin VB.Form FrmGraph
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H0000FF00&
+      ForeColor       =   &H000000FF&
       Height          =   615
       Left            =   6480
       TabIndex        =   18
@@ -181,7 +181,7 @@ Begin VB.Form FrmGraph
       BackColor       =   &H80000008&
       BackStyle       =   0  'Transparent
       Caption         =   "Label6"
-      ForeColor       =   &H00C00000&
+      ForeColor       =   &H00400000&
       Height          =   255
       Left            =   1080
       TabIndex        =   13
@@ -192,7 +192,7 @@ Begin VB.Form FrmGraph
       BackColor       =   &H80000008&
       BackStyle       =   0  'Transparent
       Caption         =   "Label5"
-      ForeColor       =   &H00C00000&
+      ForeColor       =   &H00400000&
       Height          =   255
       Left            =   960
       TabIndex        =   12
