@@ -1432,8 +1432,8 @@ With MSChart1.Plot.Axis(VtChAxisIdX).ValueScale
     .MajorDivision = 1
 End With
 With MSChart1.Plot.Axis(VtChAxisIdX).CategoryScale
-    .DivisionsPerLabel = (pos - posStart) / 15
-    .DivisionsPerTick = (pos - posStart) / 15
+    .DivisionsPerLabel = (pos - posStart) / 3
+    .DivisionsPerTick = (pos - posStart) / 3
 End With
 
 MSChart1.ChartData = MyData
