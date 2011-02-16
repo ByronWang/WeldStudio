@@ -1,5 +1,5 @@
 VERSION 5.00
-Begin VB.Form dlgPWD 
+Begin VB.Form FrmPWD 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Password"
    ClientHeight    =   1740
@@ -50,7 +50,7 @@ Begin VB.Form dlgPWD
       Width           =   1215
    End
 End
-Attribute VB_Name = "dlgPWD"
+Attribute VB_Name = "FrmPWD"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -71,7 +71,7 @@ Private Sub CancelButton_Click()
 End Sub
 
 Private Sub cmdChangePwd_Click()
-    dlgChangePwd.Show vbModal, Me
+    frmChangePWD.Show vbModal, Me
 End Sub
 
 Private Sub Form_Load()

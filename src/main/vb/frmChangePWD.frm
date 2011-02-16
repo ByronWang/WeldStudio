@@ -1,5 +1,5 @@
 VERSION 5.00
-Begin VB.Form dlgChangePWD 
+Begin VB.Form FrmChangePWD 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Change password"
    ClientHeight    =   3195
@@ -86,7 +86,7 @@ Begin VB.Form dlgChangePWD
       Width           =   3375
    End
 End
-Attribute VB_Name = "dlgChangePwd"
+Attribute VB_Name = "FrmChangePWD"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

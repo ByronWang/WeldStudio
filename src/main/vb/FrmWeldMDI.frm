@@ -114,14 +114,19 @@ End Sub
 
 Private Sub mnuOpen_Click()
     'CommonDialog1.Filter = "Weld Data File (*.wdd) | *.wdd |Old Data File (*.wld) | *.wld"
-    CommonDialog1.Filter = "Old Data File (*.wld) | *.wld"
+    CommonDialog1.Filter = "Old Data File (*.WLD) |*.wld|Daily Report(*.dly)|*.DLY"
     CommonDialog1.filename = ""
     CommonDialog1.ShowOpen
-    If CommonDialog1.filename <> "" Then
+    If CommonDialog1.filename <> "" And UCase(Right(CommonDialog1.filename, 4)) = ".WLD" Then
         Dim f As New FrmChart
         f.Load CommonDialog1.filename
         f.Caption = CommonDialog1.filename
         f.Show
+    ElseIf CommonDialog1.filename <> "" And UCase(Right(CommonDialog1.filename, 4)) = ".DLY" Then
+        Dim frmDR  As New FrmDailyReport
+        'frmDR.Load CommonDialog1.filename
+        frmDR.Caption = CommonDialog1.filename
+        frmDR.Show
     End If
 End Sub
 

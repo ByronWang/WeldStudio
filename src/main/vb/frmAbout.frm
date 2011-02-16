@@ -7,7 +7,7 @@ Begin VB.Form FrmAbout
    ClientTop       =   1935
    ClientWidth     =   5730
    ClipControls    =   0   'False
-   Icon            =   "frmAbout.frx":0000
+   Icon            =   "FrmAbout.frx":0000
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -22,7 +22,7 @@ Begin VB.Form FrmAbout
       ClipControls    =   0   'False
       Height          =   300
       Left            =   240
-      Picture         =   "frmAbout.frx":000C
+      Picture         =   "FrmAbout.frx":000C
       ScaleHeight     =   168.56
       ScaleMode       =   0  'User
       ScaleWidth      =   168.56
