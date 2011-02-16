@@ -9,11 +9,11 @@ Begin VB.Form FrmDailyReport
    ClientWidth     =   10440
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
+   MDIChild        =   -1  'True
    MinButton       =   0   'False
    ScaleHeight     =   8505
    ScaleWidth      =   10440
    ShowInTaskbar   =   0   'False
-   StartUpPosition =   1  '所有者中心
    Begin MSFlexGridLib.MSFlexGrid MSFlexGrid1 
       Height          =   5895
       Left            =   0
@@ -23,7 +23,7 @@ Begin VB.Form FrmDailyReport
       _ExtentX        =   18441
       _ExtentY        =   10398
       _Version        =   393216
-      Cols            =   9
+      Cols            =   11
       FixedCols       =   0
    End
 End
@@ -34,56 +34,119 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Public Sub Load(filename As String)
+ Dim data() As DailyReport
+  
+data = PlcDailyReport.LoadData(filename)
+
+Dim path As String
+path = Left(filename, InStrRev(filename, "\"))
+
+
+Dim sa() As String
+ReDim sa(UBound(data))
+Dim f As FileR
+Dim Weldfile As String
+Dim entry As String
+  Dim i As Integer
+  For i = LBound(data) To UBound(data)
+            Weldfile = CStr(data(i).Sequence)
+            Weldfile = path & data(i).Serial & Left("0000", 4 - Len(Weldfile)) & Weldfile & ".wld"
+            
+            f = PlcWld.LoadData(Weldfile)
+            
+
+'   Result
+If f.analysisResult.succeed Then
+    entry = "OK"
+Else
+    entry = "NO"
+End If
+'   Time
+entry = entry & vbTab & f.header.Time
+'   Duration
+entry = entry & vbTab & f.analysisResult.TotalDuration
+'   UPSET
+entry = entry & vbTab & f.analysisResult.UpsetRailUsage
+'   max.Current
+entry = entry & vbTab & f.analysisResult.UpsetMaxCurrent
+'   Impedance
+entry = entry & vbTab & f.analysisResult.OverallImpedance
+'   Rail Usage
+entry = entry & vbTab & f.analysisResult.TotalRailUsage
+'   FLASH Speed
+entry = entry & vbTab & f.analysisResult.FlashSpeed
+'   BOOST Speed
+entry = entry & vbTab & f.analysisResult.BoostSpeed
+'   FORGE force
+entry = entry & vbTab & f.analysisResult.ForgeAverageForce
+'   Slippage
+entry = entry & vbTab & f.analysisResult.HasSlippage
+'   Weld Program  ---
+
+'   Chainage  ---
+sa(i) = entry
+
+  Next i
+    
+    
+   Call setData(sa)
+    
+    'lblDate.Caption = Trim(fr.header.Date)
+    'lblTime.Caption = Trim(fr.header.Time)
+    'lblParam.Caption = "UNIT:" & Trim(fr.header.ParamName)
+
+End Sub
+
 Public Function setData(sa() As String)
 Dim i As Integer
-For i = 0 To UBound(sa)
+For i = LBound(sa) To UBound(sa)
     MSFlexGrid1.AddItem sa(i)
 Next
+
+i = 0
 MSFlexGrid1.RemoveItem (1)
+MSFlexGrid1.TextMatrix(0, i) = "Result"
 
-MSFlexGrid1.TextMatrix(0, 0) = "STAGE"
-MSFlexGrid1.ColWidth(0) = 1200
-MSFlexGrid1.TextMatrix(0, 1) = "PLC STAGE"
-MSFlexGrid1.ColWidth(1) = 1000
-MSFlexGrid1.TextMatrix(0, 2) = "DIST"
-MSFlexGrid1.ColWidth(2) = 700
-MSFlexGrid1.TextMatrix(0, 3) = "AMP"
-MSFlexGrid1.ColWidth(3) = 600
-MSFlexGrid1.TextMatrix(0, 4) = "VOLT"
-MSFlexGrid1.ColWidth(4) = 600
-MSFlexGrid1.TextMatrix(0, 5) = "PSI(Upset)"
-MSFlexGrid1.ColWidth(5) = 1100
-MSFlexGrid1.TextMatrix(0, 6) = "PSI(Open)"
-MSFlexGrid1.ColWidth(6) = 1000
-MSFlexGrid1.TextMatrix(0, 7) = "FORCE"
-MSFlexGrid1.ColWidth(7) = 700
-MSFlexGrid1.TextMatrix(0, 8) = "TIMER"
-MSFlexGrid1.ColWidth(8) = 800
-'
-'
-'WeldSstage 0-init, 1-preflash 2-flash 3-boost 4-upset 5-forge 6-shear
-'PLC stage
-'DIST scaled reading in mm * 100
-'AMP scaled reading in A
-'VOLT scaled reading in V
-'PSI scaled reading in psi
-'PSI2 scaled reading in psi
-'Force = (PSI -PSI2) / 25.42    注：25.27~25.47 具体数值不清楚
-'
-'
+MSFlexGrid1.ColWidth(i) = 1200
+i = i + 1
+MSFlexGrid1.TextMatrix(0, i) = "Time"
+MSFlexGrid1.ColWidth(i) = 1200
+i = i + 1
+MSFlexGrid1.TextMatrix(0, i) = "Duration"
+MSFlexGrid1.ColWidth(i) = 1200
+i = i + 1
+MSFlexGrid1.TextMatrix(0, i) = "Upset"
+MSFlexGrid1.ColWidth(i) = 1200
+i = i + 1
+MSFlexGrid1.TextMatrix(0, i) = "Max.Current"
+MSFlexGrid1.ColWidth(i) = 1200
+i = i + 1
+MSFlexGrid1.TextMatrix(0, i) = "Impedance"
+MSFlexGrid1.ColWidth(i) = 1200
+i = i + 1
+MSFlexGrid1.TextMatrix(0, i) = "RailUsage"
+MSFlexGrid1.ColWidth(i) = 1200
+i = i + 1
+MSFlexGrid1.TextMatrix(0, i) = "FlashSpeed"
+MSFlexGrid1.ColWidth(i) = 1200
+i = i + 1
+MSFlexGrid1.TextMatrix(0, i) = "BoostSpeed"
+MSFlexGrid1.ColWidth(i) = 1200
+i = i + 1
+MSFlexGrid1.TextMatrix(0, i) = "ForgeForce"
+MSFlexGrid1.ColWidth(i) = 1200
+i = i + 1
+MSFlexGrid1.TextMatrix(0, i) = "Slippage"
+MSFlexGrid1.ColWidth(i) = 1200
+i = i + 1
+'MSFlexGrid1.TextMatrix(0, i) = "WeldProgram"
+'MSFlexGrid1.ColWidth(i) = 1200
+'i = i + 1
+'MSFlexGrid1.TextMatrix(0, i) = "Chainage"
+'MSFlexGrid1.ColWidth(i) = 1200
+'i = i + 1
 
-'With MSFlexGrid1
-'.AllowBigSelection = True
-'For i = 0 To .Rows - 1
-'.Row = i: .Col = .FixedCols
-'.ColSel = .Cols() - .FixedCols - 1
-'If i Mod 2 = 0 Then
-'.CellBackColor = &HC0C0C0
-'Else
-'.CellBackColor = vbBlue
-'End If
-'Next i
-'End With
 End Function
 
 Private Sub Form_Resize()

@@ -124,7 +124,7 @@ Private Sub mnuOpen_Click()
         f.Show
     ElseIf CommonDialog1.filename <> "" And UCase(Right(CommonDialog1.filename, 4)) = ".DLY" Then
         Dim frmDR  As New FrmDailyReport
-        'frmDR.Load CommonDialog1.filename
+        frmDR.Load CommonDialog1.filename
         frmDR.Caption = CommonDialog1.filename
         frmDR.Show
     End If
