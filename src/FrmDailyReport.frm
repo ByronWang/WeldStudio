@@ -1,24 +1,20 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Begin VB.Form FrmDailyReport 
-   BorderStyle     =   5  'Sizable ToolWindow
-   Caption         =   "Data From"
-   ClientHeight    =   8505
+   Caption         =   "Form1"
+   ClientHeight    =   5070
    ClientLeft      =   60
-   ClientTop       =   330
-   ClientWidth     =   10440
+   ClientTop       =   450
+   ClientWidth     =   7785
    LinkTopic       =   "Form1"
-   MaxButton       =   0   'False
    MDIChild        =   -1  'True
-   MinButton       =   0   'False
-   ScaleHeight     =   8505
-   ScaleWidth      =   10440
-   ShowInTaskbar   =   0   'False
+   ScaleHeight     =   5070
+   ScaleWidth      =   7785
    Begin MSFlexGridLib.MSFlexGrid MSFlexGrid1 
       Height          =   5895
       Left            =   0
       TabIndex        =   0
-      Top             =   1440
+      Top             =   1200
       Width           =   10455
       _ExtentX        =   18441
       _ExtentY        =   10398
@@ -46,14 +42,14 @@ path = Left(filename, InStrRev(filename, "\"))
 Dim sa() As String
 ReDim sa(UBound(data))
 Dim f As FileR
-Dim Weldfile As String
+Dim WeldFile As String
 Dim entry As String
   Dim i As Integer
   For i = LBound(data) To UBound(data)
-            Weldfile = CStr(data(i).Sequence)
-            Weldfile = path & data(i).Serial & Left("0000", 4 - Len(Weldfile)) & Weldfile & ".wld"
+            WeldFile = CStr(data(i).Sequence)
+            WeldFile = path & data(i).Serial & Left("0000", 4 - Len(WeldFile)) & WeldFile & ".wld"
             
-            f = PlcWld.LoadData(Weldfile)
+            f = PlcWld.LoadData(WeldFile)
             
 
 '   Result
@@ -154,4 +150,5 @@ Private Sub Form_Resize()
     Me.MSFlexGrid1.Height = Me.Height - 380 - MSFlexGrid1.Top
     
 End Sub
+
 
