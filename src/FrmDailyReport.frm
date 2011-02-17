@@ -2,19 +2,19 @@ VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Begin VB.Form FrmDailyReport 
    Caption         =   "Form1"
-   ClientHeight    =   5070
+   ClientHeight    =   7365
    ClientLeft      =   60
    ClientTop       =   450
-   ClientWidth     =   7785
+   ClientWidth     =   9135
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   5070
-   ScaleWidth      =   7785
+   ScaleHeight     =   7365
+   ScaleWidth      =   9135
    Begin MSFlexGridLib.MSFlexGrid MSFlexGrid1 
       Height          =   5895
       Left            =   0
       TabIndex        =   0
-      Top             =   1200
+      Top             =   1080
       Width           =   10455
       _ExtentX        =   18441
       _ExtentY        =   10398
@@ -53,11 +53,16 @@ Dim entry As String
             
 
 '   Result
-If f.analysisResult.succeed Then
+If f.analysisResult.succeed = 1 Then
     entry = "OK"
-Else
+ElseIf f.analysisResult.succeed = 2 Then
     entry = "NO"
+ElseIf f.analysisResult.succeed = 3 Then
+    entry = "INT"
+Else
+    MsgBox "qqqq"
 End If
+
 '   Time
 entry = entry & vbTab & f.header.Time
 '   Duration
@@ -77,7 +82,17 @@ entry = entry & vbTab & f.analysisResult.BoostSpeed
 '   FORGE force
 entry = entry & vbTab & f.analysisResult.ForgeAverageForce
 '   Slippage
-entry = entry & vbTab & f.analysisResult.HasSlippage
+If f.analysisResult.HasSlippage = 1 Then
+    entry = entry & vbTab & "Y"
+ElseIf f.analysisResult.HasSlippage = 2 Then
+    entry = entry & vbTab & "N"
+ElseIf f.analysisResult.HasSlippage = 3 Then
+    entry = entry & vbTab & "-"
+Else
+    entry = entry & vbTab & "-"
+End If
+
+'entry = entry & vbTab & f.analysisResult.HasSlippage
 '   Weld Program  ---
 
 '   Chainage  ---
@@ -103,51 +118,52 @@ Next
 i = 0
 MSFlexGrid1.RemoveItem (1)
 MSFlexGrid1.TextMatrix(0, i) = "Result"
-
-MSFlexGrid1.ColWidth(i) = 1200
+MSFlexGrid1.ColWidth(i) = 800
+MSFlexGrid1.ColAlignment(i) = AlignmentSettings.flexAlignCenterCenter
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "Time"
-MSFlexGrid1.ColWidth(i) = 1200
+MSFlexGrid1.ColWidth(i) = 1000
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "Duration"
-MSFlexGrid1.ColWidth(i) = 1200
+MSFlexGrid1.ColWidth(i) = 1000
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "Upset"
-MSFlexGrid1.ColWidth(i) = 1200
+MSFlexGrid1.ColWidth(i) = 800
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "Max.Current"
-MSFlexGrid1.ColWidth(i) = 1200
+MSFlexGrid1.ColWidth(i) = 1000
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "Impedance"
-MSFlexGrid1.ColWidth(i) = 1200
+MSFlexGrid1.ColWidth(i) = 1000
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "RailUsage"
-MSFlexGrid1.ColWidth(i) = 1200
+MSFlexGrid1.ColWidth(i) = 1000
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "FlashSpeed"
-MSFlexGrid1.ColWidth(i) = 1200
+MSFlexGrid1.ColWidth(i) = 1000
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "BoostSpeed"
-MSFlexGrid1.ColWidth(i) = 1200
+MSFlexGrid1.ColWidth(i) = 1000
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "ForgeForce"
-MSFlexGrid1.ColWidth(i) = 1200
+MSFlexGrid1.ColWidth(i) = 1000
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "Slippage"
-MSFlexGrid1.ColWidth(i) = 1200
+MSFlexGrid1.ColWidth(i) = 1000
+MSFlexGrid1.ColAlignment(i) = AlignmentSettings.flexAlignCenterCenter
 i = i + 1
 'MSFlexGrid1.TextMatrix(0, i) = "WeldProgram"
-'MSFlexGrid1.ColWidth(i) = 1200
+'MSFlexGrid1.ColWidth(i) = 1000
 'i = i + 1
 'MSFlexGrid1.TextMatrix(0, i) = "Chainage"
-'MSFlexGrid1.ColWidth(i) = 1200
+'MSFlexGrid1.ColWidth(i) = 1000
 'i = i + 1
 
 End Function
 
 Private Sub Form_Resize()
     Me.MSFlexGrid1.Width = Me.Width - 120
-    Me.MSFlexGrid1.Height = Me.Height - 380 - MSFlexGrid1.Top
+    Me.MSFlexGrid1.Height = Me.Height - 500 - MSFlexGrid1.Top
     
 End Sub
 
