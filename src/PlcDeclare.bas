@@ -129,7 +129,7 @@ End Type
 
 
 Type WeldAnalysisResultType
-    succeed  As Boolean
+    succeed  As Integer
     X110 As Integer
     FlashSpeedSucceed  As Boolean
     X111 As Integer
