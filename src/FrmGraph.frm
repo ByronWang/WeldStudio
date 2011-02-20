@@ -403,7 +403,7 @@ Dim beSigned As Boolean
 Dim StartRecording As Integer
 Dim StartRecodingParam(5) As Single
 
-Dim WeldNumber As Integer
+Dim weldSerailNumber As Integer
 'Dim WeldFile As String
 
 Const ANALYSIS_DURATION As Integer = 6000
@@ -426,11 +426,11 @@ Function SwitchToRecoding(status As ShowModeType)
             TimerShow.Tag = ""
             
             lblTop.Caption = "Ready"
-            lblBigCenter.Caption = Me.toShowModel(WeldNumber)
+            lblBigCenter.Caption = toShowModel(weldSerailNumber)
             lblBigCenter.ForeColor = &H8000000E
             lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting", "DEFAULT")
         Case RECORDING_MODE
-            lblTop.Caption = WeldFile
+            lblTop.Caption = toShowModel(weldSerailNumber)
         Case ANALYSIS_MODE
             TimerTest.Enabled = False
             TimerShow.Tag = "ANALYSIS"
@@ -445,7 +445,7 @@ Dim f As File
 Dim fd As String
 
 
-WeldNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
+weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
 
 'fd = path & "\" & Format(Date, "YYYY-MM-DD")
 '
@@ -538,7 +538,7 @@ PlcRes.LoadResFor Me
     timeInMS = 0
     rIndex = 0
 
-    WeldNumber = GetLastWeldNumber()
+    weldSerailNumber = GetLastWeldNumber()
     
     SwitchToRecoding STANDBY_MODE
     
@@ -553,7 +553,7 @@ End Sub
 
 Private Sub TimerShow_Timer()
     
-lblDate.Caption = FormatDateTime(Date, vbLongDate)
+lblDate.Caption = Format(Date, "YYYY-MM-DD")
 lblTime.Caption = FormatDateTime(Now, vbLongTime)
 
 If Me.TimerShow.Tag = "ANALYSIS" Then
@@ -657,7 +657,7 @@ If wm.WeldCycle = 1 And 0 < wm.data.WeldStage And wm.data.WeldStage <= 6 Then
             rIndex = 0
             wm.data.Time = timeInMS
             rBuf(rIndex) = wm.data
-            SwitchToRecoding True
+            SwitchToRecoding RECORDING_MODE
         End If
     Else
         wm.data.Time = timeInMS / 1000
@@ -723,14 +723,17 @@ End Function
 
 Function SaveData()
 Dim fh As FileHeader
+Dim weldFile As String
+    weldFile = toShowModel(weldSerailNumber)
     fh.Date = Date
     fh.Time = Time
-    fh.filename = WeldFile
+    fh.filename = weldFile
     fh.ParamName = lblParameter.Caption
     
-    Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & toShowModel(WeldNumber) & ".WLD", fh, rBuf, rIndex, analysisDefine, analysisResult)
+    Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & weldFile & ".WLD", fh, rBuf, rIndex, analysisDefine, analysisResult)
 
-    Call SaveSetting(App.EXEName, "WELD", "LastSerialNumber", WeldNumber)
+    weldSerailNumber = weldSerailNumber + 1
+    Call SaveSetting(App.EXEName, "WELD", "LastSerialNumber", weldSerailNumber)
 End Function
 
 
@@ -752,7 +755,7 @@ Dim leadChar As String
     leaveNumber = n - (n / 10000) * 10000
     
     Dim showString As String
-    showString = CStr(WeldNumber)
+    showString = CStr(n)
     
     toShowModel = "" & leadChar & Left("0000", 4 - Len(showString)) & showString
 End Function
