@@ -135,19 +135,21 @@ Private Sub mnuOptions_Click()
 End Sub
 
 Private Sub mnuPulseProcess_Click()
-    dlgPWD.clear
-    dlgPWD.Show vbModal, Me
+Dim fpwd As New FrmPWD
+    fpwd.clear
+    fpwd.Show vbModal, Me
     
-    If dlgPWD.pass Then
+    If fpwd.pass Then
         FrmPulseSetting.Show vbModal, Me
     End If
 End Sub
 
 Private Sub mnuRegularProcess_Click()
-    dlgPWD.clear
-    dlgPWD.Show vbModal, Me
+Dim fpwd As New FrmPWD
+    fpwd.clear
+    fpwd.Show vbModal, Me
     
-    If dlgPWD.pass Then
+    If fpwd.pass Then
        FrmRegularSetting.Show vbModal, Me
     End If
 End Sub
