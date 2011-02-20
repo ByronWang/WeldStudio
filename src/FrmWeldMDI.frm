@@ -99,6 +99,12 @@ Private Sub MDIForm_Unload(Cancel As Integer)
     PLCDrv.UninitPLCConection
 End Sub
 
+Private Sub mnuTools_Click()
+    If Forms.count > 1 Then
+        mnuOptions.Enabled = False
+    End If
+End Sub
+
 Private Sub mnuAbout_Click()
     FrmAbout.Show vbModal, Me
 End Sub
@@ -111,12 +117,6 @@ End Sub
 Private Sub mnuExit_Click()
     Unload Me
 End Sub
-
-Private Sub mnuTools_Click()
-    
-
-End Sub
-
 
 Private Sub mnuOpen_Click()
     'CommonDialog1.Filter = "Weld Data File (*.wdd) | *.wdd |Old Data File (*.wld) | *.wld"
