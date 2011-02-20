@@ -573,10 +573,33 @@ End If
 Dim scale_width As Long
 scale_width = 8000
 '
-picDist.Width = Dist * scale_width / dist_scale
-picVolt.Width = Volt * scale_width / volt_scale
-picAmp.Width = Amp * scale_width / amp_scale
-picPsi.Width = psi * scale_width / psi_scale
+Dim w As Long
+w = Dist * scale_width / dist_scale
+If w >= scale_width Then
+    w = scale_width
+End If
+picDist.Width = w
+
+w = Volt * scale_width / dist_scale
+If w >= scale_width Then
+    w = scale_width
+End If
+picVolt.Width = w
+
+
+w = Amp * scale_width / dist_scale
+If w >= scale_width Then
+    w = scale_width
+End If
+picAmp.Width = w
+
+
+w = psi * scale_width / dist_scale
+If w >= scale_width Then
+    w = scale_width
+End If
+picPsi.Width = w
+
 
 'lblTime.Caption = data.Time
 

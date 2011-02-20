@@ -5,12 +5,12 @@ Begin VB.Form FrmChart
    ClientHeight    =   9540
    ClientLeft      =   60
    ClientTop       =   450
-   ClientWidth     =   13395
+   ClientWidth     =   15240
    Icon            =   "FrmChart.frx":0000
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
    ScaleHeight     =   9540
-   ScaleWidth      =   13395
+   ScaleWidth      =   15240
    ShowInTaskbar   =   0   'False
    Tag             =   "11000"
    WindowState     =   2  'Maximized

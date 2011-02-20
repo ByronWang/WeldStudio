@@ -107,9 +107,9 @@ Private Sub MDIForm_Unload(Cancel As Integer)
 End Sub
 
 Private Sub mnuTools_Click()
-    If Forms.count > 1 Then
-        mnuOptions.Enabled = False
-    End If
+'    If Forms.count > 1 Then
+'        mnuOptions.Enabled = False
+'    End If
 End Sub
 
 Private Sub mnuAbout_Click()
