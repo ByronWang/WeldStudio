@@ -404,7 +404,7 @@ Dim StartRecording As Integer
 Dim StartRecodingParam(5) As Single
 
 Dim WeldNumber As Integer
-Dim WeldFile As String
+'Dim WeldFile As String
 
 Const ANALYSIS_DURATION As Integer = 6000
 
@@ -425,12 +425,8 @@ Function SwitchToRecoding(status As ShowModeType)
             TimerTest.Enabled = True
             TimerShow.Tag = ""
             
-            WeldNumber = WeldNumber + 1
-            WeldFile = CStr(WeldNumber)
-            WeldFile = "T" & Left("0000", 4 - Len(WeldFile)) & WeldFile
-            
             lblTop.Caption = "Ready"
-            lblBigCenter.Caption = WeldFile
+            lblBigCenter.Caption = Me.toShowModel(WeldNumber)
             lblBigCenter.ForeColor = &H8000000E
             lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting", "DEFAULT")
         Case RECORDING_MODE
@@ -448,28 +444,31 @@ Dim f As File
     
 Dim fd As String
 
-fd = path & "\" & Format(Date, "YYYY-MM-DD")
 
-Dim wn As Integer
-If fso.FolderExists(fd) Then
-  Set fs = fso.GetFolder(fd).Files
-  
-  Dim i As Integer
-  
-    For Each f In fs
-        If Len(f.name) = 9 Then
-            i = CInt(Mid(f.name, 2, 4))
-            If wn < i Then
-                wn = i
-            End If
-        End If
-    Next
-    GetLastWeldNumber = wn
-Else
-    fso.CreateFolder fd
-    GetLastWeldNumber = 0
-End If
-     
+WeldNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
+
+'fd = path & "\" & Format(Date, "YYYY-MM-DD")
+'
+'Dim wn As Integer
+'If fso.FolderExists(fd) Then
+'  Set fs = fso.GetFolder(fd).Files
+'
+'  Dim i As Integer
+'
+'    For Each f In fs
+'        If Len(f.name) = 9 Then
+'            i = CInt(Mid(f.name, 2, 4))
+'            If wn < i Then
+'                wn = i
+'            End If
+'        End If
+'    Next
+'    GetLastWeldNumber = wn
+'Else
+'    fso.CreateFolder fd
+'    GetLastWeldNumber = 0
+'End If
+'
      
 End Function
 
@@ -565,7 +564,8 @@ If Me.TimerShow.Tag = "ANALYSIS" Then
 End If
 
 If beRecording Then
-    lblBigCenter.Caption = Format(timeInMS / 1000, "##0.00")
+    lblBigCenter.Caption = Format(timeInMS / 1000, "##0")
+    'lblBigCenter.Caption = Format(timeInMS / 1000, "##0.00")
 End If
 
 If 1 <= wm.data.PlcStage And wm.data.PlcStage <= 12 Then
@@ -728,12 +728,34 @@ Dim fh As FileHeader
     fh.filename = WeldFile
     fh.ParamName = lblParameter.Caption
     
-    Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & WeldFile & ".WLD", fh, rBuf, rIndex, analysisDefine, analysisResult)
+    Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & toShowModel(WeldNumber) & ".WLD", fh, rBuf, rIndex, analysisDefine, analysisResult)
 
+    Call SaveSetting(App.EXEName, "WELD", "LastSerialNumber", WeldNumber)
 End Function
 
 
 
+
+Function toShowModel(n As Integer) As String
+Dim leadNumber As Integer
+Dim leadChar As String
+    
+    leadNumber = (n / 10000)
+    
+    If leadNumber >= 26 Then
+        leadNumber = 0
+    End If
+    
+    leadChar = Chr(Asc("A") + leadNumber)
+        
+    Dim leaveNumber As Integer
+    leaveNumber = n - (n / 10000) * 10000
+    
+    Dim showString As String
+    showString = CStr(WeldNumber)
+    
+    toShowModel = "" & leadChar & Left("0000", 4 - Len(showString)) & showString
+End Function
 
 
 
