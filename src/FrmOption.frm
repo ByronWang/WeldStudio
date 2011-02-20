@@ -46,16 +46,16 @@ Begin VB.Form FrmOption
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   3
+      Tab             =   6
       TabsPerRow      =   10
       TabHeight       =   520
       TabCaption(0)   =   "General"
       TabPicture(0)   =   "FrmOption.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "CommonDialog1"
-      Tab(0).Control(1)=   "cboLanguage"
-      Tab(0).Control(2)=   "chkOnlineOnStartUp"
-      Tab(0).Control(3)=   "lblLanguage"
+      Tab(0).Control(0)=   "lblLanguage"
+      Tab(0).Control(1)=   "chkOnlineOnStartUp"
+      Tab(0).Control(2)=   "cboLanguage"
+      Tab(0).Control(3)=   "CommonDialog1"
       Tab(0).ControlCount=   4
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
@@ -65,24 +65,23 @@ Begin VB.Form FrmOption
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame2(2)"
-      Tab(2).Control(1)=   "Frame2(3)"
-      Tab(2).Control(2)=   "Frame2(0)"
-      Tab(2).Control(3)=   "Frame2(1)"
+      Tab(2).Control(0)=   "Frame2(1)"
+      Tab(2).Control(1)=   "Frame2(0)"
+      Tab(2).Control(2)=   "Frame2(3)"
+      Tab(2).Control(3)=   "Frame2(2)"
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
-      Tab(3).ControlEnabled=   -1  'True
+      Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "Frame3"
-      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).ControlCount=   1
       TabCaption(4)   =   "Weld Chart"
       TabPicture(4)   =   "FrmOption.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Frame1(1)"
-      Tab(4).Control(1)=   "Frame1(0)"
-      Tab(4).Control(2)=   "Frame1(2)"
-      Tab(4).Control(3)=   "chkFilterData"
+      Tab(4).Control(0)=   "chkFilterData"
+      Tab(4).Control(1)=   "Frame1(2)"
+      Tab(4).Control(2)=   "Frame1(0)"
+      Tab(4).Control(3)=   "Frame1(1)"
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
@@ -93,9 +92,42 @@ Begin VB.Form FrmOption
       Tab(5).ControlCount=   3
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
-      Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "Frame4"
-      Tab(6).ControlCount=   1
+      Tab(6).ControlEnabled=   -1  'True
+      Tab(6).Control(0)=   "Label2"
+      Tab(6).Control(0).Enabled=   0   'False
+      Tab(6).Control(1)=   "Frame4"
+      Tab(6).Control(1).Enabled=   0   'False
+      Tab(6).Control(2)=   "txtWeldNumber"
+      Tab(6).Control(2).Enabled=   0   'False
+      Tab(6).Control(3)=   "chkRecordInterrupts"
+      Tab(6).Control(3).Enabled=   0   'False
+      Tab(6).Control(4)=   "cmdReset"
+      Tab(6).Control(4).Enabled=   0   'False
+      Tab(6).ControlCount=   5
+      Begin VB.CommandButton cmdReset 
+         Caption         =   "Reset"
+         Height          =   375
+         Left            =   7200
+         TabIndex        =   167
+         Top             =   720
+         Width           =   975
+      End
+      Begin VB.CheckBox chkRecordInterrupts 
+         Caption         =   "Record Interrupts"
+         Height          =   375
+         Left            =   4320
+         TabIndex        =   166
+         Top             =   1560
+         Width           =   3015
+      End
+      Begin VB.TextBox txtWeldNumber 
+         Height          =   375
+         Left            =   5400
+         TabIndex        =   164
+         Text            =   "A0001"
+         Top             =   720
+         Width           =   1695
+      End
       Begin VB.Frame Frame1 
          Caption         =   $"FrmOption.frx":00D0
          BeginProperty Font 
@@ -1252,7 +1284,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame3 
          Caption         =   "Limits"
          Height          =   1215
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   35
          Tag             =   "19100"
          Top             =   480
@@ -1650,7 +1682,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame4 
          Caption         =   "Start Recording"
          Height          =   4335
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   2
          Tag             =   "22100"
          Top             =   600
@@ -1745,6 +1777,14 @@ Begin VB.Form FrmOption
             Top             =   360
             Width           =   2055
          End
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Weld Number:"
+         Height          =   375
+         Left            =   4200
+         TabIndex        =   165
+         Top             =   840
+         Width           =   1335
       End
       Begin VB.Label Label1 
          Caption         =   "Label1"
@@ -1915,6 +1955,14 @@ Private Sub cmdOK_Click()
     Unload Me
 End Sub
 
+Private Sub cmdReset_Click()
+   Dim weldSerailNumber As Integer
+   weldSerailNumber = fromWeldNumberShowModel(txtWeldNumber.Text)
+   
+   Call SaveSetting(App.EXEName, "WELD", "LastSerialNumber", weldSerailNumber)
+    
+End Sub
+
 Private Sub cmdSimulate_Click()
      CommonDialog1.filename = txtSimulate.Text
     CommonDialog1.ShowOpen
@@ -2028,6 +2076,10 @@ WeldAnalysis_Data(19) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDia
     For i = 0 To 7
         chkEnableAnalysis(i).Value = WeldAnalysisEnable_Data(i)
     Next
+    
+    Dim weldSerailNumber As Integer
+    weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
+    txtWeldNumber.Text = PlcCommon.toWeldNumberShowModel(weldSerailNumber)
     
 End Sub
 

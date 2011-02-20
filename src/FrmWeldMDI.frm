@@ -112,6 +112,12 @@ Private Sub mnuExit_Click()
     Unload Me
 End Sub
 
+Private Sub mnuTools_Click()
+    
+
+End Sub
+
+
 Private Sub mnuOpen_Click()
     'CommonDialog1.Filter = "Weld Data File (*.wdd) | *.wdd |Old Data File (*.wld) | *.wld"
     CommonDialog1.Filter = "Old Data File (*.WLD) |*.wld|Daily Report(*.dly)|*.DLY"
@@ -156,6 +162,5 @@ End Sub
 
 Private Sub mnuStartEmulate_Click()
     PlcDemo.StartDemo
-    
 End Sub
 

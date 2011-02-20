@@ -14,7 +14,7 @@ Begin VB.Form FrmGraph
    ScaleWidth      =   14055
    Tag             =   "12000"
    Begin VB.Timer TimerShow 
-      Interval        =   90
+      Interval        =   10
       Left            =   9720
       Top             =   3240
    End
@@ -55,7 +55,7 @@ Begin VB.Form FrmGraph
       Width           =   8355
    End
    Begin VB.Timer TimerTest 
-      Interval        =   62
+      Interval        =   6
       Left            =   9960
       Top             =   2640
    End
@@ -426,53 +426,19 @@ Function SwitchToRecoding(status As ShowModeType)
             TimerShow.Tag = ""
             
             lblTop.Caption = "Ready"
-            lblBigCenter.Caption = toShowModel(weldSerailNumber)
+            weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
+            lblBigCenter.Caption = toWeldNumberShowModel(weldSerailNumber)
             lblBigCenter.ForeColor = &H8000000E
             lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting", "DEFAULT")
         Case RECORDING_MODE
-            lblTop.Caption = toShowModel(weldSerailNumber)
+            weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
+            lblTop.Caption = toWeldNumberShowModel(weldSerailNumber)
         Case ANALYSIS_MODE
             TimerTest.Enabled = False
             TimerShow.Tag = "ANALYSIS"
     End Select
     showMode = status
 End Function
-
-Private Function GetLastWeldNumber() As Integer
-Dim fs As Files
-Dim f As File
-    
-Dim fd As String
-
-
-weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
-
-'fd = path & "\" & Format(Date, "YYYY-MM-DD")
-'
-'Dim wn As Integer
-'If fso.FolderExists(fd) Then
-'  Set fs = fso.GetFolder(fd).Files
-'
-'  Dim i As Integer
-'
-'    For Each f In fs
-'        If Len(f.name) = 9 Then
-'            i = CInt(Mid(f.name, 2, 4))
-'            If wn < i Then
-'                wn = i
-'            End If
-'        End If
-'    Next
-'    GetLastWeldNumber = wn
-'Else
-'    fso.CreateFolder fd
-'    GetLastWeldNumber = 0
-'End If
-'
-     
-End Function
-
-
 
 Private Sub Form_Load()
 ' Resource
@@ -538,7 +504,7 @@ PlcRes.LoadResFor Me
     timeInMS = 0
     rIndex = 0
 
-    weldSerailNumber = GetLastWeldNumber()
+    weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
     
     SwitchToRecoding STANDBY_MODE
     
@@ -723,42 +689,24 @@ End Function
 
 Function SaveData()
 Dim fh As FileHeader
-Dim weldFile As String
-    weldFile = toShowModel(weldSerailNumber)
+Dim WeldFile As String
+    WeldFile = toWeldNumberShowModel(weldSerailNumber)
     fh.Date = Date
     fh.Time = Time
-    fh.filename = weldFile
+    fh.filename = WeldFile
     fh.ParamName = lblParameter.Caption
     
-    Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & weldFile & ".WLD", fh, rBuf, rIndex, analysisDefine, analysisResult)
+    Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & WeldFile & ".WLD", fh, rBuf, rIndex, analysisDefine, analysisResult)
 
-    weldSerailNumber = weldSerailNumber + 1
-    Call SaveSetting(App.EXEName, "WELD", "LastSerialNumber", weldSerailNumber)
-End Function
-
-
-
-
-Function toShowModel(n As Integer) As String
-Dim leadNumber As Integer
-Dim leadChar As String
+    Dim wn As Integer
+    wn = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
     
-    leadNumber = (n / 10000)
-    
-    If leadNumber >= 26 Then
-        leadNumber = 0
+    If wn = weldSerailNumber Then
+        weldSerailNumber = weldSerailNumber + 1
+        Call SaveSetting(App.EXEName, "WELD", "LastSerialNumber", weldSerailNumber)
+       
     End If
     
-    leadChar = Chr(Asc("A") + leadNumber)
-        
-    Dim leaveNumber As Integer
-    leaveNumber = n - (n / 10000) * 10000
-    
-    Dim showString As String
-    showString = CStr(n)
-    
-    toShowModel = "" & leadChar & Left("0000", 4 - Len(showString)) & showString
+
 End Function
-
-
 
