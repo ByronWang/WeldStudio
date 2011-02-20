@@ -160,7 +160,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "3.0"
+         Caption         =   "1.8"
          Height          =   255
          Index           =   14
          Left            =   4440
@@ -180,7 +180,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "0.10"
+         Caption         =   "0.7"
          Height          =   255
          Index           =   14
          Left            =   3600
@@ -191,17 +191,17 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblLabel 
          Caption         =   "Pre-Flash Distance (mm):"
          Height          =   255
-         Index           =   13
+         Index           =   11
          Left            =   240
          TabIndex        =   71
          Tag             =   "140"
-         Top             =   5640
+         Top             =   4920
          Width           =   2415
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "3.0"
+         Caption         =   "0.30"
          Height          =   255
          Index           =   13
          Left            =   4440
@@ -221,7 +221,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "0.10"
+         Caption         =   "0.12"
          Height          =   255
          Index           =   13
          Left            =   3600
@@ -232,17 +232,17 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblLabel 
          Caption         =   "Boost Speed (mm/s):"
          Height          =   255
-         Index           =   12
+         Index           =   13
          Left            =   240
          TabIndex        =   66
          Tag             =   "130"
-         Top             =   5280
+         Top             =   5640
          Width           =   2415
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "3.0"
+         Caption         =   "5.0"
          Height          =   255
          Index           =   11
          Left            =   4440
@@ -262,7 +262,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "0.10"
+         Caption         =   "0.0"
          Height          =   255
          Index           =   11
          Left            =   3600
@@ -273,17 +273,17 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblLabel 
          Caption         =   "Flash Speed (mm/s):"
          Height          =   255
-         Index           =   11
+         Index           =   12
          Left            =   240
          TabIndex        =   61
          Tag             =   "120"
-         Top             =   4920
+         Top             =   5280
          Width           =   2415
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "3.0"
+         Caption         =   "20.0"
          Height          =   255
          Index           =   10
          Left            =   4440
@@ -303,7 +303,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "0.10"
+         Caption         =   "9.0"
          Height          =   255
          Index           =   10
          Left            =   3600
@@ -324,7 +324,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "3.0"
+         Caption         =   "450"
          Height          =   255
          Index           =   9
          Left            =   4440
@@ -344,7 +344,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "0.10"
+         Caption         =   "150"
          Height          =   255
          Index           =   9
          Left            =   3600
@@ -365,7 +365,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "3.0"
+         Caption         =   "350"
          Height          =   255
          Index           =   8
          Left            =   4440
@@ -385,7 +385,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "0.10"
+         Caption         =   "150"
          Height          =   255
          Index           =   8
          Left            =   3600
@@ -486,7 +486,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "0.1"
+         Caption         =   "25"
          Height          =   255
          Index           =   0
          Left            =   3600
@@ -506,7 +506,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "10.0"
+         Caption         =   "60"
          Height          =   255
          Index           =   0
          Left            =   4440
@@ -517,7 +517,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "0"
+         Caption         =   "60"
          Height          =   255
          Index           =   1
          Left            =   3600
@@ -537,7 +537,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "60"
+         Caption         =   "200"
          Height          =   255
          Index           =   1
          Left            =   4440
@@ -548,7 +548,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "250"
+         Caption         =   "0.00"
          Height          =   255
          Index           =   2
          Left            =   3600
@@ -568,7 +568,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "460"
+         Caption         =   "3.00"
          Height          =   255
          Index           =   2
          Left            =   4440
@@ -579,7 +579,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "150"
+         Caption         =   "1.0"
          Height          =   255
          Index           =   3
          Left            =   3600
@@ -599,7 +599,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "800"
+         Caption         =   "3.00"
          Height          =   255
          Index           =   3
          Left            =   4440
@@ -610,7 +610,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "150"
+         Caption         =   "360"
          Height          =   255
          Index           =   4
          Left            =   3600
@@ -630,7 +630,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "800"
+         Caption         =   "480"
          Height          =   255
          Index           =   4
          Left            =   4440
@@ -641,7 +641,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "150"
+         Caption         =   "280"
          Height          =   255
          Index           =   5
          Left            =   3600
@@ -661,7 +661,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "800"
+         Caption         =   "380"
          Height          =   255
          Index           =   5
          Left            =   4440
@@ -672,7 +672,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "0.10"
+         Caption         =   "360"
          Height          =   255
          Index           =   6
          Left            =   3600
@@ -692,7 +692,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "3.0"
+         Caption         =   "480"
          Height          =   255
          Index           =   6
          Left            =   4440
@@ -703,7 +703,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "0.10"
+         Caption         =   "150"
          Height          =   255
          Index           =   7
          Left            =   3600
@@ -723,7 +723,7 @@ Begin VB.Form FrmRegularSetting
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
          BackColor       =   &H8000000E&
-         Caption         =   "3.0"
+         Caption         =   "300"
          Height          =   255
          Index           =   7
          Left            =   4440

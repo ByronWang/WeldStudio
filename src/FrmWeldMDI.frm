@@ -83,11 +83,18 @@ Attribute VB_Exposed = False
 
 
 Private Sub MDIForm_Load()
+
+Dim fProgress As frmProgress
 ' Resource
 PlcRes.LoadResFor Me
 
-
+PlcAnalysiser.GetAnalysisDefine
+Set fProgress = New frmProgress
+    
     PLCDrv.InitPLCConnection
+    fProgress.Show vbmodel, Me
+    
+    Set fProgress = Nothing
     mnuConnect.Enabled = PLCDrv.beActive
     PLCDrv.UninitPLCConection
     

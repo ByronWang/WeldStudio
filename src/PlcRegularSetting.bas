@@ -21,21 +21,21 @@ Dim DefalutParam As RegularSettingType
 '14  15  Pre-flash distance in millimeter
 '
 
-    DefalutParam.Value(0) = 0
-    DefalutParam.Value(1) = 0
-    DefalutParam.Value(2) = 0
-    DefalutParam.Value(3) = 0
-    DefalutParam.Value(4) = 0
-    DefalutParam.Value(5) = 0
-    DefalutParam.Value(6) = 0
-    DefalutParam.Value(7) = 0
-    DefalutParam.Value(8) = 0
-    DefalutParam.Value(9) = 0
-    DefalutParam.Value(10) = 0
-    DefalutParam.Value(11) = 0
-    DefalutParam.Value(12) = 0
-    DefalutParam.Value(13) = 0
-    DefalutParam.Value(14) = 0
+    DefalutParam.Value(0) = 47
+    DefalutParam.Value(1) = 110
+    DefalutParam.Value(2) = 0.9
+    DefalutParam.Value(3) = 2.5
+    DefalutParam.Value(4) = 430
+    DefalutParam.Value(5) = 325
+    DefalutParam.Value(6) = 410
+    DefalutParam.Value(7) = 200
+    DefalutParam.Value(8) = 250
+    DefalutParam.Value(9) = 290
+    DefalutParam.Value(10) = 12.1
+    DefalutParam.Value(11) = 3
+    DefalutParam.Value(12) = 0.19
+    DefalutParam.Value(13) = 1.3
+    'DefalutParam.Value(14) = 0
         
 DefalutStagesParameters = DefalutParam
 End Function
@@ -52,11 +52,11 @@ Public Function LoadAll(filename As String) As RegularFileItemType()
     Open filename For Binary As #1
     Get 1, 1, pFileHeader
     
-    ReDim pFileItemList(pFileHeader.Count)
+    ReDim pFileItemList(pFileHeader.count)
     
     pos = pos + LenB(pFileHeader)
     
-    For i = 0 To pFileHeader.Count - 1
+    For i = 0 To pFileHeader.count - 1
         Get 1, pos + 1, pFileItem
         pos = pos + LenB(pFileItem)
         pFileItemList(i) = pFileItem
@@ -104,7 +104,7 @@ Public Function SaveConfig(filename As String, configName As String, RegularSett
     Dim pFileItem As RegularFileItemType
     Dim pos As Integer
     
-    pFileHeader.Count = UBound(pFileItemList)
+    pFileHeader.count = UBound(pFileItemList)
     
     pos = 0
     If haved Then
@@ -112,8 +112,8 @@ Public Function SaveConfig(filename As String, configName As String, RegularSett
         pos = pos + (i) * LenB(pFileItem)
     Else
         pos = pos + LenB(pFileHeader)
-        pos = pos + pFileHeader.Count * LenB(pFileItem)
-        pFileHeader.Count = pFileHeader.Count + 1
+        pos = pos + pFileHeader.count * LenB(pFileItem)
+        pFileHeader.count = pFileHeader.count + 1
     End If
     
     pFileItem.name = configName

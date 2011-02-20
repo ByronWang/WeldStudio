@@ -5,12 +5,12 @@ Begin VB.Form FrmChart
    ClientHeight    =   9540
    ClientLeft      =   60
    ClientTop       =   450
-   ClientWidth     =   9930
+   ClientWidth     =   13395
    Icon            =   "FrmChart.frx":0000
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
    ScaleHeight     =   9540
-   ScaleWidth      =   9930
+   ScaleWidth      =   13395
    ShowInTaskbar   =   0   'False
    Tag             =   "11000"
    WindowState     =   2  'Maximized
@@ -1405,7 +1405,8 @@ While i <= UBound(EmulateData) And i <= pos
 Wend
 
 For i = posStart To pos
-    MyData(1, i + 1 - posStart) = (EmulateData(i).PsiUpset - EmulateData(i).PsiOpen) / 25.4
+
+    MyData(1, i + 1 - posStart) = PlcAnalysiser.toForce(EmulateData(i).PsiUpset, EmulateData(i).PsiOpen)
     MyData(2, i + 1 - posStart) = EmulateData(i).Volt
     MyData(3, i + 1 - posStart) = EmulateData(i).Amp
     MyData(4, i + 1 - posStart) = EmulateData(i).Dist
@@ -1467,7 +1468,7 @@ Next
 
 i = 0
 While i <= UBound(EmulateData) And i <= count
-    MyData(1, i + 1) = (EmulateData(i).PsiUpset - EmulateData(i).PsiOpen) / 25.4
+    MyData(1, i + 1) = PlcAnalysiser.toForce(EmulateData(i).PsiUpset, EmulateData(i).PsiOpen)
     MyData(2, i + 1) = EmulateData(i).Volt
     MyData(3, i + 1) = EmulateData(i).Amp
     MyData(4, i + 1) = EmulateData(i).Dist
@@ -1676,7 +1677,7 @@ For i = 0 To UBound(EmulateData)
     entry = entry & vbTab & data.Volt
     entry = entry & vbTab & data.PsiUpset
     entry = entry & vbTab & data.PsiOpen
-    entry = entry & vbTab & Format((data.PsiUpset - data.PsiOpen) / 25.42, "##0")
+    entry = entry & vbTab & Format(PlcAnalysiser.toForce(data.PsiUpset, data.PsiOpen), "##0")
     entry = entry & vbTab & Format(data.Time, "##0.00")
     sa(i) = entry
         
@@ -1691,3 +1692,6 @@ Next
     Call dataForm.setData(sa)
 
 End Function
+
+
+

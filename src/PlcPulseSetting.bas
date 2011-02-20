@@ -2,7 +2,7 @@ Attribute VB_Name = "PlcPulseSetting"
 Option Explicit
 
 Type FileHeaderType
-    Count As Integer
+    count As Integer
 End Type
 
 Type StageParametersType
@@ -50,34 +50,111 @@ Public Function DefalutStagesParameters() As PulseSettingType
 
 Dim DefalutParam As PulseSettingType
 
-    DefalutParam.General.Value(0) = 0
-    DefalutParam.General.Value(1) = 9
-    DefalutParam.General.Value(2) = 20
+    DefalutParam.General.Value(0) = 10
+    DefalutParam.General.Value(1) = 0.6
+    DefalutParam.General.Value(2) = 51
     DefalutParam.General.Value(3) = 0
         
     Dim i As Integer
     Dim stage As StageParametersType
     
-    For i = 0 To 6
-        DefalutParam.Stages(i).Value(0) = 0.1
-        DefalutParam.Stages(i).Value(1) = 0
-        DefalutParam.Stages(i).Value(2) = 250
-        DefalutParam.Stages(i).Value(3) = 150
-        DefalutParam.Stages(i).Value(4) = 150
-        DefalutParam.Stages(i).Value(5) = 150
-        DefalutParam.Stages(i).Value(6) = 0.1
-        DefalutParam.Stages(i).Value(7) = 0.1
-'
-'
-'        DefalutParam.Stages(i).Distance = 0.1
-'        DefalutParam.Stages(i).Time = 0
-'        DefalutParam.Stages(i).Voltage = 250
-'        DefalutParam.Stages(i).CurrentSetpoint1 = 150
-'        DefalutParam.Stages(i).CurrentSetpoint2 = 150
-'        DefalutParam.Stages(i).CurrentSetpoint3 = 150
-'        DefalutParam.Stages(i).ForwardSpeed = 0.1
-'        DefalutParam.Stages(i).ReverseSpeed = 0.1
-    Next i
+'    For i = 0 To 6
+'        DefalutParam.Stages(i).Value(0) = 0.1
+'        DefalutParam.Stages(i).Value(1) = 0
+'        DefalutParam.Stages(i).Value(2) = 250
+'        DefalutParam.Stages(i).Value(3) = 150
+'        DefalutParam.Stages(i).Value(4) = 150
+'        DefalutParam.Stages(i).Value(5) = 150
+'        DefalutParam.Stages(i).Value(6) = 0.1
+'        DefalutParam.Stages(i).Value(7) = 0.1
+''
+''
+''        DefalutParam.Stages(i).Distance = 0.1
+''        DefalutParam.Stages(i).Time = 0
+''        DefalutParam.Stages(i).Voltage = 250
+''        DefalutParam.Stages(i).CurrentSetpoint1 = 150
+''        DefalutParam.Stages(i).CurrentSetpoint2 = 150
+''        DefalutParam.Stages(i).CurrentSetpoint3 = 150
+''        DefalutParam.Stages(i).ForwardSpeed = 0.1
+''        DefalutParam.Stages(i).ReverseSpeed = 0.1
+'    Next i
+    
+    i = -1
+    
+    i = i + 1 ' Preflash
+    DefalutParam.Stages(i).Value(0) = 10
+    DefalutParam.Stages(i).Value(1) = 20
+    DefalutParam.Stages(i).Value(2) = 420
+    DefalutParam.Stages(i).Value(3) = 300
+    DefalutParam.Stages(i).Value(4) = 350
+    DefalutParam.Stages(i).Value(5) = 400
+    DefalutParam.Stages(i).Value(6) = 0.8
+    DefalutParam.Stages(i).Value(7) = 0.7
+    
+    i = i + 1 'Flash-I
+    DefalutParam.Stages(i).Value(0) = 2.5
+    DefalutParam.Stages(i).Value(1) = 40
+    DefalutParam.Stages(i).Value(2) = 380
+    DefalutParam.Stages(i).Value(3) = 250
+    DefalutParam.Stages(i).Value(4) = 350
+    DefalutParam.Stages(i).Value(5) = 450
+    DefalutParam.Stages(i).Value(6) = 1.2
+    DefalutParam.Stages(i).Value(7) = 0.5
+    
+    i = i + 1 'Flash-II
+    DefalutParam.Stages(i).Value(0) = 10
+    DefalutParam.Stages(i).Value(1) = 15
+    DefalutParam.Stages(i).Value(2) = 360
+    DefalutParam.Stages(i).Value(3) = 200
+    DefalutParam.Stages(i).Value(4) = 300
+    DefalutParam.Stages(i).Value(5) = 400
+    DefalutParam.Stages(i).Value(6) = 1.6
+    DefalutParam.Stages(i).Value(7) = 0.7
+    
+    i = i + 1 'Flash-III
+    DefalutParam.Stages(i).Value(0) = 10
+    DefalutParam.Stages(i).Value(1) = 32
+    DefalutParam.Stages(i).Value(2) = 330
+    DefalutParam.Stages(i).Value(3) = 200
+    DefalutParam.Stages(i).Value(4) = 250
+    DefalutParam.Stages(i).Value(5) = 300
+    DefalutParam.Stages(i).Value(6) = 1.9
+    DefalutParam.Stages(i).Value(7) = 0.6
+    
+    i = i + 1 'Flash-IV
+    DefalutParam.Stages(i).Value(0) = 10
+    DefalutParam.Stages(i).Value(1) = 6
+    DefalutParam.Stages(i).Value(2) = 365
+    DefalutParam.Stages(i).Value(3) = 180
+    DefalutParam.Stages(i).Value(4) = 210
+    DefalutParam.Stages(i).Value(5) = 250
+    DefalutParam.Stages(i).Value(6) = 1.5
+    DefalutParam.Stages(i).Value(7) = 0.5
+    
+    i = i + 1 'Boost-I
+    DefalutParam.Stages(i).Value(0) = 10
+    DefalutParam.Stages(i).Value(1) = 5
+    DefalutParam.Stages(i).Value(2) = 390
+    DefalutParam.Stages(i).Value(3) = 400
+    DefalutParam.Stages(i).Value(4) = 450
+    DefalutParam.Stages(i).Value(5) = 500
+    DefalutParam.Stages(i).Value(6) = 0.9
+    DefalutParam.Stages(i).Value(7) = 0.45
+    
+    i = i + 1 'Boost-II
+    DefalutParam.Stages(i).Value(0) = 0.4
+    DefalutParam.Stages(i).Value(1) = 10
+    DefalutParam.Stages(i).Value(2) = 420
+    DefalutParam.Stages(i).Value(3) = 430
+    DefalutParam.Stages(i).Value(4) = 500
+    DefalutParam.Stages(i).Value(5) = 550
+    DefalutParam.Stages(i).Value(6) = 1.3
+    DefalutParam.Stages(i).Value(7) = 0.2
+    
+    
+    
+    
+    
 DefalutStagesParameters = DefalutParam
 End Function
 
@@ -93,11 +170,11 @@ Public Function LoadAll(filename As String) As PulseFileItemType()
     Open filename For Binary As #1
     Get 1, 1, pFileHeader
     
-    ReDim pFileItemList(pFileHeader.Count)
+    ReDim pFileItemList(pFileHeader.count)
     
     pos = pos + LenB(pFileHeader)
     
-    For i = 0 To pFileHeader.Count - 1
+    For i = 0 To pFileHeader.count - 1
         Get 1, pos + 1, pFileItem
         pos = pos + LenB(pFileItem)
         pFileItemList(i) = pFileItem
@@ -145,7 +222,7 @@ Public Function SaveConfig(filename As String, configName As String, PulseSettin
     Dim pFileItem As PulseFileItemType
     Dim pos As Integer
     
-    pFileHeader.Count = UBound(pFileItemList)
+    pFileHeader.count = UBound(pFileItemList)
     
     pos = 0
     If haved Then
@@ -153,8 +230,8 @@ Public Function SaveConfig(filename As String, configName As String, PulseSettin
         pos = pos + (i) * LenB(pFileItem)
     Else
         pos = pos + LenB(pFileHeader)
-        pos = pos + pFileHeader.Count * LenB(pFileItem)
-        pFileHeader.Count = pFileHeader.Count + 1
+        pos = pos + pFileHeader.count * LenB(pFileItem)
+        pFileHeader.count = pFileHeader.count + 1
     End If
     
     pFileItem.name = configName

@@ -181,7 +181,7 @@ Begin VB.Form FrmGraph
       BackColor       =   &H80000008&
       BackStyle       =   0  'Transparent
       Caption         =   "Label6"
-      ForeColor       =   &H00400000&
+      ForeColor       =   &H00000000&
       Height          =   255
       Left            =   1080
       TabIndex        =   13
@@ -192,7 +192,7 @@ Begin VB.Form FrmGraph
       BackColor       =   &H80000008&
       BackStyle       =   0  'Transparent
       Caption         =   "Label5"
-      ForeColor       =   &H00400000&
+      ForeColor       =   &H00000000&
       Height          =   255
       Left            =   960
       TabIndex        =   12
@@ -275,7 +275,7 @@ Begin VB.Form FrmGraph
    End
    Begin VB.Label Label4 
       BackStyle       =   0  'Transparent
-      Caption         =   "Psi"
+      Caption         =   "Force"
       BeginProperty Font 
          Name            =   "ËÎÌו"
          Size            =   36
@@ -291,7 +291,7 @@ Begin VB.Form FrmGraph
       TabIndex        =   8
       Tag             =   "12040"
       Top             =   9000
-      Width           =   1695
+      Width           =   1935
    End
    Begin VB.Label Label3 
       BackStyle       =   0  'Transparent
@@ -530,7 +530,7 @@ If Me.TimerShow.Tag = "ANALYSIS" Then
 End If
 
 If beRecording Then
-    lblBigCenter.Caption = Format(timeInMS / 1000, "##0")
+    lblBigCenter.Caption = Format(timeInMS / 1000, "000")
     'lblBigCenter.Caption = Format(timeInMS / 1000, "##0.00")
 End If
 
@@ -564,7 +564,7 @@ If Amp < 0 Then
     Amp = 0
 End If
 
-psi = (wm.data.PsiUpset - wm.data.PsiOpen) / 25.4
+psi = PlcAnalysiser.toForce(wm.data.PsiUpset, wm.data.PsiOpen)
 If psi < 0 Then
     psi = 0
 End If
@@ -695,6 +695,10 @@ Dim WeldFile As String
     fh.Time = Time
     fh.filename = WeldFile
     fh.ParamName = lblParameter.Caption
+        
+    If Not fso.FolderExists(path & "\" & Format(Date, "YYYY-MM-DD")) Then
+        fso.CreateFolder (path & "\" & Format(Date, "YYYY-MM-DD"))
+    End If
     
     Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & WeldFile & ".WLD", fh, rBuf, rIndex, analysisDefine, analysisResult)
 

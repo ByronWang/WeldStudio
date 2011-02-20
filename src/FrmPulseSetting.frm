@@ -777,7 +777,27 @@ Private Sub cmdLoad_Click()
     Call SaveSetting(App.EXEName, "Parameter", "LastSetting", "Pulse:" & lastConfigName)
 End Sub
 
+Private Function checkInputedDataValidate() As Boolean
+Dim i As Integer
+    For i = 0 To txtValue.count
+        If txtValue(i).BackColor = &HFF& Then
+            checkInputedDataValidate = False
+            Exit Function
+        End If
+    Next i
+    
+        For i = 0 To txtValueGeneral.count
+        If txtValueGeneral(i).BackColor = &HFF& Then
+            checkInputedDataValidate = False
+            Exit Function
+        End If
+    Next i
+    
+End Function
+
 Private Sub cmdSave_Click()
+
+
     If cboFileName.Text <> "" Then
         Call PlcPulseSetting.SaveConfig(path, cboFileName.Text, PulseSetting)
     End If
@@ -853,17 +873,47 @@ Dim pFileItemList() As PulseFileItemType
 End Sub
 
 Private Sub txtValue_Change(index As Integer)
+    Dim min As Single
+    Dim max As Single
+    Dim v As Single
+    
+    min = CSng(lblMin(index).Caption)
+    max = CSng(lblMax(index).Caption)
+        
     If IsNumeric(txtValue(index).Text) Then
-        PulseSetting.Stages(cboStage.ListIndex).Value(index) = CSng(txtValue(index).Text)
-    Else
-        txtValue(index).Text = PulseSetting.Stages(cboStage.ListIndex).Value(index)
+        v = CSng(txtValue(index).Text)
+        If min <= v And v <= max Then
+            txtValue(index).BackColor = &HFFFFFF
+            PulseSetting.Stages(cboStage.ListIndex).Value(index) = CDbl(txtValue(index).Text)
+            Exit Sub
+        End If
     End If
+            
+    txtValue(index).BackColor = &HFF&
+    
+    'txtValue(index).Text = PulseSetting.Stages(cboStage.ListIndex).Value(index)
+    
 End Sub
 
 Private Sub txtValueGeneral_Change(index As Integer)
+    Dim min As Single
+    Dim max As Single
+    Dim v As Single
+    
+    min = CSng(lblMinGeneral(index).Caption)
+    max = CSng(lblMaxGeneral(index).Caption)
     If IsNumeric(txtValueGeneral(index).Text) Then
-        PulseSetting.General.Value(index) = CSng(txtValueGeneral(index).Text)
-    Else
-        txtValueGeneral(index).Text = PulseSetting.General.Value(index)
+    
+        v = CSng(txtValueGeneral(index).Text)
+        If min <= v And v <= max Then
+            txtValueGeneral(index).BackColor = &HFFFFFF
+            PulseSetting.General.Value(index) = CSng(txtValueGeneral(index).Text)
+            Exit Sub
+        End If
     End If
+            
+    txtValueGeneral(index).BackColor = &HFF&
+    
+    'txtValueGeneral(index).Text = PulseSetting.General.Value(index)
+    
 End Sub

@@ -42,17 +42,18 @@ End Function
 
 
 Public Function SaveData(filename As String, data() As DailyReport, count As Integer)
-Dim pos As Long
-
-Dim i As Integer
-
-Open filename For Binary As #1
-    pos = 0
-    For i = 1 To count
-        Put 1, pos + 1, r(i)
-        pos = pos + Len(DailyReport)
-    Wend
-Close 1
+'Dim pos As Long
+'
+'Dim i As Integer
+'
+'Open filename For Binary As #1
+'    pos = 0
+'    For i = 1 To count
+'        Put 1, pos + 1, r(i)
+'        pos = pos + Len(DailyReport)
+'    Wend
+'Close 1
+'TODO
 
 End Function
 

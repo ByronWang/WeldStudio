@@ -283,7 +283,7 @@ Dim force As Single
 Dim sumForce As Double
 
     For i = stopPos To startPos Step -1
-        force = (buf(i).PsiUpset - buf(i).PsiOpen) / 25.4
+        force = PlcAnalysiser.toForce(buf(i).PsiUpset, buf(i).PsiOpen)
         sumForce = sumForce + force
     Next
             
@@ -453,3 +453,27 @@ Exit Function
 OVER:
     ANALYSIS = r
 End Function
+
+
+Public Function toForce(Pupset As Long, Popen As Long) As Double
+
+    Dim Dpiston As Double
+    Dim Drod As Double
+    'Call GetAnalysisDefine
+    Dpiston = analysisDefine.UpsetDiameter_Pistonside
+    Drod = analysisDefine.UpsetDiameter_Rodside
+    
+'    toForce = 3.1415926 * ( _
+'        0.0703 * Pupset * ((Dpiston / 2) * (Dpiston / 2) - (Drod / 2) * (Drod / 2)) - _
+'         0.0703 * Popen * (Dpiston / 2) * (Dpiston / 2) _
+'        ) _
+'        / 100 / 1000
+        
+        toForce = 2 * 3.1415926 * ( _
+        0.0703 * (Abs(Pupset) - Abs(Popen)) * ((Dpiston / 2) * (Dpiston / 2) - (Drod / 2) * (Drod / 2)) _
+        ) _
+        / 100 / 1000
+        
+End Function
+        
+
