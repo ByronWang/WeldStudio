@@ -32,9 +32,9 @@ Dim DefalutParam As RegularSettingType
     DefalutParam.Value(8) = 250
     DefalutParam.Value(9) = 290
     DefalutParam.Value(10) = 12.1
-    DefalutParam.Value(11) = 3
-    DefalutParam.Value(12) = 0.19
-    DefalutParam.Value(13) = 1.3
+    DefalutParam.Value(11) = 0.19
+    DefalutParam.Value(12) = 1.3
+    DefalutParam.Value(13) = 3
     'DefalutParam.Value(14) = 0
         
 DefalutStagesParameters = DefalutParam

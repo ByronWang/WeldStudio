@@ -470,9 +470,19 @@ Public Function toForce(Pupset As Long, Popen As Long) As Double
 '        / 100 / 1000
         
         toForce = 2 * 3.1415926 * ( _
-        0.0703 * (Abs(Pupset) - Abs(Popen)) * ((Dpiston / 2) * (Dpiston / 2) - (Drod / 2) * (Drod / 2)) _
+        0.0703 * (Abs(Pupset) - Abs(Popen)) * ((Dpiston / 2) * (Dpiston / 2) - ((Drod / 2) * (Drod / 2))) _
         ) _
         / 100 / 1000
+
+        
+'
+'        toForce = 3.1415926 * ( _
+'            0.0703 * ( _
+'                Abs(Pupset) * (Dpiston / 2) * (Dpiston / 2) - _
+'                Abs(Popen) * ((Dpiston / 2) * (Dpiston / 2) - (Drod / 2) * (Drod / 2)) _
+'            ) _
+'        ) _
+'        / 100 / 1000
         
 End Function
         

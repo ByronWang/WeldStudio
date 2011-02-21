@@ -26,7 +26,7 @@ Begin VB.Form FrmPulseSetting
       Width           =   5175
       Begin VB.TextBox txtValueGeneral 
          Height          =   270
-         Index           =   3
+         Index           =   2
          Left            =   2640
          TabIndex        =   49
          Text            =   "Text1"
@@ -35,7 +35,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.TextBox txtValueGeneral 
          Height          =   270
-         Index           =   2
+         Index           =   3
          Left            =   2640
          TabIndex        =   48
          Text            =   "Text1"
@@ -62,10 +62,9 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMaxGeneral 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
-         Caption         =   "30"
+         Caption         =   "60"
          Height          =   255
-         Index           =   3
+         Index           =   2
          Left            =   4440
          TabIndex        =   65
          Top             =   1440
@@ -82,10 +81,9 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMinGeneral 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
-         Caption         =   "0"
+         Caption         =   "20"
          Height          =   255
-         Index           =   3
+         Index           =   2
          Left            =   3600
          TabIndex        =   63
          Top             =   1440
@@ -93,10 +91,9 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMaxGeneral 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
-         Caption         =   "75"
+         Caption         =   "30"
          Height          =   255
-         Index           =   2
+         Index           =   3
          Left            =   4440
          TabIndex        =   62
          Top             =   1080
@@ -113,10 +110,9 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMinGeneral 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
-         Caption         =   "20"
+         Caption         =   "0"
          Height          =   255
-         Index           =   2
+         Index           =   3
          Left            =   3600
          TabIndex        =   60
          Top             =   1080
@@ -124,7 +120,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMaxGeneral 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "3.0"
          Height          =   255
          Index           =   1
@@ -144,7 +139,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMinGeneral 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "0.00"
          Height          =   255
          Index           =   1
@@ -155,7 +149,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMaxGeneral 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "20.0"
          Height          =   255
          Index           =   0
@@ -175,7 +168,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMinGeneral 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "9"
          Height          =   255
          Index           =   0
@@ -191,7 +183,7 @@ Begin VB.Form FrmPulseSetting
          Left            =   240
          TabIndex        =   53
          Tag             =   "40"
-         Top             =   1440
+         Top             =   1080
          Width           =   2415
       End
       Begin VB.Label lblLabel 
@@ -201,7 +193,7 @@ Begin VB.Form FrmPulseSetting
          Left            =   240
          TabIndex        =   52
          Tag             =   "30"
-         Top             =   1080
+         Top             =   1440
          Width           =   2415
       End
       Begin VB.Label lblLabel 
@@ -370,7 +362,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "3.0"
          Height          =   255
          Index           =   7
@@ -390,7 +381,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "0.10"
          Height          =   255
          Index           =   7
@@ -401,7 +391,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "3.0"
          Height          =   255
          Index           =   6
@@ -421,7 +410,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "0.10"
          Height          =   255
          Index           =   6
@@ -432,7 +420,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "800"
          Height          =   255
          Index           =   5
@@ -452,7 +439,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "150"
          Height          =   255
          Index           =   5
@@ -463,7 +449,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "800"
          Height          =   255
          Index           =   4
@@ -483,7 +468,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "150"
          Height          =   255
          Index           =   4
@@ -494,7 +478,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "800"
          Height          =   255
          Index           =   3
@@ -514,7 +497,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "150"
          Height          =   255
          Index           =   3
@@ -525,7 +507,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "460"
          Height          =   255
          Index           =   2
@@ -545,7 +526,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "250"
          Height          =   255
          Index           =   2
@@ -556,7 +536,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "60"
          Height          =   255
          Index           =   1
@@ -576,7 +555,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "0"
          Height          =   255
          Index           =   1
@@ -587,7 +565,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "10.0"
          Height          =   255
          Index           =   0
@@ -607,7 +584,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         BackColor       =   &H8000000E&
          Caption         =   "0.1"
          Height          =   255
          Index           =   0
@@ -698,7 +674,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblLabel 
          Alignment       =   2  'Center
-         BackColor       =   &H00FFFFFF&
          Caption         =   "Max"
          Height          =   255
          Index           =   16
@@ -710,7 +685,6 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblLabel 
          Alignment       =   2  'Center
-         BackColor       =   &H00FFFFFF&
          Caption         =   "Min"
          Height          =   255
          Index           =   15
@@ -771,10 +745,13 @@ End Sub
 Private Sub cmdLoad_Click()
 
     Call PLCDrv.InitPLCConnection
+    Dim p As New frmProgress
+    frmProgress.Show , Me
     Call PLCDrv.WritePulseData(PulseSetting)
     Call PLCDrv.UninitPLCConection
     
     Call SaveSetting(App.EXEName, "Parameter", "LastSetting", "Pulse:" & lastConfigName)
+    cmdLoad.Enabled = False
 End Sub
 
 Private Function checkInputedDataValidate() As Boolean
@@ -816,6 +793,9 @@ Private Sub cmdSave_Click()
     If Not existed Then
         cboFileName.AddItem (cboFileName.Text)
     End If
+    
+    cmdLoad.Enabled = True
+    cmdSave.Enabled = False
     
 End Sub
 
@@ -866,6 +846,9 @@ Dim pFileItemList() As PulseFileItemType
     Else
         Call LoadConfig("NONE")
     End If
+    
+    cmdSave.Enabled = False
+    cmdLoad.Enabled = False
 
 '    Debug.Print Frame1(1).Caption
 '
@@ -885,6 +868,7 @@ Private Sub txtValue_Change(index As Integer)
         If min <= v And v <= max Then
             txtValue(index).BackColor = &HFFFFFF
             PulseSetting.Stages(cboStage.ListIndex).Value(index) = CDbl(txtValue(index).Text)
+            cmdSave.Enabled = True
             Exit Sub
         End If
     End If
@@ -908,6 +892,7 @@ Private Sub txtValueGeneral_Change(index As Integer)
         If min <= v And v <= max Then
             txtValueGeneral(index).BackColor = &HFFFFFF
             PulseSetting.General.Value(index) = CSng(txtValueGeneral(index).Text)
+            cmdSave.Enabled = True
             Exit Sub
         End If
     End If

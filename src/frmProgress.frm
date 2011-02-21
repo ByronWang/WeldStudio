@@ -52,9 +52,14 @@ End Sub
 
 
 Private Sub Timer1_Timer()
-    If lblProgress.Width < frmProgress.Width - seperator Then
+'    If Not PLCDrv.loading Then
+'        Me.Hide
+'        Unload Me
+'    End If
+    
+    If lblProgress.Width < frmProgress.Width - seperator - seperator / 2 Then
         lblProgress.Width = lblProgress.Width + step
-    Else
+    ElseIf Not PLCDrv.loading Then
         Me.Hide
         Unload Me
     End If

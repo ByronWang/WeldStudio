@@ -46,17 +46,19 @@ Begin VB.Form FrmOption
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   2
+      Tab             =   5
       TabsPerRow      =   10
       TabHeight       =   520
       TabCaption(0)   =   "General"
       TabPicture(0)   =   "FrmOption.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "CommonDialog1"
-      Tab(0).Control(1)=   "cboLanguage"
-      Tab(0).Control(2)=   "chkOnlineOnStartUp"
-      Tab(0).Control(3)=   "lblLanguage"
-      Tab(0).ControlCount=   4
+      Tab(0).Control(0)=   "Frame7"
+      Tab(0).Control(1)=   "Frame5"
+      Tab(0).Control(2)=   "CommonDialog1"
+      Tab(0).Control(3)=   "cboLanguage"
+      Tab(0).Control(4)=   "chkOnlineOnStartUp"
+      Tab(0).Control(5)=   "lblLanguage"
+      Tab(0).ControlCount=   6
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
       Tab(1).ControlEnabled=   0   'False
@@ -64,15 +66,11 @@ Begin VB.Form FrmOption
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
-      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Frame2(1)"
-      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "Frame2(0)"
-      Tab(2).Control(1).Enabled=   0   'False
       Tab(2).Control(2)=   "Frame2(3)"
-      Tab(2).Control(2).Enabled=   0   'False
       Tab(2).Control(3)=   "Frame2(2)"
-      Tab(2).Control(3).Enabled=   0   'False
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
@@ -89,20 +87,239 @@ Begin VB.Form FrmOption
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
-      Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Frame1(11)"
+      Tab(5).ControlEnabled=   -1  'True
+      Tab(5).Control(0)=   "Label1"
+      Tab(5).Control(0).Enabled=   0   'False
       Tab(5).Control(1)=   "Frame6"
-      Tab(5).Control(2)=   "Label1"
+      Tab(5).Control(1).Enabled=   0   'False
+      Tab(5).Control(2)=   "Frame1(11)"
+      Tab(5).Control(2).Enabled=   0   'False
       Tab(5).ControlCount=   3
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "cmdReset"
-      Tab(6).Control(1)=   "chkRecordInterrupts"
+      Tab(6).Control(0)=   "Label2"
+      Tab(6).Control(1)=   "Frame4"
       Tab(6).Control(2)=   "txtWeldNumber"
-      Tab(6).Control(3)=   "Frame4"
-      Tab(6).Control(4)=   "Label2"
+      Tab(6).Control(3)=   "chkRecordInterrupts"
+      Tab(6).Control(4)=   "cmdReset"
       Tab(6).ControlCount=   5
+      Begin VB.Frame Frame7 
+         Caption         =   "Unit Info"
+         Height          =   1335
+         Left            =   -74640
+         TabIndex        =   187
+         Top             =   4800
+         Width           =   5775
+         Begin VB.TextBox txtComp 
+            Enabled         =   0   'False
+            Height          =   375
+            Index           =   10
+            Left            =   1920
+            TabIndex        =   191
+            Top             =   720
+            Width           =   3375
+         End
+         Begin VB.TextBox txtComp 
+            Enabled         =   0   'False
+            Height          =   375
+            Index           =   9
+            Left            =   1920
+            TabIndex        =   189
+            Top             =   360
+            Width           =   3375
+         End
+         Begin VB.Label lblComp 
+            Caption         =   "Location:"
+            Height          =   375
+            Index           =   10
+            Left            =   240
+            TabIndex        =   190
+            Top             =   720
+            Width           =   1575
+         End
+         Begin VB.Label lblComp 
+            Caption         =   "Unit:"
+            Height          =   375
+            Index           =   9
+            Left            =   240
+            TabIndex        =   188
+            Top             =   360
+            Width           =   1575
+         End
+      End
+      Begin VB.Frame Frame5 
+         Caption         =   "Company Info"
+         Height          =   3855
+         Left            =   -74640
+         TabIndex        =   168
+         Top             =   720
+         Width           =   5775
+         Begin VB.TextBox txtComp 
+            Enabled         =   0   'False
+            Height          =   375
+            Index           =   8
+            Left            =   1920
+            TabIndex        =   186
+            Top             =   3240
+            Width           =   3375
+         End
+         Begin VB.TextBox txtComp 
+            Enabled         =   0   'False
+            Height          =   375
+            Index           =   7
+            Left            =   1920
+            TabIndex        =   184
+            Top             =   2880
+            Width           =   3375
+         End
+         Begin VB.TextBox txtComp 
+            Enabled         =   0   'False
+            Height          =   375
+            Index           =   6
+            Left            =   1920
+            TabIndex        =   182
+            Top             =   2520
+            Width           =   3375
+         End
+         Begin VB.TextBox txtComp 
+            Enabled         =   0   'False
+            Height          =   375
+            Index           =   5
+            Left            =   1920
+            TabIndex        =   180
+            Top             =   2160
+            Width           =   3375
+         End
+         Begin VB.TextBox txtComp 
+            Enabled         =   0   'False
+            Height          =   375
+            Index           =   4
+            Left            =   1920
+            TabIndex        =   178
+            Text            =   "China"
+            Top             =   1800
+            Width           =   3375
+         End
+         Begin VB.TextBox txtComp 
+            Enabled         =   0   'False
+            Height          =   375
+            Index           =   3
+            Left            =   1920
+            TabIndex        =   176
+            Top             =   1440
+            Width           =   3375
+         End
+         Begin VB.TextBox txtComp 
+            Enabled         =   0   'False
+            Height          =   375
+            Index           =   2
+            Left            =   1920
+            TabIndex        =   174
+            Top             =   1080
+            Width           =   3375
+         End
+         Begin VB.TextBox txtComp 
+            Enabled         =   0   'False
+            Height          =   375
+            Index           =   1
+            Left            =   1920
+            TabIndex        =   172
+            Top             =   720
+            Width           =   3375
+         End
+         Begin VB.TextBox txtComp 
+            Enabled         =   0   'False
+            Height          =   375
+            Index           =   0
+            Left            =   1920
+            TabIndex        =   170
+            Text            =   "KIWAY"
+            Top             =   360
+            Width           =   3375
+         End
+         Begin VB.Label lblComp 
+            Caption         =   "EMail:"
+            Height          =   375
+            Index           =   8
+            Left            =   240
+            TabIndex        =   185
+            Top             =   3240
+            Width           =   1575
+         End
+         Begin VB.Label lblComp 
+            Caption         =   "Fax:"
+            Height          =   375
+            Index           =   7
+            Left            =   240
+            TabIndex        =   183
+            Top             =   2880
+            Width           =   1575
+         End
+         Begin VB.Label lblComp 
+            Caption         =   "Telephone:"
+            Height          =   375
+            Index           =   6
+            Left            =   240
+            TabIndex        =   181
+            Top             =   2520
+            Width           =   1575
+         End
+         Begin VB.Label lblComp 
+            Caption         =   "Contact Name:"
+            Height          =   375
+            Index           =   5
+            Left            =   240
+            TabIndex        =   179
+            Top             =   2160
+            Width           =   1575
+         End
+         Begin VB.Label lblComp 
+            Caption         =   "Country"
+            Height          =   375
+            Index           =   4
+            Left            =   240
+            TabIndex        =   177
+            Top             =   1800
+            Width           =   1575
+         End
+         Begin VB.Label lblComp 
+            Caption         =   "Zip Code:"
+            Height          =   375
+            Index           =   3
+            Left            =   240
+            TabIndex        =   175
+            Top             =   1440
+            Width           =   1575
+         End
+         Begin VB.Label lblComp 
+            Caption         =   "City:"
+            Height          =   375
+            Index           =   2
+            Left            =   240
+            TabIndex        =   173
+            Top             =   1080
+            Width           =   1575
+         End
+         Begin VB.Label lblComp 
+            Caption         =   "Address:"
+            Height          =   375
+            Index           =   1
+            Left            =   240
+            TabIndex        =   171
+            Top             =   720
+            Width           =   1575
+         End
+         Begin VB.Label lblComp 
+            Caption         =   "Company Name:"
+            Height          =   375
+            Index           =   0
+            Left            =   240
+            TabIndex        =   169
+            Top             =   360
+            Width           =   1575
+         End
+      End
       Begin VB.CommandButton cmdReset 
          Caption         =   "Reset"
          Height          =   375
@@ -113,6 +330,7 @@ Begin VB.Form FrmOption
       End
       Begin VB.CheckBox chkRecordInterrupts 
          Caption         =   "Record Interrupts"
+         Enabled         =   0   'False
          Height          =   375
          Left            =   -70680
          TabIndex        =   166
@@ -138,19 +356,19 @@ Begin VB.Form FrmOption
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   1575
+         Height          =   1215
          Index           =   11
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   153
          Tag             =   "21900"
-         Top             =   4680
+         Top             =   4560
          Width           =   10335
          Begin VB.TextBox txtWA 
             Height          =   270
             Index           =   19
             Left            =   6720
             TabIndex        =   162
-            Text            =   "0"
+            Text            =   "82.55"
             Top             =   720
             Width           =   855
          End
@@ -159,7 +377,7 @@ Begin VB.Form FrmOption
             Index           =   18
             Left            =   6720
             TabIndex        =   160
-            Text            =   "0"
+            Text            =   "209.05"
             Top             =   360
             Width           =   855
          End
@@ -169,7 +387,7 @@ Begin VB.Form FrmOption
             Left            =   2760
             TabIndex        =   158
             Text            =   "0"
-            Top             =   1080
+            Top             =   720
             Width           =   615
          End
          Begin VB.TextBox txtWA 
@@ -185,11 +403,11 @@ Begin VB.Form FrmOption
             Enabled         =   0   'False
             Height          =   270
             Index           =   16
-            Left            =   2760
+            Left            =   6720
             Locked          =   -1  'True
             TabIndex        =   154
             Text            =   "2"
-            Top             =   720
+            Top             =   1440
             Width           =   615
          End
          Begin VB.Label lblAV 
@@ -219,11 +437,11 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   159
             Tag             =   "30"
-            Top             =   1080
+            Top             =   720
             Width           =   2535
          End
          Begin VB.Label lblAV 
-            Caption         =   "Flash Speed Time Range (s):"
+            Caption         =   "Initial Voltage(V):"
             Height          =   375
             Index           =   25
             Left            =   240
@@ -237,10 +455,10 @@ Begin VB.Form FrmOption
             Enabled         =   0   'False
             Height          =   375
             Index           =   24
-            Left            =   240
+            Left            =   4080
             TabIndex        =   156
             Tag             =   "20"
-            Top             =   720
+            Top             =   1440
             Width           =   2535
          End
       End
@@ -256,7 +474,7 @@ Begin VB.Form FrmOption
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3855
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   105
          Top             =   600
          Width           =   10215
@@ -815,7 +1033,7 @@ Begin VB.Form FrmOption
          Caption         =   "Voltage"
          Height          =   1455
          Index           =   2
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   87
          Tag             =   "18300"
          Top             =   2040
@@ -955,7 +1173,7 @@ Begin VB.Form FrmOption
          Caption         =   "Pressure"
          Height          =   1455
          Index           =   3
-         Left            =   5400
+         Left            =   -69600
          TabIndex        =   72
          Tag             =   "18400"
          Top             =   2040
@@ -1372,27 +1590,27 @@ Begin VB.Form FrmOption
       Begin VB.ComboBox cboLanguage 
          Height          =   300
          ItemData        =   "FrmOption.frx":0106
-         Left            =   -73560
+         Left            =   -67440
          List            =   "FrmOption.frx":0113
          Style           =   2  'Dropdown List
          TabIndex        =   34
-         Top             =   600
+         Top             =   720
          Width           =   1335
       End
       Begin VB.CheckBox chkOnlineOnStartUp 
          Caption         =   "OnlineOnStartup"
          Height          =   375
-         Left            =   -71400
+         Left            =   -68400
          TabIndex        =   33
          Tag             =   "16120"
-         Top             =   600
+         Top             =   1440
          Width           =   2535
       End
       Begin VB.Frame Frame2 
          Caption         =   "Distance"
          Height          =   1455
          Index           =   0
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   19
          Tag             =   "18100"
          Top             =   480
@@ -1532,7 +1750,7 @@ Begin VB.Form FrmOption
          Caption         =   "Current"
          Height          =   1455
          Index           =   1
-         Left            =   5400
+         Left            =   -69600
          TabIndex        =   5
          Tag             =   "18200"
          Top             =   480
@@ -1680,70 +1898,70 @@ Begin VB.Form FrmOption
       End
       Begin VB.Frame Frame4 
          Caption         =   "Start Recording"
-         Height          =   4335
+         Height          =   1935
          Left            =   -74640
          TabIndex        =   2
          Tag             =   "22100"
          Top             =   600
-         Width           =   3495
+         Width           =   3375
          Begin VB.TextBox txtStartRecording 
             Enabled         =   0   'False
             Height          =   270
             Index           =   4
-            Left            =   360
+            Left            =   3000
             TabIndex        =   71
             Text            =   "2.50"
-            Top             =   3240
+            Top             =   4560
             Width           =   855
          End
          Begin VB.TextBox txtStartRecording 
             Enabled         =   0   'False
             Height          =   270
             Index           =   3
-            Left            =   360
+            Left            =   3000
             TabIndex        =   70
             Text            =   "2.50"
-            Top             =   2520
+            Top             =   3840
             Width           =   855
          End
          Begin VB.TextBox txtStartRecording 
             Enabled         =   0   'False
             Height          =   270
             Index           =   2
-            Left            =   360
+            Left            =   600
             TabIndex        =   69
             Text            =   "2.50"
-            Top             =   1800
+            Top             =   1080
             Width           =   855
          End
          Begin VB.TextBox txtStartRecording 
             Enabled         =   0   'False
             Height          =   270
             Index           =   1
-            Left            =   360
+            Left            =   3000
             TabIndex        =   68
             Text            =   "2.50"
-            Top             =   1080
+            Top             =   2400
             Width           =   855
          End
          Begin VB.OptionButton optStartRecording 
             Caption         =   "Time (s)"
             Height          =   255
             Index           =   4
-            Left            =   120
+            Left            =   2760
             TabIndex        =   67
             Tag             =   "50"
-            Top             =   2880
+            Top             =   4200
             Width           =   2055
          End
          Begin VB.OptionButton optStartRecording 
             Caption         =   "Volt (V)"
             Height          =   255
             Index           =   3
-            Left            =   120
+            Left            =   2760
             TabIndex        =   66
             Tag             =   "40"
-            Top             =   2160
+            Top             =   3480
             Width           =   2055
          End
          Begin VB.OptionButton optStartRecording 
@@ -1753,17 +1971,17 @@ Begin VB.Form FrmOption
             Left            =   120
             TabIndex        =   65
             Tag             =   "30"
-            Top             =   1440
+            Top             =   720
             Width           =   2055
          End
          Begin VB.OptionButton optStartRecording 
             Caption         =   "Distance (mm)"
             Height          =   255
             Index           =   1
-            Left            =   120
+            Left            =   2760
             TabIndex        =   64
             Tag             =   "20"
-            Top             =   720
+            Top             =   2040
             Width           =   2055
          End
          Begin VB.OptionButton optStartRecording 
@@ -1788,7 +2006,7 @@ Begin VB.Form FrmOption
       Begin VB.Label Label1 
          Caption         =   "Label1"
          Height          =   255
-         Left            =   -69360
+         Left            =   5640
          TabIndex        =   106
          Top             =   2040
          Width           =   1815
@@ -1796,10 +2014,10 @@ Begin VB.Form FrmOption
       Begin VB.Label lblLanguage 
          Caption         =   "Language:"
          Height          =   255
-         Left            =   -74640
+         Left            =   -68520
          TabIndex        =   63
          Tag             =   "16110"
-         Top             =   680
+         Top             =   795
          Width           =   975
       End
    End
@@ -1830,24 +2048,24 @@ LANGUAGE = cboLanguage.Text
 End Sub
 
 
-Private Sub chkCalibration_Click(index As Integer)
-    Calibration_Enable(index) = chkCalibration(index).Value
-    If chkCalibration(index).Value = 1 Then
-        Call CalibrationSwitchTo(index, True)
+Private Sub chkCalibration_Click(Index As Integer)
+    Calibration_Enable(Index) = chkCalibration(Index).Value
+    If chkCalibration(Index).Value = 1 Then
+        Call CalibrationSwitchTo(Index, True)
     Else
-        Call CalibrationSwitchTo(index, False)
+        Call CalibrationSwitchTo(Index, False)
     End If
 End Sub
 
-Private Function CalibrationSwitchTo(index As Integer, enable As Boolean)
-        txt(index * 4).Enabled = enable
-        lblCalibrate(index * 4).Enabled = enable
-        txt(index * 4 + 1).Enabled = enable
-        lblCalibrate(index * 4 + 1).Enabled = enable
-        txt(index * 4 + 2).Enabled = enable
-        lblCalibrate(index * 4 + 2).Enabled = enable
-        txt(index * 4 + 3).Enabled = enable
-        lblCalibrate(index * 4 + 3).Enabled = enable
+Private Function CalibrationSwitchTo(Index As Integer, enable As Boolean)
+        txt(Index * 4).Enabled = enable
+        lblCalibrate(Index * 4).Enabled = enable
+        txt(Index * 4 + 1).Enabled = enable
+        lblCalibrate(Index * 4 + 1).Enabled = enable
+        txt(Index * 4 + 2).Enabled = enable
+        lblCalibrate(Index * 4 + 2).Enabled = enable
+        txt(Index * 4 + 3).Enabled = enable
+        lblCalibrate(Index * 4 + 3).Enabled = enable
 End Function
 
 
@@ -1983,7 +2201,7 @@ Private Sub cmdOK_Click()
 End Sub
 
 Private Sub cmdReset_Click()
-   Dim weldSerailNumber As Integer
+   Dim weldSerailNumber As Long
    weldSerailNumber = fromWeldNumberShowModel(txtWeldNumber.Text)
    
    Call SaveSetting(App.EXEName, "WELD", "LastSerialNumber", weldSerailNumber)
@@ -2001,7 +2219,7 @@ Private Sub Form_Load()
 ' Resource
 PlcRes.LoadResFor Me
 
-LANGUAGE = GetSetting(App.EXEName, "General", "Language", "ZH")
+LANGUAGE = GetSetting(App.EXEName, "General", "Language", "EN")
 cboLanguage.Text = LANGUAGE
 
 chkOnlineOnStartUp.Value = GetSetting(App.EXEName, "Genaral", "IsSimulate", 0)
@@ -2143,64 +2361,65 @@ WeldAnalysis_Data(19) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDia
         chkEnableAnalysis(i).Value = WeldAnalysisEnable_Data(i)
     Next
     
-    Dim weldSerailNumber As Integer
+    Dim weldSerailNumber As Long
     weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
     txtWeldNumber.Text = PlcCommon.toWeldNumberShowModel(weldSerailNumber)
     
 End Sub
 
-Private Sub optStartRecording_Click(index As Integer)
-    StartRecording = index
+
+Private Sub optStartRecording_Click(Index As Integer)
+    StartRecording = Index
     Dim i As Integer
     For i = 1 To 4
         txtStartRecording(i).Enabled = False
     Next
-    If index > 0 Then
-        txtStartRecording(index).Enabled = True
+    If Index > 0 Then
+        txtStartRecording(Index).Enabled = True
     End If
 End Sub
 
-Private Sub txt_Change(index As Integer)
-    If IsNumeric(txt(index).Text) Then
-        Calibration_Data(index) = CSng(txt(index).Text)
+Private Sub txt_Change(Index As Integer)
+    If IsNumeric(txt(Index).Text) Then
+        Calibration_Data(Index) = CSng(txt(Index).Text)
     Else
-        txt(index).Text = Calibration_Data(index)
+        txt(Index).Text = Calibration_Data(Index)
     End If
 End Sub
 
-Private Sub txtSRB_Change(index As Integer)
-    If IsNumeric(txtSRB(index).Text) Then
-        SRB_Data(index) = CInt(txtSRB(index).Text)
+Private Sub txtSRB_Change(Index As Integer)
+    If IsNumeric(txtSRB(Index).Text) Then
+        SRB_Data(Index) = CInt(txtSRB(Index).Text)
     Else
-        txtSRB(index).Text = SRB_Data(index)
+        txtSRB(Index).Text = SRB_Data(Index)
     End If
 End Sub
 
-Private Sub txtStartRecording_Change(index As Integer)
-    If IsNumeric(txtStartRecording(index).Text) Then
-        StartRecodingParam(index) = CSng(txtStartRecording(index).Text)
+Private Sub txtStartRecording_Change(Index As Integer)
+    If IsNumeric(txtStartRecording(Index).Text) Then
+        StartRecodingParam(Index) = CSng(txtStartRecording(Index).Text)
     Else
-        txtStartRecording(index).Text = StartRecodingParam(index)
+        txtStartRecording(Index).Text = StartRecodingParam(Index)
     End If
 End Sub
 
-Private Sub txtWA_Change(index As Integer)
-    If IsNumeric(txtWA(index).Text) Then
-        WeldAnalysis_Data(index) = CSng(txtWA(index).Text)
+Private Sub txtWA_Change(Index As Integer)
+    If IsNumeric(txtWA(Index).Text) Then
+        WeldAnalysis_Data(Index) = CSng(txtWA(Index).Text)
     Else
-        txtWA(index).Text = WeldAnalysis_Data(index)
+        txtWA(Index).Text = WeldAnalysis_Data(Index)
     End If
 End Sub
 
-Private Sub txtWC_Change(index As Integer)
-    If IsNumeric(txtWC(index).Text) Then
-        WeldChart_Data(index) = CInt(txtWC(index).Text)
+Private Sub txtWC_Change(Index As Integer)
+    If IsNumeric(txtWC(Index).Text) Then
+        WeldChart_Data(Index) = CInt(txtWC(Index).Text)
     Else
-        txtWC(index).Text = WeldChart_Data(index)
+        txtWC(Index).Text = WeldChart_Data(Index)
     End If
 
 End Sub
 
-Private Sub chkEnableAnalysis_Click(index As Integer)
-    WeldAnalysisEnable_Data(index) = chkEnableAnalysis(index).Value
+Private Sub chkEnableAnalysis_Click(Index As Integer)
+    WeldAnalysisEnable_Data(Index) = chkEnableAnalysis(Index).Value
 End Sub

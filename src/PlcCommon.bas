@@ -2,8 +2,8 @@ Attribute VB_Name = "PlcCommon"
 
 
 
-Public Function toWeldNumberShowModel(n As Integer) As String
-Dim leadNumber As Integer
+Public Function toWeldNumberShowModel(n As Long) As String
+Dim leadNumber As Long
 Dim leadChar As String
     
     leadNumber = (n / 10000)
@@ -14,8 +14,8 @@ Dim leadChar As String
     
     leadChar = Chr(Asc("A") + leadNumber)
         
-    Dim leaveNumber As Integer
-    leaveNumber = n - CInt(n / 10000) * 10000
+    Dim leaveNumber As Long
+    leaveNumber = n - 10000# * CInt(n / 10000)
     
     Dim showString As String
     showString = CStr(leaveNumber)
@@ -24,14 +24,14 @@ Dim leadChar As String
 End Function
 
 
-Public Function fromWeldNumberShowModel(s As String) As Integer
+Public Function fromWeldNumberShowModel(s As String) As Long
 
 
-Dim leadNumber As Integer
+Dim leadNumber As Long
 Dim leadChar As String
-Dim leaveNumber As Integer
+Dim leaveNumber As Long
     
-    leadChar = Left(s, 1)
+    leadChar = UCase(Left(s, 1))
     leadNumber = Asc(leadChar) - Asc("A")
 
 

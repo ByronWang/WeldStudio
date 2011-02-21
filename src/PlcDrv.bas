@@ -52,6 +52,7 @@ Public SimulatePath As String
 
 Public Calibrate_Distance As Boolean
 
+Public loading As Boolean
 
 Public Sub InitPLCConnection()
 IsSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
@@ -158,6 +159,7 @@ End Function
 
 
 Public Function WritePulseData(PulseSetting As PulseSettingType)
+loading = True
 
 '    Distance As Single
 '    Voltage As Single
@@ -211,9 +213,12 @@ If UtlServer.Define(handle, def(8)) = 0 Then
     UtlServer.Undef (handle)
 End If
 
+loading = False
 End Function
 
 Public Function WriteRegularData(RegularSetting As RegularSettingType)
+
+loading = True
 '0   1   Parameter set index
 '1   2   High volt timer in seconds
 '2   3   Low volt timer in seconds
@@ -246,12 +251,35 @@ If UtlServer.Define(handle, def) = 0 Then
     UtlServer.Undef (handle)
 End If
 
+loading = False
 End Function
 
 
 
 
 Public Function WriteCalibrationData(ca() As Single)
+loading = True
+'==TEST FOR CALIBRATION
+
+
+Dim buffer_signal(1) As Integer
+
+Dim def_signal As String
+def_signal = "N21:5,1,WORD,MODIFY,AB:LOCAL,1,SLC500,1" 'General
+
+Dim handle_signal As Long
+
+buffer_signal(1) = 1
+
+'If UtlServer.Define(handle_signal, def_signal) = 0 Then
+'    status = UtlServer.WriteInt(handle_signal, buffer_signal, IO_STATUS, 1000)
+'    UtlServer.Undef (handle_signal)
+'End If
+
+
+
+'==END
+
 '5   1   LVDT calibration rate in mm/DU
 '6   2   LVDT calibration ZeroPoint in mm
 '7   3   LVDT calibration offset in mm
@@ -281,4 +309,13 @@ If UtlServer.Define(handle, def) = 0 Then
     UtlServer.Undef (handle)
 End If
 
+
+'++
+If UtlServer.Define(handle_signal, def_signal) = 0 Then
+    status = UtlServer.WriteInt(handle_signal, buffer_signal, IO_STATUS, 1000)
+    UtlServer.Undef (handle_signal)
+End If
+'++
+
+loading = False
 End Function

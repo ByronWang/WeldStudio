@@ -3,16 +3,58 @@ Begin VB.Form FrmGraph
    Appearance      =   0  'Flat
    BackColor       =   &H80000006&
    Caption         =   "FormGraph"
-   ClientHeight    =   9795
+   ClientHeight    =   10605
    ClientLeft      =   165
    ClientTop       =   555
-   ClientWidth     =   14055
+   ClientWidth     =   15240
    Icon            =   "FrmGraph.frx":0000
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   9795
-   ScaleWidth      =   14055
+   ScaleHeight     =   10605
+   ScaleWidth      =   15240
    Tag             =   "12000"
+   Begin VB.Frame frmVolt 
+      BackColor       =   &H00000000&
+      BorderStyle     =   0  'None
+      Height          =   4215
+      Left            =   12240
+      TabIndex        =   18
+      Top             =   120
+      Width           =   1575
+      Begin VB.PictureBox picVolt 
+         Appearance      =   0  'Flat
+         BackColor       =   &H0000FFFF&
+         ForeColor       =   &H80000008&
+         Height          =   5000
+         Left            =   0
+         ScaleHeight     =   4965
+         ScaleWidth      =   1470
+         TabIndex        =   19
+         Top             =   360
+         Width           =   1500
+      End
+   End
+   Begin VB.Frame frmDist 
+      BackColor       =   &H00000000&
+      BorderStyle     =   0  'None
+      Height          =   4215
+      Left            =   1560
+      TabIndex        =   16
+      Top             =   120
+      Width           =   1575
+      Begin VB.PictureBox picDist 
+         Appearance      =   0  'Flat
+         BackColor       =   &H0000FFFF&
+         ForeColor       =   &H80000008&
+         Height          =   5000
+         Left            =   0
+         ScaleHeight     =   4965
+         ScaleWidth      =   2070
+         TabIndex        =   17
+         Top             =   360
+         Width           =   2100
+      End
+   End
    Begin VB.Timer TimerShow 
       Interval        =   80
       Left            =   9720
@@ -26,8 +68,8 @@ Begin VB.Form FrmGraph
       Left            =   2040
       ScaleHeight     =   720
       ScaleWidth      =   8325
-      TabIndex        =   4
-      Top             =   9000
+      TabIndex        =   1
+      Top             =   7800
       Width           =   8355
    End
    Begin VB.PictureBox picAmp 
@@ -38,20 +80,8 @@ Begin VB.Form FrmGraph
       Left            =   2040
       ScaleHeight     =   720
       ScaleWidth      =   8325
-      TabIndex        =   3
-      Top             =   7560
-      Width           =   8355
-   End
-   Begin VB.PictureBox picVolt 
-      Appearance      =   0  'Flat
-      BackColor       =   &H0000FFFF&
-      ForeColor       =   &H80000008&
-      Height          =   750
-      Left            =   2040
-      ScaleHeight     =   720
-      ScaleWidth      =   8325
-      TabIndex        =   2
-      Top             =   1920
+      TabIndex        =   0
+      Top             =   9240
       Width           =   8355
    End
    Begin VB.Timer TimerTest 
@@ -59,38 +89,46 @@ Begin VB.Form FrmGraph
       Left            =   9960
       Top             =   2640
    End
-   Begin VB.PictureBox picDist 
-      Appearance      =   0  'Flat
-      BackColor       =   &H0000FFFF&
-      ForeColor       =   &H80000008&
-      Height          =   750
-      Left            =   2040
-      ScaleHeight     =   720
-      ScaleWidth      =   8325
-      TabIndex        =   0
-      Top             =   480
-      Width           =   8355
-   End
-   Begin VB.Label lblTop 
-      Alignment       =   2  'Center
-      BackColor       =   &H80000008&
+   Begin VB.Label lblDist 
+      Alignment       =   1  'Right Justify
       BackStyle       =   0  'Transparent
-      Caption         =   "Label5"
+      Caption         =   "67.98"
       BeginProperty Font 
          Name            =   "宋体"
-         Size            =   21.75
+         Size            =   48
          Charset         =   134
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H000000FF&
-      Height          =   615
-      Left            =   6480
-      TabIndex        =   18
-      Top             =   3480
-      Width           =   2535
+      ForeColor       =   &H00FFFFFF&
+      Height          =   975
+      Left            =   120
+      TabIndex        =   20
+      Top             =   4440
+      Width           =   3420
+   End
+   Begin VB.Label lblTop 
+      Alignment       =   2  'Center
+      BackColor       =   &H80000008&
+      BackStyle       =   0  'Transparent
+      Caption         =   "A1234"
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   99.75
+         Charset         =   134
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H0000FF00&
+      Height          =   2295
+      Left            =   4973
+      TabIndex        =   15
+      Top             =   480
+      Width           =   5295
    End
    Begin VB.Label lblParameter 
       Alignment       =   2  'Center
@@ -108,9 +146,9 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H0000FF00&
       Height          =   615
-      Left            =   4980
-      TabIndex        =   17
-      Top             =   6120
+      Left            =   4853
+      TabIndex        =   14
+      Top             =   6360
       Width           =   5535
    End
    Begin VB.Label lblTime 
@@ -128,10 +166,10 @@ Begin VB.Form FrmGraph
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H000000FF&
-      Height          =   615
+      Height          =   495
       Left            =   11880
-      TabIndex        =   16
-      Top             =   3480
+      TabIndex        =   13
+      Top             =   6840
       Width           =   3135
    End
    Begin VB.Label lblDate 
@@ -151,16 +189,16 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H000000FF&
       Height          =   495
-      Left            =   120
-      TabIndex        =   15
-      Top             =   3480
+      Left            =   0
+      TabIndex        =   12
+      Top             =   6840
       Width           =   3135
    End
    Begin VB.Label lblBigCenter 
       Alignment       =   2  'Center
       BackColor       =   &H80000008&
       BackStyle       =   0  'Transparent
-      Caption         =   "Label5"
+      Caption         =   "A0001"
       BeginProperty Font 
          Name            =   "宋体"
          Size            =   120
@@ -171,11 +209,11 @@ Begin VB.Form FrmGraph
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H8000000E&
-      Height          =   2295
-      Left            =   2280
-      TabIndex        =   14
-      Top             =   3840
-      Width           =   10575
+      Height          =   3015
+      Left            =   4373
+      TabIndex        =   11
+      Top             =   2880
+      Width           =   6495
    End
    Begin VB.Label lblWeldStage 
       BackColor       =   &H80000008&
@@ -184,7 +222,7 @@ Begin VB.Form FrmGraph
       ForeColor       =   &H00000000&
       Height          =   255
       Left            =   1080
-      TabIndex        =   13
+      TabIndex        =   10
       Top             =   4560
       Width           =   1935
    End
@@ -194,32 +232,25 @@ Begin VB.Form FrmGraph
       Caption         =   "Label5"
       ForeColor       =   &H00000000&
       Height          =   255
-      Left            =   960
-      TabIndex        =   12
-      Top             =   5040
+      Left            =   2280
+      TabIndex        =   9
+      Top             =   6600
       Width           =   1935
    End
    Begin VB.Line Line2 
       BorderColor     =   &H00404040&
       X1              =   0
       X2              =   15240
-      Y1              =   6960
-      Y2              =   6960
-   End
-   Begin VB.Line Line1 
-      BorderColor     =   &H00404040&
-      X1              =   0
-      X2              =   15240
-      Y1              =   3240
-      Y2              =   3240
+      Y1              =   7320
+      Y2              =   7320
    End
    Begin VB.Label lblVolt 
       Alignment       =   1  'Right Justify
       BackStyle       =   0  'Transparent
-      Caption         =   "0"
+      Caption         =   "345"
       BeginProperty Font 
          Name            =   "宋体"
-         Size            =   72
+         Size            =   48
          Charset         =   134
          Weight          =   700
          Underline       =   0   'False
@@ -227,11 +258,11 @@ Begin VB.Form FrmGraph
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   1335
-      Left            =   10440
-      TabIndex        =   11
-      Top             =   1560
-      Width           =   4380
+      Height          =   1095
+      Left            =   10560
+      TabIndex        =   8
+      Top             =   4440
+      Width           =   3180
    End
    Begin VB.Label lblPsi 
       Alignment       =   1  'Right Justify
@@ -249,8 +280,8 @@ Begin VB.Form FrmGraph
       ForeColor       =   &H00FFFFFF&
       Height          =   1335
       Left            =   10920
-      TabIndex        =   10
-      Top             =   8640
+      TabIndex        =   7
+      Top             =   7440
       Width           =   3900
    End
    Begin VB.Label lblAmp 
@@ -269,8 +300,8 @@ Begin VB.Form FrmGraph
       ForeColor       =   &H00FFFFFF&
       Height          =   1335
       Left            =   10920
-      TabIndex        =   9
-      Top             =   7200
+      TabIndex        =   6
+      Top             =   8880
       Width           =   3900
    End
    Begin VB.Label Label4 
@@ -288,9 +319,9 @@ Begin VB.Form FrmGraph
       ForeColor       =   &H00FFFFFF&
       Height          =   735
       Left            =   120
-      TabIndex        =   8
+      TabIndex        =   5
       Tag             =   "12040"
-      Top             =   9000
+      Top             =   7800
       Width           =   1935
    End
    Begin VB.Label Label3 
@@ -308,9 +339,9 @@ Begin VB.Form FrmGraph
       ForeColor       =   &H00FFFFFF&
       Height          =   735
       Left            =   120
-      TabIndex        =   7
+      TabIndex        =   4
       Tag             =   "12030"
-      Top             =   7560
+      Top             =   9240
       Width           =   1695
    End
    Begin VB.Label Label2 
@@ -327,10 +358,10 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   735
-      Left            =   120
-      TabIndex        =   6
+      Left            =   12360
+      TabIndex        =   3
       Tag             =   "12020"
-      Top             =   1920
+      Top             =   5520
       Width           =   1695
    End
    Begin VB.Label Label1 
@@ -347,31 +378,11 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   735
-      Left            =   120
-      TabIndex        =   5
+      Left            =   1560
+      TabIndex        =   2
       Tag             =   "12010"
-      Top             =   480
+      Top             =   5520
       Width           =   1695
-   End
-   Begin VB.Label lblDist 
-      Alignment       =   1  'Right Justify
-      BackStyle       =   0  'Transparent
-      Caption         =   "154.3"
-      BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   72
-         Charset         =   134
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   1335
-      Left            =   10440
-      TabIndex        =   1
-      Top             =   120
-      Width           =   4380
    End
 End
 Attribute VB_Name = "FrmGraph"
@@ -429,10 +440,12 @@ Function SwitchToRecoding(status As ShowModeType)
             weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
             lblBigCenter.Caption = toWeldNumberShowModel(weldSerailNumber)
             lblBigCenter.ForeColor = &H8000000E
+            lblBigCenter.FontSize = 120
             lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting", "DEFAULT")
         Case RECORDING_MODE
             weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
             lblTop.Caption = toWeldNumberShowModel(weldSerailNumber)
+            lblBigCenter.FontSize = 160
         Case ANALYSIS_MODE
             TimerTest.Enabled = False
             TimerShow.Tag = "ANALYSIS"
@@ -516,7 +529,6 @@ Private Sub Form_Unload(Cancel As Integer)
     Unload Me
 End Sub
 
-
 Private Sub TimerShow_Timer()
     
 lblDate.Caption = Format(Date, "YYYY-MM-DD")
@@ -572,19 +584,21 @@ End If
 
 Dim scale_width As Long
 scale_width = 8000
+Dim scale_height As Long
+scale_height = 4000
 '
 Dim w As Long
-w = Dist * scale_width / dist_scale
-If w >= scale_width Then
-    w = scale_width
+w = Dist * scale_height / dist_scale
+If w >= scale_height Then
+    w = scale_height
 End If
-picDist.Width = w
+picDist.Top = scale_height - w
 
-w = Volt * scale_width / volt_scale
-If w >= scale_width Then
-    w = scale_width
+w = Volt * scale_height / volt_scale
+If w >= scale_height Then
+    w = scale_height
 End If
-picVolt.Width = w
+picVolt.Top = scale_height - w
 
 
 w = Amp * scale_width / amp_scale
@@ -603,10 +617,10 @@ picPsi.Width = w
 
 'lblTime.Caption = data.Time
 If PLCDrv.Calibrate_Distance Then
-    lblDist.FontSize = lblAmp.FontSize
+    lblDist.FontSize = lblVolt.FontSize
     lblDist.Caption = Format(wm.data.Dist, "##0.0")
 Else
-    lblDist.FontSize = lblAmp.FontSize - 3
+    lblDist.FontSize = lblVolt.FontSize - 3
     lblDist.Caption = Format(wm.data.Dist, "##0")
 End If
 lblVolt.Caption = wm.data.Volt

@@ -84,20 +84,14 @@ Attribute VB_Exposed = False
 
 Private Sub MDIForm_Load()
 
-Dim fProgress As frmProgress
 ' Resource
 PlcRes.LoadResFor Me
 
 PlcAnalysiser.GetAnalysisDefine
-Set fProgress = New frmProgress
     
     PLCDrv.InitPLCConnection
-    fProgress.Show vbmodel, Me
-    
-    Set fProgress = Nothing
     mnuConnect.Enabled = PLCDrv.beActive
     PLCDrv.UninitPLCConection
-    
     
     
 End Sub
@@ -117,6 +111,19 @@ Private Sub mnuAbout_Click()
 End Sub
 
 Private Sub mnuConnect_Click()
+    'TODO
+    Dim fProgress As New frmProgress
+    fProgress.Show vbModal, Me
+    
+    
+    PLCDrv.InitPLCConnection
+    PLCDrv.readPcMonitor
+    PLCDrv.UninitPLCConection
+    
+    Unload fProgress
+    Set fProgress = Nothing
+    
+    
     FrmGraph.WindowState = FormWindowStateConstants.vbMaximized
     Call FrmGraph.Show
 End Sub
@@ -153,7 +160,7 @@ Dim fpwd As New FrmPWD
     fpwd.Show vbModal, Me
     
     If fpwd.pass Then
-        FrmPulseSetting.Show vbModal, Me
+        FrmPulseSetting.Show , Me
     End If
 End Sub
 
@@ -163,7 +170,7 @@ Dim fpwd As New FrmPWD
     fpwd.Show vbModal, Me
     
     If fpwd.pass Then
-       FrmRegularSetting.Show vbModal, Me
+       FrmRegularSetting.Show , Me
     End If
 End Sub
 
