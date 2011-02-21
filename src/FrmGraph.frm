@@ -14,7 +14,7 @@ Begin VB.Form FrmGraph
    ScaleWidth      =   14055
    Tag             =   "12000"
    Begin VB.Timer TimerShow 
-      Interval        =   10
+      Interval        =   80
       Left            =   9720
       Top             =   3240
    End
@@ -55,7 +55,7 @@ Begin VB.Form FrmGraph
       Width           =   8355
    End
    Begin VB.Timer TimerTest 
-      Interval        =   6
+      Interval        =   62
       Left            =   9960
       Top             =   2640
    End
@@ -228,10 +228,10 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   1335
-      Left            =   10920
+      Left            =   10440
       TabIndex        =   11
       Top             =   1560
-      Width           =   3900
+      Width           =   4380
    End
    Begin VB.Label lblPsi 
       Alignment       =   1  'Right Justify
@@ -368,10 +368,10 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   1335
-      Left            =   10920
+      Left            =   10440
       TabIndex        =   1
       Top             =   120
-      Width           =   3900
+      Width           =   4380
    End
 End
 Attribute VB_Name = "FrmGraph"
@@ -580,21 +580,21 @@ If w >= scale_width Then
 End If
 picDist.Width = w
 
-w = Volt * scale_width / dist_scale
+w = Volt * scale_width / volt_scale
 If w >= scale_width Then
     w = scale_width
 End If
 picVolt.Width = w
 
 
-w = Amp * scale_width / dist_scale
+w = Amp * scale_width / amp_scale
 If w >= scale_width Then
     w = scale_width
 End If
 picAmp.Width = w
 
 
-w = psi * scale_width / dist_scale
+w = psi * scale_width / psi_scale
 If w >= scale_width Then
     w = scale_width
 End If
@@ -602,8 +602,13 @@ picPsi.Width = w
 
 
 'lblTime.Caption = data.Time
-
-lblDist.Caption = Format(wm.data.Dist, "##0.0")
+If PLCDrv.Calibrate_Distance Then
+    lblDist.FontSize = lblAmp.FontSize
+    lblDist.Caption = Format(wm.data.Dist, "##0.0")
+Else
+    lblDist.FontSize = lblAmp.FontSize - 3
+    lblDist.Caption = Format(wm.data.Dist, "##0")
+End If
 lblVolt.Caption = wm.data.Volt
 lblAmp.Caption = wm.data.Amp
 lblPsi.Caption = psi

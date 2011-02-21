@@ -50,9 +50,14 @@ Public IO_STATUS As Long
 Public IsSimulate As Integer
 Public SimulatePath As String
 
+Public Calibrate_Distance As Boolean
+
+
 Public Sub InitPLCConnection()
 IsSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
 SimulatePath = GetSetting(App.EXEName, "Simulate", "SimulateFilename", App.path & "\T0039.WLD")
+Calibrate_Distance = "1" = Left(GetSetting(App.EXEName, "Calibration", "value", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"), 1)
+
 
 If IsSimulate = 1 Then
     Set UtlServer = New CPlcSimulate
@@ -119,7 +124,13 @@ Public Function readPcMonitor() As WeldMonitor
 
 
     Dim wm As WeldMonitor
-    wm.data.Dist = buffer(0) / 100
+    
+    If Calibrate_Distance Then
+        wm.data.Dist = buffer(0) / 100
+    Else
+        wm.data.Dist = buffer(0)
+    End If
+    
     wm.data.Amp = buffer(1)
     wm.data.PsiUpset = buffer(2)
     wm.data.Volt = buffer(3)

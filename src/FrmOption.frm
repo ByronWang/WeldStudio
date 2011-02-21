@@ -866,44 +866,44 @@ Begin VB.Form FrmOption
             Top             =   240
             Width           =   1455
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Zero Point:"
             Height          =   300
-            Index           =   23
+            Index           =   8
             Left            =   120
             TabIndex        =   100
             Tag             =   "20"
             Top             =   600
             Width           =   1215
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Maxinum:"
             Height          =   300
-            Index           =   22
+            Index           =   9
             Left            =   120
             TabIndex        =   99
             Tag             =   "40"
             Top             =   960
             Width           =   1215
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Range:"
             Height          =   300
-            Index           =   21
+            Index           =   10
             Left            =   2520
             TabIndex        =   98
             Tag             =   "30"
             Top             =   600
             Width           =   1275
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Offset:"
             Height          =   300
-            Index           =   20
+            Index           =   11
             Left            =   2520
             TabIndex        =   97
             Tag             =   "50"
@@ -931,7 +931,7 @@ Begin VB.Form FrmOption
             Width           =   255
          End
          Begin VB.Label lbl 
-            Caption         =   "psi"
+            Caption         =   "V"
             Height          =   225
             Index           =   17
             Left            =   4680
@@ -941,7 +941,7 @@ Begin VB.Form FrmOption
             Width           =   255
          End
          Begin VB.Label lbl 
-            Caption         =   "psi"
+            Caption         =   "V"
             Height          =   225
             Index           =   16
             Left            =   4680
@@ -1046,44 +1046,44 @@ Begin VB.Form FrmOption
             Top             =   600
             Width           =   255
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Offset:"
             Height          =   300
-            Index           =   27
+            Index           =   15
             Left            =   2520
             TabIndex        =   81
             Tag             =   "50"
             Top             =   960
             Width           =   1275
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Range:"
             Height          =   300
-            Index           =   26
+            Index           =   14
             Left            =   2520
             TabIndex        =   80
             Tag             =   "30"
             Top             =   600
             Width           =   1275
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Maxinum:"
             Height          =   300
-            Index           =   25
+            Index           =   13
             Left            =   120
             TabIndex        =   79
             Tag             =   "40"
             Top             =   960
             Width           =   1215
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Zero Point:"
             Height          =   300
-            Index           =   24
+            Index           =   12
             Left            =   120
             TabIndex        =   78
             Tag             =   "20"
@@ -1483,7 +1483,7 @@ Begin VB.Form FrmOption
             Top             =   600
             Width           =   255
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Offset:"
             Height          =   300
@@ -1494,7 +1494,7 @@ Begin VB.Form FrmOption
             Top             =   960
             Width           =   1275
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Fuly Stroke:"
             Height          =   300
@@ -1505,7 +1505,7 @@ Begin VB.Form FrmOption
             Top             =   600
             Width           =   1275
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Fuly Close:"
             Height          =   300
@@ -1516,7 +1516,7 @@ Begin VB.Form FrmOption
             Top             =   960
             Width           =   1215
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Fuly Open:"
             Height          =   300
@@ -1583,44 +1583,44 @@ Begin VB.Form FrmOption
             Top             =   240
             Width           =   1455
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Zero Point:"
             Height          =   300
-            Index           =   8
+            Index           =   4
             Left            =   120
             TabIndex        =   18
             Tag             =   "20"
             Top             =   600
             Width           =   1215
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Maxinum:"
             Height          =   300
-            Index           =   9
+            Index           =   5
             Left            =   120
             TabIndex        =   17
             Tag             =   "40"
             Top             =   960
             Width           =   1215
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Range:"
             Height          =   300
-            Index           =   10
+            Index           =   6
             Left            =   2760
             TabIndex        =   16
             Tag             =   "30"
             Top             =   600
             Width           =   1035
          End
-         Begin VB.Label lbl 
+         Begin VB.Label lblCalibrate 
             Alignment       =   1  'Right Justify
             Caption         =   "Offset:"
             Height          =   300
-            Index           =   11
+            Index           =   7
             Left            =   2520
             TabIndex        =   15
             Tag             =   "50"
@@ -1813,6 +1813,7 @@ Option Explicit
 
 Dim SRB_Data(4) As Integer
 Dim Calibration_Data(16) As Single
+Dim Calibration_Enable(4) As Single
 Dim WeldChart_Data(16) As Single
 Dim WeldAnalysis_Data(19) As Single
 Dim WeldAnalysisEnable_Data(19) As Single
@@ -1829,12 +1830,33 @@ LANGUAGE = cboLanguage.Text
 End Sub
 
 
+Private Sub chkCalibration_Click(index As Integer)
+    Calibration_Enable(index) = chkCalibration(index).Value
+    If chkCalibration(index).Value = 1 Then
+        Call CalibrationSwitchTo(index, True)
+    Else
+        Call CalibrationSwitchTo(index, False)
+    End If
+End Sub
+
+Private Function CalibrationSwitchTo(index As Integer, enable As Boolean)
+        txt(index * 4).Enabled = enable
+        lblCalibrate(index * 4).Enabled = enable
+        txt(index * 4 + 1).Enabled = enable
+        lblCalibrate(index * 4 + 1).Enabled = enable
+        txt(index * 4 + 2).Enabled = enable
+        lblCalibrate(index * 4 + 2).Enabled = enable
+        txt(index * 4 + 3).Enabled = enable
+        lblCalibrate(index * 4 + 3).Enabled = enable
+End Function
+
+
 Private Sub cmdCancel_Click()
     Me.Hide
 End Sub
 
-Private Function UpgradeCalibration(cd() As Single)
-    Dim ca(12) As Single
+Private Function UpgradeCalibration(cd() As Single, Calibration_Enable() As Single)
+    Dim ca(11) As Single
     Dim o As Integer
     Dim p As Integer
     Dim i As Integer
@@ -1844,10 +1866,11 @@ Private Function UpgradeCalibration(cd() As Single)
     For i = 0 To 3
         o = i * 3
         p = i * 4
-        If cd(p + 1) - cd(p + 0) <> 0 Then
-            ca(o + 0) = cd(p + 2) / (cd(p + 1) - cd(p + 0))
-            ca(o + 1) = cd(p + 0) * ca(o + 0)
-            ca(o + 2) = cd(p + 3)
+        
+        If Calibration_Enable(i) = 1 And cd(p + 1) - cd(p + 0) <> 0 Then
+                ca(o + 0) = cd(p + 2) / (cd(p + 1) - cd(p + 0))
+                ca(o + 1) = cd(p + 0) * ca(o + 0)
+                ca(o + 2) = cd(p + 3)
         Else
             ca(o + 0) = 1
             ca(o + 1) = 0
@@ -1879,15 +1902,20 @@ Private Sub cmdOK_Click()
     
     Dim v As String
     Dim vo As String
-    vo = GetSetting(App.EXEName, "Calibration", "value", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,")
+    vo = GetSetting(App.EXEName, "Calibration", "value", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,")
     
-    For i = 0 To 15
-       v = v & Calibration_Data(i) & ","
+    For i = 0 To 19 Step 5
+       v = v & Calibration_Enable(i / 5) & ","
+       v = v & Calibration_Data(i - i / 5) & ","
+       v = v & Calibration_Data(i + 1 - i / 5) & ","
+       v = v & Calibration_Data(i + 2 - i / 5) & ","
+       v = v & Calibration_Data(i + 3 - i / 5) & ","
     Next
+    
     
     If v <> vo Then
         Call SaveSetting(App.EXEName, "Calibration", "value", v)
-        UpgradeCalibration Calibration_Data
+        UpgradeCalibration Calibration_Data, Calibration_Enable
     End If
     
     
@@ -1997,14 +2025,51 @@ StartRecodingParam(4) = CSng(GetSetting(App.EXEName, "StartRecording", "Time", 2
     optStartRecording(StartRecording).Value = True
     
      Dim vo As String
-    vo = GetSetting(App.EXEName, "Calibration", "value", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,")
+    vo = GetSetting(App.EXEName, "Calibration", "value", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,")
     Dim cd() As String
     cd = Split(vo, ",")
+    
+    
+    '----------------
+ 
+    Dim k As Integer
+    Dim j As Integer
+           
+    For i = 0 To 3
+        k = 4 * i
+        j = 5 * i
+        
+        Calibration_Enable(i) = CSng(cd(j))
+        chkCalibration(i).Value = Calibration_Enable(i)
+                
+        If Calibration_Enable(i) = 1 Then
+            Call CalibrationSwitchTo(i, True)
+        Else
+            Call CalibrationSwitchTo(i, False)
+        End If
        
-    For i = 0 To 15
-        Calibration_Data(i) = CSng(cd(i))
-        txt(i).Text = Calibration_Data(i)
+       
+        j = j + 1
+        Calibration_Data(k) = CSng(cd(j))
+        txt(k).Text = Calibration_Data(k)
+        
+        k = k + 1
+        j = j + 1
+        Calibration_Data(k) = CSng(cd(j))
+        txt(k).Text = Calibration_Data(k)
+        
+        k = k + 1
+        j = j + 1
+        Calibration_Data(k) = CSng(cd(j))
+        txt(k).Text = Calibration_Data(k)
+        
+        k = k + 1
+        j = j + 1
+        Calibration_Data(k) = CSng(cd(j))
+        txt(k).Text = Calibration_Data(k)
     Next
+    
+
     
     
 txtStartRecording(1).Text = StartRecodingParam(1)
