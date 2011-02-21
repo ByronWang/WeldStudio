@@ -1,0 +1,120 @@
+[Root]
+Most Recent Package=NewScript
+
+
+[Package|NewScript|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=D:\WeldStudio\intall
+
+[Package|NewScript|Configure DAO ISAMs]
+Applicable=No
+
+[Package|NewScript|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|NewScript|Files Found]
+
+[Package|NewScript|Files Released]
+
+[Package|NewScript|Missing Dependency Information]
+
+[Package|NewScript|Out-of-Date Dependency Information]
+C:\WINDOWS\system32\scrrun.dll=
+
+[Package|NewScript|Files Added]
+D:\WeldStudio\src\T0039.WLD=
+
+[Package|NewScript|Files Removed]
+
+[Package|NewScript|Files In Project]
+D:\WeldStudio\WeldSystem.exe=Yes
+C:\WINDOWS\system32\msvbvm60.dll=Yes
+C:\WINDOWS\system32\oleaut32.dll=Yes
+C:\WINDOWS\system32\olepro32.dll=Yes
+C:\WINDOWS\system32\asycfilt.dll=Yes
+C:\WINDOWS\system32\stdole2.tlb=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\system32\VB6CHS.DLL=Yes
+C:\WINDOWS\system32\DTL32.DLL=Yes
+C:\WINDOWS\system32\scrrun.dll=Yes
+C:\WINDOWS\system32\msvcrt.dll=Yes
+C:\WINDOWS\system32\SCRRNCHS.DLL=Yes
+C:\WINDOWS\system32\MSCHRT20.OCX=Yes
+C:\WINDOWS\system32\MSCH2CHS.DLL=Yes
+C:\WINDOWS\system32\MSFLXGRD.OCX=Yes
+C:\WINDOWS\system32\FLXGDCHS.DLL=Yes
+C:\WINDOWS\system32\TABCTL32.OCX=Yes
+C:\WINDOWS\system32\TABCTCHS.DLL=Yes
+C:\WINDOWS\system32\COMDLG32.OCX=Yes
+C:\WINDOWS\system32\CMDLGCHS.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\WINDOWS\system32\VB6STKIT.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+D:\WeldStudio\src\T0039.WLD=Yes
+
+[Package|NewScript|Configure Registry Files]
+Applicable=No
+
+[Package|NewScript|Configure Remote Servers]
+Applicable=No
+
+[Package|NewScript|Install Locations]
+D:\WeldStudio\WeldSystem.exe=$(AppPath)
+C:\WINDOWS\system32\msvbvm60.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\oleaut32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\olepro32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\asycfilt.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\stdole2.tlb=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\system32\VB6CHS.DLL=$(WinSysPath)
+C:\WINDOWS\system32\DTL32.DLL=$(AppPath)
+C:\WINDOWS\system32\scrrun.dll=$(WinSysPath)
+C:\WINDOWS\system32\msvcrt.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\SCRRNCHS.DLL=$(WinSysPath)
+C:\WINDOWS\system32\MSCHRT20.OCX=$(WinSysPath)
+C:\WINDOWS\system32\MSCH2CHS.DLL=$(WinSysPath)
+C:\WINDOWS\system32\MSFLXGRD.OCX=$(WinSysPath)
+C:\WINDOWS\system32\FLXGDCHS.DLL=$(WinSysPath)
+C:\WINDOWS\system32\TABCTL32.OCX=$(WinSysPath)
+C:\WINDOWS\system32\TABCTCHS.DLL=$(WinSysPath)
+C:\WINDOWS\system32\COMDLG32.OCX=$(WinSysPath)
+C:\WINDOWS\system32\CMDLGCHS.DLL=$(WinSysPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\system32\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+D:\WeldStudio\src\T0039.WLD=$(AppPath)
+
+[Package|NewScript|Configure Shared Files]
+Applicable=Yes
+D:\WeldStudio\WeldSystem.exe=No
+C:\WINDOWS\system32\DTL32.DLL=No
+D:\WeldStudio\src\T0039.WLD=No
+
+[Package|NewScript|Distribution]
+Type=single
+Size=
+Title=NewWeldStudio
+
+[Package|NewScript|Package]
+PackageFolder=D:\WeldStudio\intall
+ProjectFolder=D:\WeldStudio
+ServerSideCab=
+File1=D:\WeldStudio\intall\setup.exe
+File2=D:\WeldStudio\intall\Setup.Lst
+File3=D:\WeldStudio\intall\WeldSystem.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
+
+[Package|NewScript|IconGroups]
+Group0=NewWeldStudio
+PrivateGroup0=True
+Parent0=$(Programs)
+
+[Package|NewScript|NewWeldStudio]
+Icon1=WeldSystem.exe
+Title1=NewWeldStudio
+StartIn1=$(AppPath)
+Key1=Icon1
