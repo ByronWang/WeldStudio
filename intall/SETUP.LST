@@ -47,7 +47,7 @@ File10=@SCRRNCHS.DLL,$(WinSysPath),,$(Shared),6/14/98 12:00:00 AM,15160,4.0.0.29
 File11=@msvcrt.dll,$(WinSysPathSysFile),,,4/14/08 8:00:00 PM,343040,7.0.2600.5512
 File12=@scrrun.dll,$(WinSysPath),$(DLLSelfRegister),$(Shared),5/9/08 6:53:40 PM,172032,5.7.0.18066
 File13=@DTL32.DLL,$(AppPath),,,7/7/08 9:22:38 AM,401408,2.54.11.0
-File14=@WeldSystem.exe,$(AppPath),,,2/20/11 7:47:13 PM,286720,1.0.0.0
+File14=@WeldSystem.exe,$(AppPath),,,2/21/11 11:47:05 PM,294912,1.0.0.0
 
 ; 要在满的安装盘上定制该文件，需要额外的空间，下列行可能被删除。
 ; 
