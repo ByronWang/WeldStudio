@@ -403,7 +403,7 @@ Dim beSigned As Boolean
 Dim StartRecording As Integer
 Dim StartRecodingParam(5) As Single
 
-Dim weldSerailNumber As Integer
+Dim weldSerailNumber As Long
 'Dim WeldFile As String
 
 Const ANALYSIS_DURATION As Integer = 6000
