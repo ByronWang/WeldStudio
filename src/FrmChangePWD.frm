@@ -18,7 +18,7 @@ Begin VB.Form FrmChangePWD
       IMEMode         =   3  'DISABLE
       Left            =   960
       PasswordChar    =   "*"
-      TabIndex        =   4
+      TabIndex        =   2
       Top             =   2040
       Width           =   2895
    End
@@ -27,7 +27,7 @@ Begin VB.Form FrmChangePWD
       IMEMode         =   3  'DISABLE
       Left            =   960
       PasswordChar    =   "*"
-      TabIndex        =   3
+      TabIndex        =   1
       Top             =   1320
       Width           =   2895
    End
@@ -36,24 +36,26 @@ Begin VB.Form FrmChangePWD
       IMEMode         =   3  'DISABLE
       Left            =   960
       PasswordChar    =   "*"
-      TabIndex        =   2
+      TabIndex        =   0
       Top             =   600
       Width           =   2895
    End
    Begin VB.CommandButton CancelButton 
+      Cancel          =   -1  'True
       Caption         =   "Cancel"
       Height          =   375
       Left            =   4680
-      TabIndex        =   1
+      TabIndex        =   5
       Tag             =   "25050"
       Top             =   600
       Width           =   1215
    End
    Begin VB.CommandButton OKButton 
       Caption         =   "OK"
+      Default         =   -1  'True
       Height          =   375
       Left            =   4680
-      TabIndex        =   0
+      TabIndex        =   3
       Tag             =   "25040"
       Top             =   120
       Width           =   1215
@@ -80,7 +82,7 @@ Begin VB.Form FrmChangePWD
       Caption         =   "Old password:"
       Height          =   255
       Left            =   480
-      TabIndex        =   5
+      TabIndex        =   4
       Tag             =   "25010"
       Top             =   240
       Width           =   3375

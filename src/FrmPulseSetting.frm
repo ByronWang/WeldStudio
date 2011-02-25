@@ -5,13 +5,13 @@ Begin VB.Form FrmPulseSetting
    ClientHeight    =   7680
    ClientLeft      =   2760
    ClientTop       =   3750
-   ClientWidth     =   5910
+   ClientWidth     =   6660
    Icon            =   "FrmPulseSetting.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7680
-   ScaleWidth      =   5910
+   ScaleWidth      =   6660
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  '所有者中心
    Tag             =   "13000"
@@ -20,43 +20,47 @@ Begin VB.Form FrmPulseSetting
       Height          =   1935
       Index           =   1
       Left            =   360
-      TabIndex        =   45
+      TabIndex        =   50
       Tag             =   "13200"
       Top             =   5160
-      Width           =   5175
+      Width           =   6135
       Begin VB.TextBox txtValueGeneral 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   2
          Left            =   2640
-         TabIndex        =   49
-         Text            =   "Text1"
+         TabIndex        =   13
+         Text            =   "0.00"
          Top             =   1440
          Width           =   735
       End
       Begin VB.TextBox txtValueGeneral 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   3
          Left            =   2640
-         TabIndex        =   48
-         Text            =   "Text1"
+         TabIndex        =   12
+         Text            =   "0.00"
          Top             =   1080
          Width           =   735
       End
       Begin VB.TextBox txtValueGeneral 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   1
          Left            =   2640
-         TabIndex        =   47
-         Text            =   "Text1"
+         TabIndex        =   11
+         Text            =   "0.00"
          Top             =   720
          Width           =   735
       End
       Begin VB.TextBox txtValueGeneral 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   0
          Left            =   2640
-         TabIndex        =   46
-         Text            =   "Text1"
+         TabIndex        =   10
+         Text            =   "0.00"
          Top             =   360
          Width           =   735
       End
@@ -65,8 +69,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "60"
          Height          =   255
          Index           =   2
-         Left            =   4440
-         TabIndex        =   65
+         Left            =   5160
+         TabIndex        =   66
          Top             =   1440
          Width           =   495
       End
@@ -74,8 +78,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "/"
          Height          =   255
          Index           =   11
-         Left            =   4200
-         TabIndex        =   64
+         Left            =   4920
+         TabIndex        =   65
          Top             =   1440
          Width           =   255
       End
@@ -84,8 +88,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "20"
          Height          =   255
          Index           =   2
-         Left            =   3600
-         TabIndex        =   63
+         Left            =   4320
+         TabIndex        =   64
          Top             =   1440
          Width           =   495
       End
@@ -94,8 +98,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "30"
          Height          =   255
          Index           =   3
-         Left            =   4440
-         TabIndex        =   62
+         Left            =   5160
+         TabIndex        =   63
          Top             =   1080
          Width           =   495
       End
@@ -103,8 +107,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "/"
          Height          =   255
          Index           =   10
-         Left            =   4200
-         TabIndex        =   61
+         Left            =   4920
+         TabIndex        =   62
          Top             =   1080
          Width           =   255
       End
@@ -113,8 +117,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "0"
          Height          =   255
          Index           =   3
-         Left            =   3600
-         TabIndex        =   60
+         Left            =   4320
+         TabIndex        =   61
          Top             =   1080
          Width           =   495
       End
@@ -123,8 +127,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "3.0"
          Height          =   255
          Index           =   1
-         Left            =   4440
-         TabIndex        =   59
+         Left            =   5160
+         TabIndex        =   60
          Top             =   720
          Width           =   495
       End
@@ -132,8 +136,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "/"
          Height          =   255
          Index           =   9
-         Left            =   4200
-         TabIndex        =   58
+         Left            =   4920
+         TabIndex        =   59
          Top             =   720
          Width           =   255
       End
@@ -142,8 +146,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "0.00"
          Height          =   255
          Index           =   1
-         Left            =   3600
-         TabIndex        =   57
+         Left            =   4320
+         TabIndex        =   58
          Top             =   720
          Width           =   495
       End
@@ -152,8 +156,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "20.0"
          Height          =   255
          Index           =   0
-         Left            =   4440
-         TabIndex        =   56
+         Left            =   5160
+         TabIndex        =   57
          Top             =   360
          Width           =   495
       End
@@ -161,8 +165,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "/"
          Height          =   255
          Index           =   8
-         Left            =   4200
-         TabIndex        =   55
+         Left            =   4920
+         TabIndex        =   56
          Top             =   360
          Width           =   255
       End
@@ -171,8 +175,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "9"
          Height          =   255
          Index           =   0
-         Left            =   3600
-         TabIndex        =   54
+         Left            =   4320
+         TabIndex        =   55
          Top             =   360
          Width           =   495
       End
@@ -181,7 +185,7 @@ Begin VB.Form FrmPulseSetting
          Height          =   255
          Index           =   11
          Left            =   240
-         TabIndex        =   53
+         TabIndex        =   54
          Tag             =   "40"
          Top             =   1080
          Width           =   2415
@@ -191,7 +195,7 @@ Begin VB.Form FrmPulseSetting
          Height          =   255
          Index           =   10
          Left            =   240
-         TabIndex        =   52
+         TabIndex        =   53
          Tag             =   "30"
          Top             =   1440
          Width           =   2415
@@ -201,7 +205,7 @@ Begin VB.Form FrmPulseSetting
          Height          =   255
          Index           =   9
          Left            =   240
-         TabIndex        =   51
+         TabIndex        =   52
          Tag             =   "20"
          Top             =   720
          Width           =   2415
@@ -211,7 +215,7 @@ Begin VB.Form FrmPulseSetting
          Height          =   255
          Index           =   8
          Left            =   240
-         TabIndex        =   50
+         TabIndex        =   51
          Tag             =   "10"
          Top             =   360
          Width           =   2415
@@ -221,7 +225,7 @@ Begin VB.Form FrmPulseSetting
       Caption         =   "&Load"
       Height          =   375
       Left            =   1680
-      TabIndex        =   3
+      TabIndex        =   15
       Tag             =   "13020"
       Top             =   7200
       Width           =   1215
@@ -229,15 +233,15 @@ Begin VB.Form FrmPulseSetting
    Begin VB.ComboBox cboFileName 
       Height          =   300
       Left            =   2160
-      TabIndex        =   2
+      TabIndex        =   0
       Top             =   360
       Width           =   3015
    End
    Begin VB.CommandButton CancelButton 
       Caption         =   "E&xit"
       Height          =   375
-      Left            =   3960
-      TabIndex        =   1
+      Left            =   5280
+      TabIndex        =   17
       Tag             =   "13030"
       Top             =   7200
       Width           =   1215
@@ -246,7 +250,7 @@ Begin VB.Form FrmPulseSetting
       Caption         =   "&Save"
       Height          =   375
       Left            =   360
-      TabIndex        =   0
+      TabIndex        =   14
       Tag             =   "13010"
       Top             =   7200
       Width           =   1215
@@ -256,97 +260,125 @@ Begin VB.Form FrmPulseSetting
       Height          =   4095
       Index           =   0
       Left            =   360
-      TabIndex        =   4
+      TabIndex        =   16
       Tag             =   "13100"
       Top             =   960
-      Width           =   5175
+      Width           =   6135
       Begin VB.ComboBox cboStage 
          Height          =   300
          ItemData        =   "FrmPulseSetting.frx":000C
-         Left            =   960
+         Left            =   1320
          List            =   "FrmPulseSetting.frx":0025
          Style           =   2  'Dropdown List
-         TabIndex        =   67
-         Top             =   435
+         TabIndex        =   1
+         Top             =   480
          Width           =   2055
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   7
          Left            =   2640
-         TabIndex        =   12
-         Text            =   "Text1"
+         TabIndex        =   9
+         Text            =   "0.00"
          Top             =   3480
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   6
          Left            =   2640
-         TabIndex        =   11
-         Text            =   "Text1"
+         TabIndex        =   8
+         Text            =   "0.00"
          Top             =   3120
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   5
          Left            =   2640
-         TabIndex        =   10
-         Text            =   "Text1"
+         TabIndex        =   7
+         Text            =   "0.00"
          Top             =   2760
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   4
          Left            =   2640
-         TabIndex        =   9
-         Text            =   "Text1"
+         TabIndex        =   6
+         Text            =   "0.00"
          Top             =   2400
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   3
          Left            =   2640
-         TabIndex        =   8
-         Text            =   "Text1"
+         TabIndex        =   5
+         Text            =   "0.00"
          Top             =   2040
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   2
          Left            =   2640
-         TabIndex        =   7
-         Text            =   "Text1"
+         TabIndex        =   4
+         Text            =   "0.00"
          Top             =   1680
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   1
          Left            =   2640
-         TabIndex        =   6
-         Text            =   "Text1"
+         TabIndex        =   3
+         Text            =   "0.00"
          Top             =   1320
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   0
          Left            =   2640
-         TabIndex        =   5
-         Text            =   "Text1"
+         TabIndex        =   2
+         Text            =   "0.00"
          Top             =   960
          Width           =   735
+      End
+      Begin VB.Label lblSign 
+         Alignment       =   1  'Right Justify
+         Caption         =   "344/430"
+         Height          =   225
+         Index           =   1
+         Left            =   3600
+         TabIndex        =   73
+         Top             =   1350
+         Width           =   675
+      End
+      Begin VB.Label Label2 
+         Alignment       =   1  'Right Justify
+         Caption         =   "%"
+         Height          =   165
+         Index           =   3
+         Left            =   3375
+         TabIndex        =   72
+         Top             =   1360
+         Width           =   165
       End
       Begin VB.Label lblSepereter 
          Caption         =   "/"
          Height          =   255
          Index           =   12
-         Left            =   4200
+         Left            =   4920
          TabIndex        =   71
          Top             =   480
          Width           =   255
@@ -355,7 +387,7 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "Stage:"
          Height          =   255
          Left            =   240
-         TabIndex        =   66
+         TabIndex        =   67
          Tag             =   "1"
          Top             =   480
          Width           =   735
@@ -365,8 +397,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "3.0"
          Height          =   255
          Index           =   7
-         Left            =   4440
-         TabIndex        =   44
+         Left            =   5160
+         TabIndex        =   49
          Top             =   3480
          Width           =   495
       End
@@ -374,8 +406,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "/"
          Height          =   255
          Index           =   7
-         Left            =   4200
-         TabIndex        =   43
+         Left            =   4920
+         TabIndex        =   48
          Top             =   3480
          Width           =   255
       End
@@ -384,8 +416,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "0.10"
          Height          =   255
          Index           =   7
-         Left            =   3600
-         TabIndex        =   42
+         Left            =   4320
+         TabIndex        =   47
          Top             =   3480
          Width           =   495
       End
@@ -394,8 +426,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "3.0"
          Height          =   255
          Index           =   6
-         Left            =   4440
-         TabIndex        =   41
+         Left            =   5160
+         TabIndex        =   46
          Top             =   3120
          Width           =   495
       End
@@ -403,8 +435,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "/"
          Height          =   255
          Index           =   6
-         Left            =   4200
-         TabIndex        =   40
+         Left            =   4920
+         TabIndex        =   45
          Top             =   3120
          Width           =   255
       End
@@ -413,8 +445,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "0.10"
          Height          =   255
          Index           =   6
-         Left            =   3600
-         TabIndex        =   39
+         Left            =   4320
+         TabIndex        =   44
          Top             =   3120
          Width           =   495
       End
@@ -423,85 +455,85 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "800"
          Height          =   255
          Index           =   5
-         Left            =   4440
+         Left            =   5160
+         TabIndex        =   43
+         Top             =   2760
+         Width           =   495
+      End
+      Begin VB.Label lblSepereter 
+         Caption         =   "/"
+         Height          =   255
+         Index           =   5
+         Left            =   4920
+         TabIndex        =   42
+         Top             =   2760
+         Width           =   255
+      End
+      Begin VB.Label lblMin 
+         Alignment       =   2  'Center
+         Caption         =   "150"
+         Height          =   255
+         Index           =   5
+         Left            =   4320
+         TabIndex        =   41
+         Top             =   2760
+         Width           =   495
+      End
+      Begin VB.Label lblMax 
+         Alignment       =   2  'Center
+         Caption         =   "800"
+         Height          =   255
+         Index           =   4
+         Left            =   5160
+         TabIndex        =   40
+         Top             =   2400
+         Width           =   495
+      End
+      Begin VB.Label lblSepereter 
+         Caption         =   "/"
+         Height          =   255
+         Index           =   4
+         Left            =   4920
+         TabIndex        =   39
+         Top             =   2400
+         Width           =   255
+      End
+      Begin VB.Label lblMin 
+         Alignment       =   2  'Center
+         Caption         =   "150"
+         Height          =   255
+         Index           =   4
+         Left            =   4320
          TabIndex        =   38
-         Top             =   2760
+         Top             =   2400
          Width           =   495
       End
-      Begin VB.Label lblSepereter 
-         Caption         =   "/"
+      Begin VB.Label lblMax 
+         Alignment       =   2  'Center
+         Caption         =   "800"
          Height          =   255
-         Index           =   5
-         Left            =   4200
+         Index           =   3
+         Left            =   5160
          TabIndex        =   37
-         Top             =   2760
-         Width           =   255
+         Top             =   2040
+         Width           =   495
       End
-      Begin VB.Label lblMin 
-         Alignment       =   2  'Center
-         Caption         =   "150"
+      Begin VB.Label lblSepereter 
+         Caption         =   "/"
          Height          =   255
-         Index           =   5
-         Left            =   3600
+         Index           =   3
+         Left            =   4920
          TabIndex        =   36
-         Top             =   2760
-         Width           =   495
+         Top             =   2040
+         Width           =   255
       End
-      Begin VB.Label lblMax 
+      Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         Caption         =   "800"
+         Caption         =   "150"
          Height          =   255
-         Index           =   4
-         Left            =   4440
+         Index           =   3
+         Left            =   4320
          TabIndex        =   35
-         Top             =   2400
-         Width           =   495
-      End
-      Begin VB.Label lblSepereter 
-         Caption         =   "/"
-         Height          =   255
-         Index           =   4
-         Left            =   4200
-         TabIndex        =   34
-         Top             =   2400
-         Width           =   255
-      End
-      Begin VB.Label lblMin 
-         Alignment       =   2  'Center
-         Caption         =   "150"
-         Height          =   255
-         Index           =   4
-         Left            =   3600
-         TabIndex        =   33
-         Top             =   2400
-         Width           =   495
-      End
-      Begin VB.Label lblMax 
-         Alignment       =   2  'Center
-         Caption         =   "800"
-         Height          =   255
-         Index           =   3
-         Left            =   4440
-         TabIndex        =   32
-         Top             =   2040
-         Width           =   495
-      End
-      Begin VB.Label lblSepereter 
-         Caption         =   "/"
-         Height          =   255
-         Index           =   3
-         Left            =   4200
-         TabIndex        =   31
-         Top             =   2040
-         Width           =   255
-      End
-      Begin VB.Label lblMin 
-         Alignment       =   2  'Center
-         Caption         =   "150"
-         Height          =   255
-         Index           =   3
-         Left            =   3600
-         TabIndex        =   30
          Top             =   2040
          Width           =   495
       End
@@ -510,8 +542,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "460"
          Height          =   255
          Index           =   2
-         Left            =   4440
-         TabIndex        =   29
+         Left            =   5160
+         TabIndex        =   34
          Top             =   1680
          Width           =   495
       End
@@ -519,8 +551,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "/"
          Height          =   255
          Index           =   2
-         Left            =   4200
-         TabIndex        =   28
+         Left            =   4920
+         TabIndex        =   33
          Top             =   1680
          Width           =   255
       End
@@ -529,8 +561,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "250"
          Height          =   255
          Index           =   2
-         Left            =   3600
-         TabIndex        =   27
+         Left            =   4320
+         TabIndex        =   32
          Top             =   1680
          Width           =   495
       End
@@ -539,8 +571,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "60"
          Height          =   255
          Index           =   1
-         Left            =   4440
-         TabIndex        =   26
+         Left            =   5160
+         TabIndex        =   31
          Top             =   1320
          Width           =   495
       End
@@ -548,8 +580,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "/"
          Height          =   255
          Index           =   1
-         Left            =   4200
-         TabIndex        =   25
+         Left            =   4920
+         TabIndex        =   30
          Top             =   1320
          Width           =   255
       End
@@ -558,8 +590,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "0"
          Height          =   255
          Index           =   1
-         Left            =   3600
-         TabIndex        =   24
+         Left            =   4320
+         TabIndex        =   29
          Top             =   1320
          Width           =   495
       End
@@ -568,8 +600,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "10.0"
          Height          =   255
          Index           =   0
-         Left            =   4440
-         TabIndex        =   23
+         Left            =   5160
+         TabIndex        =   28
          Top             =   960
          Width           =   495
       End
@@ -577,8 +609,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "/"
          Height          =   255
          Index           =   0
-         Left            =   4200
-         TabIndex        =   22
+         Left            =   4920
+         TabIndex        =   27
          Top             =   960
          Width           =   255
       End
@@ -587,8 +619,8 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "0.1"
          Height          =   255
          Index           =   0
-         Left            =   3600
-         TabIndex        =   21
+         Left            =   4320
+         TabIndex        =   26
          Top             =   960
          Width           =   495
       End
@@ -597,7 +629,7 @@ Begin VB.Form FrmPulseSetting
          Height          =   255
          Index           =   7
          Left            =   240
-         TabIndex        =   20
+         TabIndex        =   25
          Tag             =   "80"
          Top             =   3480
          Width           =   2415
@@ -607,7 +639,7 @@ Begin VB.Form FrmPulseSetting
          Height          =   255
          Index           =   6
          Left            =   240
-         TabIndex        =   19
+         TabIndex        =   24
          Tag             =   "70"
          Top             =   3120
          Width           =   2415
@@ -617,7 +649,7 @@ Begin VB.Form FrmPulseSetting
          Height          =   255
          Index           =   5
          Left            =   240
-         TabIndex        =   18
+         TabIndex        =   23
          Tag             =   "60"
          Top             =   2760
          Width           =   2415
@@ -627,7 +659,7 @@ Begin VB.Form FrmPulseSetting
          Height          =   255
          Index           =   4
          Left            =   240
-         TabIndex        =   17
+         TabIndex        =   22
          Tag             =   "50"
          Top             =   2400
          Width           =   2415
@@ -637,7 +669,7 @@ Begin VB.Form FrmPulseSetting
          Height          =   255
          Index           =   3
          Left            =   240
-         TabIndex        =   16
+         TabIndex        =   21
          Tag             =   "40"
          Top             =   2040
          Width           =   2415
@@ -647,7 +679,7 @@ Begin VB.Form FrmPulseSetting
          Height          =   255
          Index           =   2
          Left            =   240
-         TabIndex        =   15
+         TabIndex        =   20
          Tag             =   "30"
          Top             =   1680
          Width           =   2415
@@ -657,7 +689,7 @@ Begin VB.Form FrmPulseSetting
          Height          =   255
          Index           =   1
          Left            =   240
-         TabIndex        =   14
+         TabIndex        =   19
          Tag             =   "20"
          Top             =   1320
          Width           =   2415
@@ -667,7 +699,7 @@ Begin VB.Form FrmPulseSetting
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   13
+         TabIndex        =   18
          Tag             =   "10"
          Top             =   960
          Width           =   2415
@@ -677,7 +709,7 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "Max"
          Height          =   255
          Index           =   16
-         Left            =   4440
+         Left            =   5160
          TabIndex        =   69
          Tag             =   "6"
          Top             =   480
@@ -688,7 +720,7 @@ Begin VB.Form FrmPulseSetting
          Caption         =   "Min"
          Height          =   255
          Index           =   15
-         Left            =   3600
+         Left            =   4320
          TabIndex        =   68
          Tag             =   "2"
          Top             =   480
@@ -716,6 +748,7 @@ Dim fso As New FileSystemObject
 Dim lastConfigName As String
 Dim PulseSetting As PulseSettingType
 Dim path As String
+Dim InitialVoltage As Long
 
 Private Sub CancelButton_Click()
     Me.Hide
@@ -735,7 +768,8 @@ Private Sub cboStage_Change()
     For i = 0 To 7
         txtValue(i).Text = PulseSetting.Stages(cboStage.ListIndex).Value(i)
     Next
-    
+    i = 1
+    lblSign(i).Caption = PulseSetting.Stages(cboStage.ListIndex).Value(i) * InitialVoltage / 100 & "/" & InitialVoltage
 End Sub
 
 Private Sub cboStage_Click()
@@ -826,6 +860,7 @@ Dim pFileItemList() As PulseFileItemType
 
     lastConfigName = ""
     PulseSetting = PlcPulseSetting.DefalutStagesParameters
+    InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
     
     path = App.path & "\" & SETTING_PATH & "PulseSetting.config"
 
@@ -849,56 +884,77 @@ Dim pFileItemList() As PulseFileItemType
     
     cmdSave.Enabled = False
     cmdLoad.Enabled = False
+    
+    
+
 
 '    Debug.Print Frame1(1).Caption
 '
 '    Debug.Print txtValue(1).hWnd
 End Sub
 
-Private Sub txtValue_Change(index As Integer)
+Private Sub txtValue_Change(Index As Integer)
     Dim min As Single
     Dim max As Single
     Dim v As Single
     
-    min = CSng(lblMin(index).Caption)
-    max = CSng(lblMax(index).Caption)
+    min = CSng(lblMin(Index).Caption)
+    max = CSng(lblMax(Index).Caption)
         
-    If IsNumeric(txtValue(index).Text) Then
-        v = CSng(txtValue(index).Text)
+    If IsNumeric(txtValue(Index).Text) Then
+        v = CSng(txtValue(Index).Text)
+        
+        
+        If Index = 1 Then
+            Dim i As Integer
+            i = Index
+            lblSign(i).Caption = CStr(v * InitialVoltage / 100) & "/" & InitialVoltage
+        End If
+        
         If min <= v And v <= max Then
-            txtValue(index).BackColor = &HFFFFFF
-            PulseSetting.Stages(cboStage.ListIndex).Value(index) = CDbl(txtValue(index).Text)
+            txtValue(Index).BackColor = &HFFFFFF
+            PulseSetting.Stages(cboStage.ListIndex).Value(Index) = CDbl(txtValue(Index).Text)
             cmdSave.Enabled = True
             Exit Sub
         End If
     End If
             
-    txtValue(index).BackColor = &HFF&
+    txtValue(Index).BackColor = &HFF&
     
     'txtValue(index).Text = PulseSetting.Stages(cboStage.ListIndex).Value(index)
     
 End Sub
 
-Private Sub txtValueGeneral_Change(index As Integer)
+Private Sub txtValueGeneral_Change(Index As Integer)
     Dim min As Single
     Dim max As Single
     Dim v As Single
     
-    min = CSng(lblMinGeneral(index).Caption)
-    max = CSng(lblMaxGeneral(index).Caption)
-    If IsNumeric(txtValueGeneral(index).Text) Then
+    min = CSng(lblMinGeneral(Index).Caption)
+    max = CSng(lblMaxGeneral(Index).Caption)
+    If IsNumeric(txtValueGeneral(Index).Text) Then
     
-        v = CSng(txtValueGeneral(index).Text)
+        v = CSng(txtValueGeneral(Index).Text)
         If min <= v And v <= max Then
-            txtValueGeneral(index).BackColor = &HFFFFFF
-            PulseSetting.General.Value(index) = CSng(txtValueGeneral(index).Text)
+            txtValueGeneral(Index).BackColor = &HFFFFFF
+            PulseSetting.General.Value(Index) = CSng(txtValueGeneral(Index).Text)
             cmdSave.Enabled = True
             Exit Sub
         End If
     End If
             
-    txtValueGeneral(index).BackColor = &HFF&
+    txtValueGeneral(Index).BackColor = &HFF&
     
     'txtValueGeneral(index).Text = PulseSetting.General.Value(index)
     
+End Sub
+
+
+Private Sub txtValue_GotFocus(Index As Integer)
+    txtValue(Index).SelLength = Len(txtValue(Index).Text)
+End Sub
+
+
+Private Sub txtValueGeneral_GotFocus(Index As Integer)
+    txtValue(Index).SelLength = Len(txtValue(Index).Text)
 End Sub

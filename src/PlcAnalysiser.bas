@@ -69,7 +69,7 @@ analysisDefine.CurrentInterruptTime = CSng(GetSetting(App.EXEName, "AnalysisDefi
 analysisDefine.ShortCircuitCurrent = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitCurrent", 550))
 analysisDefine.ShortCircuitTime = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitTime", 0.8))
 analysisDefine.TotalRailUsageTotalRail = CSng(GetSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageTotalRail", 30))
-analysisDefine.FlashSpeedTimeRange = CSng(GetSetting(App.EXEName, "AnalysisDefine", "FlashSpeedTimeRange", 10))
+analysisDefine.InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
 analysisDefine.BoostSpeedTimeRange = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostSpeedTimeRange", 2))
 analysisDefine.UpsetCurrentMinimum = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetCurrentMinimum", 0))
 analysisDefine.UpsetDiameter_Pistonside = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Pistonside)", 0))
@@ -120,17 +120,18 @@ Dim sumCurrent As Double
     
            
     ' OLD LOGIC
-    For i = stopPos To startPos Step -1
-        If buf(stopPos).Time - buf(i).Time >= analysisDefine.FlashSpeedTimeRange Then
-            Exit For
-        End If
-    Next
-    
-    r.FlashSpeed = (buf(stopPos).Dist - buf(i + 1).Dist) / (buf(stopPos).Time - buf(i + 1).Time)
+    '    For i = stopPos To startPos Step -1
+    '        If buf(stopPos).Time - buf(i).Time >= analysisDefine.FlashSpeedTimeRange Then
+    '            Exit For
+    '        End If
+    '    Next
+    '
+    '    r.FlashSpeed = (buf(stopPos).Dist - buf(i + 1).Dist) / (buf(stopPos).Time - buf(i + 1).Time)
     ' OLD LOGIC
     
     '   NEW  Logic
-'   Change at 2011-2-24 by wangshilian
+    
+    ' Change at 2011-2-24 by wangshilian
     Dim bStartOK As Boolean
     Dim bStart As Long
     Dim bStop As Long

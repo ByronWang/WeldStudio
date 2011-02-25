@@ -19,6 +19,7 @@ Begin VB.Form FrmOption
    Tag             =   "16000"
    Begin VB.CommandButton cmdOK 
       Caption         =   "OK"
+      Default         =   -1  'True
       Height          =   375
       Left            =   6840
       TabIndex        =   86
@@ -27,6 +28,7 @@ Begin VB.Form FrmOption
       Width           =   1335
    End
    Begin VB.CommandButton cmdCancel 
+      Cancel          =   -1  'True
       Caption         =   "Cancel"
       Height          =   375
       Left            =   8760
@@ -52,12 +54,12 @@ Begin VB.Form FrmOption
       TabCaption(0)   =   "General"
       TabPicture(0)   =   "FrmOption.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame7"
-      Tab(0).Control(1)=   "Frame5"
-      Tab(0).Control(2)=   "CommonDialog1"
-      Tab(0).Control(3)=   "cboLanguage"
-      Tab(0).Control(4)=   "chkOnlineOnStartUp"
-      Tab(0).Control(5)=   "lblLanguage"
+      Tab(0).Control(0)=   "lblLanguage"
+      Tab(0).Control(1)=   "chkOnlineOnStartUp"
+      Tab(0).Control(2)=   "cboLanguage"
+      Tab(0).Control(3)=   "CommonDialog1"
+      Tab(0).Control(4)=   "Frame5"
+      Tab(0).Control(5)=   "Frame7"
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
@@ -364,6 +366,7 @@ Begin VB.Form FrmOption
          Top             =   4560
          Width           =   10335
          Begin VB.TextBox txtWA 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   19
             Left            =   6720
@@ -373,6 +376,7 @@ Begin VB.Form FrmOption
             Width           =   855
          End
          Begin VB.TextBox txtWA 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   18
             Left            =   6720
@@ -382,6 +386,7 @@ Begin VB.Form FrmOption
             Width           =   855
          End
          Begin VB.TextBox txtWA 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   17
             Left            =   2760
@@ -391,11 +396,12 @@ Begin VB.Form FrmOption
             Width           =   615
          End
          Begin VB.TextBox txtWA 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   15
             Left            =   2760
             TabIndex        =   155
-            Text            =   "10"
+            Text            =   "480"
             Top             =   360
             Width           =   615
          End
@@ -411,8 +417,8 @@ Begin VB.Form FrmOption
             Width           =   615
          End
          Begin VB.Label lblAV 
-            Caption         =   "Upset Diameter(Rod side) (mm):"
-            Height          =   375
+            Caption         =   "Upset Diameter(Rod side)(mm):"
+            Height          =   255
             Index           =   28
             Left            =   3600
             TabIndex        =   163
@@ -421,8 +427,8 @@ Begin VB.Form FrmOption
             Width           =   3135
          End
          Begin VB.Label lblAV 
-            Caption         =   "Upset Diameter(Piston side) (mm):"
-            Height          =   375
+            Caption         =   "Upset Diameter(Piston side)(mm):"
+            Height          =   255
             Index           =   27
             Left            =   3600
             TabIndex        =   161
@@ -431,8 +437,8 @@ Begin VB.Form FrmOption
             Width           =   3255
          End
          Begin VB.Label lblAV 
-            Caption         =   "Upset Current Minimum (A):"
-            Height          =   375
+            Caption         =   "Upset Current Minimum(A):"
+            Height          =   255
             Index           =   26
             Left            =   240
             TabIndex        =   159
@@ -442,7 +448,7 @@ Begin VB.Form FrmOption
          End
          Begin VB.Label lblAV 
             Caption         =   "Initial Voltage(V):"
-            Height          =   375
+            Height          =   255
             Index           =   25
             Left            =   240
             TabIndex        =   157
@@ -497,6 +503,7 @@ Begin VB.Form FrmOption
             Top             =   2160
             Width           =   2415
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   14
                Left            =   1680
@@ -555,6 +562,7 @@ Begin VB.Form FrmOption
                Width           =   1935
             End
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   12
                Left            =   1680
@@ -564,6 +572,7 @@ Begin VB.Form FrmOption
                Width           =   615
             End
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   13
                Left            =   1680
@@ -612,6 +621,7 @@ Begin VB.Form FrmOption
             Top             =   2160
             Width           =   2415
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   11
                Left            =   1680
@@ -621,6 +631,7 @@ Begin VB.Form FrmOption
                Width           =   615
             End
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   10
                Left            =   1680
@@ -689,6 +700,7 @@ Begin VB.Form FrmOption
                Width           =   1935
             End
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   8
                Left            =   1680
@@ -698,6 +710,7 @@ Begin VB.Form FrmOption
                Width           =   615
             End
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   9
                Left            =   1680
@@ -756,6 +769,7 @@ Begin VB.Form FrmOption
                Width           =   1935
             End
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   6
                Left            =   1680
@@ -765,6 +779,7 @@ Begin VB.Form FrmOption
                Width           =   615
             End
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   7
                Left            =   1680
@@ -813,6 +828,7 @@ Begin VB.Form FrmOption
             Top             =   360
             Width           =   2415
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   5
                Left            =   1680
@@ -822,6 +838,7 @@ Begin VB.Form FrmOption
                Width           =   615
             End
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   4
                Left            =   1680
@@ -890,6 +907,7 @@ Begin VB.Form FrmOption
                Width           =   1935
             End
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   2
                Left            =   1680
@@ -899,6 +917,7 @@ Begin VB.Form FrmOption
                Width           =   615
             End
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   3
                Left            =   1680
@@ -947,6 +966,7 @@ Begin VB.Form FrmOption
             Top             =   360
             Width           =   2415
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   1
                Left            =   1680
@@ -956,6 +976,7 @@ Begin VB.Form FrmOption
                Width           =   615
             End
             Begin VB.TextBox txtWA 
+               Alignment       =   1  'Right Justify
                Height          =   270
                Index           =   0
                Left            =   1680
@@ -1039,6 +1060,7 @@ Begin VB.Form FrmOption
          Top             =   2040
          Width           =   5055
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   8
             Left            =   1440
@@ -1048,6 +1070,7 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   9
             Left            =   1440
@@ -1057,6 +1080,7 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   10
             Left            =   3840
@@ -1066,6 +1090,7 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   11
             Left            =   3840
@@ -1189,6 +1214,7 @@ Begin VB.Form FrmOption
             Width           =   1455
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   15
             Left            =   3840
@@ -1198,6 +1224,7 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   14
             Left            =   3840
@@ -1207,6 +1234,7 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   13
             Left            =   1440
@@ -1216,6 +1244,7 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   12
             Left            =   1440
@@ -1326,6 +1355,7 @@ Begin VB.Form FrmOption
          Top             =   480
          Width           =   3135
          Begin VB.TextBox txtWC 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   3
             Left            =   1680
@@ -1335,6 +1365,7 @@ Begin VB.Form FrmOption
             Width           =   1215
          End
          Begin VB.TextBox txtWC 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   4
             Left            =   1680
@@ -1344,6 +1375,7 @@ Begin VB.Form FrmOption
             Width           =   1215
          End
          Begin VB.TextBox txtWC 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   5
             Left            =   1680
@@ -1393,6 +1425,7 @@ Begin VB.Form FrmOption
          Top             =   480
          Width           =   3135
          Begin VB.TextBox txtWC 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   2
             Left            =   1680
@@ -1402,6 +1435,7 @@ Begin VB.Form FrmOption
             Width           =   1215
          End
          Begin VB.TextBox txtWC 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   1
             Left            =   1680
@@ -1411,6 +1445,7 @@ Begin VB.Form FrmOption
             Width           =   1215
          End
          Begin VB.TextBox txtWC 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   0
             Left            =   1680
@@ -1460,6 +1495,7 @@ Begin VB.Form FrmOption
          Top             =   2280
          Width           =   4575
          Begin VB.TextBox txtWC 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   7
             Left            =   1800
@@ -1469,6 +1505,7 @@ Begin VB.Form FrmOption
             Width           =   1215
          End
          Begin VB.TextBox txtWC 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   6
             Left            =   2760
@@ -1505,8 +1542,9 @@ Begin VB.Form FrmOption
          TabIndex        =   35
          Tag             =   "19100"
          Top             =   480
-         Width           =   4575
+         Width           =   4695
          Begin VB.TextBox txtSRB 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   0
             Left            =   1440
@@ -1516,15 +1554,17 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txtSRB 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   1
-            Left            =   3600
+            Left            =   3720
             TabIndex        =   38
             Text            =   "100"
             Top             =   360
             Width           =   735
          End
          Begin VB.TextBox txtSRB 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   2
             Left            =   1440
@@ -1534,9 +1574,10 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txtSRB 
+            Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   3
-            Left            =   3600
+            Left            =   3720
             TabIndex        =   36
             Text            =   "50"
             Top             =   720
@@ -1558,7 +1599,7 @@ Begin VB.Form FrmOption
             Caption         =   "Distance(mm):"
             Height          =   255
             Index           =   1
-            Left            =   2160
+            Left            =   2280
             TabIndex        =   42
             Tag             =   "2"
             Top             =   360
@@ -1580,7 +1621,7 @@ Begin VB.Form FrmOption
             Caption         =   "Pressure(psi):"
             Height          =   255
             Index           =   3
-            Left            =   2160
+            Left            =   2280
             TabIndex        =   40
             Tag             =   "4"
             Top             =   735
@@ -1626,6 +1667,7 @@ Begin VB.Form FrmOption
             Width           =   1455
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   3
             Left            =   3840
@@ -1635,6 +1677,7 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   2
             Left            =   3840
@@ -1644,6 +1687,7 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   1
             Left            =   1440
@@ -1653,6 +1697,7 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   0
             Left            =   1440
@@ -1756,6 +1801,7 @@ Begin VB.Form FrmOption
          Top             =   480
          Width           =   5055
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   4
             Left            =   1440
@@ -1765,6 +1811,7 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   5
             Left            =   1440
@@ -1774,6 +1821,7 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   6
             Left            =   3840
@@ -1783,6 +1831,7 @@ Begin VB.Form FrmOption
             Width           =   735
          End
          Begin VB.TextBox txt 
+            Alignment       =   1  'Right Justify
             Height          =   250
             Index           =   7
             Left            =   3840
@@ -1889,10 +1938,10 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkFilterData 
          Caption         =   "FilterData"
          Height          =   255
-         Left            =   -74760
+         Left            =   -73200
          TabIndex        =   4
          Tag             =   "20010"
-         Top             =   3960
+         Top             =   6840
          Visible         =   0   'False
          Width           =   3135
       End
@@ -1925,6 +1974,7 @@ Begin VB.Form FrmOption
             Width           =   855
          End
          Begin VB.TextBox txtStartRecording 
+            Alignment       =   1  'Right Justify
             Enabled         =   0   'False
             Height          =   270
             Index           =   2
@@ -2178,8 +2228,8 @@ Private Sub cmdOK_Click()
   Call SaveSetting(App.EXEName, "AnalysisDefine", "ShortCircuitCurrent", WeldAnalysis_Data(12))
   Call SaveSetting(App.EXEName, "AnalysisDefine", "ShortCircuitTime", WeldAnalysis_Data(13))
   Call SaveSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageTotalRail", WeldAnalysis_Data(14))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "FlashSpeedTimeRange", WeldAnalysis_Data(15))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "BoostSpeedTimeRange", WeldAnalysis_Data(16))
+  Call SaveSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", WeldAnalysis_Data(15))
+  'Call SaveSetting(App.EXEName, "AnalysisDefine", "BoostSpeedTimeRange", WeldAnalysis_Data(16))
   Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetCurrentMinimum", WeldAnalysis_Data(17))
   Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Pistonside)", WeldAnalysis_Data(18))
   Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Rodside)", WeldAnalysis_Data(19))
@@ -2335,8 +2385,8 @@ WeldAnalysis_Data(11) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "CurrentI
 WeldAnalysis_Data(12) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitCurrent", 550))
 WeldAnalysis_Data(13) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitTime", 0.8))
 WeldAnalysis_Data(14) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageTotalRail", 30))
-WeldAnalysis_Data(15) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "FlashSpeedTimeRange", 10))
-WeldAnalysis_Data(16) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostSpeedTimeRange", 2))
+WeldAnalysis_Data(15) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
+'WeldAnalysis_Data(16) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostSpeedTimeRange", 2))
 WeldAnalysis_Data(17) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetCurrentMinimum", 100))
 WeldAnalysis_Data(18) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Pistonside)", 209.55))
 WeldAnalysis_Data(19) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Rodside)", 82.55))

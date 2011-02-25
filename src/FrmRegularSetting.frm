@@ -5,155 +5,169 @@ Begin VB.Form FrmRegularSetting
    ClientHeight    =   7920
    ClientLeft      =   2760
    ClientTop       =   3750
-   ClientWidth     =   7080
+   ClientWidth     =   6525
    Icon            =   "FrmRegularSetting.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7920
-   ScaleWidth      =   7080
+   ScaleWidth      =   6525
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  '所有者中心
    Tag             =   "14000"
    Begin VB.ComboBox cboFileName 
       Height          =   300
       Left            =   2160
-      TabIndex        =   77
+      TabIndex        =   0
       Top             =   360
       Width           =   3015
    End
    Begin VB.Frame Frame1 
       Caption         =   "Weld Parameters"
-      Height          =   6375
+      Height          =   6255
       Index           =   0
       Left            =   360
-      TabIndex        =   3
+      TabIndex        =   17
       Tag             =   "14100"
       Top             =   1080
-      Width           =   6135
+      Width           =   5895
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   12
          Left            =   2640
-         TabIndex        =   70
-         Text            =   "Text1"
+         TabIndex        =   14
+         Text            =   "0.00"
          Top             =   5640
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   11
          Left            =   2640
-         TabIndex        =   65
-         Text            =   "Text1"
+         TabIndex        =   13
+         Text            =   "0.00"
          Top             =   5280
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   13
          Left            =   2640
-         TabIndex        =   60
-         Text            =   "Text1"
+         TabIndex        =   12
+         Text            =   "0.00"
          Top             =   4920
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   10
          Left            =   2640
-         TabIndex        =   55
-         Text            =   "Text1"
+         TabIndex        =   11
+         Text            =   "0.00"
          Top             =   4560
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   9
          Left            =   2640
-         TabIndex        =   50
-         Text            =   "Text1"
+         TabIndex        =   10
+         Text            =   "0.00"
          Top             =   4200
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   8
          Left            =   2640
-         TabIndex        =   45
-         Text            =   "Text1"
+         TabIndex        =   9
+         Text            =   "0.00"
          Top             =   3840
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   0
          Left            =   2640
-         TabIndex        =   11
-         Text            =   "Text1"
+         TabIndex        =   1
+         Text            =   "0.00"
          Top             =   960
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   1
          Left            =   2640
-         TabIndex        =   10
-         Text            =   "Text1"
+         TabIndex        =   2
+         Text            =   "0.00"
          Top             =   1320
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   2
          Left            =   2640
-         TabIndex        =   9
-         Text            =   "Text1"
+         TabIndex        =   3
+         Text            =   "0.00"
          Top             =   1680
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   3
          Left            =   2640
-         TabIndex        =   8
-         Text            =   "Text1"
+         TabIndex        =   4
+         Text            =   "0.00"
          Top             =   2040
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   4
          Left            =   2640
-         TabIndex        =   7
-         Text            =   "Text1"
+         TabIndex        =   5
+         Text            =   "0.00"
          Top             =   2400
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   5
          Left            =   2640
          TabIndex        =   6
-         Text            =   "Text1"
+         Text            =   "0.00"
          Top             =   2760
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   6
          Left            =   2640
-         TabIndex        =   5
-         Text            =   "Text1"
+         TabIndex        =   7
+         Text            =   "0.00"
          Top             =   3120
          Width           =   735
       End
       Begin VB.TextBox txtValue 
+         Alignment       =   1  'Right Justify
          Height          =   270
          Index           =   7
          Left            =   2640
-         TabIndex        =   4
-         Text            =   "Text1"
+         TabIndex        =   8
+         Text            =   "0.00"
          Top             =   3480
          Width           =   735
       End
@@ -164,7 +178,7 @@ Begin VB.Form FrmRegularSetting
          Index           =   2
          Left            =   3360
          TabIndex        =   85
-         Top             =   3120
+         Top             =   3165
          Width           =   165
       End
       Begin VB.Label Label2 
@@ -174,7 +188,7 @@ Begin VB.Form FrmRegularSetting
          Index           =   1
          Left            =   3360
          TabIndex        =   84
-         Top             =   2760
+         Top             =   2805
          Width           =   165
       End
       Begin VB.Label Label2 
@@ -184,37 +198,40 @@ Begin VB.Form FrmRegularSetting
          Index           =   0
          Left            =   3360
          TabIndex        =   83
-         Top             =   2400
-         Width           =   160
+         Top             =   2445
+         Width           =   165
       End
       Begin VB.Label lblSign 
          Alignment       =   1  'Right Justify
          Caption         =   "230/430"
          Height          =   255
-         Index           =   3
+         Index           =   6
          Left            =   3600
          TabIndex        =   82
-         Top             =   3120
+         Top             =   3165
+         WhatsThisHelpID =   6
          Width           =   735
       End
       Begin VB.Label lblSign 
          Alignment       =   1  'Right Justify
          Caption         =   "43/430"
          Height          =   255
-         Index           =   2
+         Index           =   5
          Left            =   3600
          TabIndex        =   81
-         Top             =   2760
+         Top             =   2805
+         WhatsThisHelpID =   5
          Width           =   735
       End
       Begin VB.Label lblSign 
          Alignment       =   1  'Right Justify
          Caption         =   "344/430"
          Height          =   255
-         Index           =   0
+         Index           =   4
          Left            =   3600
          TabIndex        =   79
-         Top             =   2400
+         Top             =   2445
+         WhatsThisHelpID =   4
          Width           =   735
       End
       Begin VB.Label lblMax 
@@ -223,7 +240,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   12
          Left            =   5160
-         TabIndex        =   74
+         TabIndex        =   75
          Top             =   5640
          Width           =   495
       End
@@ -232,7 +249,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   14
          Left            =   4920
-         TabIndex        =   73
+         TabIndex        =   74
          Top             =   5640
          Width           =   255
       End
@@ -242,7 +259,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   12
          Left            =   4320
-         TabIndex        =   72
+         TabIndex        =   73
          Top             =   5640
          Width           =   495
       End
@@ -251,7 +268,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   11
          Left            =   240
-         TabIndex        =   71
+         TabIndex        =   72
          Tag             =   "140"
          Top             =   4920
          Width           =   2415
@@ -262,7 +279,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   11
          Left            =   5160
-         TabIndex        =   69
+         TabIndex        =   71
          Top             =   5280
          Width           =   495
       End
@@ -271,7 +288,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   13
          Left            =   4920
-         TabIndex        =   68
+         TabIndex        =   70
          Top             =   5280
          Width           =   255
       End
@@ -281,7 +298,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   11
          Left            =   4320
-         TabIndex        =   67
+         TabIndex        =   69
          Top             =   5280
          Width           =   495
       End
@@ -290,7 +307,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   13
          Left            =   240
-         TabIndex        =   66
+         TabIndex        =   68
          Tag             =   "130"
          Top             =   5640
          Width           =   2415
@@ -301,7 +318,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   13
          Left            =   5160
-         TabIndex        =   64
+         TabIndex        =   67
          Top             =   4920
          Width           =   495
       End
@@ -310,7 +327,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   11
          Left            =   4920
-         TabIndex        =   63
+         TabIndex        =   66
          Top             =   4920
          Width           =   255
       End
@@ -320,7 +337,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   13
          Left            =   4320
-         TabIndex        =   62
+         TabIndex        =   65
          Top             =   4920
          Width           =   495
       End
@@ -329,7 +346,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   12
          Left            =   240
-         TabIndex        =   61
+         TabIndex        =   64
          Tag             =   "120"
          Top             =   5280
          Width           =   2415
@@ -340,7 +357,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   10
          Left            =   5160
-         TabIndex        =   59
+         TabIndex        =   63
          Top             =   4560
          Width           =   495
       End
@@ -349,7 +366,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   10
          Left            =   4920
-         TabIndex        =   58
+         TabIndex        =   62
          Top             =   4560
          Width           =   255
       End
@@ -359,7 +376,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   10
          Left            =   4320
-         TabIndex        =   57
+         TabIndex        =   61
          Top             =   4560
          Width           =   495
       End
@@ -368,7 +385,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   10
          Left            =   240
-         TabIndex        =   56
+         TabIndex        =   60
          Tag             =   "110"
          Top             =   4560
          Width           =   2415
@@ -379,7 +396,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   9
          Left            =   5160
-         TabIndex        =   54
+         TabIndex        =   59
          Top             =   4200
          Width           =   495
       End
@@ -388,7 +405,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   9
          Left            =   4920
-         TabIndex        =   53
+         TabIndex        =   58
          Top             =   4200
          Width           =   255
       End
@@ -398,7 +415,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   9
          Left            =   4320
-         TabIndex        =   52
+         TabIndex        =   57
          Top             =   4200
          Width           =   495
       End
@@ -407,7 +424,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   9
          Left            =   240
-         TabIndex        =   51
+         TabIndex        =   56
          Tag             =   "100"
          Top             =   4200
          Width           =   2415
@@ -418,7 +435,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   8
          Left            =   5160
-         TabIndex        =   49
+         TabIndex        =   55
          Top             =   3840
          Width           =   495
       End
@@ -427,7 +444,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   8
          Left            =   4920
-         TabIndex        =   48
+         TabIndex        =   54
          Top             =   3840
          Width           =   255
       End
@@ -437,7 +454,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   8
          Left            =   4320
-         TabIndex        =   47
+         TabIndex        =   53
          Top             =   3840
          Width           =   495
       End
@@ -446,7 +463,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   8
          Left            =   240
-         TabIndex        =   46
+         TabIndex        =   52
          Tag             =   "90"
          Top             =   3840
          Width           =   2415
@@ -456,7 +473,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   44
+         TabIndex        =   51
          Tag             =   "10"
          Top             =   960
          Width           =   2415
@@ -466,7 +483,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   1
          Left            =   240
-         TabIndex        =   43
+         TabIndex        =   50
          Tag             =   "20"
          Top             =   1320
          Width           =   2415
@@ -476,7 +493,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   2
          Left            =   240
-         TabIndex        =   42
+         TabIndex        =   49
          Tag             =   "30"
          Top             =   1680
          Width           =   2535
@@ -486,7 +503,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   3
          Left            =   240
-         TabIndex        =   41
+         TabIndex        =   48
          Tag             =   "40"
          Top             =   2040
          Width           =   2415
@@ -496,7 +513,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   4
          Left            =   240
-         TabIndex        =   40
+         TabIndex        =   47
          Tag             =   "50"
          Top             =   2400
          Width           =   2415
@@ -506,7 +523,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   5
          Left            =   240
-         TabIndex        =   39
+         TabIndex        =   46
          Tag             =   "60"
          Top             =   2760
          Width           =   2415
@@ -516,7 +533,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   6
          Left            =   240
-         TabIndex        =   38
+         TabIndex        =   45
          Tag             =   "70"
          Top             =   3120
          Width           =   2415
@@ -526,7 +543,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   7
          Left            =   240
-         TabIndex        =   37
+         TabIndex        =   44
          Tag             =   "80"
          Top             =   3480
          Width           =   2415
@@ -537,7 +554,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   0
          Left            =   4320
-         TabIndex        =   36
+         TabIndex        =   43
          Top             =   960
          Width           =   495
       End
@@ -546,7 +563,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   0
          Left            =   4920
-         TabIndex        =   35
+         TabIndex        =   42
          Top             =   960
          Width           =   255
       End
@@ -556,7 +573,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   0
          Left            =   5160
-         TabIndex        =   34
+         TabIndex        =   41
          Top             =   960
          Width           =   495
       End
@@ -566,7 +583,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   1
          Left            =   4320
-         TabIndex        =   33
+         TabIndex        =   40
          Top             =   1320
          Width           =   495
       End
@@ -575,7 +592,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   1
          Left            =   4920
-         TabIndex        =   32
+         TabIndex        =   39
          Top             =   1320
          Width           =   255
       End
@@ -585,7 +602,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   1
          Left            =   5160
-         TabIndex        =   31
+         TabIndex        =   38
          Top             =   1320
          Width           =   495
       End
@@ -595,7 +612,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   2
          Left            =   4320
-         TabIndex        =   30
+         TabIndex        =   37
          Top             =   1680
          Width           =   495
       End
@@ -604,7 +621,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   2
          Left            =   4920
-         TabIndex        =   29
+         TabIndex        =   36
          Top             =   1680
          Width           =   255
       End
@@ -614,7 +631,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   2
          Left            =   5160
-         TabIndex        =   28
+         TabIndex        =   35
          Top             =   1680
          Width           =   495
       End
@@ -624,7 +641,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   3
          Left            =   4320
-         TabIndex        =   27
+         TabIndex        =   34
          Top             =   2040
          Width           =   495
       End
@@ -633,7 +650,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   3
          Left            =   4920
-         TabIndex        =   26
+         TabIndex        =   33
          Top             =   2040
          Width           =   255
       End
@@ -643,7 +660,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   3
          Left            =   5160
-         TabIndex        =   25
+         TabIndex        =   32
          Top             =   2040
          Width           =   495
       End
@@ -653,84 +670,84 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   4
          Left            =   4320
+         TabIndex        =   31
+         Top             =   2400
+         Width           =   495
+      End
+      Begin VB.Label lblSepereter 
+         Caption         =   "/"
+         Height          =   255
+         Index           =   4
+         Left            =   4920
+         TabIndex        =   30
+         Top             =   2400
+         Width           =   255
+      End
+      Begin VB.Label lblMax 
+         Alignment       =   1  'Right Justify
+         Caption         =   "100"
+         Height          =   255
+         Index           =   4
+         Left            =   5040
+         TabIndex        =   29
+         Top             =   2400
+         Width           =   495
+      End
+      Begin VB.Label lblMin 
+         Alignment       =   1  'Right Justify
+         Caption         =   "0"
+         Height          =   255
+         Index           =   5
+         Left            =   4320
+         TabIndex        =   28
+         Top             =   2760
+         Width           =   495
+      End
+      Begin VB.Label lblSepereter 
+         Caption         =   "/"
+         Height          =   255
+         Index           =   5
+         Left            =   4920
+         TabIndex        =   27
+         Top             =   2760
+         Width           =   255
+      End
+      Begin VB.Label lblMax 
+         Alignment       =   1  'Right Justify
+         Caption         =   "100"
+         Height          =   255
+         Index           =   5
+         Left            =   5040
+         TabIndex        =   26
+         Top             =   2760
+         Width           =   495
+      End
+      Begin VB.Label lblMin 
+         Alignment       =   1  'Right Justify
+         Caption         =   "0"
+         Height          =   255
+         Index           =   6
+         Left            =   4320
+         TabIndex        =   25
+         Top             =   3120
+         Width           =   495
+      End
+      Begin VB.Label lblSepereter 
+         Caption         =   "/"
+         Height          =   255
+         Index           =   6
+         Left            =   4920
          TabIndex        =   24
-         Top             =   2400
-         Width           =   495
+         Top             =   3120
+         Width           =   255
       End
-      Begin VB.Label lblSepereter 
-         Caption         =   "/"
+      Begin VB.Label lblMax 
+         Alignment       =   1  'Right Justify
+         Caption         =   "100"
          Height          =   255
-         Index           =   4
-         Left            =   4920
+         Index           =   6
+         Left            =   5040
          TabIndex        =   23
-         Top             =   2400
-         Width           =   255
-      End
-      Begin VB.Label lblMax 
-         Alignment       =   1  'Right Justify
-         Caption         =   "100"
-         Height          =   255
-         Index           =   4
-         Left            =   5040
-         TabIndex        =   22
-         Top             =   2400
-         Width           =   495
-      End
-      Begin VB.Label lblMin 
-         Alignment       =   1  'Right Justify
-         Caption         =   "0"
-         Height          =   255
-         Index           =   5
-         Left            =   4320
-         TabIndex        =   21
-         Top             =   2760
-         Width           =   495
-      End
-      Begin VB.Label lblSepereter 
-         Caption         =   "/"
-         Height          =   255
-         Index           =   5
-         Left            =   4920
-         TabIndex        =   20
-         Top             =   2760
-         Width           =   255
-      End
-      Begin VB.Label lblMax 
-         Alignment       =   1  'Right Justify
-         Caption         =   "100"
-         Height          =   255
-         Index           =   5
-         Left            =   5040
-         TabIndex        =   19
-         Top             =   2760
-         Width           =   495
-      End
-      Begin VB.Label lblMin 
-         Alignment       =   1  'Right Justify
-         Caption         =   "0"
-         Height          =   255
-         Index           =   6
-         Left            =   4320
-         TabIndex        =   18
-         Top             =   3120
-         Width           =   495
-      End
-      Begin VB.Label lblSepereter 
-         Caption         =   "/"
-         Height          =   255
-         Index           =   6
-         Left            =   4920
-         TabIndex        =   17
-         Top             =   3120
-         Width           =   255
-      End
-      Begin VB.Label lblMax 
-         Alignment       =   1  'Right Justify
-         Caption         =   "100"
-         Height          =   255
-         Index           =   6
-         Left            =   5040
-         TabIndex        =   16
          Top             =   3120
          Width           =   495
       End
@@ -740,7 +757,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   7
          Left            =   4320
-         TabIndex        =   15
+         TabIndex        =   22
          Top             =   3480
          Width           =   495
       End
@@ -749,7 +766,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   7
          Left            =   4920
-         TabIndex        =   14
+         TabIndex        =   21
          Top             =   3480
          Width           =   255
       End
@@ -759,7 +776,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   7
          Left            =   5160
-         TabIndex        =   13
+         TabIndex        =   20
          Top             =   3480
          Width           =   495
       End
@@ -768,7 +785,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   12
          Left            =   4920
-         TabIndex        =   12
+         TabIndex        =   19
          Top             =   480
          Width           =   255
       End
@@ -778,7 +795,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   15
          Left            =   4320
-         TabIndex        =   75
+         TabIndex        =   76
          Tag             =   "2"
          Top             =   480
          Width           =   495
@@ -789,7 +806,7 @@ Begin VB.Form FrmRegularSetting
          Height          =   255
          Index           =   16
          Left            =   5160
-         TabIndex        =   76
+         TabIndex        =   77
          Tag             =   "6"
          Top             =   480
          Width           =   495
@@ -800,7 +817,7 @@ Begin VB.Form FrmRegularSetting
       Enabled         =   0   'False
       Height          =   375
       Left            =   360
-      TabIndex        =   2
+      TabIndex        =   15
       Tag             =   "14010"
       Top             =   7440
       Width           =   1215
@@ -808,8 +825,8 @@ Begin VB.Form FrmRegularSetting
    Begin VB.CommandButton CancelButton 
       Caption         =   "E&xit"
       Height          =   375
-      Left            =   3960
-      TabIndex        =   1
+      Left            =   5040
+      TabIndex        =   18
       Tag             =   "14030"
       Top             =   7440
       Width           =   1215
@@ -819,7 +836,7 @@ Begin VB.Form FrmRegularSetting
       Enabled         =   0   'False
       Height          =   375
       Left            =   1680
-      TabIndex        =   0
+      TabIndex        =   16
       Tag             =   "14020"
       Top             =   7440
       Width           =   1215
@@ -855,6 +872,7 @@ Dim fso As New FileSystemObject
 Dim lastConfigName As String
 Dim RegularSetting As RegularSettingType
 Dim path As String
+Dim InitialVoltage As Long
 
 Private Sub CancelButton_Click()
     Me.Hide
@@ -874,6 +892,13 @@ Private Sub cboStage_Change()
     For i = 0 To 14 - 1
         txtValue(i).Text = RegularSetting.Value(i)
     Next
+    
+    i = 4
+    lblSign(i).Caption = CStr(RegularSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
+    i = 5
+    lblSign(i).Caption = CStr(RegularSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
+    i = 6
+    lblSign(i).Caption = CStr(RegularSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
     
 End Sub
 
@@ -941,6 +966,7 @@ Dim pFileItemList() As PulseFileItemType
 
     lastConfigName = ""
     RegularSetting = PlcRegularSetting.DefalutStagesParameters
+    InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
     
     path = App.path & "\" & SETTING_PATH & "RegularSetting.config"
 
@@ -968,25 +994,31 @@ Dim pFileItemList() As PulseFileItemType
         
 End Sub
 
-Private Sub txtValue_Change(index As Integer)
+Private Sub txtValue_Change(Index As Integer)
     Dim min As Single
     Dim max As Single
     Dim v As Single
     
-    min = CSng(lblMin(index).Caption)
-    max = CSng(lblMax(index).Caption)
-    If IsNumeric(txtValue(index).Text) Then
+    min = CSng(lblMin(Index).Caption)
+    max = CSng(lblMax(Index).Caption)
+    If IsNumeric(txtValue(Index).Text) Then
     
-        v = CSng(txtValue(index).Text)
+        v = CSng(txtValue(Index).Text)
+        If 4 <= Index And Index <= 6 Then
+            Dim i As Integer
+            i = Index
+            lblSign(i).Caption = CStr(v * InitialVoltage / 100) & "/" & InitialVoltage
+        End If
+        
         If min <= v And v <= max Then
-            txtValue(index).BackColor = &HFFFFFF
-            RegularSetting.Value(index) = CSng(txtValue(index).Text)
+            txtValue(Index).BackColor = &HFFFFFF
+            RegularSetting.Value(Index) = CSng(txtValue(Index).Text)
             cmdSave.Enabled = True
             Exit Sub
         End If
     End If
             
-    txtValue(index).BackColor = &HFF&
+    txtValue(Index).BackColor = &HFF&
 End Sub
 Private Function checkInputedDataValidate() As Boolean
     Dim min As Single
@@ -1008,3 +1040,7 @@ Dim i As Integer
     Next i
     checkInputedDataValidate = True
 End Function
+
+Private Sub txtValue_GotFocus(Index As Integer)
+    txtValue(Index).SelLength = Len(txtValue(Index).Text)
+End Sub

@@ -107,7 +107,8 @@ Type WeldAnalysisDefineType
     TotalRailUsageEnable As Boolean
     X8 As Integer
     TotalRailUsageTotalRail As Long
-    FlashSpeedTimeRange As Long
+    'FlashSpeedTimeRange As Long
+    InitialVoltage As Long
     BoostSpeedTimeRange As Long
     UpsetCurrentMinimum As Long
     UpsetDiameter_Pistonside As Single
