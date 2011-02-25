@@ -1356,7 +1356,7 @@ Dim posStart As Long
 bOk = False
 
 For i = 0 To UBound(EmulateData)
-    If EmulateData(i).WeldStage >= BOOST_STAGE Then
+    If EmulateData(i).WeldStage = BOOST_STAGE Then
         posStart = i
         bOk = True
         Exit For
@@ -1598,33 +1598,33 @@ lblItemData(26).Caption = CInt(r.TotalDuration)
 End Function
 
 
-Private Function updateCueWithCri(Index As Integer, succeed As Boolean)
+Private Function updateCueWithCri(index As Integer, succeed As Boolean)
     If succeed Then
-        lblItem(Index).ForeColor = SUCCEED_COLOR
-        lblItemData(Index).ForeColor = SUCCEED_COLOR
-        lblCriData(Index).ForeColor = SUCCEED_COLOR
+        lblItem(index).ForeColor = SUCCEED_COLOR
+        lblItemData(index).ForeColor = SUCCEED_COLOR
+        lblCriData(index).ForeColor = SUCCEED_COLOR
     Else
-        lblItem(Index).ForeColor = FAIL_COLOR
-        lblItemData(Index).ForeColor = FAIL_COLOR
-        lblCriData(Index).ForeColor = FAIL_COLOR
+        lblItem(index).ForeColor = FAIL_COLOR
+        lblItemData(index).ForeColor = FAIL_COLOR
+        lblCriData(index).ForeColor = FAIL_COLOR
     End If
 
-    lblItem(Index).FontBold = True
-    lblItemData(Index).FontBold = True
-    lblCriData(Index).FontBold = True
+    lblItem(index).FontBold = True
+    lblItemData(index).FontBold = True
+    lblCriData(index).FontBold = True
 End Function
 
-Private Function updateCue(Index As Integer, succeed As Boolean)
+Private Function updateCue(index As Integer, succeed As Boolean)
     If succeed Then
-        lblItem(Index).ForeColor = SUCCEED_COLOR
-        lblItemData(Index).ForeColor = SUCCEED_COLOR
+        lblItem(index).ForeColor = SUCCEED_COLOR
+        lblItemData(index).ForeColor = SUCCEED_COLOR
     Else
-        lblItem(Index).ForeColor = FAIL_COLOR
-        lblItemData(Index).ForeColor = FAIL_COLOR
+        lblItem(index).ForeColor = FAIL_COLOR
+        lblItemData(index).ForeColor = FAIL_COLOR
     End If
 
-    lblItem(Index).FontBold = True
-    lblItemData(Index).FontBold = True
+    lblItem(index).FontBold = True
+    lblItemData(index).FontBold = True
 End Function
 
 Private Sub cmdViewDataDetail_Click()
