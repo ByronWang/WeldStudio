@@ -10,10 +10,37 @@ Const FORGE_STAGE As Integer = 5
 Const SHEAR_STAGE As Integer = 6
 
 
+Const PRE_FALSH As Integer = 1
+Const FLASH_I As Integer = 2
+Const FLASH_II As Integer = 3
+Const FLASH_III As Integer = 4
+Const FLASH_IV As Integer = 5
+Const BOOST_I As Integer = 6
+Const BOOST_II As Integer = 7
+Const UPSET As Integer = 8
+Const FORGE As Integer = 9
+Const SHEAR_I As Integer = 10
+Const SHEAR_II As Integer = 11
+Const SHEAR_III As Integer = 12
+
+
 Public analysisDefine As WeldAnalysisDefineType
 
 
 Public buf(30000) As WeldData
+
+'1       PRE-FALSH
+'2       FLASH-i
+'3       FLASH-II
+'4       FLASH-III
+'5       FLASH-IV
+'6       BOOST-I
+'7       BOOST-II
+'8       UPSET
+'9       FORGE
+'10      SHEAR-I
+'11      SHEAR-II
+'12      SHEAR-III
 
 
 Public Function GetAnalysisDefine()
@@ -92,7 +119,7 @@ Dim sumCurrent As Double
     r.FlashDuration = buf(stopPos + 1).Time - buf(startPos).Time
     
            
-           
+    ' OLD LOGIC
     For i = stopPos To startPos Step -1
         If buf(stopPos).Time - buf(i).Time >= analysisDefine.FlashSpeedTimeRange Then
             Exit For
@@ -100,6 +127,51 @@ Dim sumCurrent As Double
     Next
     
     r.FlashSpeed = (buf(stopPos).Dist - buf(i + 1).Dist) / (buf(stopPos).Time - buf(i + 1).Time)
+    ' OLD LOGIC
+    
+    '   NEW  Logic
+'   Change at 2011-2-24 by wangshilian
+    Dim bStartOK As Boolean
+    Dim bStart As Long
+    Dim bStop As Long
+    
+    
+    bStartOK = False
+    For i = startPos To stopPos
+        If buf(i).PlcStage = FLASH_I Then
+            bStartOK = True
+            bStart = i
+            Exit For
+        End If
+    Next i
+        
+    If bStartOK Then
+        For i = i To stopPos
+            If buf(i).PlcStage <> FLASH_I Then
+                Exit For
+            End If
+        Next i
+        For i = i To stopPos
+            If buf(i).PlcStage <> FLASH_II Then
+                Exit For
+            End If
+        Next i
+        
+        For i = i To stopPos
+            If buf(i).PlcStage <> FLASH_III Then
+                Exit For
+            End If
+        Next i
+        
+        bStop = i
+        r.FlashSpeed = (buf(bStop - 1).Dist - buf(bStart).Dist) / (buf(bStop - 1).Time - buf(bStart).Time)
+    Else
+        r.FlashSpeed = 0
+    End If
+    
+'   End of new logic
+
+
     
     If analysisDefine.FlashEnable Then
     
@@ -137,15 +209,45 @@ Dim sumCurrent As Double
     r.BoostDuration = buf(stopPos + 1).Time - buf(startPos).Time
     
     
-    'TODO
-    For i = stopPos To startPos Step -1
-        If buf(stopPos).Time - buf(i).Time >= 1 Then
+'    'TODO   OLD LOGIC
+'    For i = stopPos To startPos Step -1
+'        If buf(stopPos).Time - buf(i).Time >= 1 Then
+'            Exit For
+'        End If
+'    Next
+'
+'    r.BoostSpeed = (buf(stopPos).Dist - buf(i + 1).Dist) / (buf(stopPos).Time - buf(i + 1).Time)
+
+'   NEW  Logic
+'   Change at 2011-2-24 by wangshilian
+    Dim bStartOK As Boolean
+    Dim bStart As Long
+    Dim bStop As Long
+    
+    
+    bStartOK = False
+    For i = startPos To stopPos
+        If buf(i).PlcStage = BOOST_II Then
+            bStartOK = True
+            bStart = i
             Exit For
         End If
-    Next
+    Next i
+        
+    If bStartOK Then
+        For i = i To stopPos
+            If buf(i).PlcStage <> BOOST_II Then
+                Exit For
+            End If
+        Next i
+        
+        bStop = i
+        r.BoostSpeed = (buf(bStop - 1).Dist - buf(bStart).Dist) / (buf(bStop - 1).Time - buf(bStart).Time)
+    Else
+        r.BoostSpeed = 0
+    End If
     
-    r.BoostSpeed = (buf(stopPos).Dist - buf(i + 1).Dist) / (buf(stopPos).Time - buf(i + 1).Time)
-           
+'   End of new logic
                        
     If analysisDefine.BoostEnable Then
     
@@ -282,12 +384,25 @@ Dim i As Integer
 Dim force As Single
 Dim sumForce As Double
 
-    For i = stopPos To startPos Step -1
-        force = PlcAnalysiser.toForce(buf(i).PsiUpset, buf(i).PsiOpen)
-        sumForce = sumForce + force
-    Next
-            
-    r.ForgeAverageForce = CInt(sumForce / (stopPos - startPos + 1))
+' OLD LOGIC
+'    For i = stopPos To startPos Step -1
+'        force = PlcAnalysiser.toForce(buf(i).PsiUpset, buf(i).PsiOpen)
+'        sumForce = sumForce + force
+'    Next
+'
+'    r.ForgeAverageForce = CInt(sumForce / (stopPos - startPos + 1))
+
+    If stopPos - startPos > 3 Then
+        i = startPos
+        sumForce = PlcAnalysiser.toForce(buf(i).PsiUpset, buf(i).PsiOpen)
+        i = i + 1
+        sumForce = sumForce + PlcAnalysiser.toForce(buf(i).PsiUpset, buf(i).PsiOpen)
+        i = i + 1
+        sumForce = sumForce + PlcAnalysiser.toForce(buf(i).PsiUpset, buf(i).PsiOpen)
+        r.ForgeAverageForce = CInt(sumForce / 3)
+    Else
+        r.ForgeAverageForce = 0
+    End If
     
     If analysisDefine.ForgeEnable Then
         If analysisDefine.ForgeMin > r.ForgeAverageForce Or r.ForgeAverageForce > analysisDefine.ForgeMax Then
