@@ -69,6 +69,9 @@ Begin VB.MDIForm WeldMDIForm
    Begin VB.Menu mnuHelp 
       Caption         =   "&Help"
       Tag             =   "10400"
+      Begin VB.Menu menuUserGuide 
+         Caption         =   "&User's Guide"
+      End
       Begin VB.Menu mnuAbout 
          Caption         =   "&About"
          Tag             =   "10410"
@@ -98,6 +101,11 @@ End Sub
 
 Private Sub MDIForm_Unload(Cancel As Integer)
     PLCDrv.UninitPLCConection
+End Sub
+
+Private Sub menuUserGuide_Click()
+    MsgBox "user's guide"
+    Shell App.path & "\" & "UserGuide.doc", vbMaximizedFocus
 End Sub
 
 Private Sub mnuTools_Click()
