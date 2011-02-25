@@ -104,8 +104,8 @@ Private Sub MDIForm_Unload(Cancel As Integer)
 End Sub
 
 Private Sub menuUserGuide_Click()
-    MsgBox "user's guide"
-    Shell App.path & "\" & "UserGuide.doc", vbMaximizedFocus
+   MsgBox "user's guide"
+   ' Shell App.path & "\" & "UserGuide.doc"
 End Sub
 
 Private Sub mnuTools_Click()
