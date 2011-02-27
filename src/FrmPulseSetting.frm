@@ -2,16 +2,16 @@ VERSION 5.00
 Begin VB.Form FrmPulseSetting 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Weld parameter for Pulse Process"
-   ClientHeight    =   7680
+   ClientHeight    =   7800
    ClientLeft      =   2760
    ClientTop       =   3750
-   ClientWidth     =   6660
+   ClientWidth     =   6615
    Icon            =   "FrmPulseSetting.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7680
-   ScaleWidth      =   6660
+   ScaleHeight     =   7800
+   ScaleWidth      =   6615
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  '所有者中心
    Tag             =   "13000"
@@ -23,7 +23,7 @@ Begin VB.Form FrmPulseSetting
       TabIndex        =   50
       Tag             =   "13200"
       Top             =   5160
-      Width           =   6135
+      Width           =   5895
       Begin VB.TextBox txtValueGeneral 
          Alignment       =   1  'Right Justify
          Height          =   270
@@ -227,7 +227,7 @@ Begin VB.Form FrmPulseSetting
       Left            =   1680
       TabIndex        =   15
       Tag             =   "13020"
-      Top             =   7200
+      Top             =   7320
       Width           =   1215
    End
    Begin VB.ComboBox cboFileName 
@@ -240,10 +240,10 @@ Begin VB.Form FrmPulseSetting
    Begin VB.CommandButton CancelButton 
       Caption         =   "E&xit"
       Height          =   375
-      Left            =   5280
+      Left            =   5040
       TabIndex        =   17
       Tag             =   "13030"
-      Top             =   7200
+      Top             =   7320
       Width           =   1215
    End
    Begin VB.CommandButton cmdSave 
@@ -252,7 +252,7 @@ Begin VB.Form FrmPulseSetting
       Left            =   360
       TabIndex        =   14
       Tag             =   "13010"
-      Top             =   7200
+      Top             =   7320
       Width           =   1215
    End
    Begin VB.Frame Frame1 
@@ -263,7 +263,7 @@ Begin VB.Form FrmPulseSetting
       TabIndex        =   16
       Tag             =   "13100"
       Top             =   960
-      Width           =   6135
+      Width           =   5895
       Begin VB.ComboBox cboStage 
          Height          =   300
          ItemData        =   "FrmPulseSetting.frx":000C
@@ -893,68 +893,68 @@ Dim pFileItemList() As PulseFileItemType
 '    Debug.Print txtValue(1).hWnd
 End Sub
 
-Private Sub txtValue_Change(Index As Integer)
+Private Sub txtValue_Change(index As Integer)
     Dim min As Single
     Dim max As Single
     Dim v As Single
     
-    min = CSng(lblMin(Index).Caption)
-    max = CSng(lblMax(Index).Caption)
+    min = CSng(lblMin(index).Caption)
+    max = CSng(lblMax(index).Caption)
         
-    If IsNumeric(txtValue(Index).Text) Then
-        v = CSng(txtValue(Index).Text)
+    If IsNumeric(txtValue(index).Text) Then
+        v = CSng(txtValue(index).Text)
         
         
-        If Index = 1 Then
+        If index = 1 Then
             Dim i As Integer
-            i = Index
+            i = index
             lblSign(i).Caption = CStr(v * InitialVoltage / 100) & "/" & InitialVoltage
         End If
         
         If min <= v And v <= max Then
-            txtValue(Index).BackColor = &HFFFFFF
-            PulseSetting.Stages(cboStage.ListIndex).Value(Index) = CDbl(txtValue(Index).Text)
+            txtValue(index).BackColor = &HFFFFFF
+            PulseSetting.Stages(cboStage.ListIndex).Value(index) = CDbl(txtValue(index).Text)
             cmdSave.Enabled = True
             Exit Sub
         End If
     End If
             
-    txtValue(Index).BackColor = &HFF&
+    txtValue(index).BackColor = &HFF&
     
     'txtValue(index).Text = PulseSetting.Stages(cboStage.ListIndex).Value(index)
     
 End Sub
 
-Private Sub txtValueGeneral_Change(Index As Integer)
+Private Sub txtValueGeneral_Change(index As Integer)
     Dim min As Single
     Dim max As Single
     Dim v As Single
     
-    min = CSng(lblMinGeneral(Index).Caption)
-    max = CSng(lblMaxGeneral(Index).Caption)
-    If IsNumeric(txtValueGeneral(Index).Text) Then
+    min = CSng(lblMinGeneral(index).Caption)
+    max = CSng(lblMaxGeneral(index).Caption)
+    If IsNumeric(txtValueGeneral(index).Text) Then
     
-        v = CSng(txtValueGeneral(Index).Text)
+        v = CSng(txtValueGeneral(index).Text)
         If min <= v And v <= max Then
-            txtValueGeneral(Index).BackColor = &HFFFFFF
-            PulseSetting.General.Value(Index) = CSng(txtValueGeneral(Index).Text)
+            txtValueGeneral(index).BackColor = &HFFFFFF
+            PulseSetting.General.Value(index) = CSng(txtValueGeneral(index).Text)
             cmdSave.Enabled = True
             Exit Sub
         End If
     End If
             
-    txtValueGeneral(Index).BackColor = &HFF&
+    txtValueGeneral(index).BackColor = &HFF&
     
     'txtValueGeneral(index).Text = PulseSetting.General.Value(index)
     
 End Sub
 
 
-Private Sub txtValue_GotFocus(Index As Integer)
-    txtValue(Index).SelLength = Len(txtValue(Index).Text)
+Private Sub txtValue_GotFocus(index As Integer)
+    txtValue(index).SelLength = Len(txtValue(index).Text)
 End Sub
 
 
-Private Sub txtValueGeneral_GotFocus(Index As Integer)
-    txtValue(Index).SelLength = Len(txtValue(Index).Text)
+Private Sub txtValueGeneral_GotFocus(index As Integer)
+    txtValue(index).SelLength = Len(txtValue(index).Text)
 End Sub

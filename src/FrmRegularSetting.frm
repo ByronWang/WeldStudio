@@ -2,16 +2,16 @@ VERSION 5.00
 Begin VB.Form FrmRegularSetting 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Weld parameter for Regular Process"
-   ClientHeight    =   7920
+   ClientHeight    =   7800
    ClientLeft      =   2760
    ClientTop       =   3750
-   ClientWidth     =   6525
+   ClientWidth     =   6615
    Icon            =   "FrmRegularSetting.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7920
-   ScaleWidth      =   6525
+   ScaleHeight     =   7800
+   ScaleWidth      =   6615
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  '所有者中心
    Tag             =   "14000"
@@ -24,12 +24,12 @@ Begin VB.Form FrmRegularSetting
    End
    Begin VB.Frame Frame1 
       Caption         =   "Weld Parameters"
-      Height          =   6255
+      Height          =   6135
       Index           =   0
       Left            =   360
       TabIndex        =   17
       Tag             =   "14100"
-      Top             =   1080
+      Top             =   960
       Width           =   5895
       Begin VB.TextBox txtValue 
          Alignment       =   1  'Right Justify
@@ -819,7 +819,7 @@ Begin VB.Form FrmRegularSetting
       Left            =   360
       TabIndex        =   15
       Tag             =   "14010"
-      Top             =   7440
+      Top             =   7320
       Width           =   1215
    End
    Begin VB.CommandButton CancelButton 
@@ -828,7 +828,7 @@ Begin VB.Form FrmRegularSetting
       Left            =   5040
       TabIndex        =   18
       Tag             =   "14030"
-      Top             =   7440
+      Top             =   7320
       Width           =   1215
    End
    Begin VB.CommandButton cmdLoad 
@@ -838,7 +838,7 @@ Begin VB.Form FrmRegularSetting
       Left            =   1680
       TabIndex        =   16
       Tag             =   "14020"
-      Top             =   7440
+      Top             =   7320
       Width           =   1215
    End
    Begin VB.Label lblSign 
@@ -994,31 +994,31 @@ Dim pFileItemList() As PulseFileItemType
         
 End Sub
 
-Private Sub txtValue_Change(Index As Integer)
+Private Sub txtValue_Change(index As Integer)
     Dim min As Single
     Dim max As Single
     Dim v As Single
     
-    min = CSng(lblMin(Index).Caption)
-    max = CSng(lblMax(Index).Caption)
-    If IsNumeric(txtValue(Index).Text) Then
+    min = CSng(lblMin(index).Caption)
+    max = CSng(lblMax(index).Caption)
+    If IsNumeric(txtValue(index).Text) Then
     
-        v = CSng(txtValue(Index).Text)
-        If 4 <= Index And Index <= 6 Then
+        v = CSng(txtValue(index).Text)
+        If 4 <= index And index <= 6 Then
             Dim i As Integer
-            i = Index
+            i = index
             lblSign(i).Caption = CStr(v * InitialVoltage / 100) & "/" & InitialVoltage
         End If
         
         If min <= v And v <= max Then
-            txtValue(Index).BackColor = &HFFFFFF
-            RegularSetting.Value(Index) = CSng(txtValue(Index).Text)
+            txtValue(index).BackColor = &HFFFFFF
+            RegularSetting.Value(index) = CSng(txtValue(index).Text)
             cmdSave.Enabled = True
             Exit Sub
         End If
     End If
             
-    txtValue(Index).BackColor = &HFF&
+    txtValue(index).BackColor = &HFF&
 End Sub
 Private Function checkInputedDataValidate() As Boolean
     Dim min As Single
@@ -1041,6 +1041,6 @@ Dim i As Integer
     checkInputedDataValidate = True
 End Function
 
-Private Sub txtValue_GotFocus(Index As Integer)
-    txtValue(Index).SelLength = Len(txtValue(Index).Text)
+Private Sub txtValue_GotFocus(index As Integer)
+    txtValue(index).SelLength = Len(txtValue(index).Text)
 End Sub

@@ -187,10 +187,21 @@ Dim j As Integer
 
 Dim handle As Long
 
+Dim InitialVoltage As Long
+InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
+
 For i = 0 To 7
-    For j = 0 To 6
-        bufSingle(j) = PulseSetting.Stages(j).Value(i)
-    Next
+    If i = 1 Then
+        For j = 0 To 6
+            bufSingle(j) = PulseSetting.Stages(j).Value(i) * InitialVoltage / 100 'Voltage
+        Next j
+    Else
+        For j = 0 To 6
+            bufSingle(j) = PulseSetting.Stages(j).Value(i)
+        Next
+    End If
+    
+    
 
     If UtlServer.Define(handle, def(i)) = 0 Then
         status = UtlServer.WriteSingle(handle, bufSingle, IO_STATUS, 1000)
@@ -241,10 +252,20 @@ def = "F60:0,15,FLOAT,MODIFY,AB:LOCAL,1,SLC500,1" 'General
 Dim j As Integer
 Dim handle As Long
 
+Dim InitialVoltage As Long
+InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
+
 bufSingle(0) = 6
 For j = 1 To 14
     bufSingle(j) = RegularSetting.Value(j - 1)
 Next
+
+j = 4
+bufSingle(j) = RegularSetting.Value(j - 1) * InitialVoltage / 100 'Voltage
+j = 5
+bufSingle(j) = RegularSetting.Value(j - 1) * InitialVoltage / 100 'Voltage
+j = 6
+bufSingle(j) = RegularSetting.Value(j - 1) * InitialVoltage / 100 'Voltage
 
 If UtlServer.Define(handle, def) = 0 Then
     status = UtlServer.WriteSingle(handle, bufSingle, IO_STATUS, 1000)
