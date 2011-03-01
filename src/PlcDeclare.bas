@@ -59,18 +59,55 @@ End Type
 
 
 Type FileHeader
-     'H1(&HC14 - 1) As Byte
-     H1H(&H90A - 1) As Byte
-     ParamName As String * &H19
-     H1L(&H2EA - 1 + 7) As Byte
-     filename As String * &H6
-     Date As String * &HC
-     H3(&HF4 - 1) As Byte
-     'H4(&H8 - 1) As Byte
-     Time As String * 8
-     H5(&HFA - 1) As Byte
+     X00 As String * 1
+     X01 As Byte
+     X02 As String * 1
+     X03 As Byte
+     X04 As String * 4
+     X08 As Byte
+     X09 As Byte
+     CompanyName As String * &HB ' X10
+     X16 As String * &HB
+     
+     X20 As String * &H8E0
+     
+     
+     X900 As String * &HA
+     UnitName As String * &H18
+     X922 As String * &HE
+     
+     X930 As String * &HD0
+     
+     Xa00 As String * &HA
+     Location As String * &H9
+     Xa14 As String * &HD
+     
+     Xa20 As String * &H1F0
+
+     
+     Xc10 As String * &H4
+     filename As String * &H5
+     Xc1a As Byte
+     Date As String * &HB
+     Xc25 As String * &HB
+     
+     XC30 As String * &HE0
+     
+     
+     Xd10 As String * &HA
+     Time As String * &H8
+     Xd22 As String * &HE
+     
+     H5(&HEC - 1) As Byte
      RecordCount As Long
-     H6(&H630 - 1) As Byte
+     XE1E As String * 2
+     XE20 As String * &H5F0
+     X1410 As String * &HC
+     BaseRed As String * &H7
+     X1423 As String * &HD
+     H6(&H1E - 1) As Byte
+
+
 End Type
 
 
