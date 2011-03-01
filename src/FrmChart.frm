@@ -1466,12 +1466,28 @@ For i = UBound(EmulateData) + 1 To count
 MyData(0, i + 1) = CInt(((i / count) * TimeMax)) & Space(1)   '注意一定要后面的space(1)，这样做的目的是为了自动显示成标签(字符串类型)
 Next
 
+Dim lastv As Integer
+
+
+' issue from american 7
+Dim step As Integer
+step = 2
+
 i = 0
+lastv = 0
 While i <= UBound(EmulateData) And i <= count
-    MyData(1, i + 1) = PlcAnalysiser.toForce(EmulateData(i).PsiUpset, EmulateData(i).PsiOpen)
-    MyData(2, i + 1) = EmulateData(i).Volt
-    MyData(3, i + 1) = EmulateData(i).Amp
-    MyData(4, i + 1) = EmulateData(i).Dist
+    If i = CInt(i / step) * step Then
+        lastv = i
+        MyData(1, i + 1) = PlcAnalysiser.toForce(EmulateData(i).PsiUpset, EmulateData(i).PsiOpen)
+        MyData(2, i + 1) = EmulateData(i).Volt
+        MyData(3, i + 1) = EmulateData(i).Amp
+        MyData(4, i + 1) = EmulateData(i).Dist
+    Else
+        MyData(1, i + 1) = PlcAnalysiser.toForce(EmulateData(lastv).PsiUpset, EmulateData(lastv).PsiOpen)
+        MyData(2, i + 1) = EmulateData(lastv).Volt
+        MyData(3, i + 1) = EmulateData(lastv).Amp
+        MyData(4, i + 1) = EmulateData(i).Dist
+    End If
     i = i + 1
 Wend
 

@@ -56,7 +56,7 @@ Begin VB.Form FrmGraph
       End
    End
    Begin VB.Timer TimerShow 
-      Interval        =   80
+      Interval        =   100
       Left            =   9720
       Top             =   3240
    End
