@@ -66,6 +66,12 @@ Begin VB.MDIForm WeldMDIForm
       Tag             =   "10300"
       WindowList      =   -1  'True
    End
+   Begin VB.Menu mnuSystem 
+      Caption         =   "&System"
+      Begin VB.Menu mnuShutdown 
+         Caption         =   "Shut&down"
+      End
+   End
    Begin VB.Menu mnuHelp 
       Caption         =   "&Help"
       Tag             =   "10400"
@@ -116,6 +122,10 @@ End Sub
 Private Sub menuUserGuide_Click()
    MsgBox "user's guide"
    ' Shell App.path & "\" & "UserGuide.doc"
+End Sub
+
+Private Sub mnuShutdown_Click()
+    Shell "Shutdown -s -f -t 1"
 End Sub
 
 Private Sub mnuTools_Click()
