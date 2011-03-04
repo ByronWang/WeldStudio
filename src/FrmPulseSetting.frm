@@ -47,7 +47,7 @@ Begin VB.Form FrmPulseSetting
       Begin VB.TextBox txtValueGeneral 
          Alignment       =   1  'Right Justify
          Height          =   270
-         Index           =   1
+         Index           =   0
          Left            =   2640
          TabIndex        =   11
          Text            =   "0.00"
@@ -57,7 +57,7 @@ Begin VB.Form FrmPulseSetting
       Begin VB.TextBox txtValueGeneral 
          Alignment       =   1  'Right Justify
          Height          =   270
-         Index           =   0
+         Index           =   1
          Left            =   2640
          TabIndex        =   10
          Text            =   "0.00"
@@ -126,7 +126,7 @@ Begin VB.Form FrmPulseSetting
          Alignment       =   2  'Center
          Caption         =   "3.0"
          Height          =   255
-         Index           =   1
+         Index           =   0
          Left            =   5160
          TabIndex        =   60
          Top             =   720
@@ -145,7 +145,7 @@ Begin VB.Form FrmPulseSetting
          Alignment       =   2  'Center
          Caption         =   "0.00"
          Height          =   255
-         Index           =   1
+         Index           =   0
          Left            =   4320
          TabIndex        =   58
          Top             =   720
@@ -155,7 +155,7 @@ Begin VB.Form FrmPulseSetting
          Alignment       =   2  'Center
          Caption         =   "20.0"
          Height          =   255
-         Index           =   0
+         Index           =   1
          Left            =   5160
          TabIndex        =   57
          Top             =   360
@@ -174,7 +174,7 @@ Begin VB.Form FrmPulseSetting
          Alignment       =   2  'Center
          Caption         =   "9"
          Height          =   255
-         Index           =   0
+         Index           =   1
          Left            =   4320
          TabIndex        =   55
          Top             =   360
@@ -207,7 +207,7 @@ Begin VB.Form FrmPulseSetting
          Left            =   240
          TabIndex        =   52
          Tag             =   "20"
-         Top             =   720
+         Top             =   360
          Width           =   2415
       End
       Begin VB.Label lblLabel 
@@ -217,7 +217,7 @@ Begin VB.Form FrmPulseSetting
          Left            =   240
          TabIndex        =   51
          Tag             =   "10"
-         Top             =   360
+         Top             =   720
          Width           =   2415
       End
    End
