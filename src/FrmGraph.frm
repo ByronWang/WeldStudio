@@ -730,19 +730,20 @@ End Function
 
 
 Function SaveData()
-Dim fh As FileHeader
+Dim fh1 As FileHeader1
+Dim fh2 As FileHeader2
 Dim WeldFile As String
     WeldFile = toWeldNumberShowModel(weldSerailNumber)
-    fh.Date = Date
-    fh.Time = Time
-    fh.filename = WeldFile
-    fh.ParamName = lblParameter.Caption
+    fh2.Date = Date
+    fh2.Time = Time
+    fh2.filename = WeldFile
+    fh2.BaseRed = lblParameter.Caption
         
     If Not fso.FolderExists(path & "\" & Format(Date, "YYYY-MM-DD")) Then
         fso.CreateFolder (path & "\" & Format(Date, "YYYY-MM-DD"))
     End If
     
-    Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & WeldFile & ".WLD", fh, rBuf, rIndex, analysisDefine, analysisResult)
+    Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & WeldFile & ".WLD", fh1, fh2, rBuf, rIndex, analysisDefine, analysisResult)
 
     Dim wn As Integer
     wn = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)

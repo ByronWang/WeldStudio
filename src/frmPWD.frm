@@ -27,24 +27,26 @@ Begin VB.Form FrmPWD
       IMEMode         =   3  'DISABLE
       Left            =   480
       PasswordChar    =   "*"
-      TabIndex        =   2
+      TabIndex        =   0
       Top             =   360
       Width           =   3615
    End
    Begin VB.CommandButton CancelButton 
+      Cancel          =   -1  'True
       Caption         =   "Cancel"
       Height          =   375
       Left            =   4680
-      TabIndex        =   1
+      TabIndex        =   2
       Tag             =   "24020"
       Top             =   600
       Width           =   1215
    End
    Begin VB.CommandButton OKButton 
       Caption         =   "OK"
+      Default         =   -1  'True
       Height          =   375
       Left            =   4680
-      TabIndex        =   0
+      TabIndex        =   1
       Tag             =   "24010"
       Top             =   120
       Width           =   1215
@@ -71,7 +73,7 @@ Private Sub CancelButton_Click()
 End Sub
 
 Private Sub cmdChangePwd_Click()
-    frmChangePWD.Show vbModal, Me
+    FrmChangePWD.Show vbModal, Me
 End Sub
 
 Private Sub Form_Load()

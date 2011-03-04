@@ -58,7 +58,7 @@ Type Record
 End Type
 
 
-Type FileHeader
+Type FileHeader1
      X00 As String * 1
      X01 As Byte
      X02 As String * 1
@@ -66,26 +66,30 @@ Type FileHeader
      X04 As String * 4
      X08 As Byte
      X09 As Byte
-     CompanyName As String * &HB ' X10
-     X16 As String * &HB
+     CompanyName As String * &H20 ' X10
+
      
-     X20 As String * &H8E0
+     X20 As String * &H8D6
      
      
      X900 As String * &HA
-     UnitName As String * &H18
-     X922 As String * &HE
+     UnitName As String * &H1A
+     X922 As String * &HC
      
      X930 As String * &HD0
      
      Xa00 As String * &HA
-     Location As String * &H9
-     Xa14 As String * &HD
+     Location As String * &H10
+     Xa14 As String * &H6
      
      Xa20 As String * &H1F0
 
      
      Xc10 As String * &H4
+
+End Type
+
+Type FileHeader2
      filename As String * &H5
      Xc1a As Byte
      Date As String * &HB
@@ -102,13 +106,14 @@ Type FileHeader
      RecordCount As Long
      XE1E As String * 2
      XE20 As String * &H5F0
+
      X1410 As String * &HC
      BaseRed As String * &H7
      X1423 As String * &HD
+
      H6(&H1E - 1) As Byte
-
-
 End Type
+
 
 
 
@@ -235,7 +240,8 @@ End Type
 
 
 Type FileR
-    header As FileHeader
+    header1 As FileHeader1
+    header2 As FileHeader2
     data() As Record
     analysisDefine As WeldAnalysisDefineType
     analysisResult As WeldAnalysisResultType

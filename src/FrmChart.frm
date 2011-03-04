@@ -1432,24 +1432,24 @@ PlcRes.LoadResFor Me
 
 Dim i As Integer
 
-ReDim buf(fr.header.RecordCount - 1)
+ReDim buf(fr.header2.RecordCount - 1)
 
-For i = 0 To fr.header.RecordCount - 1
+For i = 0 To fr.header2.RecordCount - 1
     buf(i) = fr.data(i).data
 Next
 
 
     Call setChart(buf)
     
-    lblCompany.Caption = Trim(fr.header.CompanyName)
-    lblParam.Caption = Trim(fr.header.filename)
-    lblProgram.Caption = Trim(fr.header.BaseRed)
+    lblCompany.Caption = Trim(fr.header1.CompanyName)
+    lblParam.Caption = Trim(fr.header2.filename)
+    lblProgram.Caption = Trim(fr.header2.BaseRed)
     
-    lblDate.Caption = Trim(fr.header.Date)
-    lblTime.Caption = Trim(fr.header.Time)
+    lblDate.Caption = Trim(fr.header2.Date)
+    lblTime.Caption = Trim(fr.header2.Time)
     
-    lblUnit.Caption = "UNIT:" & Trim(fr.header.UnitName)
-    lblLocation.Caption = "LOCATION:" & Trim(fr.header.Location)
+    lblUnit.Caption = "UNIT:" & Trim(fr.header1.UnitName)
+    lblLocation.Caption = "LOCATION:" & Trim(fr.header1.Location)
     
     Call anaylize(fr.analysisDefine, fr.analysisResult)
 

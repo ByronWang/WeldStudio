@@ -64,7 +64,7 @@ Else
 End If
 
 '   Time
-entry = entry & vbTab & f.header.Time
+entry = entry & vbTab & f.header2.Time
 '   Duration
 entry = entry & vbTab & f.analysisResult.TotalDuration
 '   UPSET
