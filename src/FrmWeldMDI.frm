@@ -97,6 +97,16 @@ PlcAnalysiser.GetAnalysisDefine
     PLCDrv.UninitPLCConection
     
     
+    If GetSetting(App.EXEName, "UserData", "CompanyName", "") = "" Or _
+        GetSetting(App.EXEName, "UserData", "Unit", "") = "" Or _
+        GetSetting(App.EXEName, "UserData", "Location", "") = "" Then
+        
+        Call mnuOptions_Click
+        
+        
+    End If
+    
+    
 End Sub
 
 Private Sub MDIForm_Unload(Cancel As Integer)

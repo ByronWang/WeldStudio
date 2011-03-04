@@ -734,6 +734,14 @@ Dim fh1 As FileHeader1
 Dim fh2 As FileHeader2
 Dim WeldFile As String
     WeldFile = toWeldNumberShowModel(weldSerailNumber)
+    
+    
+    fh1.CompanyName = GetSetting(App.EXEName, "UserData", "CompanyName", "")
+    fh1.UnitName = GetSetting(App.EXEName, "UserData", "Unit", "")
+    fh1.Location = GetSetting(App.EXEName, "UserData", "Location", "")
+        
+        
+    
     fh2.Date = Date
     fh2.Time = Time
     fh2.filename = WeldFile
