@@ -24,10 +24,10 @@ Const SHEAR_II As Integer = 11
 Const SHEAR_III As Integer = 12
 
 
-Public analysisDefine As WeldAnalysisDefineType
+Private analysisDefine As WeldAnalysisDefineType
 
 
-Public buf(30000) As WeldData
+Private buf(30000) As WeldData
 
 '1       PRE-FALSH
 '2       FLASH-i
@@ -43,7 +43,7 @@ Public buf(30000) As WeldData
 '12      SHEAR-III
 
 
-Public Function GetAnalysisDefine()
+Private Function GetAnalysisDefine()
 
 analysisDefine.FlashEnable = GetSetting(App.EXEName, "AnalysisDefine", "FlashEnable", 1)
 analysisDefine.BoostEnable = GetSetting(App.EXEName, "AnalysisDefine", "BoostEnable", 1)
@@ -78,7 +78,7 @@ analysisDefine.UpsetDiameter_Rodside = CSng(GetSetting(App.EXEName, "AnalysisDef
 
 End Function
 
-Public Function anaPreFlash(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
+Private Function anaPreFlash(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
    
 Dim i As Integer
 
@@ -100,7 +100,7 @@ Dim sumCurrent As Double
 End Function
 
 
-Public Function anaFlash(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
+Private Function anaFlash(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
    
 Dim i As Integer
 
@@ -192,7 +192,7 @@ End Function
 
 
 
-Public Function anaBoost(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
+Private Function anaBoost(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
     
 Dim i As Integer
 Dim sumVol As Double
@@ -323,7 +323,7 @@ End Function
 
 
 
-Public Function anaUpset(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
+Private Function anaUpset(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
     
 Dim i As Integer
 Dim maxCurrent As Long
@@ -377,7 +377,7 @@ End Function
 
 
 
-Public Function anaForge(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
+Private Function anaForge(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
    
 Dim i As Integer
 
@@ -395,11 +395,11 @@ Dim sumForce As Double
 
     If stopPos - startPos > 3 Then
         i = startPos
-        sumForce = PlcAnalysiser.toForce(buf(i).PsiUpset, buf(i).PsiOpen)
+        sumForce = PlcAnalysiser.toForce(buf(i).PsiUpset, buf(i).PsiOpen, analysisDefine)
         i = i + 1
-        sumForce = sumForce + PlcAnalysiser.toForce(buf(i).PsiUpset, buf(i).PsiOpen)
+        sumForce = sumForce + PlcAnalysiser.toForce(buf(i).PsiUpset, buf(i).PsiOpen, analysisDefine)
         i = i + 1
-        sumForce = sumForce + PlcAnalysiser.toForce(buf(i).PsiUpset, buf(i).PsiOpen)
+        sumForce = sumForce + PlcAnalysiser.toForce(buf(i).PsiUpset, buf(i).PsiOpen, analysisDefine)
         r.ForgeAverageForce = CInt(sumForce / 3)
     Else
         r.ForgeAverageForce = 0
@@ -418,7 +418,7 @@ Dim sumForce As Double
     anaForge = r
 End Function
 
-Public Function anaAll(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
+Private Function anaAll(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
 Dim i As Integer
 
           
@@ -456,7 +456,7 @@ End Function
 
 
 
-Public Function ANALYSIS(buf() As WeldData, count As Integer) As WeldAnalysisResultType
+Public Function Analysis(buf() As WeldData, count As Integer) As WeldAnalysisResultType
 
 Call GetAnalysisDefine
 
@@ -564,20 +564,20 @@ Next
  
 
 
-ANALYSIS = r
+Analysis = r
 Exit Function
 OVER:
-    ANALYSIS = r
+    Analysis = r
 End Function
 
 
-Public Function toForce(Pupset As Long, Popen As Long) As Double
+Public Function toForce(Pupset As Long, Popen As Long, anaDefine As WeldAnalysisDefineType) As Double
 
     Dim Dpiston As Double
     Dim Drod As Double
     'Call GetAnalysisDefine
-    Dpiston = analysisDefine.UpsetDiameter_Pistonside
-    Drod = analysisDefine.UpsetDiameter_Rodside
+    Dpiston = anaDefine.UpsetDiameter_Pistonside
+    Drod = anaDefine.UpsetDiameter_Rodside
     
 '    toForce = 3.1415926 * ( _
 '        0.0703 * Pupset * ((Dpiston / 2) * (Dpiston / 2) - (Drod / 2) * (Drod / 2)) - _

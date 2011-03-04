@@ -1517,7 +1517,7 @@ Wend
 
 For i = posStart To pos
 
-    MyData(1, i + 1 - posStart) = PlcAnalysiser.toForce(EmulateData(i).PsiUpset, EmulateData(i).PsiOpen)
+    MyData(1, i + 1 - posStart) = PlcAnalysiser.toForce(EmulateData(i).PsiUpset, EmulateData(i).PsiOpen, fr.analysisDefine)
     MyData(2, i + 1 - posStart) = EmulateData(i).Volt
     MyData(3, i + 1 - posStart) = EmulateData(i).Amp
     MyData(4, i + 1 - posStart) = EmulateData(i).Dist
@@ -1589,12 +1589,12 @@ lastv = 0
 While i <= UBound(EmulateData) And i <= count
     If i = CInt(i / step) * step Then
         lastv = i
-        MyData(1, i + 1) = PlcAnalysiser.toForce(EmulateData(i).PsiUpset, EmulateData(i).PsiOpen)
+        MyData(1, i + 1) = PlcAnalysiser.toForce(EmulateData(i).PsiUpset, EmulateData(i).PsiOpen, fr.analysisDefine)
         MyData(2, i + 1) = EmulateData(i).Volt
         MyData(3, i + 1) = EmulateData(i).Amp
         MyData(4, i + 1) = EmulateData(i).Dist
     Else
-        MyData(1, i + 1) = PlcAnalysiser.toForce(EmulateData(lastv).PsiUpset, EmulateData(lastv).PsiOpen)
+        MyData(1, i + 1) = PlcAnalysiser.toForce(EmulateData(lastv).PsiUpset, EmulateData(lastv).PsiOpen, fr.analysisDefine)
         MyData(2, i + 1) = EmulateData(lastv).Volt
         MyData(3, i + 1) = EmulateData(lastv).Amp
         MyData(4, i + 1) = EmulateData(i).Dist
@@ -1804,7 +1804,7 @@ For i = 0 To UBound(EmulateData)
     entry = entry & vbTab & data.Volt
     entry = entry & vbTab & data.PsiUpset
     entry = entry & vbTab & data.PsiOpen
-    entry = entry & vbTab & Format(PlcAnalysiser.toForce(data.PsiUpset, data.PsiOpen), "##0")
+    entry = entry & vbTab & Format(PlcAnalysiser.toForce(data.PsiUpset, data.PsiOpen, fr.analysisDefine), "##0")
     entry = entry & vbTab & Format(data.Time, "##0.00")
     sa(i) = entry
         

@@ -95,8 +95,6 @@ Private Sub MDIForm_Load()
 
 ' Resource
 PlcRes.LoadResFor Me
-
-PlcAnalysiser.GetAnalysisDefine
     
     PLCDrv.InitPLCConnection
     mnuConnect.Enabled = PLCDrv.beActive

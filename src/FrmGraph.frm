@@ -576,7 +576,7 @@ If Amp < 0 Then
     Amp = 0
 End If
 
-psi = PlcAnalysiser.toForce(wm.data.PsiUpset, wm.data.PsiOpen)
+psi = PlcAnalysiser.toForce(wm.data.PsiUpset, wm.data.PsiOpen, analysisDefine)
 If psi < 0 Then
     psi = 0
 End If
