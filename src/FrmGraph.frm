@@ -683,7 +683,12 @@ Else
         
         analysisResult = PlcAnalysiser.ANALYSIS(rBuf, rIndex)
         
-        SaveData
+        If rBuf(rIndex - 2).WeldStage >= 6 Then
+            SaveData
+        ElseIf GetSetting(App.EXEName, "Weld", "RecordInterrupts", 0) = 1 Then
+            SaveData
+        End If
+
      
 
         If analysisResult.succeed Then

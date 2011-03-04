@@ -102,11 +102,11 @@ Begin VB.Form FrmOption
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "Label2"
-      Tab(6).Control(1)=   "Frame4"
+      Tab(6).Control(0)=   "cmdReset"
+      Tab(6).Control(1)=   "chkRecordInterrupts"
       Tab(6).Control(2)=   "txtWeldNumber"
-      Tab(6).Control(3)=   "chkRecordInterrupts"
-      Tab(6).Control(4)=   "cmdReset"
+      Tab(6).Control(3)=   "Frame4"
+      Tab(6).Control(4)=   "Label2"
       Tab(6).ControlCount=   5
       Begin VB.Frame Frame7 
          Caption         =   "Unit Info"
@@ -347,7 +347,6 @@ Begin VB.Form FrmOption
       End
       Begin VB.CheckBox chkRecordInterrupts 
          Caption         =   "Record Interrupts"
-         Enabled         =   0   'False
          Height          =   375
          Left            =   -70680
          TabIndex        =   5
@@ -2105,6 +2104,8 @@ Dim WeldAnalysisEnable_Data(19) As Single
 Dim StartRecording As Integer
 Dim StartRecodingParam(5) As Single
 
+Dim isRecordInterrupts As Boolean
+
 Dim LANGUAGE As String
 Dim IsSimulate As Integer
 Dim SimulateFile As String
@@ -2114,26 +2115,25 @@ LANGUAGE = cboLanguage.Text
 End Sub
 
 
-Private Sub chkCalibration_Click(Index As Integer)
-    Calibration_Enable(Index) = chkCalibration(Index).Value
-    If chkCalibration(Index).Value = 1 Then
-        Call CalibrationSwitchTo(Index, True)
+Private Sub chkCalibration_Click(index As Integer)
+    Calibration_Enable(index) = chkCalibration(index).Value
+    If chkCalibration(index).Value = 1 Then
+        Call CalibrationSwitchTo(index, True)
     Else
-        Call CalibrationSwitchTo(Index, False)
+        Call CalibrationSwitchTo(index, False)
     End If
 End Sub
 
-Private Function CalibrationSwitchTo(Index As Integer, enable As Boolean)
-        txt(Index * 4).Enabled = enable
-        lblCalibrate(Index * 4).Enabled = enable
-        txt(Index * 4 + 1).Enabled = enable
-        lblCalibrate(Index * 4 + 1).Enabled = enable
-        txt(Index * 4 + 2).Enabled = enable
-        lblCalibrate(Index * 4 + 2).Enabled = enable
-        txt(Index * 4 + 3).Enabled = enable
-        lblCalibrate(Index * 4 + 3).Enabled = enable
+Private Function CalibrationSwitchTo(index As Integer, enable As Boolean)
+        txt(index * 4).Enabled = enable
+        lblCalibrate(index * 4).Enabled = enable
+        txt(index * 4 + 1).Enabled = enable
+        lblCalibrate(index * 4 + 1).Enabled = enable
+        txt(index * 4 + 2).Enabled = enable
+        lblCalibrate(index * 4 + 2).Enabled = enable
+        txt(index * 4 + 3).Enabled = enable
+        lblCalibrate(index * 4 + 3).Enabled = enable
 End Function
-
 
 Private Sub cmdCancel_Click()
     Me.Hide
@@ -2224,6 +2224,8 @@ Private Sub cmdOK_Click()
     
     
 
+    Call SaveSetting(App.EXEName, "Weld", "RecordInterrupts", chkRecordInterrupts.Value)
+    
     Call SaveSetting(App.EXEName, "UserData", "CompanyName", User_Data(0))
     Call SaveSetting(App.EXEName, "UserData", "Address", User_Data(1))
     Call SaveSetting(App.EXEName, "UserData", "City", User_Data(2))
@@ -2321,6 +2323,7 @@ PlcRes.LoadResFor Me
 
 LANGUAGE = GetSetting(App.EXEName, "General", "Language", "EN")
 cboLanguage.Text = LANGUAGE
+ chkRecordInterrupts.Value = GetSetting(App.EXEName, "Weld", "RecordInterrupts", 0)
 
 chkOnlineOnStartUp.Value = GetSetting(App.EXEName, "Genaral", "IsSimulate", 0)
 
@@ -2485,66 +2488,66 @@ WeldAnalysis_Data(19) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDia
 End Sub
 
 
-Private Sub optStartRecording_Click(Index As Integer)
-    StartRecording = Index
+Private Sub optStartRecording_Click(index As Integer)
+    StartRecording = index
     Dim i As Integer
     For i = 1 To 4
         txtStartRecording(i).Enabled = False
     Next
-    If Index > 0 Then
-        txtStartRecording(Index).Enabled = True
+    If index > 0 Then
+        txtStartRecording(index).Enabled = True
     End If
 End Sub
 
-Private Sub txt_Change(Index As Integer)
-    If IsNumeric(txt(Index).Text) Then
-        Calibration_Data(Index) = CSng(txt(Index).Text)
+Private Sub txt_Change(index As Integer)
+    If IsNumeric(txt(index).Text) Then
+        Calibration_Data(index) = CSng(txt(index).Text)
     Else
-        txt(Index).Text = Calibration_Data(Index)
+        txt(index).Text = Calibration_Data(index)
     End If
 End Sub
 
-Private Sub txtComp_Change(Index As Integer)
-    If Len(txtComp(Index).Text) <= 20 Then
-        User_Data(Index) = txtComp(Index).Text
+Private Sub txtComp_Change(index As Integer)
+    If Len(txtComp(index).Text) <= 20 Then
+        User_Data(index) = txtComp(index).Text
     Else
-        txtComp(Index).Text = User_Data(Index)
+        txtComp(index).Text = User_Data(index)
     End If
 End Sub
 
-Private Sub txtSRB_Change(Index As Integer)
-    If IsNumeric(txtSRB(Index).Text) Then
-        SRB_Data(Index) = CInt(txtSRB(Index).Text)
+Private Sub txtSRB_Change(index As Integer)
+    If IsNumeric(txtSRB(index).Text) Then
+        SRB_Data(index) = CInt(txtSRB(index).Text)
     Else
-        txtSRB(Index).Text = SRB_Data(Index)
+        txtSRB(index).Text = SRB_Data(index)
     End If
 End Sub
 
-Private Sub txtStartRecording_Change(Index As Integer)
-    If IsNumeric(txtStartRecording(Index).Text) Then
-        StartRecodingParam(Index) = CSng(txtStartRecording(Index).Text)
+Private Sub txtStartRecording_Change(index As Integer)
+    If IsNumeric(txtStartRecording(index).Text) Then
+        StartRecodingParam(index) = CSng(txtStartRecording(index).Text)
     Else
-        txtStartRecording(Index).Text = StartRecodingParam(Index)
+        txtStartRecording(index).Text = StartRecodingParam(index)
     End If
 End Sub
 
-Private Sub txtWA_Change(Index As Integer)
-    If IsNumeric(txtWA(Index).Text) Then
-        WeldAnalysis_Data(Index) = CSng(txtWA(Index).Text)
+Private Sub txtWA_Change(index As Integer)
+    If IsNumeric(txtWA(index).Text) Then
+        WeldAnalysis_Data(index) = CSng(txtWA(index).Text)
     Else
-        txtWA(Index).Text = WeldAnalysis_Data(Index)
+        txtWA(index).Text = WeldAnalysis_Data(index)
     End If
 End Sub
 
-Private Sub txtWC_Change(Index As Integer)
-    If IsNumeric(txtWC(Index).Text) Then
-        WeldChart_Data(Index) = CInt(txtWC(Index).Text)
+Private Sub txtWC_Change(index As Integer)
+    If IsNumeric(txtWC(index).Text) Then
+        WeldChart_Data(index) = CInt(txtWC(index).Text)
     Else
-        txtWC(Index).Text = WeldChart_Data(Index)
+        txtWC(index).Text = WeldChart_Data(index)
     End If
 
 End Sub
 
-Private Sub chkEnableAnalysis_Click(Index As Integer)
-    WeldAnalysisEnable_Data(Index) = chkEnableAnalysis(Index).Value
+Private Sub chkEnableAnalysis_Click(index As Integer)
+    WeldAnalysisEnable_Data(index) = chkEnableAnalysis(index).Value
 End Sub
