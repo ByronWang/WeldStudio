@@ -23,9 +23,12 @@ ODBCDirect=
 C:\WINDOWS\system32\scrrun.dll=
 
 [Package|NewScript|Files Added]
-D:\WeldStudio\src\T0039.WLD=
+d:\weldstudio\src\t0039.wld=
 
 [Package|NewScript|Files Removed]
+c:\windows\hh.exe=
+c:\windows\system32\comdlg32.ocx=
+c:\windows\system32\hhctrl.ocx=
 
 [Package|NewScript|Files In Project]
 D:\WeldStudio\WeldSystem.exe=Yes
@@ -46,13 +49,17 @@ C:\WINDOWS\system32\MSFLXGRD.OCX=Yes
 C:\WINDOWS\system32\FLXGDCHS.DLL=Yes
 C:\WINDOWS\system32\TABCTL32.OCX=Yes
 C:\WINDOWS\system32\TABCTCHS.DLL=Yes
-C:\WINDOWS\system32\COMDLG32.OCX=Yes
+C:\WINDOWS\system32\COMDLG32.OCX=No
 C:\WINDOWS\system32\CMDLGCHS.DLL=Yes
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
 C:\WINDOWS\system32\VB6STKIT.DLL=Yes
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
 D:\WeldStudio\src\T0039.WLD=Yes
+C:\WINDOWS\system32\hhctrl.ocx=No
+C:\WINDOWS\system32\itss.dll=Yes
+C:\WINDOWS\system32\itircl.dll=Yes
+C:\WINDOWS\hh.exe=No
 
 [Package|NewScript|Configure Registry Files]
 Applicable=No
@@ -86,12 +93,15 @@ C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinP
 C:\WINDOWS\system32\VB6STKIT.DLL=$(WinSysPathSysFile)
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
 D:\WeldStudio\src\T0039.WLD=$(AppPath)
+C:\WINDOWS\system32\hhctrl.ocx=$(WinSysPath)
+C:\WINDOWS\system32\itss.dll=$(WinSysPath)
+C:\WINDOWS\system32\itircl.dll=$(WinSysPath)
 
 [Package|NewScript|Configure Shared Files]
 Applicable=Yes
 D:\WeldStudio\WeldSystem.exe=No
 C:\WINDOWS\system32\DTL32.DLL=No
-D:\WeldStudio\src\T0039.WLD=No
+D:\WeldStudio\src\T0039.WLD=Yes
 
 [Package|NewScript|Distribution]
 Type=single

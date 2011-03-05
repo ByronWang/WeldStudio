@@ -29,6 +29,7 @@ Module=PlcDailyReport; src\PlcDailyReport.bas
 Form=src\FrmDailyReport.frm
 Module=PlcCommon; src\PlcCommon.bas
 Form=src\frmProgress.frm
+Form=src\frmPrint.frm
 ResFile32="src\WeldStudio.RES"
 IconForm="WeldMDIForm"
 Startup="WeldMDIForm"

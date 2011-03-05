@@ -2,7 +2,7 @@ SetPulseSetting.config
 SetRegularSetting.config
 *.SCC
 doc/WeldsImage/Thumbs.db
-intall/*
+./intall/*
 intall/Support/*
 data/*
 ~*
