@@ -2,8 +2,10 @@ SetPulseSetting.config
 SetRegularSetting.config
 *.SCC
 doc/WeldsImage/Thumbs.db
-./intall/*
-intall/Support/*
+./install/*
+install
+WeldSystem.exe
+WMSSystem.exe
 data/*
 ~*
 */~*
