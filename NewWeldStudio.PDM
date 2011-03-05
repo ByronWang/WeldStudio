@@ -4,7 +4,7 @@ Most Recent Package=NewScript
 
 [Package|NewScript|Root]
 SubWizProgID=PDWizard.SetupPkgSubWiz
-BuildFolder=D:\WeldStudio\intall
+BuildFolder=D:\WeldStudio\install
 
 [Package|NewScript|Configure DAO ISAMs]
 Applicable=No
@@ -108,16 +108,6 @@ Type=single
 Size=
 Title=NewWeldStudio
 
-[Package|NewScript|Package]
-PackageFolder=D:\WeldStudio\intall
-ProjectFolder=D:\WeldStudio
-ServerSideCab=
-File1=D:\WeldStudio\intall\setup.exe
-File2=D:\WeldStudio\intall\Setup.Lst
-File3=D:\WeldStudio\intall\WeldSystem.CAB
-Handler1=PDWizard.FolderDplySubWiz
-Handler2=PDWizard.WebPostDplySubWiz
-
 [Package|NewScript|IconGroups]
 Group0=NewWeldStudio
 PrivateGroup0=True
@@ -128,3 +118,13 @@ Icon1=WeldSystem.exe
 Title1=NewWeldStudio
 StartIn1=$(AppPath)
 Key1=Icon1
+
+[Package|NewScript|Package]
+PackageFolder=D:\WeldStudio\install
+ProjectFolder=D:\WeldStudio
+ServerSideCab=
+File1=D:\WeldStudio\install\setup.exe
+File2=D:\WeldStudio\install\Setup.Lst
+File3=D:\WeldStudio\install\WeldSystem.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
