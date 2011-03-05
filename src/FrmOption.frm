@@ -48,36 +48,36 @@ Begin VB.Form FrmOption
       _Version        =   393216
       Style           =   1
       Tabs            =   7
+      Tab             =   1
       TabsPerRow      =   10
       TabHeight       =   520
       TabCaption(0)   =   "General"
       TabPicture(0)   =   "FrmOption.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "lblLanguage"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "chkOnlineOnStartUp"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "cboLanguage"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "CommonDialog1"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Frame5"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Frame7"
-      Tab(0).Control(5).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "Frame7"
+      Tab(0).Control(1)=   "Frame5"
+      Tab(0).Control(2)=   "CommonDialog1"
+      Tab(0).Control(3)=   "cboLanguage"
+      Tab(0).Control(4)=   "chkOnlineOnStartUp"
+      Tab(0).Control(5)=   "lblLanguage"
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "FrameP(0)"
+      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Frame2(1)"
+      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "Frame2(0)"
+      Tab(2).Control(1).Enabled=   0   'False
       Tab(2).Control(2)=   "Frame2(3)"
+      Tab(2).Control(2).Enabled=   0   'False
       Tab(2).Control(3)=   "Frame2(2)"
+      Tab(2).Control(3).Enabled=   0   'False
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
@@ -111,7 +111,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame7 
          Caption         =   "Unit Info"
          Height          =   1335
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   189
          Tag             =   "16300"
          Top             =   4800
@@ -158,7 +158,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame5 
          Caption         =   "Company Info"
          Height          =   3855
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   179
          Tag             =   "16200"
          Top             =   720
@@ -1032,10 +1032,10 @@ Begin VB.Form FrmOption
          End
       End
       Begin VB.Frame FrameP 
-         Caption         =   "Frame5"
+         Caption         =   "Simulate"
          Height          =   3255
          Index           =   0
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   141
          Top             =   600
          Width           =   5415
@@ -1353,7 +1353,7 @@ Begin VB.Form FrmOption
          End
       End
       Begin MSComDlg.CommonDialog CommonDialog1 
-         Left            =   1560
+         Left            =   -73440
          Top             =   5520
          _ExtentX        =   847
          _ExtentY        =   847
@@ -1645,7 +1645,7 @@ Begin VB.Form FrmOption
       Begin VB.ComboBox cboLanguage 
          Height          =   300
          ItemData        =   "FrmOption.frx":0106
-         Left            =   7560
+         Left            =   -67440
          List            =   "FrmOption.frx":0113
          Style           =   2  'Dropdown List
          TabIndex        =   76
@@ -1655,7 +1655,7 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkOnlineOnStartUp 
          Caption         =   "OnlineOnStartup"
          Height          =   375
-         Left            =   6600
+         Left            =   -68400
          TabIndex        =   77
          Tag             =   "16120"
          Top             =   1440
@@ -2078,7 +2078,7 @@ Begin VB.Form FrmOption
       Begin VB.Label lblLanguage 
          Caption         =   "Language:"
          Height          =   255
-         Left            =   6480
+         Left            =   -68520
          TabIndex        =   115
          Tag             =   "16110"
          Top             =   795
@@ -2346,7 +2346,7 @@ StartRecodingParam(4) = CSng(GetSetting(App.EXEName, "StartRecording", "Time", 2
     optStartRecording(StartRecording).Value = True
     
      Dim vo As String
-    vo = GetSetting(App.EXEName, "Calibration", "value", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,")
+    vo = GetSetting(App.EXEName, "Calibration", "value", "1,6245,23390,150,2,1,3277,16384,1000,0,1,0,32767,460,0,1,3277,16384,5000,0,")
     Dim cd() As String
     cd = Split(vo, ",")
     

@@ -25,9 +25,9 @@ Dim DefalutParam As RegularSettingType
     DefalutParam.Value(1) = 110
     DefalutParam.Value(2) = 0.9
     DefalutParam.Value(3) = 2.5
-    DefalutParam.Value(4) = 430
-    DefalutParam.Value(5) = 325
-    DefalutParam.Value(6) = 410
+    DefalutParam.Value(4) = 80
+    DefalutParam.Value(5) = 60
+    DefalutParam.Value(6) = 80
     DefalutParam.Value(7) = 200
     DefalutParam.Value(8) = 250
     DefalutParam.Value(9) = 290

@@ -66,7 +66,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMaxGeneral 
          Alignment       =   2  'Center
-         Caption         =   "60"
+         Caption         =   "30"
          Height          =   255
          Index           =   2
          Left            =   5160
@@ -85,7 +85,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMinGeneral 
          Alignment       =   2  'Center
-         Caption         =   "20"
+         Caption         =   "0"
          Height          =   255
          Index           =   2
          Left            =   4320
@@ -95,7 +95,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMaxGeneral 
          Alignment       =   2  'Center
-         Caption         =   "30"
+         Caption         =   "60"
          Height          =   255
          Index           =   3
          Left            =   5160
@@ -114,7 +114,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMinGeneral 
          Alignment       =   2  'Center
-         Caption         =   "0"
+         Caption         =   "20"
          Height          =   255
          Index           =   3
          Left            =   4320

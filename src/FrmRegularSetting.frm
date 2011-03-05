@@ -509,7 +509,7 @@ Begin VB.Form FrmRegularSetting
          Width           =   2415
       End
       Begin VB.Label lblLabel 
-         Caption         =   "High Voltage (V):"
+         Caption         =   "High Voltage (%):"
          Height          =   255
          Index           =   4
          Left            =   240
@@ -519,7 +519,7 @@ Begin VB.Form FrmRegularSetting
          Width           =   2415
       End
       Begin VB.Label lblLabel 
-         Caption         =   "Low Voltage (V):"
+         Caption         =   "Low Voltage (%):"
          Height          =   255
          Index           =   5
          Left            =   240
@@ -529,7 +529,7 @@ Begin VB.Form FrmRegularSetting
          Width           =   2415
       End
       Begin VB.Label lblLabel 
-         Caption         =   "High Voltage Boost(V):"
+         Caption         =   "High Voltage Boost(%):"
          Height          =   255
          Index           =   6
          Left            =   240
