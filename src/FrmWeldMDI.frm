@@ -48,6 +48,9 @@ Begin VB.MDIForm WeldMDIForm
       Begin VB.Menu mnuSep1 
          Caption         =   "-"
       End
+      Begin VB.Menu mnuPrint 
+         Caption         =   "Print"
+      End
       Begin VB.Menu mnuExit 
          Caption         =   "E&xit"
          Tag             =   "10140"
@@ -89,12 +92,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
+Private Declare Function Htmlhelp Lib "hhctrl.ocx " Alias "HtmlHelpA " (ByVal hwndCaller As Long, ByVal pszFile As String, ByVal uCommand As Long, ByVal dwData As Any) As Long
 
 Private Sub MDIForm_Load()
 
 ' Resource
 PlcRes.LoadResFor Me
+
+    App.HelpFile = App.path & "\weld.chm "
     
     PLCDrv.InitPLCConnection
     mnuConnect.Enabled = PLCDrv.beActive
@@ -118,8 +123,23 @@ Private Sub MDIForm_Unload(Cancel As Integer)
 End Sub
 
 Private Sub menuUserGuide_Click()
-   MsgBox "user's guide"
-   ' Shell App.path & "\" & "UserGuide.doc"
+    Shell "hh.exe " & App.path & "\WMS.chm ", vbNormalFocus
+End Sub
+
+Private Sub mnuPrint_Click()
+
+    Me.CommonDialog1.ShowPrinter
+    
+    Dim f As Form
+    
+    Set f = WeldMDIForm.ActiveForm
+    If f Is Nothing Then
+        Exit Sub
+    ElseIf TypeOf f Is FrmChart Then
+        f.PrintForm
+    End If
+    
+    
 End Sub
 
 Private Sub mnuShutdown_Click()
