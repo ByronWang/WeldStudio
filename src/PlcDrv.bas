@@ -1,7 +1,7 @@
 Attribute VB_Name = "PLCDrv"
 Option Explicit
 
-
+Public Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long) '
 Public Declare Function timeGetTime Lib "winmm.dll" () As Long
 
 'Function Prototypes

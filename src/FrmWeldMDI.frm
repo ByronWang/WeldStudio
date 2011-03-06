@@ -126,21 +126,205 @@ Private Sub menuUserGuide_Click()
     Shell "hh.exe " & App.path & "\WMS.chm ", vbNormalFocus
 End Sub
 
-Private Sub mnuPrint_Click()
 
-    Me.CommonDialog1.ShowPrinter
+Private Sub mnuFile_click()
+    If WeldMDIForm.ActiveForm Is Nothing Then
+        mnuPrint.Enabled = False
+    ElseIf TypeOf WeldMDIForm.ActiveForm Is FrmChart Then
+        mnuPrint.Enabled = True
+    Else
+        mnuPrint.Enabled = False
+    End If
     
+End Sub
+
+Private Sub mnuPrint_Click()
     Dim f As Form
+    Dim fc As FrmChart
     
     Set f = WeldMDIForm.ActiveForm
     If f Is Nothing Then
         Exit Sub
     ElseIf TypeOf f Is FrmChart Then
-        f.PrintForm
+        Me.CommonDialog1.ShowPrinter
+        DoEvents   ' may be needed for large datasets
+        
+        Set fc = f
+    
+        Printer.Orientation = vbPRORLandscape
+                
+        fc.MSChart1.EditCopy
+        DoEvents   ' may be needed for large datasets
+        DoEvents   ' may be needed for large datasets
+        Printer.Print " "
+        'Printer.Print " ------------------------------- "
+        Printer.Print " "
+        Printer.PaintPicture Clipboard.GetData(), 4000, 1500
+        
+        
+        Dim i As Integer
+        Dim j As Integer
+        Dim gSep As Single
+        Dim iSep As Single
+        Dim gLeft As Integer
+        Dim iLeft As Integer
+        Dim idLeft As Integer
+        
+        gLeft = 300
+        iLeft = 600
+        idLeft = 2600
+        
+        gSep = 100
+        iSep = 50
+        
+        Printer.CurrentY = 1500
+        
+        Dim lTop As Integer
+        
+        With fc
+    
+            i = 0
+            Printer.CurrentX = gLeft
+            Call setFrom(.lblGroup(i))
+            Printer.CurrentY = Printer.CurrentY + lineSep
+            
+            For j = 0 To 3
+                Printer.FontBold = False
+                Printer.CurrentX = iLeft
+                lTop = Printer.CurrentY
+                Call setFrom(.lblItem(j))
+                Printer.CurrentY = lTop
+                
+                Printer.CurrentX = idLeft
+                Call setFrom(.lblItemData(j))
+                Printer.CurrentY = Printer.CurrentY + iSep
+            Next
+            
+            
+            i = 1
+            Printer.CurrentX = gLeft
+            Call setFrom(.lblGroup(i))
+            Printer.CurrentY = Printer.CurrentY + lineSep
+            
+            For j = 4 To 8
+                Printer.CurrentX = iLeft
+                lTop = Printer.CurrentY
+                Call setFrom(.lblItem(j))
+                Printer.CurrentY = lTop
+                
+                Printer.CurrentX = idLeft
+                Call setFrom(.lblItemData(j))
+                Printer.CurrentY = Printer.CurrentY + iSep
+            Next
+            
+            
+            i = 2
+            Printer.CurrentX = gLeft
+            Call setFrom(.lblGroup(i))
+            Printer.CurrentY = Printer.CurrentY + lineSep
+                            
+            For j = 9 To 15
+                Printer.CurrentX = iLeft
+                lTop = Printer.CurrentY
+                Call setFrom(.lblItem(j))
+                Printer.CurrentY = lTop
+                
+                Printer.CurrentX = idLeft
+                Call setFrom(.lblItemData(j))
+                Printer.CurrentY = Printer.CurrentY + iSep
+            Next
+            
+            
+            
+            i = 3
+            Printer.CurrentX = gLeft
+            Call setFrom(.lblGroup(i))
+            Printer.CurrentY = Printer.CurrentY + lineSep
+            
+            For j = 16 To 20
+                Printer.CurrentX = iLeft
+                lTop = Printer.CurrentY
+                Call setFrom(.lblItem(j))
+                Printer.CurrentY = lTop
+                
+                Printer.CurrentX = idLeft
+                Call setFrom(.lblItemData(j))
+                Printer.CurrentY = Printer.CurrentY + iSep
+            Next
+            
+            
+            
+            i = 4
+            Printer.CurrentX = gLeft
+            Call setFrom(.lblGroup(i))
+            Printer.CurrentY = Printer.CurrentY + lineSep
+            
+            For j = 21 To 22
+                Printer.CurrentX = iLeft
+                lTop = Printer.CurrentY
+                Call setFrom(.lblItem(j))
+                Printer.CurrentY = lTop
+                
+                Printer.CurrentX = idLeft
+                Printer.Print .lblItemData(j).Caption
+                Printer.CurrentY = Printer.CurrentY + iSep
+            Next
+            
+                            
+            
+            i = 5
+            Printer.CurrentX = gLeft
+            Call setFrom(.lblGroup(i))
+            Printer.CurrentY = Printer.CurrentY + lineSep
+            
+            For j = 23 To 24
+                Printer.CurrentX = iLeft
+                lTop = Printer.CurrentY
+                Call setFrom(.lblItem(j))
+                Printer.CurrentY = lTop
+                
+                Printer.CurrentX = idLeft
+                Call setFrom(.lblItemData(j))
+                Printer.CurrentY = Printer.CurrentY + iSep
+            Next
+            
+            
+            
+            
+            Call navControl(fc.lblCompany)
+            Call navControl(fc.lblParam)
+            Call navControl(fc.lblProgram)
+            Call navControl(fc.lblDate)
+            Call navControl(fc.lblTime)
+            
+            Call navControl(fc.lblUnit)
+            Call navControl(fc.lblLocation)
+            
+        End With
+        
+        Printer.EndDoc
     End If
     
     
 End Sub
+
+Private Function navControl(con As Label)
+    Printer.CurrentX = con.Left
+    Printer.CurrentY = con.Top + 300
+    
+    Printer.FontSize = con.FontSize
+    Printer.FontBold = con.FontBold
+    Printer.ForeColor = con.ForeColor
+    Printer.Print con.Caption
+End Function
+
+Private Function setFrom(con As Control)
+    Printer.FontSize = con.FontSize
+    Printer.FontBold = con.FontBold
+    Printer.ForeColor = con.ForeColor
+    Printer.Print con.Caption
+End Function
+
 
 Private Sub mnuShutdown_Click()
     Shell "Shutdown -s -f -t 1"
