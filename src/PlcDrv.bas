@@ -193,7 +193,7 @@ InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage"
 For i = 0 To 7
     If i = 1 Then
         For j = 0 To 6
-            bufSingle(j) = PulseSetting.Stages(j).Value(i) * InitialVoltage / 100 'Voltage
+            bufSingle(j) = CInt(PulseSetting.Stages(j).Value(i) * InitialVoltage / 100) 'Voltage
         Next j
     Else
         For j = 0 To 6
@@ -261,11 +261,11 @@ For j = 1 To 14
 Next
 
 j = 4
-bufSingle(j) = RegularSetting.Value(j - 1) * InitialVoltage / 100 'Voltage
+bufSingle(j) = CInt(RegularSetting.Value(j - 1) * InitialVoltage / 100) 'Voltage
 j = 5
-bufSingle(j) = RegularSetting.Value(j - 1) * InitialVoltage / 100 'Voltage
+bufSingle(j) = CInt(RegularSetting.Value(j - 1) * InitialVoltage / 100) 'Voltage
 j = 6
-bufSingle(j) = RegularSetting.Value(j - 1) * InitialVoltage / 100 'Voltage
+bufSingle(j) = CInt(RegularSetting.Value(j - 1) * InitialVoltage / 100) 'Voltage
 
 If UtlServer.Define(handle, def) = 0 Then
     status = UtlServer.WriteSingle(handle, bufSingle, IO_STATUS, 1000)

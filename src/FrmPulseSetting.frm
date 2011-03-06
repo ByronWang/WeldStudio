@@ -95,7 +95,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMaxGeneral 
          Alignment       =   2  'Center
-         Caption         =   "60"
+         Caption         =   "75"
          Height          =   255
          Index           =   3
          Left            =   5160
@@ -362,7 +362,7 @@ Begin VB.Form FrmPulseSetting
          Left            =   3600
          TabIndex        =   73
          Top             =   1350
-         Width           =   675
+         Width           =   795
       End
       Begin VB.Label Label2 
          Alignment       =   1  'Right Justify
@@ -749,6 +749,7 @@ Dim lastConfigName As String
 Dim PulseSetting As PulseSettingType
 Dim path As String
 Dim InitialVoltage As Long
+Dim lastCboStageIndex As Integer
 
 Private Sub CancelButton_Click()
     Me.Hide
@@ -769,11 +770,18 @@ Private Sub cboStage_Change()
         txtValue(i).Text = PulseSetting.Stages(cboStage.ListIndex).Value(i)
     Next
     i = 1
-    lblSign(i).Caption = PulseSetting.Stages(cboStage.ListIndex).Value(i) * InitialVoltage / 100 & "/" & InitialVoltage
+    lblSign(i).Caption = CInt(PulseSetting.Stages(cboStage.ListIndex).Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
 End Sub
 
 Private Sub cboStage_Click()
-    cboStage_Change
+
+    If checkInputedDataValidate Then
+        cboStage_Change
+        lastCboStageIndex = cboStage.ListIndex
+    Else
+        cboStage.ListIndex = lastCboStageIndex
+    End If
+
 End Sub
 
 Private Sub cmdLoad_Click()
@@ -790,14 +798,15 @@ End Sub
 
 Private Function checkInputedDataValidate() As Boolean
 Dim i As Integer
-    For i = 0 To txtValue.count
+    checkInputedDataValidate = True
+    For i = 0 To txtValue.count - 1
         If txtValue(i).BackColor = &HFF& Then
             checkInputedDataValidate = False
             Exit Function
         End If
     Next i
     
-        For i = 0 To txtValueGeneral.count
+        For i = 0 To txtValueGeneral.count - 1
         If txtValueGeneral(i).BackColor = &HFF& Then
             checkInputedDataValidate = False
             Exit Function
@@ -908,7 +917,7 @@ Private Sub txtValue_Change(index As Integer)
         If index = 1 Then
             Dim i As Integer
             i = index
-            lblSign(i).Caption = CStr(v * InitialVoltage / 100) & "/" & InitialVoltage
+            lblSign(i).Caption = CStr(CInt(v * InitialVoltage / 100)) & "/" & InitialVoltage
         End If
         
         If min <= v And v <= max Then

@@ -50,10 +50,10 @@ Public Function DefalutStagesParameters() As PulseSettingType
 
 Dim DefalutParam As PulseSettingType
 
-    DefalutParam.General.Value(0) = 10
-    DefalutParam.General.Value(1) = 0.6
-    DefalutParam.General.Value(2) = 51
-    DefalutParam.General.Value(3) = 0
+    DefalutParam.General.Value(0) = 0.6
+    DefalutParam.General.Value(1) = 10
+    DefalutParam.General.Value(2) = 0
+    DefalutParam.General.Value(3) = 51
         
     Dim i As Integer
     Dim stage As StageParametersType
