@@ -11,16 +11,91 @@ Begin VB.Form FrmDailyReport
    ScaleHeight     =   7365
    ScaleWidth      =   9135
    Begin MSFlexGridLib.MSFlexGrid MSFlexGrid1 
-      Height          =   6975
+      Height          =   6375
       Left            =   0
       TabIndex        =   0
-      Top             =   0
+      Top             =   960
       Width           =   10455
       _ExtentX        =   18441
-      _ExtentY        =   12303
+      _ExtentY        =   11245
       _Version        =   393216
       Cols            =   11
       FixedCols       =   0
+   End
+   Begin VB.Label lblUnit 
+      Alignment       =   1  'Right Justify
+      Caption         =   "UNIT:K922SN99-U101136(CW632)"
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   10.5
+         Charset         =   134
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   255
+      Left            =   6240
+      TabIndex        =   4
+      Top             =   600
+      Width           =   3615
+   End
+   Begin VB.Label lblLocation 
+      Caption         =   "LOCATION:CRETE ILL"
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   10.5
+         Charset         =   134
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   255
+      Left            =   3360
+      TabIndex        =   3
+      Top             =   600
+      Width           =   2415
+   End
+   Begin VB.Label lblCompany 
+      Alignment       =   2  'Center
+      Caption         =   "YARDWAY LTD."
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   10.5
+         Charset         =   134
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   255
+      Left            =   5160
+      TabIndex        =   2
+      Top             =   360
+      Width           =   2055
+   End
+   Begin VB.Label lblDate 
+      Alignment       =   2  'Center
+      Caption         =   "2011-01-01"
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   10.5
+         Charset         =   134
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   255
+      Left            =   4680
+      TabIndex        =   1
+      Top             =   120
+      Width           =   2895
    End
 End
 Attribute VB_Name = "FrmDailyReport"
@@ -29,9 +104,9 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Const SUCCEED_COLOR As Long = &HC000&
+Const SUCCEED_COLOR As Long = &HFF00&
 Const FAIL_COLOR As Long = &HFF&
-Const NOTUSED_COLOR As Long = &H80000012
+Const NOTUSED_COLOR As Long = &HFFFFFF
 
 Public Sub Load(filename As String)
  Dim data() As DailyReport
@@ -57,6 +132,15 @@ ReDim cellcolors(UBound(data))
             f = PlcWld.LoadData(WeldFile)
             
 
+    lblCompany.Caption = Trim(f.header1.CompanyName)
+        
+    lblDate.Caption = "DailyReport: " & Trim(f.header2.Date)
+    
+    lblUnit.Caption = "UNIT:" & Trim(f.header1.UnitName)
+    lblLocation.Caption = "LOCATION:" & Trim(f.header1.Location)
+
+
+
 '   Result
 If f.analysisResult.Succeed = PlcDeclare.OK Then
     entry = "OK"
@@ -71,6 +155,9 @@ Else
     entry = " - "
     cellcolors(i) = NOTUSED_COLOR
 End If
+
+
+
 
 '   Time
 entry = entry & vbTab & f.header2.Time
@@ -122,7 +209,7 @@ sa(i) = entry
         color = cellcolors(i - 1)
         For j = 0 To .Cols - 1
             .Col = j
-            .CellForeColor = color
+            .CellBackColor = color
         Next j
         
         
