@@ -11,13 +11,13 @@ Begin VB.Form FrmDailyReport
    ScaleHeight     =   7365
    ScaleWidth      =   9135
    Begin MSFlexGridLib.MSFlexGrid MSFlexGrid1 
-      Height          =   5895
+      Height          =   6975
       Left            =   0
       TabIndex        =   0
-      Top             =   1080
+      Top             =   0
       Width           =   10455
       _ExtentX        =   18441
-      _ExtentY        =   10398
+      _ExtentY        =   12303
       _Version        =   393216
       Cols            =   11
       FixedCols       =   0
@@ -38,7 +38,6 @@ data = PlcDailyReport.LoadData(filename)
 Dim path As String
 path = Left(filename, InStrRev(filename, "\"))
 
-
 Dim sa() As String
 ReDim sa(UBound(data))
 Dim f As FileR
@@ -53,39 +52,39 @@ Dim entry As String
             
 
 '   Result
-If f.analysisResult.succeed = 1 Then
+If f.analysisResult.Succeed = PlcDeclare.OK Then
     entry = "OK"
-ElseIf f.analysisResult.succeed = 2 Then
+ElseIf f.analysisResult.Succeed = PlcDeclare.NO Then
     entry = "NO"
-ElseIf f.analysisResult.succeed = 3 Then
+ElseIf f.analysisResult.Succeed = PlcDeclare.INTERRUPT Then
     entry = "INT"
 Else
-    MsgBox "qqqq"
+    entry = " - "
 End If
 
 '   Time
 entry = entry & vbTab & f.header2.Time
 '   Duration
-entry = entry & vbTab & f.analysisResult.TotalDuration
+entry = entry & vbTab & Format(f.analysisResult.TotalDuration, "##0")
 '   UPSET
-entry = entry & vbTab & f.analysisResult.UpsetRailUsage
+entry = entry & vbTab & Format(f.analysisResult.UpsetRailUsage, "##0.00")
 '   max.Current
-entry = entry & vbTab & f.analysisResult.UpsetMaxCurrent
+entry = entry & vbTab & Format(f.analysisResult.UpsetMaxCurrent, "##0")
 '   Impedance
-entry = entry & vbTab & f.analysisResult.OverallImpedance
+entry = entry & vbTab & Format(f.analysisResult.OverallImpedance, "##0.0")
 '   Rail Usage
-entry = entry & vbTab & f.analysisResult.TotalRailUsage
+entry = entry & vbTab & Format(f.analysisResult.TotalRailUsage, "##0.0")
 '   FLASH Speed
-entry = entry & vbTab & f.analysisResult.FlashSpeed
+entry = entry & vbTab & Format(f.analysisResult.FlashSpeed, "##0.00")
 '   BOOST Speed
-entry = entry & vbTab & f.analysisResult.BoostSpeed
+entry = entry & vbTab & Format(f.analysisResult.BoostSpeed, "##0.00")
 '   FORGE force
-entry = entry & vbTab & f.analysisResult.ForgeAverageForce
+entry = entry & vbTab & Format(f.analysisResult.ForgeAverageForce, "##0")
 '   Slippage
 If f.analysisResult.HasSlippage = 1 Then
-    entry = entry & vbTab & "Y"
-ElseIf f.analysisResult.HasSlippage = 2 Then
     entry = entry & vbTab & "N"
+ElseIf f.analysisResult.HasSlippage = 2 Then
+    entry = entry & vbTab & "Y"
 ElseIf f.analysisResult.HasSlippage = 3 Then
     entry = entry & vbTab & "-"
 Else
@@ -102,6 +101,13 @@ sa(i) = entry
     
     
    Call setData(sa)
+   
+   Dim i As Integer
+   Dim j As Integer
+   For i = 1 To MSFlexGrid1.Rows
+    
+   Next
+   
     
     'lblDate.Caption = Trim(fr.header.Date)
     'lblTime.Caption = Trim(fr.header.Time)

@@ -103,15 +103,15 @@ Type FileHeader2
      Xd22 As String * &HE
      
      H5(&HEC - 1) As Byte
-     RecordCount As Long
-     XE1E As String * 2
+     RecordCount As Integer
+     XE1E As String * 4
      XE20 As String * &H5F0
 
-     X1410 As String * &HC
+     X1410 As String * &HA
      BaseRed As String * &H7
      X1423 As String * &HD
 
-     H6(&H1E - 1) As Byte
+     H6(&H20 - 1) As Byte
 End Type
 
 
@@ -172,23 +172,23 @@ End Type
 
 
 Type WeldAnalysisResultType
-    succeed  As Integer
+    Succeed  As Integer
     X110 As Integer
-    FlashSpeedSucceed  As Boolean
+    FlashSpeedSucceed  As Integer
     X111 As Integer
-    BoostSpeedSucceed  As Boolean
+    BoostSpeedSucceed  As Integer
     X112 As Integer
-    UpsetRailUsageSucceed  As Boolean
+    UpsetRailUsageSucceed  As Integer
     X113 As Integer
-    ForgeForceSucceed  As Boolean
+    ForgeForceSucceed  As Integer
     X114 As Integer
-    HasCurrentInterruptinBoost  As Boolean
+    HasCurrentInterruptinBoost  As Integer
     X115 As Integer
-    HasSlippage     As Boolean 'TODO
+    HasSlippage     As Integer 'TODO
     X116 As Integer
-    HasShortCircuitinBoost  As Boolean
+    HasShortCircuitinBoost  As Integer
     X117 As Integer
-    TotalRailUsageSucceed    As Boolean
+    TotalRailUsageSucceed    As Integer
     X118 As Integer
     X129 As Single
     PreFlashVoltage     As Long
@@ -253,3 +253,9 @@ Global Const DTL_VERSION_ID = -1
 Global Const DTL_SUCCESS = 0
 Global Const DTL_PENDING = 1
 Global Const DTL_E_FAIL = 24
+
+
+Global Const OK As Integer = 1
+Global Const NO As Integer = 2
+Global Const INTERRUPT As Integer = 3
+Global Const NotUsed As Integer = 4

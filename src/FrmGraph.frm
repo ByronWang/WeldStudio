@@ -22,7 +22,7 @@ Begin VB.Form FrmGraph
       ScaleHeight     =   720
       ScaleWidth      =   8325
       TabIndex        =   18
-      Top             =   2145
+      Top             =   1905
       Width           =   8355
    End
    Begin VB.PictureBox picDist 
@@ -34,12 +34,12 @@ Begin VB.Form FrmGraph
       ScaleHeight     =   720
       ScaleWidth      =   8325
       TabIndex        =   17
-      Top             =   705
+      Top             =   465
       Width           =   8355
    End
    Begin VB.Timer TimerShow 
-      Interval        =   100
-      Left            =   9720
+      Interval        =   90
+      Left            =   9240
       Top             =   3240
    End
    Begin VB.PictureBox picPsi 
@@ -51,7 +51,7 @@ Begin VB.Form FrmGraph
       ScaleHeight     =   720
       ScaleWidth      =   8325
       TabIndex        =   1
-      Top             =   7800
+      Top             =   7560
       Width           =   8355
    End
    Begin VB.PictureBox picAmp 
@@ -63,13 +63,13 @@ Begin VB.Form FrmGraph
       ScaleHeight     =   720
       ScaleWidth      =   8325
       TabIndex        =   0
-      Top             =   9240
+      Top             =   9000
       Width           =   8355
    End
    Begin VB.Timer TimerTest 
-      Interval        =   62
-      Left            =   9960
-      Top             =   2640
+      Interval        =   92
+      Left            =   10320
+      Top             =   3120
    End
    Begin VB.Label lblDist 
       Alignment       =   1  'Right Justify
@@ -77,7 +77,7 @@ Begin VB.Form FrmGraph
       Caption         =   "67.98"
       BeginProperty Font 
          Name            =   "ËÎÌו"
-         Size            =   48
+         Size            =   72
          Charset         =   134
          Weight          =   700
          Underline       =   0   'False
@@ -88,7 +88,7 @@ Begin VB.Form FrmGraph
       Height          =   1335
       Left            =   10920
       TabIndex        =   16
-      Top             =   480
+      Top             =   120
       Width           =   3900
    End
    Begin VB.Label lblTop 
@@ -107,9 +107,9 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H0000FF00&
       Height          =   735
-      Left            =   5093
+      Left            =   5100
       TabIndex        =   15
-      Top             =   3120
+      Top             =   2880
       Width           =   5295
    End
    Begin VB.Label lblParameter 
@@ -128,9 +128,9 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H0000FF00&
       Height          =   615
-      Left            =   4913
+      Left            =   4920
       TabIndex        =   14
-      Top             =   6600
+      Top             =   6360
       Width           =   5535
    End
    Begin VB.Label lblTime 
@@ -151,7 +151,7 @@ Begin VB.Form FrmGraph
       Height          =   495
       Left            =   11760
       TabIndex        =   13
-      Top             =   3480
+      Top             =   3240
       Width           =   3135
    End
    Begin VB.Label lblDate 
@@ -173,7 +173,7 @@ Begin VB.Form FrmGraph
       Height          =   495
       Left            =   120
       TabIndex        =   12
-      Top             =   3480
+      Top             =   3240
       Width           =   3135
    End
    Begin VB.Label lblBigCenter 
@@ -192,9 +192,9 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H8000000E&
       Height          =   2655
-      Left            =   4373
+      Left            =   4380
       TabIndex        =   11
-      Top             =   3840
+      Top             =   3600
       Width           =   6495
    End
    Begin VB.Label lblWeldStage 
@@ -205,7 +205,7 @@ Begin VB.Form FrmGraph
       Height          =   255
       Left            =   1080
       TabIndex        =   10
-      Top             =   4560
+      Top             =   4320
       Width           =   1935
    End
    Begin VB.Label lblPlcStage 
@@ -216,15 +216,15 @@ Begin VB.Form FrmGraph
       Height          =   255
       Left            =   2280
       TabIndex        =   9
-      Top             =   6600
+      Top             =   6360
       Width           =   1935
    End
    Begin VB.Line Line2 
       BorderColor     =   &H00404040&
       X1              =   0
       X2              =   15240
-      Y1              =   7320
-      Y2              =   7320
+      Y1              =   7080
+      Y2              =   7080
    End
    Begin VB.Label lblVolt 
       Alignment       =   1  'Right Justify
@@ -232,7 +232,7 @@ Begin VB.Form FrmGraph
       Caption         =   "345"
       BeginProperty Font 
          Name            =   "ËÎÌו"
-         Size            =   48
+         Size            =   72
          Charset         =   134
          Weight          =   700
          Underline       =   0   'False
@@ -243,7 +243,7 @@ Begin VB.Form FrmGraph
       Height          =   1335
       Left            =   10920
       TabIndex        =   8
-      Top             =   1800
+      Top             =   1560
       Width           =   3900
    End
    Begin VB.Label lblPsi 
@@ -263,7 +263,7 @@ Begin VB.Form FrmGraph
       Height          =   1335
       Left            =   10920
       TabIndex        =   7
-      Top             =   7440
+      Top             =   7200
       Width           =   3900
    End
    Begin VB.Label lblAmp 
@@ -283,7 +283,7 @@ Begin VB.Form FrmGraph
       Height          =   1335
       Left            =   10920
       TabIndex        =   6
-      Top             =   8880
+      Top             =   8640
       Width           =   3900
    End
    Begin VB.Label Label4 
@@ -303,7 +303,7 @@ Begin VB.Form FrmGraph
       Left            =   120
       TabIndex        =   5
       Tag             =   "12040"
-      Top             =   7800
+      Top             =   7560
       Width           =   1935
    End
    Begin VB.Label Label3 
@@ -323,7 +323,7 @@ Begin VB.Form FrmGraph
       Left            =   120
       TabIndex        =   4
       Tag             =   "12030"
-      Top             =   9240
+      Top             =   9000
       Width           =   1695
    End
    Begin VB.Label Label2 
@@ -343,7 +343,7 @@ Begin VB.Form FrmGraph
       Left            =   120
       TabIndex        =   3
       Tag             =   "12020"
-      Top             =   2160
+      Top             =   1920
       Width           =   1695
    End
    Begin VB.Label Label1 
@@ -363,7 +363,7 @@ Begin VB.Form FrmGraph
       Left            =   120
       TabIndex        =   2
       Tag             =   "12010"
-      Top             =   720
+      Top             =   480
       Width           =   1695
    End
 End
@@ -673,12 +673,15 @@ Else
 
      
 
-        If analysisResult.succeed Then
+        If analysisResult.Succeed = PlcDeclare.OK Then
             lblBigCenter.Caption = "OK"
             lblBigCenter.ForeColor = &HFF00&
-        Else
+        ElseIf analysisResult.Succeed = PlcDeclare.NO Then
             lblBigCenter.Caption = "NO"
             lblBigCenter.ForeColor = &HFF&
+        Else
+            lblBigCenter.Caption = "INT"
+            lblBigCenter.ForeColor = &H0&
         End If
     
         SwitchToRecoding ANALYSIS_MODE
@@ -736,9 +739,18 @@ Dim WeldFile As String
         
     If Not fso.FolderExists(path & "\" & Format(Date, "YYYY-MM-DD")) Then
         fso.CreateFolder (path & "\" & Format(Date, "YYYY-MM-DD"))
+        fso.CreateTextFile (path & "\" & Format(Date, "YYYY-MM-DD") & "\" & Format(Date, "YYYY-MM-DD") & ".DLY")
     End If
     
     Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & WeldFile & ".WLD", fh1, fh2, rBuf, rIndex, analysisDefine, analysisResult)
+    
+    Dim dr As DailyReport
+    
+    dr.Serial = Left(WeldFile, 1)
+    dr.Sequence = weldSerailNumber - CInt(weldSerailNumber / 10000) * 10000
+    
+    
+    PlcDailyReport.SaveData path & "\" & Format(Date, "YYYY-MM-DD") & "\" & Format(Date, "YYYY-MM-DD") & ".DLY", dr
 
     Dim wn As Integer
     wn = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)

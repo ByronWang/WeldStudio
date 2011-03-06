@@ -1,6 +1,7 @@
 Attribute VB_Name = "PlcDailyReport"
 Option Explicit
-Type DailyReport
+
+Public Type DailyReport
      Serial As String * 1
      X1 As Byte
      X2 As Byte
@@ -41,19 +42,27 @@ End Function
 
 
 
-Public Function SaveData(filename As String, data() As DailyReport, count As Integer)
-'Dim pos As Long
-'
-'Dim i As Integer
-'
-'Open filename For Binary As #1
-'    pos = 0
-'    For i = 1 To count
-'        Put 1, pos + 1, r(i)
-'        pos = pos + Len(DailyReport)
-'    Wend
-'Close 1
-'TODO
+Public Function SaveData(filename As String, data As DailyReport)
+Dim pos As Long
+Dim i As Long
+Dim r(100) As DailyReport
+
+
+Open filename For Binary As #1
+    pos = 0
+    i = 0
+    
+    While pos < LOF(1)
+        Get 1, pos + 1, r(i)
+        i = i + 1
+        pos = pos + Len(data)
+    Wend
+    
+    
+    Put 1, pos + 1, data
+    pos = pos + Len(data)
+    
+Close 1
 
 End Function
 

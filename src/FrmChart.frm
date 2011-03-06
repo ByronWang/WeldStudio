@@ -20,7 +20,7 @@ Begin VB.Form FrmChart
       Left            =   0
       TabIndex        =   1
       Tag             =   "11000"
-      Top             =   1080
+      Top             =   120
       Width           =   4335
       Begin VB.CommandButton cmdViewDataDetail 
          Caption         =   "Detail"
@@ -322,6 +322,7 @@ Begin VB.Form FrmChart
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+         ForeColor       =   &H00000000&
          Height          =   255
          Index           =   5
          Left            =   2520
@@ -1264,7 +1265,6 @@ Begin VB.Form FrmChart
       Width           =   12015
    End
    Begin VB.Label lblTime 
-      Alignment       =   2  'Center
       Caption         =   "19:12:54"
       BeginProperty Font 
          Name            =   "ËÎÌו"
@@ -1277,13 +1277,13 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   9600
+      Left            =   10560
       TabIndex        =   74
       Top             =   840
       Width           =   2175
    End
    Begin VB.Label lblDate 
-      Alignment       =   2  'Center
+      Alignment       =   1  'Right Justify
       Caption         =   "2011-01-01"
       BeginProperty Font 
          Name            =   "ËÎÌו"
@@ -1296,7 +1296,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   7200
+      Left            =   7920
       TabIndex        =   73
       Top             =   840
       Width           =   2295
@@ -1315,7 +1315,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   7200
+      Left            =   8520
       TabIndex        =   72
       Top             =   600
       Width           =   3855
@@ -1334,7 +1334,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   7200
+      Left            =   8520
       TabIndex        =   71
       Top             =   120
       Width           =   3855
@@ -1353,7 +1353,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   7200
+      Left            =   8520
       TabIndex        =   70
       Top             =   360
       Width           =   3855
@@ -1371,12 +1371,13 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   9960
+      Left            =   10560
       TabIndex        =   69
       Top             =   1080
       Width           =   3855
    End
    Begin VB.Label lblUnit 
+      Alignment       =   1  'Right Justify
       Caption         =   "UNIT:K922SN99-U101136(CW632)"
       BeginProperty Font 
          Name            =   "ËÎÌו"
@@ -1389,7 +1390,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   6000
+      Left            =   6360
       TabIndex        =   68
       Top             =   1080
       Width           =   3855
@@ -1418,7 +1419,8 @@ Dim dataForm As FrmDataGrid
 Dim buf() As WeldData
 
 Const SUCCEED_COLOR As Long = &HC000&
-Const FAIL_COLOR As Long = &H80000008
+Const FAIL_COLOR As Long = &HFF&
+Const NOTUSED_COLOR As Long = &H80000012
 
 Dim fr As FileR
 Public Sub Load(filename As String)
@@ -1442,7 +1444,16 @@ Next
     Call setChart(buf)
     
     lblCompany.Caption = Trim(fr.header1.CompanyName)
-    lblParam.Caption = Trim(fr.header2.filename)
+    
+    If fr.analysisResult.Succeed = OK Then
+        lblParam.Caption = Trim(fr.header2.filename) & "-OK"
+    ElseIf fr.analysisResult.Succeed = NO Then
+        lblParam.Caption = Trim(fr.header2.filename) & "-NO"
+    Else
+        lblParam.Caption = Trim(fr.header2.filename) & "-INTERRUPT"
+    End If
+    
+    
     lblProgram.Caption = Trim(fr.header2.BaseRed)
     
     lblDate.Caption = Trim(fr.header2.Date)
@@ -1450,6 +1461,15 @@ Next
     
     lblUnit.Caption = "UNIT:" & Trim(fr.header1.UnitName)
     lblLocation.Caption = "LOCATION:" & Trim(fr.header1.Location)
+    
+    
+    updateCueControl lblCompany, fr.analysisResult.Succeed
+    updateCueControl lblParam, fr.analysisResult.Succeed
+    updateCueControl lblProgram, fr.analysisResult.Succeed
+    updateCueControl lblDate, fr.analysisResult.Succeed
+    updateCueControl lblTime, fr.analysisResult.Succeed
+    updateCueControl lblUnit, fr.analysisResult.Succeed
+    updateCueControl lblLocation, fr.analysisResult.Succeed
     
     Call anaylize(fr.analysisDefine, fr.analysisResult)
 
@@ -1657,22 +1677,28 @@ If analysisDefine.BoostEnable Then
 End If
 
 If analysisDefine.CurrentInterruptEnable Then
-    If r.HasCurrentInterruptinBoost Then
+    If r.HasCurrentInterruptinBoost = OK Then
         lblItemData(13).Caption = "N"
-        updateCue 13, True
-    Else
+        updateCue 13, r.HasCurrentInterruptinBoost
+    ElseIf r.HasCurrentInterruptinBoost = NO Then
         lblItemData(13).Caption = "Y"
-        updateCue 13, False
+        updateCue 13, r.HasCurrentInterruptinBoost
+    Else
+        lblItemData(13).Caption = "-"
+        updateCue 13, r.HasCurrentInterruptinBoost
     End If
 End If
 
 If analysisDefine.ShortCircuitEnable Then
-    If Not r.HasShortCircuitinBoost Then
+    If r.HasShortCircuitinBoost = OK Then
         lblItemData(14).Caption = "N"
-        updateCue 14, True
-    Else
+        updateCue 14, r.HasShortCircuitinBoost
+    ElseIf r.HasShortCircuitinBoost = NO Then
         lblItemData(14).Caption = "Y"
-        updateCue 14, False
+        updateCue 14, r.HasShortCircuitinBoost
+    Else
+        lblItemData(14).Caption = "-"
+        updateCue 14, r.HasShortCircuitinBoost
     End If
 End If
 
@@ -1689,12 +1715,15 @@ End If
  
 
 If analysisDefine.SlippageEnable Then
-    If Not r.HasSlippage Then
+    If r.HasSlippage = OK Then
         lblItemData(17).Caption = "N"
-        updateCue 17, True
-    Else
+        updateCue 17, r.HasSlippage
+    ElseIf r.HasSlippage = NO Then
         lblItemData(17).Caption = "Y"
-        updateCue 17, False
+        updateCue 17, r.HasSlippage
+    Else
+        lblItemData(17).Caption = "-"
+        updateCue 17, r.HasSlippage
     End If
 End If
 
@@ -1725,34 +1754,65 @@ lblItemData(26).Caption = CInt(r.TotalDuration)
 End Function
 
 
-Private Function updateCueWithCri(index As Integer, succeed As Boolean)
-    If succeed Then
+Private Function updateCueWithCri(index As Integer, Succeed As Integer)
+    If Succeed = OK Then
         lblItem(index).ForeColor = SUCCEED_COLOR
         lblItemData(index).ForeColor = SUCCEED_COLOR
         lblCriData(index).ForeColor = SUCCEED_COLOR
-    Else
+        lblItem(index).FontBold = True
+        lblItemData(index).FontBold = True
+        lblCriData(index).FontBold = True
+    ElseIf Succeed = NO Then
         lblItem(index).ForeColor = FAIL_COLOR
         lblItemData(index).ForeColor = FAIL_COLOR
         lblCriData(index).ForeColor = FAIL_COLOR
+        lblItem(index).FontBold = True
+        lblItemData(index).FontBold = True
+        lblCriData(index).FontBold = True
+    Else
+        lblItem(index).ForeColor = NOTUSED_COLOR
+        lblItemData(index).ForeColor = NOTUSED_COLOR
+        lblCriData(index).ForeColor = NOTUSED_COLOR
+        lblItem(index).FontBold = False
+        lblItemData(index).FontBold = False
+        lblCriData(index).FontBold = False
     End If
 
-    lblItem(index).FontBold = True
-    lblItemData(index).FontBold = True
-    lblCriData(index).FontBold = True
 End Function
 
-Private Function updateCue(index As Integer, succeed As Boolean)
-    If succeed Then
+Private Function updateCue(index As Integer, Succeed As Integer)
+    If Succeed = OK Then
         lblItem(index).ForeColor = SUCCEED_COLOR
         lblItemData(index).ForeColor = SUCCEED_COLOR
-    Else
+        lblItem(index).FontBold = True
+        lblItemData(index).FontBold = True
+    ElseIf Succeed = NO Then
         lblItem(index).ForeColor = FAIL_COLOR
         lblItemData(index).ForeColor = FAIL_COLOR
+        lblItem(index).FontBold = True
+        lblItemData(index).FontBold = True
+    Else
+        lblItem(index).ForeColor = NOTUSED_COLOR
+        lblItemData(index).ForeColor = NOTUSED_COLOR
+        lblItem(index).FontBold = False
+        lblItemData(index).FontBold = False
     End If
 
-    lblItem(index).FontBold = True
-    lblItemData(index).FontBold = True
 End Function
+Private Function updateCueControl(con As Control, Succeed As Integer)
+    If Succeed = OK Then
+        con.ForeColor = SUCCEED_COLOR
+        con.FontBold = True
+    ElseIf Succeed = NO Then
+        con.ForeColor = FAIL_COLOR
+        con.FontBold = True
+    Else
+        con.ForeColor = NOTUSED_COLOR
+        con.FontBold = False
+    End If
+
+End Function
+
 
 Private Sub cmdViewDataDetail_Click()
 Me.MousePointer = MousePointerConstants.vbHourglass

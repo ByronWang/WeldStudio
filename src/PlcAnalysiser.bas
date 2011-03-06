@@ -177,10 +177,10 @@ Dim sumCurrent As Double
     If analysisDefine.FlashEnable Then
     
     If analysisDefine.FlashMin > r.FlashSpeed Or r.FlashSpeed > analysisDefine.FlashMax Then
-        r.succeed = False
-        r.FlashSpeedSucceed = False
+        r.Succeed = NO
+        r.FlashSpeedSucceed = NO
     Else
-        r.FlashSpeedSucceed = True
+        r.FlashSpeedSucceed = OK
     End If
         
     End If
@@ -253,10 +253,10 @@ Dim sumCurrent As Double
     If analysisDefine.BoostEnable Then
     
     If analysisDefine.BoostMin > r.BoostSpeed Or r.BoostSpeed > analysisDefine.BoostMax Then
-        r.succeed = False
-        r.BoostSpeedSucceed = False
+        r.Succeed = NO
+        r.BoostSpeedSucceed = NO
     Else
-        r.BoostSpeedSucceed = True
+        r.BoostSpeedSucceed = OK
     End If
     
     End If
@@ -273,8 +273,8 @@ Dim sumCurrent As Double
 
                 If bIn = True Then
                     If buf(i).Time - sTime >= analysisDefine.CurrentInterruptTime Then
-                        r.succeed = False
-                        r.HasCurrentInterruptinBoost = True
+                        r.Succeed = NO
+                        r.HasCurrentInterruptinBoost = NO
                         Exit For
                     End If
                 Else
@@ -302,8 +302,8 @@ Dim sumCurrent As Double
                         
                 If bIn = True Then
                     If buf(i).Time - sTime >= analysisDefine.ShortCircuitTime Then
-                        r.HasShortCircuitinBoost = True
-                        r.succeed = False
+                        r.HasShortCircuitinBoost = NO
+                        r.Succeed = NO
                         Exit For
                     End If
                 Else
@@ -343,10 +343,10 @@ Dim sTime As Single
     
     If analysisDefine.SlippageEnable Then
         If r.UpsetDuration < analysisDefine.SlippageUpsetTime Or r.UpsetRailUsage > analysisDefine.SlippageUpset Then
-            r.succeed = False
-            r.HasSlippage = True
+            r.Succeed = NO
+            r.HasSlippage = NO
         Else
-            r.HasSlippage = False
+            r.HasSlippage = OK
         End If
     End If
     
@@ -365,10 +365,10 @@ Dim sTime As Single
         
     If analysisDefine.UpsetEnable Then
     If analysisDefine.UpsetMin > r.UpsetRailUsage Or r.UpsetRailUsage > analysisDefine.UpsetMax Then
-        r.succeed = False
-        r.UpsetRailUsageSucceed = False
+        r.Succeed = NO
+        r.UpsetRailUsageSucceed = NO
     Else
-        r.UpsetRailUsageSucceed = True
+        r.UpsetRailUsageSucceed = OK
     End If
     End If
         
@@ -407,10 +407,10 @@ Dim sumForce As Double
     
     If analysisDefine.ForgeEnable Then
         If analysisDefine.ForgeMin > r.ForgeAverageForce Or r.ForgeAverageForce > analysisDefine.ForgeMax Then
-            r.succeed = False
-            r.ForgeForceSucceed = False
+            r.Succeed = NO
+            r.ForgeForceSucceed = NO
         Else
-            r.ForgeForceSucceed = True
+            r.ForgeForceSucceed = OK
         End If
     End If
     r.ForgeDuration = buf(stopPos).Time - buf(startPos - 1).Time
@@ -429,8 +429,8 @@ Dim i As Integer
     If analysisDefine.TotalRailUsageEnable Then
     
     If r.TotalRailUsage < analysisDefine.TotalRailUsageTotalRail Then
-        r.succeed = False
-        r.TotalRailUsageSucceed = False
+        r.Succeed = NO
+        r.TotalRailUsageSucceed = NO
     Else
         r.TotalRailUsageSucceed = True
     End If
@@ -466,7 +466,8 @@ Dim startPos As Integer
 Dim lastPos As Integer
 
 Dim r As WeldAnalysisResultType
-r.succeed = True
+r.Succeed = PlcDeclare.INTERRUPT
+
 
 stage = INIT_STAGE
 For pos = pos To count
@@ -567,6 +568,7 @@ Next
 Analysis = r
 Exit Function
 OVER:
+    r.Succeed = INTERRUPT
     Analysis = r
 End Function
 

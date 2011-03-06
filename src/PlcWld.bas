@@ -21,9 +21,9 @@ Open filename For Binary As #1
     pos = pos + Len(fh1)
     
     '  ÎªÁË¼æÈÝÐÔ
-    Dim fn As String * 5
+    Dim fn As String * 6
     Get 1, pos + 1, fn
-    If UCase(fn & ".wld") <> Right(UCase(filename), 9) Then
+    If Asc("Z") <= Asc(Left(fn, 1)) And Asc(Left(fn, 1)) <= Asc("Z") And Mid(fn, 6, 1) = "." Then
         pos = pos - 5
     End If
     
@@ -35,7 +35,7 @@ Open filename For Binary As #1
     
     ReDim r(fh2.RecordCount - 1)
     Get 1, pos + 1, r
-    pos = pos + Len(r(0)) * fh2.RecordCount
+    pos = pos + 1# * Len(r(0)) * fh2.RecordCount
     
     pos = pos - 4
     Get 1, pos + 1, analysisDefine
@@ -84,7 +84,7 @@ Open filename For Binary As #1
     pos = pos + Len(fh2)
     
     Put 1, pos + 1, r
-    pos = pos + Len(r(0)) * fh2.RecordCount
+    pos = pos + 1# * Len(r(0)) * fh2.RecordCount
     
     pos = pos - 4
     Put 1, pos + 1, analysisDefine
