@@ -1277,7 +1277,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   10560
+      Left            =   10080
       TabIndex        =   74
       Top             =   840
       Width           =   2175
@@ -1296,7 +1296,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   7920
+      Left            =   7440
       TabIndex        =   73
       Top             =   840
       Width           =   2295
@@ -1315,7 +1315,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   8520
+      Left            =   8040
       TabIndex        =   72
       Top             =   600
       Width           =   3855
@@ -1334,7 +1334,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   8520
+      Left            =   8040
       TabIndex        =   71
       Top             =   120
       Width           =   3855
@@ -1353,7 +1353,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   8520
+      Left            =   8040
       TabIndex        =   70
       Top             =   360
       Width           =   3855
@@ -1371,7 +1371,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   10560
+      Left            =   10080
       TabIndex        =   69
       Top             =   1080
       Width           =   3855
@@ -1390,7 +1390,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   6360
+      Left            =   5880
       TabIndex        =   68
       Top             =   1080
       Width           =   3855

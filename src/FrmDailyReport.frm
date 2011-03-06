@@ -29,6 +29,9 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Const SUCCEED_COLOR As Long = &HC000&
+Const FAIL_COLOR As Long = &HFF&
+Const NOTUSED_COLOR As Long = &H80000012
 
 Public Sub Load(filename As String)
  Dim data() As DailyReport
@@ -43,6 +46,9 @@ ReDim sa(UBound(data))
 Dim f As FileR
 Dim WeldFile As String
 Dim entry As String
+Dim cellcolors() As Long
+ReDim cellcolors(UBound(data))
+
   Dim i As Integer
   For i = LBound(data) To UBound(data)
             WeldFile = CStr(data(i).Sequence)
@@ -54,12 +60,16 @@ Dim entry As String
 '   Result
 If f.analysisResult.Succeed = PlcDeclare.OK Then
     entry = "OK"
+    cellcolors(i) = SUCCEED_COLOR
 ElseIf f.analysisResult.Succeed = PlcDeclare.NO Then
     entry = "NO"
+    cellcolors(i) = FAIL_COLOR
 ElseIf f.analysisResult.Succeed = PlcDeclare.INTERRUPT Then
     entry = "INT"
+    cellcolors(i) = NOTUSED_COLOR
 Else
     entry = " - "
+    cellcolors(i) = NOTUSED_COLOR
 End If
 
 '   Time
@@ -102,12 +112,22 @@ sa(i) = entry
     
    Call setData(sa)
    
-   Dim i As Integer
    Dim j As Integer
-   For i = 1 To MSFlexGrid1.Rows
-    
-   Next
+   Dim color As Long
    
+   
+   With MSFlexGrid1
+   For i = 1 To .Rows - 1
+        .Row = i
+        color = cellcolors(i - 1)
+        For j = 0 To .Cols - 1
+            .Col = j
+            .CellForeColor = color
+        Next j
+        
+        
+   Next
+   End With
     
     'lblDate.Caption = Trim(fr.header.Date)
     'lblTime.Caption = Trim(fr.header.Time)
