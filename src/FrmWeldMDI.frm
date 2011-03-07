@@ -146,7 +146,11 @@ Private Sub mnuPrint_Click()
     If f Is Nothing Then
         Exit Sub
     ElseIf TypeOf f Is FrmChart Then
+        On Error GoTo ERRORHANDLE
+        Me.CommonDialog1.PrinterDefault = False
+        CommonDialog1.CancelError = True
         Me.CommonDialog1.ShowPrinter
+
         DoEvents   ' may be needed for large datasets
         
         Set fc = f
@@ -159,7 +163,7 @@ Private Sub mnuPrint_Click()
         Printer.Print " "
         'Printer.Print " ------------------------------- "
         Printer.Print " "
-        Printer.PaintPicture Clipboard.GetData(), 4000, 1500
+        Printer.PaintPicture Clipboard.GetData(), 3500, 2200
         
         
         Dim i As Integer
@@ -170,14 +174,14 @@ Private Sub mnuPrint_Click()
         Dim iLeft As Integer
         Dim idLeft As Integer
         
-        gLeft = 300
-        iLeft = 600
-        idLeft = 2600
+        gLeft = 800
+        iLeft = 1100
+        idLeft = 3100
         
         gSep = 100
         iSep = 50
         
-        Printer.CurrentY = 1500
+        Printer.CurrentY = 2300
         
         Dim lTop As Integer
         
@@ -305,12 +309,14 @@ Private Sub mnuPrint_Click()
         Printer.EndDoc
     End If
     
+    Exit Sub
+ERRORHANDLE:
     
 End Sub
 
 Private Function navControl(con As Label)
     Printer.CurrentX = con.Left
-    Printer.CurrentY = con.Top + 300
+    Printer.CurrentY = con.Top + 1100
     
     Printer.FontSize = con.FontSize
     Printer.FontBold = con.FontBold
