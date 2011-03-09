@@ -1,0 +1,124 @@
+[Root]
+Most Recent Package=WMSPackage
+
+
+[Package|WMSPackage|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=D:\WeldStudio\Package
+
+[Package|WMSPackage|Configure DAO ISAMs]
+Applicable=No
+
+[Package|WMSPackage|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|WMSPackage|Files Found]
+
+[Package|WMSPackage|Files Released]
+
+[Package|WMSPackage|Missing Dependency Information]
+
+[Package|WMSPackage|Out-of-Date Dependency Information]
+C:\WINDOWS\system32\scrrun.dll=
+
+[Package|WMSPackage|Files Added]
+
+[Package|WMSPackage|Files Removed]
+c:\windows\system32\hhctrl.ocx=
+c:\windows\hh.exe=
+c:\windows\system32\itss.dll=
+c:\windows\system32\itircl.dll=
+c:\windows\system32\scrrun.dll=
+
+[Package|WMSPackage|Files In Project]
+D:\WeldStudio\WMS.exe=Yes
+C:\WINDOWS\system32\msvbvm60.dll=Yes
+C:\WINDOWS\system32\oleaut32.dll=Yes
+C:\WINDOWS\system32\olepro32.dll=Yes
+C:\WINDOWS\system32\asycfilt.dll=Yes
+C:\WINDOWS\system32\stdole2.tlb=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\system32\VB6CHS.DLL=Yes
+C:\WINDOWS\system32\hhctrl.ocx=No
+C:\WINDOWS\system32\itss.dll=No
+C:\WINDOWS\system32\itircl.dll=No
+C:\WINDOWS\hh.exe=No
+C:\WINDOWS\system32\DTL32.DLL=Yes
+C:\WINDOWS\system32\scrrun.dll=No
+C:\WINDOWS\system32\msvcrt.dll=Yes
+C:\WINDOWS\system32\SCRRNCHS.DLL=Yes
+C:\WINDOWS\system32\MSCHRT20.OCX=Yes
+C:\WINDOWS\system32\MSCH2CHS.DLL=Yes
+C:\WINDOWS\system32\MSFLXGRD.OCX=Yes
+C:\WINDOWS\system32\FLXGDCHS.DLL=Yes
+C:\WINDOWS\system32\TABCTL32.OCX=Yes
+C:\WINDOWS\system32\TABCTCHS.DLL=Yes
+C:\WINDOWS\system32\COMDLG32.OCX=Yes
+C:\WINDOWS\system32\CMDLGCHS.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\WINDOWS\system32\VB6STKIT.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+
+[Package|WMSPackage|Configure Registry Files]
+Applicable=No
+
+[Package|WMSPackage|Configure Remote Servers]
+Applicable=No
+
+[Package|WMSPackage|Install Locations]
+D:\WeldStudio\WMS.exe=$(AppPath)
+C:\WINDOWS\system32\msvbvm60.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\oleaut32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\olepro32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\asycfilt.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\stdole2.tlb=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\system32\VB6CHS.DLL=$(WinSysPath)
+C:\WINDOWS\system32\DTL32.DLL=$(AppPath)
+C:\WINDOWS\system32\msvcrt.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\SCRRNCHS.DLL=$(WinSysPath)
+C:\WINDOWS\system32\MSCHRT20.OCX=$(WinSysPath)
+C:\WINDOWS\system32\MSCH2CHS.DLL=$(WinSysPath)
+C:\WINDOWS\system32\MSFLXGRD.OCX=$(WinSysPath)
+C:\WINDOWS\system32\FLXGDCHS.DLL=$(WinSysPath)
+C:\WINDOWS\system32\TABCTL32.OCX=$(WinSysPath)
+C:\WINDOWS\system32\TABCTCHS.DLL=$(WinSysPath)
+C:\WINDOWS\system32\COMDLG32.OCX=$(WinSysPath)
+C:\WINDOWS\system32\CMDLGCHS.DLL=$(WinSysPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\system32\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+
+[Package|WMSPackage|Configure Shared Files]
+Applicable=Yes
+D:\WeldStudio\WMS.exe=No
+C:\WINDOWS\system32\DTL32.DLL=No
+
+[Package|WMSPackage|Distribution]
+Type=single
+Size=
+Title=Weld Monitoring Studio
+
+[Package|WMSPackage|IconGroups]
+Group0=Weld Monitoring Studio
+PrivateGroup0=True
+Parent0=$(Programs)
+
+[Package|WMSPackage|Weld Monitoring Studio]
+Icon1=WMS.exe
+Title1=Weld Monitoring Studio
+StartIn1=$(AppPath)
+Key1=Icon1
+
+[Package|WMSPackage|Package]
+PackageFolder=D:\WeldStudio\Package
+ProjectFolder=D:\WeldStudio
+ServerSideCab=
+File1=D:\WeldStudio\Package\setup.exe
+File2=D:\WeldStudio\Package\Setup.Lst
+File3=D:\WeldStudio\Package\WMS.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
