@@ -192,10 +192,10 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H8000000E&
       Height          =   2655
-      Left            =   4380
+      Left            =   3353
       TabIndex        =   11
       Top             =   3600
-      Width           =   6495
+      Width           =   8535
    End
    Begin VB.Label lblWeldStage 
       BackColor       =   &H80000008&

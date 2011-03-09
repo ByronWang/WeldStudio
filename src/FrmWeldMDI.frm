@@ -3,7 +3,7 @@ Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.MDIForm WeldMDIForm 
    AutoShowChildren=   0   'False
    BackColor       =   &H8000000C&
-   Caption         =   "MDIForm"
+   Caption         =   "Weld Monitoring Studio"
    ClientHeight    =   9585
    ClientLeft      =   165
    ClientTop       =   555
@@ -71,8 +71,10 @@ Begin VB.MDIForm WeldMDIForm
    End
    Begin VB.Menu mnuSystem 
       Caption         =   "&System"
+      Tag             =   "10500"
       Begin VB.Menu mnuShutdown 
          Caption         =   "Shut&down"
+         Tag             =   "10510"
       End
    End
    Begin VB.Menu mnuHelp 

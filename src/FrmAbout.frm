@@ -5,7 +5,7 @@ Begin VB.Form FrmAbout
    ClientHeight    =   3195
    ClientLeft      =   2340
    ClientTop       =   1935
-   ClientWidth     =   5730
+   ClientWidth     =   5775
    ClipControls    =   0   'False
    Icon            =   "FrmAbout.frx":0000
    LinkTopic       =   "Form2"
@@ -13,7 +13,7 @@ Begin VB.Form FrmAbout
    MinButton       =   0   'False
    ScaleHeight     =   2205.246
    ScaleMode       =   0  'User
-   ScaleWidth      =   5380.766
+   ScaleWidth      =   5423.023
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  '所有者中心
    Tag             =   "23000"
@@ -41,6 +41,60 @@ Begin VB.Form FrmAbout
       Top             =   2640
       Width           =   1500
    End
+   Begin VB.Label Label1 
+      Caption         =   "SYSTEM"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   15
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Index           =   2
+      Left            =   1080
+      TabIndex        =   7
+      Top             =   1200
+      Width           =   2775
+   End
+   Begin VB.Label Label1 
+      Caption         =   "MONITORING"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   15
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Index           =   1
+      Left            =   1080
+      TabIndex        =   6
+      Top             =   720
+      Width           =   2775
+   End
+   Begin VB.Label Label1 
+      Caption         =   "WELD"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   15
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Index           =   0
+      Left            =   1080
+      TabIndex        =   5
+      Top             =   240
+      Width           =   2775
+   End
    Begin VB.Line Line1 
       BorderColor     =   &H00808080&
       BorderStyle     =   6  'Inside Solid
@@ -53,21 +107,21 @@ Begin VB.Form FrmAbout
    Begin VB.Label lblDescription 
       Caption         =   "About"
       ForeColor       =   &H00000000&
-      Height          =   1170
-      Left            =   1080
+      Height          =   330
+      Left            =   6240
       TabIndex        =   2
       Tag             =   "23200"
-      Top             =   1125
+      Top             =   1725
       Width           =   3885
    End
    Begin VB.Label lblTitle 
       Caption         =   "Weld Studio"
       ForeColor       =   &H00000000&
       Height          =   480
-      Left            =   1050
+      Left            =   6120
       TabIndex        =   3
       Tag             =   "23100"
-      Top             =   240
+      Top             =   960
       Width           =   3885
    End
    Begin VB.Line Line1 
@@ -82,9 +136,9 @@ Begin VB.Form FrmAbout
    Begin VB.Label lblVersion 
       Caption         =   "0.91"
       Height          =   225
-      Left            =   1050
+      Left            =   6480
       TabIndex        =   4
-      Top             =   780
+      Top             =   1440
       Width           =   3885
    End
 End

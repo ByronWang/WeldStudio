@@ -2,18 +2,26 @@ VERSION 5.00
 Object = "{65E121D4-0C60-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCHRT20.OCX"
 Begin VB.Form FrmChart 
    Caption         =   "Form1"
-   ClientHeight    =   9540
+   ClientHeight    =   10170
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   15240
    Icon            =   "FrmChart.frx":0000
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   9540
+   ScaleHeight     =   10170
    ScaleWidth      =   15240
    ShowInTaskbar   =   0   'False
    Tag             =   "11000"
    WindowState     =   2  'Maximized
+   Begin VB.CommandButton cmdViewDataDetail 
+      Caption         =   "ViewDetial"
+      Height          =   495
+      Left            =   2640
+      TabIndex        =   74
+      Top             =   9240
+      Width           =   1215
+   End
    Begin MSChart20Lib.MSChart MSChart1 
       Height          =   8295
       Left            =   4440
@@ -22,19 +30,16 @@ Begin VB.Form FrmChart
       Top             =   1320
       Width           =   12015
    End
-   Begin VB.PictureBox Frame1 
-      Appearance      =   0  'Flat
+   Begin VB.Frame Frame1 
       BorderStyle     =   0  'None
-      ForeColor       =   &H80000008&
-      Height          =   9135
-      Left            =   120
-      ScaleHeight     =   9135
-      ScaleWidth      =   4215
+      Height          =   9015
+      Left            =   240
       TabIndex        =   8
+      Tag             =   "11100"
       Top             =   360
-      Width           =   4215
-      Begin VB.Label lblCriDatadddd 
-         Caption         =   "Min/Max"
+      Width           =   4455
+      Begin VB.Label lblGroup 
+         Caption         =   "Pre-Flash"
          BeginProperty Font 
             Name            =   "Times New Roman"
             Size            =   9
@@ -44,53 +49,91 @@ Begin VB.Form FrmChart
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H80000008&
          Height          =   255
-         Left            =   3360
+         Index           =   0
+         Left            =   0
          TabIndex        =   73
-         Tag             =   "5"
-         Top             =   0
-         Width           =   915
+         Tag             =   "100"
+         Top             =   120
+         Width           =   2775
       End
-      Begin VB.Label lblCriData 
-         Caption         =   "N/A"
+      Begin VB.Label lblItem 
+         Caption         =   "Avg.Voltage(V):"
          BeginProperty Font 
             Name            =   "Times New Roman"
-            Size            =   9
+            Size            =   8.25
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   21
-         Left            =   3360
+         Index           =   0
+         Left            =   120
          TabIndex        =   72
-         Top             =   6840
-         Width           =   915
+         Tag             =   "110"
+         Top             =   360
+         Width           =   2175
       End
-      Begin VB.Label lblCriData 
-         Caption         =   "N/A"
+      Begin VB.Label lblItem 
+         Caption         =   "Avg.Current(A):"
          BeginProperty Font 
             Name            =   "Times New Roman"
-            Size            =   9
+            Size            =   8.25
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   16
-         Left            =   3360
+         Index           =   1
+         Left            =   120
          TabIndex        =   71
-         Top             =   5280
-         Width           =   915
+         Tag             =   "120"
+         Top             =   600
+         Width           =   2175
       End
-      Begin VB.Label lblCriData 
+      Begin VB.Label lblItem 
+         Caption         =   "Rail Used(mm):"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   2
+         Left            =   120
+         TabIndex        =   70
+         Tag             =   "130"
+         Top             =   840
+         Width           =   2175
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Duration(s): "
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   3
+         Left            =   120
+         TabIndex        =   69
+         Tag             =   "140"
+         Top             =   1080
+         Width           =   2175
+      End
+      Begin VB.Label lblItemData 
          Caption         =   "N/A"
          BeginProperty Font 
             Name            =   "Times New Roman"
@@ -101,15 +144,219 @@ Begin VB.Form FrmChart
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+         Height          =   255
+         Index           =   0
+         Left            =   2400
+         TabIndex        =   68
+         Top             =   360
+         Width           =   795
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   1
+         Left            =   2400
+         TabIndex        =   67
+         Top             =   600
+         Width           =   795
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   2
+         Left            =   2400
+         TabIndex        =   66
+         Top             =   840
+         Width           =   795
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   3
+         Left            =   2400
+         TabIndex        =   65
+         Top             =   1080
+         Width           =   795
+      End
+      Begin VB.Label lblGroup 
+         Caption         =   "Flash"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   1
+         Left            =   0
+         TabIndex        =   64
+         Tag             =   "200"
+         Top             =   1440
+         Width           =   2175
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Avg.Voltage(V):"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   4
+         Left            =   120
+         TabIndex        =   63
+         Tag             =   "210"
+         Top             =   1680
+         Width           =   2175
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Avg.Current(A):"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   5
+         Left            =   120
+         TabIndex        =   62
+         Tag             =   "220"
+         Top             =   1920
+         Width           =   2175
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Rail Used(mm): "
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   6
+         Left            =   120
+         TabIndex        =   61
+         Tag             =   "230"
+         Top             =   2160
+         Width           =   2175
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Flash Speed(mm/s):"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   12
-         Left            =   3360
-         TabIndex        =   70
-         Top             =   3960
-         Width           =   915
+         Index           =   7
+         Left            =   120
+         TabIndex        =   60
+         Tag             =   "240"
+         Top             =   2400
+         Width           =   2175
       End
-      Begin VB.Label lblCriData 
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   4
+         Left            =   2400
+         TabIndex        =   59
+         Top             =   1680
+         Width           =   795
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   255
+         Index           =   5
+         Left            =   2400
+         TabIndex        =   58
+         Top             =   1920
+         Width           =   795
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   6
+         Left            =   2400
+         TabIndex        =   57
+         Top             =   2160
+         Width           =   795
+      End
+      Begin VB.Label lblItemData 
          Caption         =   "N/A"
          BeginProperty Font 
             Name            =   "Times New Roman"
@@ -123,215 +370,9 @@ Begin VB.Form FrmChart
          ForeColor       =   &H80000008&
          Height          =   255
          Index           =   7
-         Left            =   3360
-         TabIndex        =   69
+         Left            =   2400
+         TabIndex        =   56
          Top             =   2400
-         Width           =   915
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   26
-         Left            =   2520
-         TabIndex        =   68
-         Top             =   8400
-         Width           =   795
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   25
-         Left            =   2520
-         TabIndex        =   67
-         Top             =   8160
-         Width           =   795
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H80000008&
-         Height          =   255
-         Index           =   24
-         Left            =   2520
-         TabIndex        =   66
-         Top             =   7920
-         Width           =   795
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   23
-         Left            =   2520
-         TabIndex        =   65
-         Top             =   7680
-         Width           =   795
-      End
-      Begin VB.Label lblItem 
-         Caption         =   "Total Duration(s): "
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   26
-         Left            =   240
-         TabIndex        =   64
-         Tag             =   "640"
-         Top             =   8400
-         Width           =   2175
-      End
-      Begin VB.Label lblItem 
-         Caption         =   "Holding Time(m): "
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   25
-         Left            =   240
-         TabIndex        =   63
-         Tag             =   "630"
-         Top             =   8160
-         Width           =   2175
-      End
-      Begin VB.Label lblItem 
-         Caption         =   "Total Rail used(mm): "
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H80000008&
-         Height          =   255
-         Index           =   24
-         Left            =   240
-         TabIndex        =   62
-         Tag             =   "620"
-         Top             =   7920
-         Width           =   2175
-      End
-      Begin VB.Label lblItem 
-         Caption         =   "Impedance(Ohm)"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   23
-         Left            =   240
-         TabIndex        =   61
-         Tag             =   "610"
-         Top             =   7680
-         Width           =   2175
-      End
-      Begin VB.Label lblGroup 
-         Caption         =   "Overall"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   5
-         Left            =   120
-         TabIndex        =   60
-         Tag             =   "600"
-         Top             =   7440
-         Width           =   2175
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   22
-         Left            =   2520
-         TabIndex        =   59
-         Top             =   7080
-         Width           =   795
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H80000008&
-         Height          =   255
-         Index           =   21
-         Left            =   2520
-         TabIndex        =   58
-         Top             =   6840
          Width           =   795
       End
       Begin VB.Label lblItem 
@@ -346,35 +387,33 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   22
-         Left            =   240
-         TabIndex        =   57
-         Tag             =   "520"
-         Top             =   7080
+         Index           =   8
+         Left            =   120
+         TabIndex        =   55
+         Tag             =   "250"
+         Top             =   2640
          Width           =   2175
       End
-      Begin VB.Label lblItem 
-         Caption         =   "Forge Force(t):"
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
          BeginProperty Font 
             Name            =   "Times New Roman"
-            Size            =   8.25
+            Size            =   9
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   21
-         Left            =   240
-         TabIndex        =   56
-         Tag             =   "510"
-         Top             =   6840
-         Width           =   2175
+         Index           =   8
+         Left            =   2400
+         TabIndex        =   54
+         Top             =   2640
+         Width           =   795
       End
       Begin VB.Label lblGroup 
-         Caption         =   "Forge"
+         Caption         =   "Boost"
          BeginProperty Font 
             Name            =   "Times New Roman"
             Size            =   9
@@ -385,55 +424,18 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   4
-         Left            =   120
-         TabIndex        =   55
-         Tag             =   "500"
-         Top             =   6600
-         Width           =   2175
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   20
-         Left            =   2520
-         TabIndex        =   54
-         Top             =   6240
-         Width           =   795
-      End
-      Begin VB.Label lblItem 
-         Caption         =   "Duration(s):"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   20
-         Left            =   240
+         Index           =   2
+         Left            =   0
          TabIndex        =   53
-         Tag             =   "450"
-         Top             =   6240
-         Width           =   2175
+         Tag             =   "300"
+         Top             =   3000
+         Width           =   1815
       End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
+      Begin VB.Label lblItem 
+         Caption         =   "Avg.Voltage(V):"
          BeginProperty Font 
             Name            =   "Times New Roman"
-            Size            =   9
+            Size            =   8.25
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -441,17 +443,18 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   19
-         Left            =   2520
+         Index           =   9
+         Left            =   120
          TabIndex        =   52
-         Top             =   6000
-         Width           =   795
+         Tag             =   "310"
+         Top             =   3240
+         Width           =   2175
       End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
+      Begin VB.Label lblItem 
+         Caption         =   "Avg.Current(A):"
          BeginProperty Font 
             Name            =   "Times New Roman"
-            Size            =   9
+            Size            =   8.25
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -459,106 +462,11 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   18
-         Left            =   2520
+         Index           =   10
+         Left            =   120
          TabIndex        =   51
-         Top             =   5760
-         Width           =   795
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H80000008&
-         Height          =   255
-         Index           =   17
-         Left            =   2520
-         TabIndex        =   50
-         Top             =   5520
-         Width           =   795
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H80000008&
-         Height          =   255
-         Index           =   16
-         Left            =   2520
-         TabIndex        =   49
-         Top             =   5280
-         Width           =   795
-      End
-      Begin VB.Label lblItem 
-         Caption         =   "Current ON time(s): "
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   19
-         Left            =   240
-         TabIndex        =   48
-         Tag             =   "440"
-         Top             =   6000
-         Width           =   2175
-      End
-      Begin VB.Label lblItem 
-         Caption         =   "Maximum Current(A): "
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   18
-         Left            =   240
-         TabIndex        =   47
-         Tag             =   "430"
-         Top             =   5760
-         Width           =   2175
-      End
-      Begin VB.Label lblItem 
-         Caption         =   "Slippage(Y/N):"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H80000008&
-         Height          =   255
-         Index           =   17
-         Left            =   240
-         TabIndex        =   46
-         Tag             =   "420"
-         Top             =   5520
+         Tag             =   "320"
+         Top             =   3480
          Width           =   2175
       End
       Begin VB.Label lblItem 
@@ -572,92 +480,16 @@ Begin VB.Form FrmChart
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   16
-         Left            =   240
-         TabIndex        =   45
-         Tag             =   "410"
-         Top             =   5280
-         Width           =   2175
-      End
-      Begin VB.Label lblGroup 
-         Caption         =   "Upset"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   3
+         Index           =   11
          Left            =   120
-         TabIndex        =   44
-         Tag             =   "400"
-         Top             =   5040
+         TabIndex        =   50
+         Tag             =   "330"
+         Top             =   3720
          Width           =   2175
       End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   15
-         Left            =   2520
-         TabIndex        =   43
-         Top             =   4680
-         Width           =   795
-      End
       Begin VB.Label lblItem 
-         Caption         =   "Duration(s):"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   15
-         Left            =   240
-         TabIndex        =   42
-         Tag             =   "370"
-         Top             =   4680
-         Width           =   2175
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H80000008&
-         Height          =   255
-         Index           =   14
-         Left            =   2520
-         TabIndex        =   41
-         Top             =   4440
-         Width           =   795
-      End
-      Begin VB.Label lblItem 
-         Caption         =   "Short Circuit(Y/N):"
+         Caption         =   "Max Speed(mm/s): "
          BeginProperty Font 
             Name            =   "Times New Roman"
             Size            =   8.25
@@ -669,12 +501,66 @@ Begin VB.Form FrmChart
          EndProperty
          ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   14
-         Left            =   240
-         TabIndex        =   40
-         Tag             =   "360"
-         Top             =   4440
+         Index           =   12
+         Left            =   120
+         TabIndex        =   49
+         Tag             =   "340"
+         Top             =   3960
          Width           =   2175
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   9
+         Left            =   2400
+         TabIndex        =   48
+         Top             =   3240
+         Width           =   795
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   10
+         Left            =   2400
+         TabIndex        =   47
+         Top             =   3480
+         Width           =   795
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   11
+         Left            =   2400
+         TabIndex        =   46
+         Top             =   3720
+         Width           =   795
       End
       Begin VB.Label lblItemData 
          Caption         =   "N/A"
@@ -689,10 +575,10 @@ Begin VB.Form FrmChart
          EndProperty
          ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   13
-         Left            =   2520
-         TabIndex        =   39
-         Top             =   4200
+         Index           =   12
+         Left            =   2400
+         TabIndex        =   45
+         Top             =   3960
          Width           =   795
       End
       Begin VB.Label lblItem 
@@ -709,8 +595,8 @@ Begin VB.Form FrmChart
          ForeColor       =   &H80000008&
          Height          =   255
          Index           =   13
-         Left            =   240
-         TabIndex        =   38
+         Left            =   120
+         TabIndex        =   44
          Tag             =   "350"
          Top             =   4200
          Width           =   2175
@@ -728,68 +614,14 @@ Begin VB.Form FrmChart
          EndProperty
          ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   12
-         Left            =   2520
-         TabIndex        =   37
-         Top             =   3960
-         Width           =   795
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   11
-         Left            =   2520
-         TabIndex        =   36
-         Top             =   3720
-         Width           =   795
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   10
-         Left            =   2520
-         TabIndex        =   35
-         Top             =   3480
-         Width           =   795
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   9
-         Left            =   2520
-         TabIndex        =   34
-         Top             =   3240
+         Index           =   13
+         Left            =   2400
+         TabIndex        =   43
+         Top             =   4200
          Width           =   795
       End
       Begin VB.Label lblItem 
-         Caption         =   "Max Speed(mm/s): "
+         Caption         =   "Short Circuit(Y/N):"
          BeginProperty Font 
             Name            =   "Times New Roman"
             Size            =   8.25
@@ -801,11 +633,86 @@ Begin VB.Form FrmChart
          EndProperty
          ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   12
-         Left            =   240
-         TabIndex        =   33
-         Tag             =   "340"
-         Top             =   3960
+         Index           =   14
+         Left            =   120
+         TabIndex        =   42
+         Tag             =   "360"
+         Top             =   4440
+         Width           =   2175
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   255
+         Index           =   14
+         Left            =   2400
+         TabIndex        =   41
+         Top             =   4440
+         Width           =   795
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Duration(s):"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   15
+         Left            =   120
+         TabIndex        =   40
+         Tag             =   "370"
+         Top             =   4680
+         Width           =   2175
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   15
+         Left            =   2400
+         TabIndex        =   39
+         Top             =   4680
+         Width           =   795
+      End
+      Begin VB.Label lblGroup 
+         Caption         =   "Upset"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   3
+         Left            =   0
+         TabIndex        =   38
+         Tag             =   "400"
+         Top             =   5040
          Width           =   2175
       End
       Begin VB.Label lblItem 
@@ -819,16 +726,37 @@ Begin VB.Form FrmChart
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+         ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   11
-         Left            =   240
-         TabIndex        =   32
-         Tag             =   "330"
-         Top             =   3720
+         Index           =   16
+         Left            =   120
+         TabIndex        =   37
+         Tag             =   "410"
+         Top             =   5280
          Width           =   2175
       End
       Begin VB.Label lblItem 
-         Caption         =   "Avg.Current(A):"
+         Caption         =   "Slippage(Y/N):"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   255
+         Index           =   17
+         Left            =   120
+         TabIndex        =   36
+         Tag             =   "420"
+         Top             =   5520
+         Width           =   2175
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Maximum Current(A): "
          BeginProperty Font 
             Name            =   "Times New Roman"
             Size            =   8.25
@@ -839,15 +767,15 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   10
-         Left            =   240
-         TabIndex        =   31
-         Tag             =   "320"
-         Top             =   3480
+         Index           =   18
+         Left            =   120
+         TabIndex        =   35
+         Tag             =   "430"
+         Top             =   5760
          Width           =   2175
       End
       Begin VB.Label lblItem 
-         Caption         =   "Avg.Voltage(V):"
+         Caption         =   "Current ON time(s): "
          BeginProperty Font 
             Name            =   "Times New Roman"
             Size            =   8.25
@@ -858,31 +786,105 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   9
-         Left            =   240
-         TabIndex        =   30
-         Tag             =   "310"
-         Top             =   3240
+         Index           =   19
+         Left            =   120
+         TabIndex        =   34
+         Tag             =   "440"
+         Top             =   6000
          Width           =   2175
       End
-      Begin VB.Label lblGroup 
-         Caption         =   "Boost"
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
          BeginProperty Font 
             Name            =   "Times New Roman"
             Size            =   9
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   255
+         Index           =   16
+         Left            =   2400
+         TabIndex        =   33
+         Top             =   5280
+         Width           =   795
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   255
+         Index           =   17
+         Left            =   2400
+         TabIndex        =   32
+         Top             =   5520
+         Width           =   795
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   2
+         Index           =   18
+         Left            =   2400
+         TabIndex        =   31
+         Top             =   5760
+         Width           =   795
+      End
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   19
+         Left            =   2400
+         TabIndex        =   30
+         Top             =   6000
+         Width           =   795
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Duration(s):"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   20
          Left            =   120
          TabIndex        =   29
-         Tag             =   "300"
-         Top             =   3000
-         Width           =   1815
+         Tag             =   "450"
+         Top             =   6240
+         Width           =   2175
       End
       Begin VB.Label lblItemData 
          Caption         =   "N/A"
@@ -896,11 +898,50 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   8
-         Left            =   2520
+         Index           =   20
+         Left            =   2400
          TabIndex        =   28
-         Top             =   2640
+         Top             =   6240
          Width           =   795
+      End
+      Begin VB.Label lblGroup 
+         Caption         =   "Forge"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   9
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   4
+         Left            =   0
+         TabIndex        =   27
+         Tag             =   "500"
+         Top             =   6600
+         Width           =   2175
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Forge Force(t):"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   255
+         Index           =   21
+         Left            =   120
+         TabIndex        =   26
+         Tag             =   "510"
+         Top             =   6840
+         Width           =   2175
       End
       Begin VB.Label lblItem 
          Caption         =   "Duration(s): "
@@ -914,92 +955,18 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   8
-         Left            =   240
-         TabIndex        =   27
-         Tag             =   "250"
-         Top             =   2640
-         Width           =   2175
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H80000008&
-         Height          =   255
-         Index           =   7
-         Left            =   2520
-         TabIndex        =   26
-         Top             =   2400
-         Width           =   795
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   6
-         Left            =   2520
+         Index           =   22
+         Left            =   120
          TabIndex        =   25
-         Top             =   2160
-         Width           =   795
+         Tag             =   "520"
+         Top             =   7080
+         Width           =   2175
       End
       Begin VB.Label lblItemData 
          Caption         =   "N/A"
          BeginProperty Font 
             Name            =   "Times New Roman"
             Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000000&
-         Height          =   255
-         Index           =   5
-         Left            =   2520
-         TabIndex        =   24
-         Top             =   1920
-         Width           =   795
-      End
-      Begin VB.Label lblItemData 
-         Caption         =   "N/A"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   9
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   4
-         Left            =   2520
-         TabIndex        =   23
-         Top             =   1680
-         Width           =   795
-      End
-      Begin VB.Label lblItem 
-         Caption         =   "Flash Speed(mm/s):"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   8.25
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -1008,18 +975,17 @@ Begin VB.Form FrmChart
          EndProperty
          ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   7
-         Left            =   240
-         TabIndex        =   22
-         Tag             =   "240"
-         Top             =   2400
-         Width           =   2175
+         Index           =   21
+         Left            =   2400
+         TabIndex        =   24
+         Top             =   6840
+         Width           =   795
       End
-      Begin VB.Label lblItem 
-         Caption         =   "Rail Used(mm): "
+      Begin VB.Label lblItemData 
+         Caption         =   "N/A"
          BeginProperty Font 
             Name            =   "Times New Roman"
-            Size            =   8.25
+            Size            =   9
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -1027,53 +993,14 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   6
-         Left            =   240
-         TabIndex        =   21
-         Tag             =   "230"
-         Top             =   2160
-         Width           =   2175
-      End
-      Begin VB.Label lblItem 
-         Caption         =   "Avg.Current(A):"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   5
-         Left            =   240
-         TabIndex        =   20
-         Tag             =   "220"
-         Top             =   1920
-         Width           =   2175
-      End
-      Begin VB.Label lblItem 
-         Caption         =   "Avg.Voltage(V):"
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   4
-         Left            =   240
-         TabIndex        =   19
-         Tag             =   "210"
-         Top             =   1680
-         Width           =   2175
+         Index           =   22
+         Left            =   2400
+         TabIndex        =   23
+         Top             =   7080
+         Width           =   795
       End
       Begin VB.Label lblGroup 
-         Caption         =   "Flash"
+         Caption         =   "Overall"
          BeginProperty Font 
             Name            =   "Times New Roman"
             Size            =   9
@@ -1084,11 +1011,88 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   1
+         Index           =   5
+         Left            =   0
+         TabIndex        =   22
+         Tag             =   "600"
+         Top             =   7440
+         Width           =   2175
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Impedance(Ohm):"
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   23
+         Left            =   120
+         TabIndex        =   21
+         Tag             =   "610"
+         Top             =   7680
+         Width           =   2175
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Total Rail used(mm): "
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   255
+         Index           =   24
+         Left            =   120
+         TabIndex        =   20
+         Tag             =   "620"
+         Top             =   7920
+         Width           =   2175
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Holding Time(m): "
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   25
+         Left            =   120
+         TabIndex        =   19
+         Tag             =   "630"
+         Top             =   8160
+         Width           =   2175
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Total Duration(s): "
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   26
          Left            =   120
          TabIndex        =   18
-         Tag             =   "200"
-         Top             =   1440
+         Tag             =   "640"
+         Top             =   8400
          Width           =   2175
       End
       Begin VB.Label lblItemData 
@@ -1103,10 +1107,10 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   3
-         Left            =   2520
+         Index           =   23
+         Left            =   2400
          TabIndex        =   17
-         Top             =   1080
+         Top             =   7680
          Width           =   795
       End
       Begin VB.Label lblItemData 
@@ -1120,11 +1124,12 @@ Begin VB.Form FrmChart
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+         ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   2
-         Left            =   2520
+         Index           =   24
+         Left            =   2400
          TabIndex        =   16
-         Top             =   840
+         Top             =   7920
          Width           =   795
       End
       Begin VB.Label lblItemData 
@@ -1139,10 +1144,10 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   1
-         Left            =   2520
+         Index           =   25
+         Left            =   2400
          TabIndex        =   15
-         Top             =   600
+         Top             =   8160
          Width           =   795
       End
       Begin VB.Label lblItemData 
@@ -1157,90 +1162,90 @@ Begin VB.Form FrmChart
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   0
-         Left            =   2520
+         Index           =   26
+         Left            =   2400
          TabIndex        =   14
-         Top             =   360
+         Top             =   8400
          Width           =   795
       End
-      Begin VB.Label lblItem 
-         Caption         =   "Duration(s): "
+      Begin VB.Label lblCriData 
+         Caption         =   "N/A"
          BeginProperty Font 
             Name            =   "Times New Roman"
-            Size            =   8.25
+            Size            =   9
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+         ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   3
-         Left            =   240
+         Index           =   7
+         Left            =   3240
          TabIndex        =   13
-         Tag             =   "140"
-         Top             =   1080
-         Width           =   2175
+         Top             =   2400
+         Width           =   915
       End
-      Begin VB.Label lblItem 
-         Caption         =   "Rail Used(mm):"
+      Begin VB.Label lblCriData 
+         Caption         =   "N/A"
          BeginProperty Font 
             Name            =   "Times New Roman"
-            Size            =   8.25
+            Size            =   9
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+         ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   2
-         Left            =   240
+         Index           =   12
+         Left            =   3240
          TabIndex        =   12
-         Tag             =   "130"
-         Top             =   840
-         Width           =   2175
+         Top             =   3960
+         Width           =   915
       End
-      Begin VB.Label lblItem 
-         Caption         =   "Avg.Current(A):"
+      Begin VB.Label lblCriData 
+         Caption         =   "N/A"
          BeginProperty Font 
             Name            =   "Times New Roman"
-            Size            =   8.25
+            Size            =   9
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+         ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   1
-         Left            =   240
+         Index           =   16
+         Left            =   3240
          TabIndex        =   11
-         Tag             =   "120"
-         Top             =   600
-         Width           =   2175
+         Top             =   5280
+         Width           =   915
       End
-      Begin VB.Label lblItem 
-         Caption         =   "Avg.Voltage(V):"
+      Begin VB.Label lblCriData 
+         Caption         =   "N/A"
          BeginProperty Font 
             Name            =   "Times New Roman"
-            Size            =   8.25
+            Size            =   9
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+         ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   0
-         Left            =   240
+         Index           =   21
+         Left            =   3240
          TabIndex        =   10
-         Tag             =   "110"
-         Top             =   360
-         Width           =   2175
+         Top             =   6840
+         Width           =   915
       End
-      Begin VB.Label lblGroup 
-         Caption         =   "Pre-Flash"
+      Begin VB.Label lblCriDatadddd 
+         Caption         =   "Min/Max"
          BeginProperty Font 
             Name            =   "Times New Roman"
             Size            =   9
@@ -1250,13 +1255,13 @@ Begin VB.Form FrmChart
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+         ForeColor       =   &H80000008&
          Height          =   255
-         Index           =   0
-         Left            =   120
+         Left            =   3240
          TabIndex        =   9
-         Tag             =   "100"
-         Top             =   120
-         Width           =   2775
+         Tag             =   "5"
+         Top             =   0
+         Width           =   915
       End
    End
    Begin VB.Label lblTime 
