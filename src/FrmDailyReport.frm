@@ -10,6 +10,7 @@ Begin VB.Form FrmDailyReport
    MDIChild        =   -1  'True
    ScaleHeight     =   7365
    ScaleWidth      =   9135
+   WindowState     =   2  'Maximized
    Begin MSFlexGridLib.MSFlexGrid MSFlexGrid1 
       Height          =   6375
       Left            =   0
@@ -19,7 +20,7 @@ Begin VB.Form FrmDailyReport
       _ExtentX        =   18441
       _ExtentY        =   11245
       _Version        =   393216
-      Cols            =   11
+      Cols            =   12
       FixedCols       =   0
    End
    Begin VB.Label lblUnit 
@@ -141,18 +142,21 @@ ReDim cellcolors(UBound(data))
 
 
 
+entry = f.header2.filename
+
+
 '   Result
 If f.analysisResult.Succeed = PlcDeclare.OK Then
-    entry = "OK"
+    entry = entry & vbTab & "OK"
     cellcolors(i) = SUCCEED_COLOR
 ElseIf f.analysisResult.Succeed = PlcDeclare.NO Then
-    entry = "NO"
+    entry = entry & vbTab & "NO"
     cellcolors(i) = FAIL_COLOR
 ElseIf f.analysisResult.Succeed = PlcDeclare.INTERRUPT Then
-    entry = "INT"
+    entry = entry & vbTab & "INT"
     cellcolors(i) = NOTUSED_COLOR
 Else
-    entry = " - "
+    entry = entry & vbTab & " - "
     cellcolors(i) = NOTUSED_COLOR
 End If
 
@@ -230,6 +234,12 @@ Next
 
 i = 0
 MSFlexGrid1.RemoveItem (1)
+
+MSFlexGrid1.TextMatrix(0, i) = "Weld#"
+MSFlexGrid1.ColWidth(i) = 800
+MSFlexGrid1.ColAlignment(i) = AlignmentSettings.flexAlignLeftCenter
+i = i + 1
+
 MSFlexGrid1.TextMatrix(0, i) = "Result"
 MSFlexGrid1.ColWidth(i) = 800
 MSFlexGrid1.ColAlignment(i) = AlignmentSettings.flexAlignCenterCenter
