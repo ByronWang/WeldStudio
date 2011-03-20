@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin VB.Form FrmGraph 
    Appearance      =   0  'Flat
-   BackColor       =   &H80000006&
+   BackColor       =   &H00000000&
    Caption         =   "FormGraph"
    ClientHeight    =   10605
    ClientLeft      =   165
