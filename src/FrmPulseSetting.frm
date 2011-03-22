@@ -354,16 +354,6 @@ Begin VB.Form FrmPulseSetting
          Top             =   960
          Width           =   735
       End
-      Begin VB.Label lblSign 
-         Alignment       =   1  'Right Justify
-         Caption         =   "344/430"
-         Height          =   225
-         Index           =   1
-         Left            =   3600
-         TabIndex        =   73
-         Top             =   1350
-         Width           =   795
-      End
       Begin VB.Label Label2 
          Alignment       =   1  'Right Justify
          Caption         =   "%"
@@ -373,6 +363,16 @@ Begin VB.Form FrmPulseSetting
          TabIndex        =   72
          Top             =   1360
          Width           =   165
+      End
+      Begin VB.Label lblSign 
+         Alignment       =   1  'Right Justify
+         Caption         =   "344/430"
+         Height          =   225
+         Index           =   1
+         Left            =   3480
+         TabIndex        =   73
+         Top             =   1350
+         Width           =   795
       End
       Begin VB.Label lblSepereter 
          Caption         =   "/"
@@ -568,7 +568,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
-         Caption         =   "460"
+         Caption         =   "100"
          Height          =   255
          Index           =   1
          Left            =   5160
@@ -587,7 +587,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         Caption         =   "250"
+         Caption         =   "0"
          Height          =   255
          Index           =   1
          Left            =   4320
