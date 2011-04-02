@@ -839,6 +839,7 @@ Private Sub cmdSave_Click()
     
     cmdLoad.Enabled = True
     cmdSave.Enabled = False
+    lastConfigName = cboFileName.Text
     
 End Sub
 

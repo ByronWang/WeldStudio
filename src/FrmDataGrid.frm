@@ -25,6 +25,7 @@ Begin VB.Form FrmDataGrid
       _Version        =   393216
       Cols            =   9
       FixedCols       =   0
+      SelectionMode   =   1
    End
 End
 Attribute VB_Name = "FrmDataGrid"

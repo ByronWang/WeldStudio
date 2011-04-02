@@ -1315,7 +1315,7 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   9240
+      Left            =   9120
       TabIndex        =   5
       Top             =   600
       Width           =   1575
@@ -1334,10 +1334,10 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   9120
+      Left            =   8880
       TabIndex        =   4
       Top             =   120
-      Width           =   1935
+      Width           =   2055
    End
    Begin VB.Label lblParam 
       Alignment       =   2  'Center
@@ -1353,10 +1353,10 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   9240
+      Left            =   9000
       TabIndex        =   3
       Top             =   360
-      Width           =   1695
+      Width           =   1815
    End
    Begin VB.Label lblLocation 
       Caption         =   "LOCATION:CRETE ILL"
@@ -1501,6 +1501,7 @@ Dim sTime As Single
 sTime = EmulateData(posStart).Time
 
 For i = posStart To UBound(EmulateData)
+        pos = i
     If EmulateData(i).Time - sTime > 15 Then
         pos = i
         bOk = True

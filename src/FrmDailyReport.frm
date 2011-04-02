@@ -22,6 +22,7 @@ Begin VB.Form FrmDailyReport
       _Version        =   393216
       Cols            =   12
       FixedCols       =   0
+      SelectionMode   =   1
    End
    Begin VB.Label lblUnit 
       Alignment       =   1  'Right Justify

@@ -38,7 +38,7 @@ Begin VB.Form FrmGraph
       Width           =   8355
    End
    Begin VB.Timer TimerShow 
-      Interval        =   90
+      Interval        =   100
       Left            =   3480
       Top             =   4920
    End
@@ -67,7 +67,7 @@ Begin VB.Form FrmGraph
       Width           =   8355
    End
    Begin VB.Timer TimerTest 
-      Interval        =   85
+      Interval        =   50
       Left            =   3480
       Top             =   5640
    End
@@ -485,6 +485,13 @@ PlcRes.LoadResFor Me
     analysisDefine.UpsetDiameter_Pistonside = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Pistonside)", 0))
     analysisDefine.UpsetDiameter_Rodside = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Rodside)", 0))
 
+
+    Dim isSimulate As Integer
+    isSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
+    If isSimulate = 1 Then
+        Me.TimerTest.Interval = 85
+    End If
+    
 
     Set fso = New FileSystemObject
     '

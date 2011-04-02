@@ -48,36 +48,31 @@ Begin VB.Form FrmOption
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   1
+      Tab             =   5
       TabsPerRow      =   10
       TabHeight       =   520
       TabCaption(0)   =   "General"
       TabPicture(0)   =   "FrmOption.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame7"
-      Tab(0).Control(1)=   "Frame5"
-      Tab(0).Control(2)=   "CommonDialog1"
-      Tab(0).Control(3)=   "cboLanguage"
-      Tab(0).Control(4)=   "chkOnlineOnStartUp"
-      Tab(0).Control(5)=   "lblLanguage"
+      Tab(0).Control(0)=   "lblLanguage"
+      Tab(0).Control(1)=   "chkOnlineOnStartUp"
+      Tab(0).Control(2)=   "cboLanguage"
+      Tab(0).Control(3)=   "CommonDialog1"
+      Tab(0).Control(4)=   "Frame5"
+      Tab(0).Control(5)=   "Frame7"
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "FrameP(0)"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Frame2(1)"
-      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "Frame2(0)"
-      Tab(2).Control(1).Enabled=   0   'False
       Tab(2).Control(2)=   "Frame2(3)"
-      Tab(2).Control(2).Enabled=   0   'False
       Tab(2).Control(3)=   "Frame2(2)"
-      Tab(2).Control(3).Enabled=   0   'False
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
@@ -94,19 +89,22 @@ Begin VB.Form FrmOption
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
-      Tab(5).ControlEnabled=   0   'False
+      Tab(5).ControlEnabled=   -1  'True
       Tab(5).Control(0)=   "Label1"
+      Tab(5).Control(0).Enabled=   0   'False
       Tab(5).Control(1)=   "Frame6"
+      Tab(5).Control(1).Enabled=   0   'False
       Tab(5).Control(2)=   "Frame1(11)"
+      Tab(5).Control(2).Enabled=   0   'False
       Tab(5).ControlCount=   3
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "cmdReset"
-      Tab(6).Control(1)=   "chkRecordInterrupts"
+      Tab(6).Control(0)=   "Label2"
+      Tab(6).Control(1)=   "Frame4"
       Tab(6).Control(2)=   "txtWeldNumber"
-      Tab(6).Control(3)=   "Frame4"
-      Tab(6).Control(4)=   "Label2"
+      Tab(6).Control(3)=   "chkRecordInterrupts"
+      Tab(6).Control(4)=   "cmdReset"
       Tab(6).ControlCount=   5
       Begin VB.Frame Frame7 
          Caption         =   "Unit Info"
@@ -374,7 +372,7 @@ Begin VB.Form FrmOption
          EndProperty
          Height          =   1215
          Index           =   11
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   170
          Tag             =   "21900"
          Top             =   4560
@@ -494,7 +492,7 @@ Begin VB.Form FrmOption
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3855
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   145
          Top             =   600
          Width           =   10215
@@ -1033,12 +1031,20 @@ Begin VB.Form FrmOption
       End
       Begin VB.Frame FrameP 
          Caption         =   "Simulate"
-         Height          =   3255
+         Height          =   2295
          Index           =   0
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   141
          Top             =   600
-         Width           =   5415
+         Width           =   5295
+         Begin VB.TextBox txtSecondSample 
+            Height          =   375
+            Left            =   5160
+            TabIndex        =   192
+            Text            =   "11"
+            Top             =   4000
+            Width           =   975
+         End
          Begin VB.CheckBox chkSimulate 
             Caption         =   "Simulate"
             Height          =   375
@@ -1062,6 +1068,14 @@ Begin VB.Form FrmOption
             TabIndex        =   142
             Top             =   1080
             Width           =   375
+         End
+         Begin VB.Label Label3 
+            Caption         =   "Sample/s:"
+            Height          =   255
+            Left            =   4080
+            TabIndex        =   193
+            Top             =   4000
+            Width           =   975
          End
       End
       Begin VB.Frame Frame2 
@@ -2070,7 +2084,7 @@ Begin VB.Form FrmOption
       Begin VB.Label Label1 
          Caption         =   "Label1"
          Height          =   255
-         Left            =   -69360
+         Left            =   5640
          TabIndex        =   146
          Top             =   2040
          Width           =   1815
@@ -2107,7 +2121,7 @@ Dim StartRecodingParam(5) As Single
 Dim isRecordInterrupts As Boolean
 
 Dim LANGUAGE As String
-Dim IsSimulate As Integer
+Dim isSimulate As Integer
 Dim SimulateFile As String
 
 Private Sub cboLanguage_Click()

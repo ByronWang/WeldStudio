@@ -466,7 +466,7 @@ Dim startPos As Integer
 Dim lastPos As Integer
 
 Dim r As WeldAnalysisResultType
-r.Succeed = PlcDeclare.INTERRUPT
+r.Succeed = PlcDeclare.OK
 
 
 stage = INIT_STAGE
