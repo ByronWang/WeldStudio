@@ -32,7 +32,7 @@ Begin VB.Form FrmAbout
    End
    Begin VB.CommandButton cmdOK 
       Cancel          =   -1  'True
-      Caption         =   "È·¶¨"
+      Caption         =   "OK"
       Default         =   -1  'True
       Height          =   345
       Left            =   4125
