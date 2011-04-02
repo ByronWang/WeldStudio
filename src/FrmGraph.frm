@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin VB.Form FrmGraph 
    Appearance      =   0  'Flat
-   BackColor       =   &H00000000&
+   BackColor       =   &H00400000&
    Caption         =   "FormGraph"
    ClientHeight    =   10605
    ClientLeft      =   165
@@ -39,8 +39,8 @@ Begin VB.Form FrmGraph
    End
    Begin VB.Timer TimerShow 
       Interval        =   90
-      Left            =   9240
-      Top             =   3240
+      Left            =   3480
+      Top             =   4920
    End
    Begin VB.PictureBox picPsi 
       Appearance      =   0  'Flat
@@ -68,24 +68,24 @@ Begin VB.Form FrmGraph
    End
    Begin VB.Timer TimerTest 
       Interval        =   92
-      Left            =   10320
-      Top             =   3120
+      Left            =   3480
+      Top             =   5640
    End
    Begin VB.Label lblDist 
       Alignment       =   1  'Right Justify
       BackStyle       =   0  'Transparent
       Caption         =   "67.98"
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   72
-         Charset         =   134
-         Weight          =   700
+         Name            =   "Impact"
+         Size            =   60
+         Charset         =   0
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   1335
+      Height          =   1600
       Left            =   10920
       TabIndex        =   16
       Top             =   120
@@ -97,10 +97,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "A1234"
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   36
-         Charset         =   134
-         Weight          =   700
+         Name            =   "Impact"
+         Size            =   26.25
+         Charset         =   0
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -118,10 +118,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Impact"
          Size            =   21.75
-         Charset         =   134
-         Weight          =   700
+         Charset         =   0
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -139,9 +139,9 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Impact"
          Size            =   21.75
-         Charset         =   134
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
@@ -161,9 +161,9 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Impact"
          Size            =   21.75
-         Charset         =   134
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
@@ -182,10 +182,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "A0001"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Impact"
          Size            =   99.75
-         Charset         =   134
-         Weight          =   700
+         Charset         =   0
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -205,7 +205,7 @@ Begin VB.Form FrmGraph
       Height          =   255
       Left            =   1080
       TabIndex        =   10
-      Top             =   4320
+      Top             =   13000
       Width           =   1935
    End
    Begin VB.Label lblPlcStage 
@@ -216,7 +216,7 @@ Begin VB.Form FrmGraph
       Height          =   255
       Left            =   2280
       TabIndex        =   9
-      Top             =   6360
+      Top             =   13000
       Width           =   1935
    End
    Begin VB.Line Line2 
@@ -231,16 +231,16 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "345"
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   72
-         Charset         =   134
-         Weight          =   700
+         Name            =   "Impact"
+         Size            =   60
+         Charset         =   0
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   1335
+      Height          =   1600
       Left            =   10920
       TabIndex        =   8
       Top             =   1560
@@ -251,16 +251,16 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "0"
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   72
-         Charset         =   134
-         Weight          =   700
+         Name            =   "Impact"
+         Size            =   60
+         Charset         =   0
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   1335
+      Height          =   1600
       Left            =   10920
       TabIndex        =   7
       Top             =   7200
@@ -271,16 +271,16 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "0"
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   72
-         Charset         =   134
-         Weight          =   700
+         Name            =   "Impact"
+         Size            =   60
+         Charset         =   0
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   1335
+      Height          =   1600
       Left            =   10920
       TabIndex        =   6
       Top             =   8640
@@ -290,16 +290,16 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Force"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Impact"
          Size            =   36
-         Charset         =   134
-         Weight          =   700
+         Charset         =   0
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   735
+      Height          =   900
       Left            =   120
       TabIndex        =   5
       Tag             =   "12040"
@@ -310,16 +310,16 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Amp"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Impact"
          Size            =   36
-         Charset         =   134
-         Weight          =   700
+         Charset         =   0
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   735
+      Height          =   900
       Left            =   120
       TabIndex        =   4
       Tag             =   "12030"
@@ -330,16 +330,16 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Volt"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Impact"
          Size            =   36
-         Charset         =   134
-         Weight          =   700
+         Charset         =   0
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   735
+      Height          =   900
       Left            =   120
       TabIndex        =   3
       Tag             =   "12020"
@@ -350,16 +350,16 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Dist"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Impact"
          Size            =   36
-         Charset         =   134
-         Weight          =   700
+         Charset         =   0
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   735
+      Height          =   900
       Left            =   120
       TabIndex        =   2
       Tag             =   "12010"
@@ -422,12 +422,12 @@ Function SwitchToRecoding(status As ShowModeType)
             weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
             lblBigCenter.Caption = toWeldNumberShowModel(weldSerailNumber)
             lblBigCenter.ForeColor = &H8000000E
-            lblBigCenter.FontSize = 120
+            lblBigCenter.FontSize = 100
             lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting", "DEFAULT")
         Case RECORDING_MODE
             weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
             lblTop.Caption = toWeldNumberShowModel(weldSerailNumber)
-            lblBigCenter.FontSize = 140
+            lblBigCenter.FontSize = 120
         Case ANALYSIS_MODE
             TimerTest.Enabled = False
             TimerShow.Tag = "ANALYSIS"
@@ -670,9 +670,7 @@ Else
         ElseIf GetSetting(App.EXEName, "Weld", "RecordInterrupts", 0) = 1 Then
             SaveData
         End If
-
      
-
         If analysisResult.Succeed = PlcDeclare.OK Then
             lblBigCenter.Caption = "OK"
             lblBigCenter.ForeColor = &HFF00&
@@ -681,7 +679,7 @@ Else
             lblBigCenter.ForeColor = &HFF&
         Else
             lblBigCenter.Caption = "INT"
-            lblBigCenter.ForeColor = &H0&
+            lblBigCenter.ForeColor = &HFFFFFF
         End If
     
         SwitchToRecoding ANALYSIS_MODE

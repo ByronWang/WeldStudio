@@ -65,7 +65,7 @@ Begin VB.MDIForm WeldMDIForm
       End
    End
    Begin VB.Menu mnuWindow 
-      Caption         =   "&Window"
+      Caption         =   "&Chart"
       Tag             =   "10300"
       WindowList      =   -1  'True
    End
@@ -373,7 +373,8 @@ End Sub
 Private Sub mnuOpen_Click()
     'CommonDialog1.Filter = "Weld Data File (*.wdd) | *.wdd |Old Data File (*.wld) | *.wld"
     CommonDialog1.Filter = "Data File (*.WLD) |*.wld|Daily Report(*.DLY)|*.DLY"
-    CommonDialog1.filename = ""
+    'CommonDialog1.filename = ".\data\" TODO
+    
     CommonDialog1.ShowOpen
     If CommonDialog1.filename <> "" And UCase(Right(CommonDialog1.filename, 4)) = ".WLD" Then
         Dim f As New FrmChart
