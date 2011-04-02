@@ -67,7 +67,7 @@ Begin VB.Form FrmGraph
       Width           =   8355
    End
    Begin VB.Timer TimerTest 
-      Interval        =   92
+      Interval        =   85
       Left            =   3480
       Top             =   5640
    End

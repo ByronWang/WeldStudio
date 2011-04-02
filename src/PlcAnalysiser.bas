@@ -342,7 +342,7 @@ Dim sTime As Single
     
     
     If analysisDefine.SlippageEnable Then
-        If r.UpsetDuration < analysisDefine.SlippageUpsetTime Or r.UpsetRailUsage > analysisDefine.SlippageUpset Then
+        If r.UpsetDuration < analysisDefine.SlippageUpsetTime And r.UpsetRailUsage > analysisDefine.SlippageUpset Then
             r.Succeed = NO
             r.HasSlippage = NO
         Else
