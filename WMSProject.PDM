@@ -25,11 +25,6 @@ C:\WINDOWS\system32\scrrun.dll=
 [Package|WMSPackage|Files Added]
 
 [Package|WMSPackage|Files Removed]
-c:\windows\system32\hhctrl.ocx=
-c:\windows\hh.exe=
-c:\windows\system32\itss.dll=
-c:\windows\system32\itircl.dll=
-c:\windows\system32\scrrun.dll=
 
 [Package|WMSPackage|Files In Project]
 D:\WeldStudio\WMS.exe=Yes
@@ -40,12 +35,12 @@ C:\WINDOWS\system32\asycfilt.dll=Yes
 C:\WINDOWS\system32\stdole2.tlb=Yes
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
 C:\WINDOWS\system32\VB6CHS.DLL=Yes
-C:\WINDOWS\system32\hhctrl.ocx=No
-C:\WINDOWS\system32\itss.dll=No
-C:\WINDOWS\system32\itircl.dll=No
-C:\WINDOWS\hh.exe=No
+C:\WINDOWS\system32\hhctrl.ocx=Yes
+C:\WINDOWS\system32\itss.dll=Yes
+C:\WINDOWS\system32\itircl.dll=Yes
+C:\WINDOWS\hh.exe=Yes
 C:\WINDOWS\system32\DTL32.DLL=Yes
-C:\WINDOWS\system32\scrrun.dll=No
+C:\WINDOWS\system32\scrrun.dll=Yes
 C:\WINDOWS\system32\msvcrt.dll=Yes
 C:\WINDOWS\system32\SCRRNCHS.DLL=Yes
 C:\WINDOWS\system32\MSCHRT20.OCX=Yes
@@ -91,6 +86,11 @@ C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPa
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
 C:\WINDOWS\system32\VB6STKIT.DLL=$(WinSysPathSysFile)
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+C:\WINDOWS\system32\hhctrl.ocx=$(WinSysPath)
+C:\WINDOWS\system32\itss.dll=$(WinSysPath)
+C:\WINDOWS\system32\itircl.dll=$(WinSysPath)
+C:\WINDOWS\hh.exe=$(WinSysPath)
+C:\WINDOWS\system32\scrrun.dll=$(WinSysPath)
 
 [Package|WMSPackage|Configure Shared Files]
 Applicable=Yes
@@ -102,6 +102,16 @@ Type=single
 Size=
 Title=Weld Monitoring Studio
 
+[Package|WMSPackage|Package]
+PackageFolder=D:\WeldStudio\Package
+ProjectFolder=D:\WeldStudio
+ServerSideCab=
+File1=D:\WeldStudio\Package\setup.exe
+File2=D:\WeldStudio\Package\Setup.Lst
+File3=D:\WeldStudio\Package\WMS.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
+
 [Package|WMSPackage|IconGroups]
 Group0=Weld Monitoring Studio
 PrivateGroup0=True
@@ -112,13 +122,3 @@ Icon1=WMS.exe
 Title1=Weld Monitoring Studio
 StartIn1=$(AppPath)
 Key1=Icon1
-
-[Package|WMSPackage|Package]
-PackageFolder=D:\WeldStudio\Package
-ProjectFolder=D:\WeldStudio
-ServerSideCab=
-File1=D:\WeldStudio\Package\setup.exe
-File2=D:\WeldStudio\Package\Setup.Lst
-File3=D:\WeldStudio\Package\WMS.CAB
-Handler1=PDWizard.FolderDplySubWiz
-Handler2=PDWizard.WebPostDplySubWiz

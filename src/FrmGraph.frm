@@ -22,7 +22,7 @@ Begin VB.Form FrmGraph
       ScaleHeight     =   720
       ScaleWidth      =   8325
       TabIndex        =   18
-      Top             =   1905
+      Top             =   6535
       Width           =   8355
    End
    Begin VB.PictureBox picDist 
@@ -34,7 +34,7 @@ Begin VB.Form FrmGraph
       ScaleHeight     =   720
       ScaleWidth      =   8325
       TabIndex        =   17
-      Top             =   465
+      Top             =   5025
       Width           =   8355
    End
    Begin VB.Timer TimerShow 
@@ -51,7 +51,7 @@ Begin VB.Form FrmGraph
       ScaleHeight     =   720
       ScaleWidth      =   8325
       TabIndex        =   1
-      Top             =   7560
+      Top             =   9240
       Width           =   8355
    End
    Begin VB.PictureBox picAmp 
@@ -63,7 +63,7 @@ Begin VB.Form FrmGraph
       ScaleHeight     =   720
       ScaleWidth      =   8325
       TabIndex        =   0
-      Top             =   9000
+      Top             =   7800
       Width           =   8355
    End
    Begin VB.Timer TimerTest 
@@ -71,46 +71,66 @@ Begin VB.Form FrmGraph
       Left            =   3480
       Top             =   5640
    End
+   Begin VB.Label Label5 
+      Alignment       =   2  'Center
+      BackColor       =   &H80000008&
+      BackStyle       =   0  'Transparent
+      Caption         =   "Regular"
+      BeginProperty Font 
+         Name            =   "Bookman Old Style"
+         Size            =   21.75
+         Charset         =   0
+         Weight          =   600
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H0000FF00&
+      Height          =   615
+      Left            =   11160
+      TabIndex        =   19
+      Top             =   1560
+      Width           =   3975
+   End
    Begin VB.Label lblDist 
       Alignment       =   1  'Right Justify
       BackStyle       =   0  'Transparent
       Caption         =   "67.98"
       BeginProperty Font 
-         Name            =   "Impact"
+         Name            =   "Bookman Old Style"
          Size            =   60
          Charset         =   0
-         Weight          =   400
+         Weight          =   600
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   1600
+      Height          =   1605
       Left            =   10920
       TabIndex        =   16
-      Top             =   120
+      Top             =   4680
       Width           =   3900
    End
    Begin VB.Label lblTop 
-      Alignment       =   2  'Center
       BackColor       =   &H80000008&
       BackStyle       =   0  'Transparent
-      Caption         =   "A1234"
+      Caption         =   "A234567890"
       BeginProperty Font 
-         Name            =   "Impact"
+         Name            =   "Bookman Old Style"
          Size            =   26.25
          Charset         =   0
-         Weight          =   400
+         Weight          =   600
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H0000FF00&
       Height          =   735
-      Left            =   5100
+      Left            =   240
       TabIndex        =   15
-      Top             =   2880
-      Width           =   5295
+      Top             =   2160
+      Width           =   3735
    End
    Begin VB.Label lblParameter 
       Alignment       =   2  'Center
@@ -118,20 +138,20 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
-         Name            =   "Impact"
+         Name            =   "Bookman Old Style"
          Size            =   21.75
          Charset         =   0
-         Weight          =   400
+         Weight          =   600
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H0000FF00&
       Height          =   615
-      Left            =   4920
+      Left            =   11160
       TabIndex        =   14
-      Top             =   6360
-      Width           =   5535
+      Top             =   2040
+      Width           =   3975
    End
    Begin VB.Label lblTime 
       Alignment       =   2  'Center
@@ -139,19 +159,19 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
-         Name            =   "Impact"
+         Name            =   "Bookman Old Style"
          Size            =   21.75
          Charset         =   0
-         Weight          =   400
+         Weight          =   600
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H000000FF&
       Height          =   495
-      Left            =   11760
+      Left            =   11640
       TabIndex        =   13
-      Top             =   3240
+      Top             =   240
       Width           =   3135
    End
    Begin VB.Label lblDate 
@@ -161,10 +181,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
-         Name            =   "Impact"
+         Name            =   "Bookman Old Style"
          Size            =   21.75
          Charset         =   0
-         Weight          =   400
+         Weight          =   600
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -173,7 +193,7 @@ Begin VB.Form FrmGraph
       Height          =   495
       Left            =   120
       TabIndex        =   12
-      Top             =   3240
+      Top             =   240
       Width           =   3135
    End
    Begin VB.Label lblBigCenter 
@@ -182,20 +202,20 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "A0001"
       BeginProperty Font 
-         Name            =   "Impact"
+         Name            =   "Bookman Old Style"
          Size            =   99.75
          Charset         =   0
-         Weight          =   400
+         Weight          =   600
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H8000000E&
-      Height          =   2655
-      Left            =   3353
+      Height          =   3735
+      Left            =   2040
       TabIndex        =   11
-      Top             =   3600
-      Width           =   8535
+      Top             =   720
+      Width           =   11295
    End
    Begin VB.Label lblWeldStage 
       BackColor       =   &H80000008&
@@ -219,31 +239,24 @@ Begin VB.Form FrmGraph
       Top             =   13000
       Width           =   1935
    End
-   Begin VB.Line Line2 
-      BorderColor     =   &H00404040&
-      X1              =   0
-      X2              =   15240
-      Y1              =   7080
-      Y2              =   7080
-   End
    Begin VB.Label lblVolt 
       Alignment       =   1  'Right Justify
       BackStyle       =   0  'Transparent
       Caption         =   "345"
       BeginProperty Font 
-         Name            =   "Impact"
+         Name            =   "Bookman Old Style"
          Size            =   60
          Charset         =   0
-         Weight          =   400
+         Weight          =   600
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   1600
+      Height          =   1605
       Left            =   10920
       TabIndex        =   8
-      Top             =   1560
+      Top             =   6120
       Width           =   3900
    End
    Begin VB.Label lblPsi 
@@ -251,19 +264,19 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "0"
       BeginProperty Font 
-         Name            =   "Impact"
+         Name            =   "Bookman Old Style"
          Size            =   60
          Charset         =   0
-         Weight          =   400
+         Weight          =   600
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   1600
+      Height          =   1605
       Left            =   10920
       TabIndex        =   7
-      Top             =   7200
+      Top             =   8880
       Width           =   3900
    End
    Begin VB.Label lblAmp 
@@ -271,19 +284,19 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "0"
       BeginProperty Font 
-         Name            =   "Impact"
+         Name            =   "Bookman Old Style"
          Size            =   60
          Charset         =   0
-         Weight          =   400
+         Weight          =   600
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   1600
+      Height          =   1605
       Left            =   10920
       TabIndex        =   6
-      Top             =   8640
+      Top             =   7440
       Width           =   3900
    End
    Begin VB.Label Label4 
@@ -293,7 +306,7 @@ Begin VB.Form FrmGraph
          Name            =   "Impact"
          Size            =   36
          Charset         =   0
-         Weight          =   400
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -303,7 +316,7 @@ Begin VB.Form FrmGraph
       Left            =   120
       TabIndex        =   5
       Tag             =   "12040"
-      Top             =   7560
+      Top             =   9120
       Width           =   1935
    End
    Begin VB.Label Label3 
@@ -313,7 +326,7 @@ Begin VB.Form FrmGraph
          Name            =   "Impact"
          Size            =   36
          Charset         =   0
-         Weight          =   400
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -323,7 +336,7 @@ Begin VB.Form FrmGraph
       Left            =   120
       TabIndex        =   4
       Tag             =   "12030"
-      Top             =   9000
+      Top             =   7680
       Width           =   1695
    End
    Begin VB.Label Label2 
@@ -333,7 +346,7 @@ Begin VB.Form FrmGraph
          Name            =   "Impact"
          Size            =   36
          Charset         =   0
-         Weight          =   400
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -343,7 +356,7 @@ Begin VB.Form FrmGraph
       Left            =   120
       TabIndex        =   3
       Tag             =   "12020"
-      Top             =   1920
+      Top             =   6360
       Width           =   1695
    End
    Begin VB.Label Label1 
@@ -353,7 +366,7 @@ Begin VB.Form FrmGraph
          Name            =   "Impact"
          Size            =   36
          Charset         =   0
-         Weight          =   400
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -363,7 +376,7 @@ Begin VB.Form FrmGraph
       Left            =   120
       TabIndex        =   2
       Tag             =   "12010"
-      Top             =   480
+      Top             =   4920
       Width           =   1695
    End
 End
@@ -427,7 +440,7 @@ Function SwitchToRecoding(status As ShowModeType)
         Case RECORDING_MODE
             weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
             lblTop.Caption = toWeldNumberShowModel(weldSerailNumber)
-            lblBigCenter.FontSize = 120
+            lblBigCenter.FontSize = 140
         Case ANALYSIS_MODE
             TimerTest.Enabled = False
             TimerShow.Tag = "ANALYSIS"
@@ -486,9 +499,9 @@ PlcRes.LoadResFor Me
     analysisDefine.UpsetDiameter_Rodside = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Rodside)", 0))
 
 
-    Dim isSimulate As Integer
-    isSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
-    If isSimulate = 1 Then
+    Dim IsSimulate As Integer
+    IsSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
+    If IsSimulate = 1 Then
         Me.TimerTest.Interval = 85
     End If
     
@@ -637,7 +650,7 @@ Private Sub TimerTest_Timer()
 wm = PLCDrv.readPcMonitor
 
 
-If wm.WeldCycle = 1 And 0 < wm.data.WeldStage And wm.data.WeldStage <= 6 Then
+If wm.WeldCycle = 1 And 0 <= wm.data.WeldStage And wm.data.WeldStage <= 6 Then
     If Not beSigned Then
         lastTimeInMS = timeGetTime()
         beSigned = True

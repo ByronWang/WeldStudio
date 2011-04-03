@@ -55,11 +55,17 @@ Begin VB.Form FrmOption
       TabPicture(0)   =   "FrmOption.frx":000C
       Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "lblLanguage"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "chkOnlineOnStartUp"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "cboLanguage"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "CommonDialog1"
+      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "Frame5"
+      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "Frame7"
+      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
@@ -69,10 +75,10 @@ Begin VB.Form FrmOption
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame2(1)"
-      Tab(2).Control(1)=   "Frame2(0)"
-      Tab(2).Control(2)=   "Frame2(3)"
-      Tab(2).Control(3)=   "Frame2(2)"
+      Tab(2).Control(0)=   "Frame2(2)"
+      Tab(2).Control(1)=   "Frame2(3)"
+      Tab(2).Control(2)=   "Frame2(0)"
+      Tab(2).Control(3)=   "Frame2(1)"
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
@@ -100,11 +106,11 @@ Begin VB.Form FrmOption
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "Label2"
-      Tab(6).Control(1)=   "Frame4"
+      Tab(6).Control(0)=   "cmdReset"
+      Tab(6).Control(1)=   "chkRecordInterrupts"
       Tab(6).Control(2)=   "txtWeldNumber"
-      Tab(6).Control(3)=   "chkRecordInterrupts"
-      Tab(6).Control(4)=   "cmdReset"
+      Tab(6).Control(3)=   "Frame4"
+      Tab(6).Control(4)=   "Label2"
       Tab(6).ControlCount=   5
       Begin VB.Frame Frame7 
          Caption         =   "Unit Info"
@@ -2121,7 +2127,7 @@ Dim StartRecodingParam(5) As Single
 Dim isRecordInterrupts As Boolean
 
 Dim LANGUAGE As String
-Dim isSimulate As Integer
+Dim IsSimulate As Integer
 Dim SimulateFile As String
 
 Private Sub cboLanguage_Click()
@@ -2459,7 +2465,7 @@ WeldAnalysis_Data(4) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetMin"
 WeldAnalysis_Data(5) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetMax", 20#))
 WeldAnalysis_Data(6) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ForgeMin", 30))
 WeldAnalysis_Data(7) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ForgeMax", 60))
-WeldAnalysis_Data(8) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "SlippageUpsetTime", 0.75))
+WeldAnalysis_Data(8) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "SlippageUpsetTime", 0.2))
 WeldAnalysis_Data(9) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "SlippageUpset", 22#))
 WeldAnalysis_Data(10) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptCurrent", 100))
 WeldAnalysis_Data(11) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptTime", 2#))

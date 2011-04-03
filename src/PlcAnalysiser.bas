@@ -342,7 +342,7 @@ Dim sTime As Single
     
     
     If analysisDefine.SlippageEnable Then
-        If r.UpsetDuration < analysisDefine.SlippageUpsetTime And r.UpsetRailUsage > analysisDefine.SlippageUpset Then
+        If r.UpsetDuration < analysisDefine.SlippageUpsetTime Or r.UpsetRailUsage > analysisDefine.SlippageUpset Then
             r.Succeed = NO
             r.HasSlippage = NO
         Else
@@ -445,7 +445,8 @@ Dim i As Integer
         sumCurrent = sumCurrent + buf(i).Amp
     Next
                 
-    r.OverallImpedance = (sumVol / sumCurrent) * (1000000 / 3600) / 3
+    'TODO
+    r.OverallImpedance = (sumVol / sumCurrent) * (1000000 / 3600) / 2.4
     
     
     'TODO Holding Time

@@ -14,6 +14,34 @@ Begin VB.Form FrmChart
    ShowInTaskbar   =   0   'False
    Tag             =   "11000"
    WindowState     =   2  'Maximized
+   Begin VB.Frame lineV 
+      BackColor       =   &H00FF0000&
+      BorderStyle     =   0  'None
+      Height          =   2000
+      Left            =   6840
+      TabIndex        =   77
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   10
+   End
+   Begin VB.Frame lineH 
+      BackColor       =   &H00FF0000&
+      BorderStyle     =   0  'None
+      Height          =   10
+      Left            =   4920
+      TabIndex        =   76
+      Top             =   5040
+      Visible         =   0   'False
+      Width           =   30000
+   End
+   Begin VB.CommandButton cmdShowMode 
+      Caption         =   "Change Mode"
+      Height          =   495
+      Left            =   13560
+      TabIndex        =   75
+      Top             =   240
+      Width           =   1215
+   End
    Begin VB.CommandButton cmdViewDataDetail 
       Caption         =   "ViewDetial"
       Height          =   495
@@ -21,14 +49,6 @@ Begin VB.Form FrmChart
       TabIndex        =   74
       Top             =   9240
       Width           =   1215
-   End
-   Begin MSChart20Lib.MSChart MSChart1 
-      Height          =   8295
-      Left            =   4440
-      OleObjectBlob   =   "FrmChart.frx":0442
-      TabIndex        =   0
-      Top             =   1320
-      Width           =   12015
    End
    Begin VB.Frame Frame1 
       BorderStyle     =   0  'None
@@ -1264,6 +1284,14 @@ Begin VB.Form FrmChart
          Width           =   915
       End
    End
+   Begin MSChart20Lib.MSChart MSChart1 
+      Height          =   8295
+      Left            =   4560
+      OleObjectBlob   =   "FrmChart.frx":0442
+      TabIndex        =   0
+      Top             =   1320
+      Width           =   12015
+   End
    Begin VB.Label lblTime 
       Caption         =   "19:12:54"
       BeginProperty Font 
@@ -1408,7 +1436,9 @@ Const MODEL_SMALL As Integer = 1
 
 Enum ModelConstants
     COMMON
-    SMALL
+    PURE
+    SMALLCOMMON
+    SMALLPURE
 End Enum
 
 Dim model As ModelConstants
@@ -1421,6 +1451,9 @@ Dim buf() As WeldData
 Const SUCCEED_COLOR As Long = &HC000&
 Const FAIL_COLOR As Long = &HFF&
 Const NOTUSED_COLOR As Long = &H80000012
+
+Dim lastTime As Long
+
 
 Dim fr As FileR
 Public Sub Load(filename As String)
@@ -1440,7 +1473,7 @@ For i = 0 To fr.header2.RecordCount - 1
 Next
 
 
-    Call setChart(buf)
+    Call setChart(buf, COMMON)
     
     lblCompany.Caption = Trim(fr.header1.CompanyName)
     
@@ -1570,7 +1603,7 @@ End With
 
 MSChart1.ChartData = MyData
 End Function
-Private Function setChart(EmulateData() As WeldData)
+Private Function setChart(EmulateData() As WeldData, model As ModelConstants)
 Dim TimeMax As Integer
 
 TimeMax = CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeMaxCycleTime", 200))
@@ -1602,7 +1635,10 @@ Dim lastv As Integer
 
 ' issue from american 7
 Dim step As Integer
-step = 2
+step = 1
+If model = PURE Then
+    step = 4
+End If
 
 i = 0
 lastv = 0
@@ -1614,8 +1650,8 @@ While i <= UBound(EmulateData) And i <= count
         MyData(3, i + 1) = EmulateData(i).Amp
         MyData(4, i + 1) = EmulateData(i).Dist
     Else
-        MyData(1, i + 1) = PlcAnalysiser.toForce(EmulateData(lastv).PsiUpset, EmulateData(lastv).PsiOpen, fr.analysisDefine)
-        MyData(2, i + 1) = EmulateData(lastv).Volt
+        MyData(1, i + 1) = PlcAnalysiser.toForce(EmulateData(i).PsiUpset, EmulateData(i).PsiOpen, fr.analysisDefine)
+        MyData(2, i + 1) = EmulateData(i).Volt
         MyData(3, i + 1) = EmulateData(lastv).Amp
         MyData(4, i + 1) = EmulateData(i).Dist
     End If
@@ -1814,6 +1850,8 @@ Private Function updateCueControl(con As Control, Succeed As Integer)
 End Function
 
 
+
+
 Private Sub cmdViewDataDetail_Click()
 Me.MousePointer = MousePointerConstants.vbHourglass
 
@@ -1829,13 +1867,35 @@ Private Sub Form_Unload(Cancel As Integer)
     Unload Me
 End Sub
 
-Private Sub MSChart1_DblClick()
+Private Sub cmdShowMode_Click()
     If model = COMMON Then
-        model = SMALL
-        Call setChartSmall(buf)
-    Else
+        model = PURE
+        Call setChart(buf, model)
+    ElseIf model = PURE Then
         model = COMMON
-        Call setChart(buf)
+        Call setChart(buf, model)
+    End If
+End Sub
+
+Private Sub MSChart1_DblClick()
+
+    If model = COMMON Then
+        model = SMALLCOMMON
+        Call setChartSmall(buf)
+        cmdShowMode.Enabled = False
+    ElseIf model = PURE Then
+        model = SMALLPURE
+        Call setChartSmall(buf)
+        cmdShowMode.Enabled = False
+    ElseIf model = SMALLCOMMON Then
+        model = COMMON
+        Call setChart(buf, model)
+        cmdShowMode.Enabled = True
+    
+    ElseIf model = SMALLPURE Then
+        model = PURE
+        Call setChart(buf, model)
+        cmdShowMode.Enabled = True
     End If
 End Sub
 
@@ -1882,3 +1942,51 @@ End Function
 
 
 
+Private Sub MSChart1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If Button = vbRightButton Then
+        lineH.Left = MSChart1.Left + 3000
+        lineH.Width = MSChart1.Width - 3000
+        lineH.Top = Y + MSChart1.Top
+        
+        lineV.Top = MSChart1.Top + 3000
+        lineV.Height = MSChart1.Height - 3000
+        lineV.Left = X + MSChart1.Left
+    
+        lineH.Visible = True
+        lineV.Visible = True
+    Else
+        lineH.Visible = False
+        lineV.Visible = False
+    End If
+End Sub
+
+Private Sub MSChart1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Dim thisTime As Long
+Dim timeSep As Long
+timeSep = 200
+
+    thisTime = timeGetTime
+    If Button = vbRightButton Then
+        If thisTime - lastTime > timeSep Then
+            Me.MousePointer = VtMousePointerArrow
+            lastTime = thisTime
+            
+            lineH.Width = MSChart1.Width
+            lineH.Left = MSChart1.Left
+            lineH.Top = Y + MSChart1.Top
+            
+            lineV.Height = MSChart1.Height
+            lineV.Top = MSChart1.Top
+            lineV.Left = X + MSChart1.Left
+        End If
+    Else
+        lineH.Visible = False
+        lineV.Visible = False
+    End If
+
+End Sub
+
+Private Sub MSChart1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+        lineH.Visible = False
+        lineV.Visible = False
+End Sub
