@@ -132,7 +132,7 @@ End Sub
 Private Sub mnuFile_click()
     If WeldMDIForm.ActiveForm Is Nothing Then
         mnuPrint.Enabled = False
-    ElseIf TypeOf WeldMDIForm.ActiveForm Is FrmChart Then
+    ElseIf TypeOf WeldMDIForm.ActiveForm Is FrmChart Or TypeOf WeldMDIForm.ActiveForm Is FrmDailyReport Then
         mnuPrint.Enabled = True
     Else
         mnuPrint.Enabled = False
@@ -151,8 +151,9 @@ Private Sub mnuPrint_Click()
         On Error GoTo ERRORHANDLE
         Me.CommonDialog1.PrinterDefault = False
         CommonDialog1.CancelError = True
+        CommonDialog1.Flags = cdlPDReturnDC + cdlPDNoPageNums
         Me.CommonDialog1.ShowPrinter
-
+        if CommonDialog1.
         DoEvents   ' may be needed for large datasets
         
         Set fc = f
@@ -309,6 +310,8 @@ Private Sub mnuPrint_Click()
         End With
         
         Printer.EndDoc
+    ElseIf TypeOf f Is FrmDailyReport Then
+        
     End If
     
     Exit Sub
@@ -373,7 +376,7 @@ End Sub
 Private Sub mnuOpen_Click()
     'CommonDialog1.Filter = "Weld Data File (*.wdd) | *.wdd |Old Data File (*.wld) | *.wld"
     CommonDialog1.Filter = "Data File (*.WLD) |*.wld|Daily Report(*.DLY)|*.DLY"
-    'CommonDialog1.filename = ".\data\" TODO
+    CommonDialog1.InitDir = ".\data\"
     
     CommonDialog1.ShowOpen
     If CommonDialog1.filename <> "" And UCase(Right(CommonDialog1.filename, 4)) = ".WLD" Then
