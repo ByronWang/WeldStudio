@@ -142,31 +142,72 @@ End Sub
 
 Private Sub mnuPrint_Click()
     Dim f As Form
-    Dim fc As FrmChart
     
     Set f = WeldMDIForm.ActiveForm
     If f Is Nothing Then
         Exit Sub
     ElseIf TypeOf f Is FrmChart Then
-        On Error GoTo ERRORHANDLE
-        Me.CommonDialog1.PrinterDefault = False
+        Me.CommonDialog1.PrinterDefault = True
         CommonDialog1.CancelError = True
-        CommonDialog1.Flags = cdlPDReturnDC + cdlPDNoPageNums
-        Me.CommonDialog1.ShowPrinter
-        if CommonDialog1.
-        DoEvents   ' may be needed for large datasets
+        CommonDialog1.Flags = cdlPDNoPageNums
         
+        On Error Resume Next
+        Me.CommonDialog1.ShowPrinter
+        If Err.Number = cdlCancel Then
+            Exit Sub
+        End If
+        On Error GoTo 0
+        DoEvents
+        
+        Dim fc As FrmChart
         Set fc = f
+        For i = 1 To CommonDialog1.Copies
+            Call printChart(fc)
+        Next i
     
-        Printer.Orientation = vbPRORLandscape
+    ElseIf TypeOf f Is FrmDailyReport Then
+        Me.CommonDialog1.PrinterDefault = True
+        CommonDialog1.CancelError = True
+        CommonDialog1.Flags = cdlPDNoPageNums
+        
+        On Error Resume Next
+        Me.CommonDialog1.ShowPrinter
+        If Err.Number = cdlCancel Then
+            Exit Sub
+        End If
+        On Error GoTo 0
+        DoEvents
+        
+        Dim fd As FrmDailyReport
+        Set fd = f
+        For i = 1 To CommonDialog1.Copies
+            Call printDailyReport(fd)
+        Next i
+    End If
+    
+    Exit Sub
+ERRORHANDLE:
+Select Case Err.Number
+Case cdlCancel
+'User clicked Cancel button on Print dialog box
+Case Else
+MsgBox Err.Description
+End Select
+
+End Sub
+
+
+Private Function printChart(fc As FrmChart)
+
+        printer.Orientation = vbPRORLandscape
                 
         fc.MSChart1.EditCopy
         DoEvents   ' may be needed for large datasets
         DoEvents   ' may be needed for large datasets
-        Printer.Print " "
+        printer.Print " "
         'Printer.Print " ------------------------------- "
-        Printer.Print " "
-        Printer.PaintPicture Clipboard.GetData(), 3500, 2200
+        printer.Print " "
+        printer.PaintPicture Clipboard.GetData(), 3500, 2200
         
         
         Dim i As Integer
@@ -184,115 +225,115 @@ Private Sub mnuPrint_Click()
         gSep = 100
         iSep = 50
         
-        Printer.CurrentY = 2300
+        printer.CurrentY = 2300
         
         Dim lTop As Integer
         
         With fc
     
             i = 0
-            Printer.CurrentX = gLeft
+            printer.CurrentX = gLeft
             Call setFrom(.lblGroup(i))
-            Printer.CurrentY = Printer.CurrentY + lineSep
+            printer.CurrentY = printer.CurrentY + lineSep
             
             For j = 0 To 3
-                Printer.FontBold = False
-                Printer.CurrentX = iLeft
-                lTop = Printer.CurrentY
+                printer.FontBold = False
+                printer.CurrentX = iLeft
+                lTop = printer.CurrentY
                 Call setFrom(.lblItem(j))
-                Printer.CurrentY = lTop
+                printer.CurrentY = lTop
                 
-                Printer.CurrentX = idLeft
+                printer.CurrentX = idLeft
                 Call setFrom(.lblItemData(j))
-                Printer.CurrentY = Printer.CurrentY + iSep
+                printer.CurrentY = printer.CurrentY + iSep
             Next
             
             
             i = 1
-            Printer.CurrentX = gLeft
+            printer.CurrentX = gLeft
             Call setFrom(.lblGroup(i))
-            Printer.CurrentY = Printer.CurrentY + lineSep
+            printer.CurrentY = printer.CurrentY + lineSep
             
             For j = 4 To 8
-                Printer.CurrentX = iLeft
-                lTop = Printer.CurrentY
+                printer.CurrentX = iLeft
+                lTop = printer.CurrentY
                 Call setFrom(.lblItem(j))
-                Printer.CurrentY = lTop
+                printer.CurrentY = lTop
                 
-                Printer.CurrentX = idLeft
+                printer.CurrentX = idLeft
                 Call setFrom(.lblItemData(j))
-                Printer.CurrentY = Printer.CurrentY + iSep
+                printer.CurrentY = printer.CurrentY + iSep
             Next
             
             
             i = 2
-            Printer.CurrentX = gLeft
+            printer.CurrentX = gLeft
             Call setFrom(.lblGroup(i))
-            Printer.CurrentY = Printer.CurrentY + lineSep
+            printer.CurrentY = printer.CurrentY + lineSep
                             
             For j = 9 To 15
-                Printer.CurrentX = iLeft
-                lTop = Printer.CurrentY
+                printer.CurrentX = iLeft
+                lTop = printer.CurrentY
                 Call setFrom(.lblItem(j))
-                Printer.CurrentY = lTop
+                printer.CurrentY = lTop
                 
-                Printer.CurrentX = idLeft
+                printer.CurrentX = idLeft
                 Call setFrom(.lblItemData(j))
-                Printer.CurrentY = Printer.CurrentY + iSep
+                printer.CurrentY = printer.CurrentY + iSep
             Next
             
             
             
             i = 3
-            Printer.CurrentX = gLeft
+            printer.CurrentX = gLeft
             Call setFrom(.lblGroup(i))
-            Printer.CurrentY = Printer.CurrentY + lineSep
+            printer.CurrentY = printer.CurrentY + lineSep
             
             For j = 16 To 20
-                Printer.CurrentX = iLeft
-                lTop = Printer.CurrentY
+                printer.CurrentX = iLeft
+                lTop = printer.CurrentY
                 Call setFrom(.lblItem(j))
-                Printer.CurrentY = lTop
+                printer.CurrentY = lTop
                 
-                Printer.CurrentX = idLeft
+                printer.CurrentX = idLeft
                 Call setFrom(.lblItemData(j))
-                Printer.CurrentY = Printer.CurrentY + iSep
+                printer.CurrentY = printer.CurrentY + iSep
             Next
             
             
             
             i = 4
-            Printer.CurrentX = gLeft
+            printer.CurrentX = gLeft
             Call setFrom(.lblGroup(i))
-            Printer.CurrentY = Printer.CurrentY + lineSep
+            printer.CurrentY = printer.CurrentY + lineSep
             
             For j = 21 To 22
-                Printer.CurrentX = iLeft
-                lTop = Printer.CurrentY
+                printer.CurrentX = iLeft
+                lTop = printer.CurrentY
                 Call setFrom(.lblItem(j))
-                Printer.CurrentY = lTop
+                printer.CurrentY = lTop
                 
-                Printer.CurrentX = idLeft
-                Printer.Print .lblItemData(j).Caption
-                Printer.CurrentY = Printer.CurrentY + iSep
+                printer.CurrentX = idLeft
+                printer.Print .lblItemData(j).Caption
+                printer.CurrentY = printer.CurrentY + iSep
             Next
             
                             
             
             i = 5
-            Printer.CurrentX = gLeft
+            printer.CurrentX = gLeft
             Call setFrom(.lblGroup(i))
-            Printer.CurrentY = Printer.CurrentY + lineSep
+            printer.CurrentY = printer.CurrentY + lineSep
             
             For j = 23 To 24
-                Printer.CurrentX = iLeft
-                lTop = Printer.CurrentY
+                printer.CurrentX = iLeft
+                lTop = printer.CurrentY
                 Call setFrom(.lblItem(j))
-                Printer.CurrentY = lTop
+                printer.CurrentY = lTop
                 
-                Printer.CurrentX = idLeft
+                printer.CurrentX = idLeft
                 Call setFrom(.lblItemData(j))
-                Printer.CurrentY = Printer.CurrentY + iSep
+                printer.CurrentY = printer.CurrentY + iSep
             Next
             
             
@@ -309,31 +350,73 @@ Private Sub mnuPrint_Click()
             
         End With
         
-        Printer.EndDoc
-    ElseIf TypeOf f Is FrmDailyReport Then
-        
-    End If
+        printer.EndDoc
+End Function
+
+Private Function printDailyReport(f As FrmDailyReport)
+printer.Orientation = vbPRORLandscape
     
-    Exit Sub
-ERRORHANDLE:
+Dim x, y As Long
+x = 1200
+y = 2200
+
+Call navControlForDailyReport(f.lblCompany)
+Call navControlForDailyReport(f.lblDate)
+Call navControlForDailyReport(f.lblLocation)
+Call navControlForDailyReport(f.lblUnit)
+
+
+For j = 0 To f.MSFlexGrid1.Cols - 1
+
+    printer.CurrentY = y
     
-End Sub
+    For i = 0 To 0
+        printer.CurrentX = x
+        printer.Print f.MSFlexGrid1.TextMatrix(i, j)
+    Next i
+    
+    printer.CurrentY = printer.CurrentY + 200
+    
+    
+    For i = 1 To f.MSFlexGrid1.Rows - 1
+        printer.CurrentY = printer.CurrentY + 100
+        printer.CurrentX = x + 100
+        printer.Print f.MSFlexGrid1.TextMatrix(i, j)
+    Next i
+    x = x + f.MSFlexGrid1.ColWidth(j) * 1.2
+Next j
+printer.EndDoc
+
+    
+End Function
+
+Private Function navControlForDailyReport(con As Label)
+    printer.CurrentX = con.Left + 2000
+    printer.CurrentY = con.Top + 1100
+    
+    printer.FontSize = con.FontSize
+    printer.FontBold = con.FontBold
+    printer.ForeColor = con.ForeColor
+    printer.Print con.Caption
+End Function
+
+
 
 Private Function navControl(con As Label)
-    Printer.CurrentX = con.Left
-    Printer.CurrentY = con.Top + 1100
+    printer.CurrentX = con.Left
+    printer.CurrentY = con.Top + 1100
     
-    Printer.FontSize = con.FontSize
-    Printer.FontBold = con.FontBold
-    Printer.ForeColor = con.ForeColor
-    Printer.Print con.Caption
+    printer.FontSize = con.FontSize
+    printer.FontBold = con.FontBold
+    printer.ForeColor = con.ForeColor
+    printer.Print con.Caption
 End Function
 
 Private Function setFrom(con As Control)
-    Printer.FontSize = con.FontSize
-    Printer.FontBold = con.FontBold
-    Printer.ForeColor = con.ForeColor
-    Printer.Print con.Caption
+    printer.FontSize = con.FontSize
+    printer.FontBold = con.FontBold
+    printer.ForeColor = con.ForeColor
+    printer.Print con.Caption
 End Function
 
 
