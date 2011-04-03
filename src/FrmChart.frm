@@ -1852,6 +1852,11 @@ End Function
 
 
 
+Private Sub cmdShowMode_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Me.MousePointer = MousePointerConstants.vbHourglass
+
+End Sub
+
 Private Sub cmdViewDataDetail_Click()
 Me.MousePointer = MousePointerConstants.vbHourglass
 
@@ -1868,6 +1873,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub cmdShowMode_Click()
+    Me.MousePointer = VtMousePointer.VtMousePointerHourGlass
     If model = COMMON Then
         model = PURE
         Call setChart(buf, model)
@@ -1875,6 +1881,7 @@ Private Sub cmdShowMode_Click()
         model = COMMON
         Call setChart(buf, model)
     End If
+    Me.MousePointer = VtMousePointer.VtMousePointerArrow
 End Sub
 
 Private Sub MSChart1_DblClick()
@@ -1944,14 +1951,14 @@ End Function
 
 Private Sub MSChart1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = vbRightButton Then
-        lineH.Left = MSChart1.Left + 3000
-        lineH.Width = MSChart1.Width - 3000
+        lineH.Left = MSChart1.Left + 300
+        lineH.Width = MSChart1.Width - 300
         lineH.Top = Y + MSChart1.Top
-        
-        lineV.Top = MSChart1.Top + 3000
-        lineV.Height = MSChart1.Height - 3000
+
+        lineV.Top = MSChart1.Top + 360
+        lineV.Height = MSChart1.Height - 800
         lineV.Left = X + MSChart1.Left
-    
+
         lineH.Visible = True
         lineV.Visible = True
     Else
@@ -1963,7 +1970,7 @@ End Sub
 Private Sub MSChart1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 Dim thisTime As Long
 Dim timeSep As Long
-timeSep = 200
+timeSep = 50
 
     thisTime = timeGetTime
     If Button = vbRightButton Then
@@ -1971,13 +1978,13 @@ timeSep = 200
             Me.MousePointer = VtMousePointerArrow
             lastTime = thisTime
             
-            lineH.Width = MSChart1.Width
-            lineH.Left = MSChart1.Left
-            lineH.Top = Y + MSChart1.Top
-            
-            lineV.Height = MSChart1.Height
-            lineV.Top = MSChart1.Top
-            lineV.Left = X + MSChart1.Left
+        lineH.Left = MSChart1.Left + 360
+        lineH.Width = MSChart1.Width - 1800
+        lineH.Top = Y + MSChart1.Top
+        
+        lineV.Top = MSChart1.Top + 320
+        lineV.Height = MSChart1.Height - 900
+        lineV.Left = X + MSChart1.Left
         End If
     Else
         lineH.Visible = False
