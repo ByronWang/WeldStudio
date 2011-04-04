@@ -10,9 +10,11 @@ Begin VB.Form FrmGraph
    Icon            =   "FrmGraph.frx":0000
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
+   MinButton       =   0   'False
    ScaleHeight     =   10605
    ScaleWidth      =   15240
    Tag             =   "12000"
+   WindowState     =   2  'Maximized
    Begin VB.PictureBox picVolt 
       Appearance      =   0  'Flat
       BackColor       =   &H0000FFFF&
@@ -71,7 +73,7 @@ Begin VB.Form FrmGraph
       Left            =   3480
       Top             =   5640
    End
-   Begin VB.Label Label5 
+   Begin VB.Label lblProcessSetting 
       Alignment       =   2  'Center
       BackColor       =   &H80000008&
       BackStyle       =   0  'Transparent
@@ -393,21 +395,22 @@ Dim path As String
 
 Dim timeStart As Long
 Dim timePostFromStart As Long
+Dim lastStage As Long
 
 Dim dist_scale As Long
 Dim volt_scale As Long
 Dim amp_scale As Long
 Dim psi_scale As Long
 
-Dim rBuf(30000) As WeldData
-Dim wm As WeldMonitor
-Dim rIndex As Integer
+Dim buffer(30000) As WeldData
+Dim wmRecord As WeldMonitor
+Dim wmRecord_Index As Integer
 
 Dim beRecording As Boolean
 Dim beSigned As Boolean
 
-Dim StartRecording As Integer
-Dim StartRecodingParam(5) As Single
+Dim Mode_StartRecording As Integer
+Dim ModeParam_StartRecoding(5) As Single
 
 Dim weldSerailNumber As Long
 'Dim WeldFile As String
@@ -425,8 +428,8 @@ End Enum
 Dim analysisDefine As WeldAnalysisDefineType
 Dim analysisResult As WeldAnalysisResultType
 
-Function SwitchToRecoding(status As ShowModeType)
-    Select Case status
+Function SwitchToRecoding(Status As ShowModeType)
+    Select Case Status
         Case STANDBY_MODE
             timerMonitor.Enabled = True
             timerDisplay.Tag = ""
@@ -445,17 +448,19 @@ Function SwitchToRecoding(status As ShowModeType)
             timerMonitor.Enabled = False
             timerDisplay.Tag = "ANALYSIS"
     End Select
-    showMode = status
+    showMode = Status
 End Function
 
 Private Sub Form_Load()
 On Error GoTo ERROR_HANDLE
 ' Resource
 PlcRes.LoadResFor Me
-PLCDrv.preparePcMonitor
-PLCDrv.g_BeMonitoring = True
+
+PLCDrv.PreparePcMonitor
 
 WeldMDIForm.mnuWindow.Enabled = False
+WeldMDIForm.mnuParameters.Enabled = False
+WeldMDIForm.mnuOptions.Enabled = False
     
     amp_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Amp", 500))
     dist_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Dist", 1000))
@@ -463,11 +468,11 @@ WeldMDIForm.mnuWindow.Enabled = False
     psi_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Press", 50))
 
 
-    StartRecording = CInt(GetSetting(App.EXEName, "StartRecording", "StartRecording", 0))
-    StartRecodingParam(1) = CSng(GetSetting(App.EXEName, "StartRecording", "Dist", 2.5))
-    StartRecodingParam(2) = CSng(GetSetting(App.EXEName, "StartRecording", "Amp", 100))
-    StartRecodingParam(3) = CSng(GetSetting(App.EXEName, "StartRecording", "Volt", 450))
-    StartRecodingParam(4) = CSng(GetSetting(App.EXEName, "StartRecording", "Time", 25))
+    Mode_StartRecording = CInt(GetSetting(App.EXEName, "StartRecording", "StartRecording", 0))
+    ModeParam_StartRecoding(1) = CSng(GetSetting(App.EXEName, "StartRecording", "Dist", 2.5))
+    ModeParam_StartRecoding(2) = CSng(GetSetting(App.EXEName, "StartRecording", "Amp", 100))
+    ModeParam_StartRecoding(3) = CSng(GetSetting(App.EXEName, "StartRecording", "Volt", 450))
+    ModeParam_StartRecoding(4) = CSng(GetSetting(App.EXEName, "StartRecording", "Time", 25))
 
     
     analysisDefine.FlashEnable = GetSetting(App.EXEName, "AnalysisDefine", "FlashEnable", 1)
@@ -504,7 +509,9 @@ WeldMDIForm.mnuWindow.Enabled = False
     Dim IsSimulate As Integer
     IsSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
     If IsSimulate = 1 Then
-        timerMonitor.Interval = 85
+        timerMonitor.Interval = 65
+    Else
+        timerMonitor.Interval = 50
     End If
     
 
@@ -519,7 +526,7 @@ WeldMDIForm.mnuWindow.Enabled = False
     beRecording = False
     timeStart = 0
     timePostFromStart = 0
-    rIndex = 0
+    wmRecord_Index = 0
 
     weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
     
@@ -535,11 +542,12 @@ End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
 On Error GoTo ERROR_HANDLE
-    PLCDrv.undefPcMonitor
-    PLCDrv.g_BeMonitoring = False
-    PLCDrv.closePLCConection
+    PLCDrv.ClosePcMonitor
+    PLCDrv.ClosePLCConection
     
     WeldMDIForm.mnuWindow.Enabled = True
+    WeldMDIForm.mnuParameters.Enabled = True
+    WeldMDIForm.mnuOptions.Enabled = True
     
     Unload Me
 ERROR_HANDLE:
@@ -562,13 +570,13 @@ Private Sub TimerDisplay_Timer()
         'lblBigCenter.Caption = Format(timePostFromStart / 1000, "##0.00")
     End If
     
-    If 1 <= wm.data.PlcStage And wm.data.PlcStage <= 12 Then
-        lblPlcStage.Caption = PLCDrv.PlcStages(wm.data.PlcStage)
+    If 1 <= wmRecord.data.PlcStage And wmRecord.data.PlcStage <= 12 Then
+        lblPlcStage.Caption = PLCDrv.PlcStages(wmRecord.data.PlcStage)
     End If
     
     
-    If 1 <= wm.data.WeldStage And wm.data.WeldStage <= 6 Then
-        lblWeldStage.Caption = PLCDrv.WeldStages(wm.data.WeldStage)
+    If 1 <= wmRecord.data.WeldStage And wmRecord.data.WeldStage <= 6 Then
+        lblWeldStage.Caption = PLCDrv.WeldStages(wmRecord.data.WeldStage)
     End If
     
     
@@ -577,22 +585,22 @@ Private Sub TimerDisplay_Timer()
     Dim Amp As Long
     Dim psi As Long
     
-    Dist = wm.data.Dist
+    Dist = wmRecord.data.Dist
     If Dist < 0 Then
         Dist = 0
     End If
     
-    Volt = wm.data.Volt
+    Volt = wmRecord.data.Volt
     If Volt < 0 Then
     Volt = 0
     End If
     
-    Amp = wm.data.Amp
+    Amp = wmRecord.data.Amp
     If Amp < 0 Then
         Amp = 0
     End If
     
-    psi = PlcAnalysiser.toForce(wm.data.PsiUpset, wm.data.PsiOpen, analysisDefine)
+    psi = PlcAnalysiser.toForce(wmRecord.data.PsiUpset, wmRecord.data.PsiOpen, analysisDefine)
     If psi < 0 Then
         psi = 0
     End If
@@ -634,13 +642,13 @@ Private Sub TimerDisplay_Timer()
     'lblTime.Caption = data.Time
     If PLCDrv.Calibrate_Distance Then
         lblDist.FontSize = lblVolt.FontSize
-        lblDist.Caption = Format(wm.data.Dist, "##0.0")
+        lblDist.Caption = Format(wmRecord.data.Dist, "##0.0")
     Else
         lblDist.FontSize = lblVolt.FontSize - 3
-        lblDist.Caption = Format(wm.data.Dist, "##0")
+        lblDist.Caption = Format(wmRecord.data.Dist, "##0")
     End If
-    lblVolt.Caption = wm.data.Volt
-    lblAmp.Caption = wm.data.Amp
+    lblVolt.Caption = wmRecord.data.Volt
+    lblAmp.Caption = wmRecord.data.Amp
     lblPsi.Caption = psi
 
 End Sub
@@ -662,10 +670,16 @@ On Error GoTo ERROR_HANDLE
 '?10 (Force???) Bosch valve
 
 
-wm = PLCDrv.readPcMonitor
+wmRecord = PLCDrv.ReadPcMonitor
 
 
-If wm.WeldCycle = 1 And 0 <= wm.data.WeldStage And wm.data.WeldStage <= 6 Then
+If wmRecord.WeldCycle = 1 And 0 <= wmRecord.data.WeldStage And wmRecord.data.WeldStage <= 6 And wmRecord.data.WeldStage >= lastStage Then
+    If beRecording Then
+        wmRecord.data.Time = timePostFromStart / 1000
+        buffer(wmRecord_Index) = wmRecord.data
+        wmRecord_Index = wmRecord_Index + 1
+    End If
+    
     If Not beSigned Then
         timeStart = timeGetTime()
         beSigned = True
@@ -681,28 +695,26 @@ If wm.WeldCycle = 1 And 0 <= wm.data.WeldStage And wm.data.WeldStage <= 6 Then
             
             beRecording = True
             
-            rIndex = 0
-            wm.data.Time = timePostFromStart
-            rBuf(rIndex) = wm.data
+            wmRecord_Index = 0
+            wmRecord.data.Time = timePostFromStart
+            buffer(wmRecord_Index) = wmRecord.data
             SwitchToRecoding RECORDING_MODE
         End If
-    Else
-        wm.data.Time = timePostFromStart / 1000
-        rBuf(rIndex) = wm.data
-        rIndex = rIndex + 1
     End If
+    
+    lastStage = wmRecord.data.WeldStage
 Else
     If beRecording = True Then  ' Finish record current poccess
         timePostFromStart = timeGetTime() - timeStart
-        wm.data.Time = timePostFromStart / 1000
-        rBuf(rIndex) = wm.data
-        rIndex = rIndex + 1
+        wmRecord.data.Time = timePostFromStart / 1000
+        buffer(wmRecord_Index) = wmRecord.data
+        wmRecord_Index = wmRecord_Index + 1
      
         timeStart = timeGetTime()
         
-        analysisResult = PlcAnalysiser.Analysis(rBuf, rIndex)
+        analysisResult = PlcAnalysiser.Analysis(buffer, wmRecord_Index)
         
-        If rBuf(rIndex - 2).WeldStage >= 6 Then
+        If buffer(wmRecord_Index - 2).WeldStage >= 6 Then
             SaveData
         ElseIf GetSetting(App.EXEName, "Weld", "RecordInterrupts", 0) = 1 Then
             SaveData
@@ -723,34 +735,50 @@ Else
     End If
     beRecording = False
     beSigned = False
-    rIndex = 0
+    wmRecord_Index = 0
+    lastStage = -1
+    
+    
+    Call PLCDrv.ReadCurrentProcessSetting
+    If ProcessSetting = 0 Then
+        lblProcessSetting.Caption = "Unknown"
+        lblParameter.Caption = "----"
+    ElseIf ProcessSetting = 1 Then
+        lblProcessSetting.Caption = "Regular"
+        lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "----")
+    Else
+        lblProcessSetting.Caption = "Pulse"
+        lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "----")
+    End If
+    
 End If
+
 
 Exit Sub
 ERROR_HANDLE:
-    MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
+    MsgBox PlcRes.LoadMsgResString(9000 + Err.Number) & vbCrLf & Trim(PLCDrv.g_Error_String), vbCritical
     Unload Me
 End Sub
 
 Public Function canStart() As Boolean
 
-    Select Case StartRecording
+    Select Case Mode_StartRecording
         Case 0:
                 canStart = True
         Case 1:
-            If wm.data.Dist >= StartRecodingParam(1) Then
+            If wmRecord.data.Dist >= ModeParam_StartRecoding(1) Then
                 canStart = True
             End If
         Case 2:
-            If wm.data.Amp >= StartRecodingParam(2) Then
+            If wmRecord.data.Amp >= ModeParam_StartRecoding(2) Then
                 canStart = True
             End If
         Case 3:
-            If wm.data.Volt >= StartRecodingParam(3) Then
+            If wmRecord.data.Volt >= ModeParam_StartRecoding(3) Then
                 canStart = True
             End If
         Case 4:
-            If timePostFromStart / 1000 >= StartRecodingParam(4) Then
+            If timePostFromStart / 1000 >= ModeParam_StartRecoding(4) Then
                 canStart = True
             End If
     End Select
@@ -781,7 +809,7 @@ Dim WeldFile As String
         fso.CreateTextFile (path & "\" & Format(Date, "YYYY-MM-DD") & "\" & Format(Date, "YYYY-MM-DD") & ".DLY")
     End If
     
-    Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & WeldFile & ".WLD", fh1, fh2, rBuf, rIndex, analysisDefine, analysisResult)
+    Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & WeldFile & ".WLD", fh1, fh2, buffer, wmRecord_Index, analysisDefine, analysisResult)
     
     Dim dr As DailyReport
     

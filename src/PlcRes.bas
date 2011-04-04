@@ -49,7 +49,8 @@ Dim v As Integer
 End If
 End Sub
 
-Public Function LoadMsgResString(id As Integer) As String
+Public Function LoadMsgResString(id As Long) As String
+On Error Resume Next
     LoadMsgResString = LoadResString(LANGUAGE + id)
 End Function
 

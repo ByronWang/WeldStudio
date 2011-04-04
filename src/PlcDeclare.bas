@@ -1,6 +1,12 @@
 Attribute VB_Name = "PlcDeclare"
 Option Explicit
 
+Public Const LOAD_ALL_PARAMETER  As Integer = 0
+Public Const LOAD_PULSE_SETTING As Integer = 1
+Public Const LOAD_REGULAR_SETTING As Integer = 2
+Public Const LOAD_CALIBRATION_SETTING As Integer = 3
+
+
 Public Const INIT_STAGE  As Integer = 0
 Public Const PREFLASH_STAGE As Integer = 1
 Public Const FLASH_STAGE As Integer = 2

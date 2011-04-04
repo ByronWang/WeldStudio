@@ -55,17 +55,11 @@ Begin VB.Form FrmOption
       TabPicture(0)   =   "FrmOption.frx":000C
       Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "Frame7"
-      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Frame5"
-      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "CommonDialog1"
-      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "cboLanguage"
-      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "chkOnlineOnStartUp"
-      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "lblLanguage"
-      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
@@ -2121,8 +2115,8 @@ Dim WeldChart_Data(16) As Single
 Dim WeldAnalysis_Data(19) As Single
 Dim WeldAnalysisEnable_Data(19) As Single
 
-Dim StartRecording As Integer
-Dim StartRecodingParam(5) As Single
+Dim Mode_StartRecording As Integer
+Dim ModeParam_StartRecoding(5) As Single
 
 Dim isRecordInterrupts As Boolean
 
@@ -2183,9 +2177,9 @@ Private Function UpgradeCalibration(cd() As Single, Calibration_Enable() As Sing
      Next
         
     
-    Call PLCDrv.InitPLCConnection
+    Call PLCDrv.OpenPLCConnection
     Call PLCDrv.WriteCalibrationData(ca)
-    Call PLCDrv.closePLCConection
+    Call PLCDrv.ClosePLCConection
     
 End Function
 
@@ -2278,11 +2272,11 @@ Private Sub cmdOK_Click()
     
     
     
-    Call SaveSetting(App.EXEName, "StartRecording", "StartRecording", StartRecording)
-    Call SaveSetting(App.EXEName, "StartRecording", "Dist", StartRecodingParam(1))
-    Call SaveSetting(App.EXEName, "StartRecording", "Amp", StartRecodingParam(2))
-    Call SaveSetting(App.EXEName, "StartRecording", "Volt", StartRecodingParam(3))
-    Call SaveSetting(App.EXEName, "StartRecording", "Time", StartRecodingParam(4))
+    Call SaveSetting(App.EXEName, "StartRecording", "StartRecording", Mode_StartRecording)
+    Call SaveSetting(App.EXEName, "StartRecording", "Dist", ModeParam_StartRecoding(1))
+    Call SaveSetting(App.EXEName, "StartRecording", "Amp", ModeParam_StartRecoding(2))
+    Call SaveSetting(App.EXEName, "StartRecording", "Volt", ModeParam_StartRecoding(3))
+    Call SaveSetting(App.EXEName, "StartRecording", "Time", ModeParam_StartRecoding(4))
     
   
   Call SaveSetting(App.EXEName, "AnalysisDefine", "FlashMin", WeldAnalysis_Data(0))
@@ -2352,18 +2346,18 @@ txtSimulate.Text = GetSetting(App.EXEName, "Simulate", "SimulateFilename", App.p
 
 
     
-StartRecording = CInt(GetSetting(App.EXEName, "StartRecording", "StartRecording", 0))
-StartRecodingParam(1) = CSng(GetSetting(App.EXEName, "StartRecording", "Dist", 2.5))
-StartRecodingParam(2) = CSng(GetSetting(App.EXEName, "StartRecording", "Amp", 100))
-StartRecodingParam(3) = CSng(GetSetting(App.EXEName, "StartRecording", "Volt", 450))
-StartRecodingParam(4) = CSng(GetSetting(App.EXEName, "StartRecording", "Time", 25))
+Mode_StartRecording = CInt(GetSetting(App.EXEName, "StartRecording", "StartRecording", 0))
+ModeParam_StartRecoding(1) = CSng(GetSetting(App.EXEName, "StartRecording", "Dist", 2.5))
+ModeParam_StartRecoding(2) = CSng(GetSetting(App.EXEName, "StartRecording", "Amp", 100))
+ModeParam_StartRecoding(3) = CSng(GetSetting(App.EXEName, "StartRecording", "Volt", 450))
+ModeParam_StartRecoding(4) = CSng(GetSetting(App.EXEName, "StartRecording", "Time", 25))
     
     
     Dim i As Integer
     For i = 0 To 4
         optStartRecording(i).Value = False
     Next
-    optStartRecording(StartRecording).Value = True
+    optStartRecording(Mode_StartRecording).Value = True
     
      Dim vo As String
     vo = GetSetting(App.EXEName, "Calibration", "value", "1,6245,23390,150,2,1,3277,16384,1000,0,1,0,32767,460,0,1,3277,16384,5000,0,")
@@ -2413,10 +2407,10 @@ StartRecodingParam(4) = CSng(GetSetting(App.EXEName, "StartRecording", "Time", 2
 
     
     
-txtStartRecording(1).Text = StartRecodingParam(1)
-txtStartRecording(2).Text = StartRecodingParam(2)
-txtStartRecording(3).Text = StartRecodingParam(3)
-txtStartRecording(4).Text = StartRecodingParam(4)
+txtStartRecording(1).Text = ModeParam_StartRecoding(1)
+txtStartRecording(2).Text = ModeParam_StartRecoding(2)
+txtStartRecording(3).Text = ModeParam_StartRecoding(3)
+txtStartRecording(4).Text = ModeParam_StartRecoding(4)
 
 
 
@@ -2457,11 +2451,11 @@ WeldAnalysisEnable_Data(5) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "Cur
 WeldAnalysisEnable_Data(6) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitEnable", 1))
 WeldAnalysisEnable_Data(7) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageEnable", 1))
 
-WeldAnalysis_Data(0) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "FlashMin", 0.14))
-WeldAnalysis_Data(1) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "FlashMax", 0.25))
-WeldAnalysis_Data(2) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostMin", 0.75))
-WeldAnalysis_Data(3) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostMax", 1.2))
-WeldAnalysis_Data(4) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetMin", 14#))
+WeldAnalysis_Data(0) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "FlashMin", 0.04))
+WeldAnalysis_Data(1) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "FlashMax", 0.45))
+WeldAnalysis_Data(2) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostMin", 0.45))
+WeldAnalysis_Data(3) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostMax", 3.2))
+WeldAnalysis_Data(4) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetMin", 8#))
 WeldAnalysis_Data(5) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetMax", 20#))
 WeldAnalysis_Data(6) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ForgeMin", 30))
 WeldAnalysis_Data(7) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ForgeMax", 60))
@@ -2469,10 +2463,10 @@ WeldAnalysis_Data(8) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "SlippageU
 WeldAnalysis_Data(9) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "SlippageUpset", 22#))
 WeldAnalysis_Data(10) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptCurrent", 100))
 WeldAnalysis_Data(11) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptTime", 2#))
-WeldAnalysis_Data(12) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitCurrent", 550))
+WeldAnalysis_Data(12) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitCurrent", 700))
 WeldAnalysis_Data(13) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitTime", 0.8))
-WeldAnalysis_Data(14) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageTotalRail", 30))
-WeldAnalysis_Data(15) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
+WeldAnalysis_Data(14) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageTotalRail", 20))
+WeldAnalysis_Data(15) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 20))
 'WeldAnalysis_Data(16) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostSpeedTimeRange", 2))
 WeldAnalysis_Data(17) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetCurrentMinimum", 100))
 WeldAnalysis_Data(18) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Pistonside)", 209.55))
@@ -2509,7 +2503,7 @@ End Sub
 
 
 Private Sub optStartRecording_Click(index As Integer)
-    StartRecording = index
+    Mode_StartRecording = index
     Dim i As Integer
     For i = 1 To 4
         txtStartRecording(i).Enabled = False
@@ -2545,9 +2539,9 @@ End Sub
 
 Private Sub txtStartRecording_Change(index As Integer)
     If IsNumeric(txtStartRecording(index).Text) Then
-        StartRecodingParam(index) = CSng(txtStartRecording(index).Text)
+        ModeParam_StartRecoding(index) = CSng(txtStartRecording(index).Text)
     Else
-        txtStartRecording(index).Text = StartRecodingParam(index)
+        txtStartRecording(index).Text = ModeParam_StartRecoding(index)
     End If
 End Sub
 

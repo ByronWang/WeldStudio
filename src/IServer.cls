@@ -20,7 +20,7 @@ Public Sub Uninit(ByVal param As Long)
 
 End Sub
 
-Public Function Define(NameId&, ByVal def As String) As Long
+Public Function Define(ByRef NameId&, ByVal def As String) As Long
 
 End Function
 
@@ -52,7 +52,7 @@ Public Function WriteSingle(ByVal NameId&, ByRef Variable() As Single, Iostat&, 
 
 End Function
 
-Public Sub ErrorStr(ByVal status&, ByVal errstr$, ByVal StrSize%)
+Public Sub ErrorStr(ByVal Status&, ByVal errstr$, ByVal StrSize%)
 
 End Sub
 

@@ -103,25 +103,14 @@ PlcRes.LoadResFor Me
 
     App.HelpFile = App.path & "\weld.chm "
     
-    PLCDrv.InitPLCConnection
-    mnuConnect.Enabled = PLCDrv.beActive
-    PLCDrv.closePLCConection
-    
-    
     If GetSetting(App.EXEName, "UserData", "CompanyName", "") = "" Or _
         GetSetting(App.EXEName, "UserData", "Unit", "") = "" Or _
         GetSetting(App.EXEName, "UserData", "Location", "") = "" Then
         
         Call mnuOptions_Click
-        
-        
     End If
     
     
-End Sub
-
-Private Sub MDIForm_Unload(Cancel As Integer)
-    PLCDrv.closePLCConection
 End Sub
 
 Private Sub menuUserGuide_Click()
@@ -136,22 +125,8 @@ Private Sub mnuFile_click()
     Else
         mnuPrint.Enabled = False
     End If
-    
-    If PLCDrv.g_BeMonitoring = True Then
-        mnuParameters.Enabled = False
-    Else
-        mnuParameters.Enabled = True
-    End If
-    
 End Sub
 
-Private Sub mnuTools_click()
-    If PLCDrv.g_BeMonitoring = True Then
-        mnuOptions.Enabled = False
-    Else
-        mnuOptions.Enabled = True
-    End If
-End Sub
 
 Private Sub mnuPrint_Click()
     Dim f As Form
@@ -442,21 +417,18 @@ Private Sub mnuAbout_Click()
 End Sub
 
 Private Sub mnuConnect_Click()
-    'TODO
-    Dim fProgress As New frmProgress
-    fProgress.Show vbModal, Me
+On Error GoTo ERROR_HANDLE
+
+    frmProgress.LoadMode = PlcDeclare.LOAD_ALL_PARAMETER
+    frmProgress.ParamName = name
+    frmProgress.Show vbModal, Me
+    If frmProgress.Status = 0 Then
+        Call FrmGraph.Show
+    End If
     
-    
-    PLCDrv.InitPLCConnection
-    PLCDrv.readPcMonitor
-    PLCDrv.closePLCConection
-    
-    Unload fProgress
-    Set fProgress = Nothing
-    
-    
-    FrmGraph.WindowState = FormWindowStateConstants.vbMaximized
-    Call FrmGraph.Show
+Exit Sub
+ERROR_HANDLE:
+    MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
 End Sub
 
 Private Sub mnuExit_Click()

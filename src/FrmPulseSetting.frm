@@ -746,7 +746,7 @@ Option Explicit
 
 Dim fso As New FileSystemObject
 Dim lastConfigName As String
-Dim PulseSetting As PulseSettingType
+Dim pulseSetting As PulseSettingType
 Dim path As String
 Dim InitialVoltage As Long
 Dim lastCboStageIndex As Integer
@@ -767,59 +767,60 @@ Private Sub cboStage_Change()
 
     Dim i As Integer
     For i = 0 To 7
-        txtValue(i).Text = PulseSetting.Stages(cboStage.ListIndex).Value(i)
+        txtValue(i).Text = pulseSetting.Stages(cboStage.ListIndex).Value(i)
     Next
     i = 1
-    lblSign(i).Caption = CInt(PulseSetting.Stages(cboStage.ListIndex).Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
+    lblSign(i).Caption = CInt(pulseSetting.Stages(cboStage.ListIndex).Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
 End Sub
 
 Private Sub cboStage_Click()
 
-    If checkInputedDataValidate Then
+'    If checkInputedDataValidate Then
         cboStage_Change
         lastCboStageIndex = cboStage.ListIndex
-    Else
-        cboStage.ListIndex = lastCboStageIndex
-    End If
+'    Else
+'        cboStage.ListIndex = lastCboStageIndex
+'    End If
 
 End Sub
 
 Private Sub cmdLoad_Click()
+On Error GoTo ERROR_HANDLE
 
-    Call PLCDrv.InitPLCConnection
-    Dim p As New frmProgress
-    frmProgress.Show , Me
-    Call PLCDrv.WritePulseData(PulseSetting)
-    Call PLCDrv.closePLCConection
-    
-    Call SaveSetting(App.EXEName, "Parameter", "LastSetting", "Pulse:" & lastConfigName)
+    frmProgress.LoadMode = PlcDeclare.LOAD_PULSE_SETTING
+    frmProgress.ParamName = name
+    frmProgress.Show vbModal, Me
     cmdLoad.Enabled = False
+    
+Exit Sub
+ERROR_HANDLE:
+    MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
 End Sub
 
-Private Function checkInputedDataValidate() As Boolean
-Dim i As Integer
-    checkInputedDataValidate = True
-    For i = 0 To txtValue.count - 1
-        If txtValue(i).BackColor = &HFF& Then
-            checkInputedDataValidate = False
-            Exit Function
-        End If
-    Next i
-    
-        For i = 0 To txtValueGeneral.count - 1
-        If txtValueGeneral(i).BackColor = &HFF& Then
-            checkInputedDataValidate = False
-            Exit Function
-        End If
-    Next i
-    
-End Function
+'Private Function checkInputedDataValidate() As Boolean
+'Dim i As Integer
+'    checkInputedDataValidate = True
+'    For i = 0 To txtValue.count - 1
+'        If txtValue(i).BackColor = &HFF& Then
+'            checkInputedDataValidate = False
+'            Exit Function
+'        End If
+'    Next i
+'
+'        For i = 0 To txtValueGeneral.count - 1
+'        If txtValueGeneral(i).BackColor = &HFF& Then
+'            checkInputedDataValidate = False
+'            Exit Function
+'        End If
+'    Next i
+'
+'End Function
 
 Private Sub cmdSave_Click()
 
 
     If cboFileName.Text <> "" Then
-        Call PlcPulseSetting.SaveConfig(path, cboFileName.Text, PulseSetting)
+        Call PlcPulseSetting.SaveConfig(path, cboFileName.Text, pulseSetting)
     End If
     Dim i As Integer
     
@@ -844,12 +845,12 @@ Private Sub cmdSave_Click()
 End Sub
 
 Private Function LoadConfig(name As String)
-    PulseSetting = PlcPulseSetting.LoadConfig(path, name)
+    pulseSetting = PlcPulseSetting.LoadConfig(path, name)
     
-    txtValueGeneral(0).Text = PulseSetting.General.Value(0)
-    txtValueGeneral(1).Text = PulseSetting.General.Value(1)
-    txtValueGeneral(2).Text = PulseSetting.General.Value(2)
-    txtValueGeneral(3).Text = PulseSetting.General.Value(3)
+    txtValueGeneral(0).Text = pulseSetting.General.Value(0)
+    txtValueGeneral(1).Text = pulseSetting.General.Value(1)
+    txtValueGeneral(2).Text = pulseSetting.General.Value(2)
+    txtValueGeneral(3).Text = pulseSetting.General.Value(3)
     
     cboStage.ListIndex = 0
     cboStage_Change
@@ -862,14 +863,14 @@ Private Sub Form_Load()
 PlcRes.LoadResFor Me
 
 
-    PLCDrv.InitPLCConnection
+    PLCDrv.OpenPLCConnection
     cmdLoad.Enabled = PLCDrv.beActive
-    PLCDrv.closePLCConection
+    PLCDrv.ClosePLCConection
 
 Dim pFileItemList() As PulseFileItemType
 
     lastConfigName = ""
-    PulseSetting = PlcPulseSetting.DefalutStagesParameters
+    pulseSetting = PlcPulseSetting.DefalutStagesParameters
     InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
     
     path = App.path & "\" & SETTING_PATH & "PulseSetting.config"
@@ -923,16 +924,16 @@ Private Sub txtValue_Change(index As Integer)
         
         If min <= v And v <= max Then
             txtValue(index).BackColor = &HFFFFFF
-            PulseSetting.Stages(cboStage.ListIndex).Value(index) = CDbl(txtValue(index).Text)
+            pulseSetting.Stages(cboStage.ListIndex).Value(index) = CDbl(txtValue(index).Text)
             cmdSave.Enabled = True
-            Exit Sub
+        Else
+            txtValue(index).BackColor = &H8080FF
+            pulseSetting.Stages(cboStage.ListIndex).Value(index) = CDbl(txtValue(index).Text)
+            cmdSave.Enabled = True
         End If
+    Else
+        txtValue(index).BackColor = &HFF&
     End If
-            
-    txtValue(index).BackColor = &HFF&
-    
-    'txtValue(index).Text = PulseSetting.Stages(cboStage.ListIndex).Value(index)
-    
 End Sub
 
 Private Sub txtValueGeneral_Change(index As Integer)
@@ -947,7 +948,7 @@ Private Sub txtValueGeneral_Change(index As Integer)
         v = CSng(txtValueGeneral(index).Text)
         If min <= v And v <= max Then
             txtValueGeneral(index).BackColor = &HFFFFFF
-            PulseSetting.General.Value(index) = CSng(txtValueGeneral(index).Text)
+            pulseSetting.General.Value(index) = CSng(txtValueGeneral(index).Text)
             cmdSave.Enabled = True
             Exit Sub
         End If

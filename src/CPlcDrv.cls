@@ -23,7 +23,7 @@ Public Sub IServer_Uninit(ByVal param As Long)
     PLCDrv.DTL_UNINIT (param)
 End Sub
 
-Public Function IServer_Define(NameId&, ByVal def As String) As Long
+Public Function IServer_Define(ByRef NameId&, ByVal def As String) As Long
     IServer_Define = PLCDrv.DTL_C_DEFINE(NameId, def)
 End Function
 
@@ -55,8 +55,8 @@ Public Function IServer_WriteSingle(ByVal NameId&, ByRef Variable() As Single, I
     IServer_WriteSingle = PLCDrv.DTL_WRITE_W(NameId, Variable(0), Iostat, timeout)
 End Function
 
-Public Sub IServer_ErrorStr(ByVal status&, ByVal errstr$, ByVal StrSize%)
-     PLCDrv.DTL_ERROR_S status, errstr$, StrSize
+Public Sub IServer_ErrorStr(ByVal Status&, ByVal errstr$, ByVal StrSize%)
+     PLCDrv.DTL_ERROR_S Status, errstr$, StrSize
 End Sub
 
 

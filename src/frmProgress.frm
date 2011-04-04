@@ -12,7 +12,9 @@ Begin VB.Form frmProgress
    ScaleHeight     =   1680
    ScaleWidth      =   6960
    ShowInTaskbar   =   0   'False
-   Begin VB.Timer Timer1 
+   StartUpPosition =   1  '所有者中心
+   Begin VB.Timer timerProgress 
+      Enabled         =   0   'False
       Interval        =   20
       Left            =   1920
       Top             =   120
@@ -42,25 +44,129 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Const seperator As Integer = 400
-
+Public ParamName As String
+Public LoadMode As Integer
+Public Status As Long
 Dim step As Integer
 
 Private Sub Form_Load()
     step = (frmProgress.Width - seperator) / 50
     lblProgress.Width = 0
+    
+    Me.timerProgress.Enabled = True
+    DoEvents
+    
+    Select Case LoadMode
+        Case LOAD_ALL_PARAMETER:
+            Status = LoadAllSetting
+        Case LOAD_PULSE_SETTING:
+            Status = LoadPulseSetting(ParamName)
+        Case LOAD_REGULAR_SETTING:
+            Status = LoadRegularSetting(ParamName)
+        Case LOAD_CALIBRATION_SETTING:
+    End Select
+    
+    
 End Sub
 
-
-Private Sub Timer1_Timer()
-'    If Not PLCDrv.g_Loading Then
-'        Me.Hide
-'        Unload Me
-'    End If
+Private Sub Finish()
+    Me.Hide
+    If Status = 0 Then
+        If LoadMode = LOAD_ALL_PARAMETER Then
+        Else
+            MsgBox "Succeed!", vbOKOnly
+        End If
+    ElseIf Status = 1000 Then
     
+    Else
+        MsgBox "Connection Error"
+    End If
+    Unload Me
+End Sub
+
+Private Sub timerProgress_Timer()
+    If Status <> 0 Then
+        lblProgress.BackColor = &HFF
+    End If
     If lblProgress.Width < frmProgress.Width - seperator - seperator / 2 Then
         lblProgress.Width = lblProgress.Width + step
-    ElseIf Not PLCDrv.g_Loading Then
-        Me.Hide
-        Unload Me
+    Else
+        Call Finish
     End If
 End Sub
+
+
+Private Function LoadAllSetting()
+    Status = PLCDrv.OpenPLCConnection
+    LoadAllSetting = Status
+End Function
+
+Private Function LoadRegularSetting(name As String) As Long
+    If name = "" Then
+        name = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "")
+    End If
+    
+    If name = "" Then
+        MsgBox "Please config regular setting!"
+        LoadRegularSetting = 1000
+        Exit Function
+    End If
+        
+    Dim regularSetting As RegularSettingType
+    Dim path As String
+    path = App.path & "\" & SETTING_PATH & "PulseSetting.config"
+    
+    regularSetting = PlcRegularSetting.LoadConfig(path, name)
+    
+    Status = PLCDrv.OpenPLCConnection
+    If Status <> 0 Then
+        LoadRegularSetting = Status
+        Exit Function
+    End If
+    DoEvents
+    Status = PLCDrv.WriteRegularData(regularSetting)
+    If Status <> 0 Then
+        LoadRegularSetting = Status
+        Exit Function
+    End If
+    DoEvents
+    Status = PLCDrv.ClosePLCConection
+    
+    Call SaveSetting(App.EXEName, "Parameter", "LastSetting_Regular", name)
+    MsgBox "Succeed!", vbOKOnly
+End Function
+
+Private Function LoadPulseSetting(name As String) As Long
+    If name = "" Then
+        name = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "")
+    End If
+    
+    If name = "" Then
+        MsgBox "Please config pulse setting!"
+        LoadPulseSetting = 1000
+    End If
+
+    Dim pulseSetting As PulseSettingType
+    Dim path As String
+    path = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    
+    pulseSetting = PlcPulseSetting.LoadConfig(path, name)
+    
+    Status = PLCDrv.OpenPLCConnection
+    If Status <> 0 Then
+        LoadPulseSetting = Status
+        Exit Function
+    End If
+    DoEvents
+    Status = PLCDrv.WritePulseData(pulseSetting)
+    If Status <> 0 Then
+        LoadPulseSetting = Status
+        Exit Function
+    End If
+    DoEvents
+    Call PLCDrv.ClosePLCConection
+    
+    Call SaveSetting(App.EXEName, "Parameter", "LastSetting_Pulse", name)
+    
+End Function
+

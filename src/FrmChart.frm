@@ -1852,7 +1852,7 @@ End Function
 
 
 
-Private Sub cmdShowMode_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub cmdShowMode_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 Me.MousePointer = MousePointerConstants.vbHourglass
 
 End Sub
@@ -1949,15 +1949,15 @@ End Function
 
 
 
-Private Sub MSChart1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub MSChart1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
     If Button = vbRightButton Then
         lineH.Left = MSChart1.Left + 300
         lineH.Width = MSChart1.Width - 300
-        lineH.Top = Y + MSChart1.Top
+        lineH.Top = y + MSChart1.Top
 
         lineV.Top = MSChart1.Top + 360
         lineV.Height = MSChart1.Height - 800
-        lineV.Left = X + MSChart1.Left
+        lineV.Left = x + MSChart1.Left
 
         lineH.Visible = True
         lineV.Visible = True
@@ -1967,7 +1967,7 @@ Private Sub MSChart1_MouseDown(Button As Integer, Shift As Integer, X As Single,
     End If
 End Sub
 
-Private Sub MSChart1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub MSChart1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 Dim thisTime As Long
 Dim timeSep As Long
 timeSep = 50
@@ -1980,11 +1980,11 @@ timeSep = 50
             
         lineH.Left = MSChart1.Left + 360
         lineH.Width = MSChart1.Width - 1800
-        lineH.Top = Y + MSChart1.Top
+        lineH.Top = y + MSChart1.Top
         
         lineV.Top = MSChart1.Top + 320
         lineV.Height = MSChart1.Height - 900
-        lineV.Left = X + MSChart1.Left
+        lineV.Left = x + MSChart1.Left
         End If
     Else
         lineH.Visible = False
@@ -1993,7 +1993,7 @@ timeSep = 50
 
 End Sub
 
-Private Sub MSChart1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub MSChart1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
         lineH.Visible = False
         lineV.Visible = False
 End Sub

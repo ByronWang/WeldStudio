@@ -12,6 +12,7 @@ Begin VB.Form FrmChangePWD
    ScaleHeight     =   3195
    ScaleWidth      =   6030
    ShowInTaskbar   =   0   'False
+   StartUpPosition =   1  '所有者中心
    Tag             =   "25000"
    Begin VB.TextBox txtConfirmNewPwd 
       Height          =   270

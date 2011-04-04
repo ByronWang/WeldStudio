@@ -24,6 +24,9 @@ Private ra() As PlcDeclare.Record
 Private index As Integer
 Dim opened As Boolean
 
+Dim defines(1000) As String
+Dim define_index As Integer
+
 'Function Prototypes
 Public Function IServer_Init(ByVal def&) As Long
     IServer_Init = PlcDeclare.DTL_SUCCESS
@@ -33,17 +36,18 @@ Public Sub IServer_Uninit(ByVal param As Long)
 End Sub
  '"N22:0,12,WORD,READ,AB:LOCAL,0,SLC500,1")
 
-Public Function IServer_Define(NameId&, ByVal def As String) As Long
-    sDef = def
-    
-Dim sa() As String
-    sa = Split(def, ",")
+Public Function IServer_Define(ByRef NameId&, ByVal def As String) As Long
+    Dim i As Integer
+    For i = 0 To define_index
+        If defines(i) = def Then
+            NameId = i
+            Exit Function
+        End If
+    Next
 
-Dim saa() As String
-    saa = Split(sa(0), ":")
-    from = CInt(saa(1))
-    length = CInt(sa(1))
-    Paragram = saa(0)
+    define_index = define_index + 1
+    defines(define_index) = def
+    NameId = define_index
     IServer_Define = PlcDeclare.DTL_SUCCESS
 End Function
 
@@ -70,6 +74,19 @@ Public Function IServer_CloseDriver(ByVal nDriverId&, ByVal timeout&) As Long
 End Function
 
 Public Function IServer_ReadInt(ByVal NameId&, ByRef Variable() As Integer, Iostat&, ByVal timeout&) As Long
+    Dim def As String
+    
+    def = defines(NameId&)
+    
+    Dim sa() As String
+    sa = Split(def, ",")
+
+    Dim saa() As String
+    saa = Split(sa(0), ":")
+    from = CInt(saa(1))
+    length = CInt(sa(1))
+    Paragram = saa(0)
+    
     
     Select Case Paragram
         Case "N22":
@@ -137,6 +154,10 @@ Public Function IServer_ReadInt(ByVal NameId&, ByRef Variable() As Integer, Iost
                         opened = True
                     End If
             End If
+        Case "N21":
+            If from = "3" Then
+                Variable(0) = 1
+            End If
     End Select
    ' IServer_ReadInt = PlcDeclare.DTL_READ_W(NameId, Variable(0), Iostat, timeout)
     IServer_ReadInt = PlcDeclare.DTL_SUCCESS
@@ -155,7 +176,7 @@ Public Function IServer_WriteSingle(ByVal NameId&, ByRef Variable() As Single, I
     IServer_WriteSingle = PlcDeclare.DTL_SUCCESS
 End Function
 
-Public Sub IServer_ErrorStr(ByVal status&, ByVal errstr$, ByVal StrSize%)
+Public Sub IServer_ErrorStr(ByVal Status&, ByVal errstr$, ByVal StrSize%)
 End Sub
 
 

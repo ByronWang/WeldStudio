@@ -12,6 +12,7 @@ Begin VB.Form FrmPWD
    ScaleHeight     =   1740
    ScaleWidth      =   6000
    ShowInTaskbar   =   0   'False
+   StartUpPosition =   1  '所有者中心
    Tag             =   "24000"
    Begin VB.CommandButton cmdChangePwd 
       Caption         =   "Change Password"
