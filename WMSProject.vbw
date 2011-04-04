@@ -1,7 +1,7 @@
 CPlcDrv = 44, 58, 602, 510, C
 CPlcSimulate = 44, 58, 692, 375, C
 FrmChart = 24, 263, 671, 715, C, 8, 10, 403, 655, C
-FrmGraph = 0, 0, 479, 452, C, 154, 203, 633, 655, C
+FrmGraph = 0, 0, 479, 452, Z, 154, 203, 633, 655, C
 FrmOption = 31, 71, 608, 523, C, 0, 0, 779, 621, C
 FrmPulseSetting = 44, 58, 552, 510, C, 22, 29, 643, 481, C
 FrmRegularSetting = 22, 29, 617, 481, C, 22, 263, 559, 833, C

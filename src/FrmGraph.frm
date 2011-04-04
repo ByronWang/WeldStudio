@@ -79,10 +79,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Regular"
       BeginProperty Font 
-         Name            =   "Bookman Old Style"
+         Name            =   "Arial"
          Size            =   21.75
          Charset         =   0
-         Weight          =   600
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -99,10 +99,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "67.98"
       BeginProperty Font 
-         Name            =   "Bookman Old Style"
+         Name            =   "Arial"
          Size            =   60
          Charset         =   0
-         Weight          =   600
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -119,10 +119,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "A234567890"
       BeginProperty Font 
-         Name            =   "Bookman Old Style"
+         Name            =   "Arial"
          Size            =   26.25
          Charset         =   0
-         Weight          =   600
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -140,10 +140,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
-         Name            =   "Bookman Old Style"
+         Name            =   "Arial"
          Size            =   21.75
          Charset         =   0
-         Weight          =   600
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -161,10 +161,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
-         Name            =   "Bookman Old Style"
+         Name            =   "Arial"
          Size            =   21.75
          Charset         =   0
-         Weight          =   600
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -183,10 +183,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "Label5"
       BeginProperty Font 
-         Name            =   "Bookman Old Style"
+         Name            =   "Arial"
          Size            =   21.75
          Charset         =   0
-         Weight          =   600
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -204,10 +204,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "A0001"
       BeginProperty Font 
-         Name            =   "Bookman Old Style"
+         Name            =   "Arial"
          Size            =   99.75
          Charset         =   0
-         Weight          =   600
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -246,10 +246,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "345"
       BeginProperty Font 
-         Name            =   "Bookman Old Style"
+         Name            =   "Arial"
          Size            =   60
          Charset         =   0
-         Weight          =   600
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -266,10 +266,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "0"
       BeginProperty Font 
-         Name            =   "Bookman Old Style"
+         Name            =   "Arial"
          Size            =   60
          Charset         =   0
-         Weight          =   600
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -286,10 +286,10 @@ Begin VB.Form FrmGraph
       BackStyle       =   0  'Transparent
       Caption         =   "0"
       BeginProperty Font 
-         Name            =   "Bookman Old Style"
+         Name            =   "Arial"
          Size            =   60
          Charset         =   0
-         Weight          =   600
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -419,6 +419,9 @@ Const ANALYSIS_DURATION As Integer = 6000
 
 Dim showMode As ShowModeType
 
+Dim beRequest As Boolean
+Dim beUnload As Boolean
+
 Enum ShowModeType
     RECORDING_MODE
     STANDBY_MODE
@@ -533,6 +536,7 @@ WeldMDIForm.mnuOptions.Enabled = False
     SwitchToRecoding STANDBY_MODE
     
     beSigned = False
+    beRequest = False
     
 Exit Sub
 ERROR_HANDLE:
@@ -542,13 +546,31 @@ End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
 On Error GoTo ERROR_HANDLE
+
+    Me.timerDisplay.Enabled = False
+    Me.timerMonitor.Enabled = False
+    Dim i As Integer
+    For i = 0 To 100
+        If Not beRequest Then
+            Exit For
+        End If
+    Next i
+'    While beRequest
+'        Call Sleep(300)
+'        DoEvents
+'    Wend
+    
     PLCDrv.ClosePcMonitor
     PLCDrv.ClosePLCConection
     
     WeldMDIForm.mnuWindow.Enabled = True
     WeldMDIForm.mnuParameters.Enabled = True
     WeldMDIForm.mnuOptions.Enabled = True
-    
+    If beRequest Then
+        beUnload = True
+    Else
+        beUnload = False
+    End If
     Unload Me
 ERROR_HANDLE:
 End Sub
@@ -657,6 +679,16 @@ End Sub
 
 Private Sub TimerMonitor_Timer()
 On Error GoTo ERROR_HANDLE
+If beRequest Then
+    Exit Sub
+End If
+If beUnload Then
+    Unload Me
+    Exit Sub
+End If
+
+
+beRequest = True
 '9   Weld stage 0-init, 1-preflash 2-flash 3-boost 4-upset 5-forge 6-shear
 '11  PLC Stage
 '0   DIST scaled reading in mm * 100
@@ -669,8 +701,10 @@ On Error GoTo ERROR_HANDLE
 '
 '?10 (Force???) Bosch valve
 
+Dim Status As Long
 
-wmRecord = PLCDrv.ReadPcMonitor
+
+Status = PLCDrv.ReadPcMonitor(wmRecord)
 
 
 If wmRecord.WeldCycle = 1 And 0 <= wmRecord.data.WeldStage And wmRecord.data.WeldStage <= 6 And wmRecord.data.WeldStage >= lastStage Then
@@ -753,9 +787,10 @@ Else
     
 End If
 
-
+beRequest = False
 Exit Sub
 ERROR_HANDLE:
+    beRequest = False
     MsgBox PlcRes.LoadMsgResString(9000 + Err.Number) & vbCrLf & Trim(PLCDrv.g_Error_String), vbCritical
     Unload Me
 End Sub

@@ -422,6 +422,7 @@ On Error GoTo ERROR_HANDLE
     frmProgress.LoadMode = PlcDeclare.LOAD_ALL_PARAMETER
     frmProgress.ParamName = name
     frmProgress.Show vbModal, Me
+    
     If frmProgress.Status = 0 Then
         Call FrmGraph.Show
     End If

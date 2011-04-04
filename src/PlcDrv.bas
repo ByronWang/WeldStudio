@@ -85,6 +85,7 @@ Public Function OpenPLCConnection() As Integer
    'Create definition table
     Status = UtlServer.Init(10)
     If (Status <> DTL_SUCCESS) Then
+        Call ClosePLCConection
         RUN_PHASE = "DTL_INIT"
         GoTo ERROR_HANDLE
     End If
@@ -188,15 +189,13 @@ ERROR_HANDLE:
     Exit Function
 End Function
 
-Public Function ReadPcMonitor() As WeldMonitor
+Public Function ReadPcMonitor(ByRef wm As WeldMonitor) As Long
     Status = UtlServer.ReadInt(handle_PC_Monitor, buffer, IO_STATUS, 12345)
     If (Status <> DTL_SUCCESS) Then
         RUN_PHASE = "READER PC MONITOR"
         GoTo ERROR_HANDLE
     End If
 
-    Dim wm As WeldMonitor
-    
     If Calibrate_Distance Then
         wm.data.Dist = buffer(0) / 100
     Else
@@ -225,14 +224,13 @@ Public Function ReadPcMonitor() As WeldMonitor
     '11  PLC stage
 
 
-    ReadPcMonitor = wm
 Exit Function
 ERROR_HANDLE:
 
     beActive = False
 
     Call UtlServer.ErrorStr(Status, g_Error_String, 80)
-    'OpenPLCConnection = status
+    ReadPcMonitor = Status
     Exit Function
 End Function
 

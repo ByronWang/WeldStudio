@@ -98,7 +98,23 @@ End Sub
 
 Private Function LoadAllSetting()
     Status = PLCDrv.OpenPLCConnection
-    LoadAllSetting = Status
+    If Status <> 0 Then
+        LoadAllSetting = Status
+        Exit Function
+    End If
+    
+    Status = PLCDrv.PreparePcMonitor
+    If Status <> 0 Then
+        LoadAllSetting = Status
+        Exit Function
+    End If
+    Dim wm As WeldMonitor
+    Status = PLCDrv.ReadPcMonitor(wm)
+    If Status <> 0 Then
+        LoadAllSetting = Status
+        Exit Function
+    End If
+    
 End Function
 
 Private Function LoadRegularSetting(name As String) As Long
