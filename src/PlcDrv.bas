@@ -283,14 +283,7 @@ loading = True
 '==TEST FOR CALIBRATION
 
 
-Dim buffer_signal(1) As Integer
 
-Dim def_signal As String
-def_signal = "N21:5,1,WORD,MODIFY,AB:LOCAL,1,SLC500,1" 'General
-
-Dim handle_signal As Long
-
-buffer_signal(1) = 1
 
 'If UtlServer.Define(handle_signal, def_signal) = 0 Then
 '    status = UtlServer.WriteInt(handle_signal, buffer_signal, IO_STATUS, 1000)
@@ -332,6 +325,12 @@ End If
 
 
 '++
+Dim buffer_signal(1) As Integer
+Dim def_signal As String
+def_signal = "N21:5,1,WORD,MODIFY,AB:LOCAL,1,SLC500,1" 'General
+
+Dim handle_signal As Long
+buffer_signal(1) = 1
 If UtlServer.Define(handle_signal, def_signal) = 0 Then
     status = UtlServer.WriteInt(handle_signal, buffer_signal, IO_STATUS, 1000)
     UtlServer.Undef (handle_signal)
