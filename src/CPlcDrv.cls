@@ -56,7 +56,7 @@ Public Function IServer_WriteSingle(ByVal NameId&, ByRef Variable() As Single, I
 End Function
 
 Public Sub IServer_ErrorStr(ByVal status&, ByVal errstr$, ByVal StrSize%)
-     PLCDrv.DTL_ERROR_S status, errstr, StrSize
+     PLCDrv.DTL_ERROR_S status, errstr$, StrSize
 End Sub
 
 

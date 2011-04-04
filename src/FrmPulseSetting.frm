@@ -790,7 +790,7 @@ Private Sub cmdLoad_Click()
     Dim p As New frmProgress
     frmProgress.Show , Me
     Call PLCDrv.WritePulseData(PulseSetting)
-    Call PLCDrv.UninitPLCConection
+    Call PLCDrv.closePLCConection
     
     Call SaveSetting(App.EXEName, "Parameter", "LastSetting", "Pulse:" & lastConfigName)
     cmdLoad.Enabled = False
@@ -864,7 +864,7 @@ PlcRes.LoadResFor Me
 
     PLCDrv.InitPLCConnection
     cmdLoad.Enabled = PLCDrv.beActive
-    PLCDrv.UninitPLCConection
+    PLCDrv.closePLCConection
 
 Dim pFileItemList() As PulseFileItemType
 

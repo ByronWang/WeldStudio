@@ -37,7 +37,7 @@ Begin VB.Form FrmGraph
       Top             =   5025
       Width           =   8355
    End
-   Begin VB.Timer TimerShow 
+   Begin VB.Timer timerDisplay 
       Interval        =   100
       Left            =   3480
       Top             =   4920
@@ -66,7 +66,7 @@ Begin VB.Form FrmGraph
       Top             =   7800
       Width           =   8355
    End
-   Begin VB.Timer TimerTest 
+   Begin VB.Timer timerMonitor 
       Interval        =   50
       Left            =   3480
       Top             =   5640
@@ -391,8 +391,8 @@ Dim fso As FileSystemObject
 
 Dim path As String
 
-Dim lastTimeInMS As Long
-Dim timeInMS As Long
+Dim timeStart As Long
+Dim timePostFromStart As Long
 
 Dim dist_scale As Long
 Dim volt_scale As Long
@@ -428,8 +428,8 @@ Dim analysisResult As WeldAnalysisResultType
 Function SwitchToRecoding(status As ShowModeType)
     Select Case status
         Case STANDBY_MODE
-            TimerTest.Enabled = True
-            TimerShow.Tag = ""
+            timerMonitor.Enabled = True
+            timerDisplay.Tag = ""
             
             lblTop.Caption = "Ready"
             weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
@@ -442,19 +442,21 @@ Function SwitchToRecoding(status As ShowModeType)
             lblTop.Caption = toWeldNumberShowModel(weldSerailNumber)
             lblBigCenter.FontSize = 140
         Case ANALYSIS_MODE
-            TimerTest.Enabled = False
-            TimerShow.Tag = "ANALYSIS"
+            timerMonitor.Enabled = False
+            timerDisplay.Tag = "ANALYSIS"
     End Select
     showMode = status
 End Function
 
 Private Sub Form_Load()
+On Error GoTo ERROR_HANDLE
 ' Resource
 PlcRes.LoadResFor Me
+PLCDrv.preparePcMonitor
+PLCDrv.g_BeMonitoring = True
 
-
-    PLCDrv.InitPLCConnection
-
+WeldMDIForm.mnuWindow.Enabled = False
+    
     amp_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Amp", 500))
     dist_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Dist", 1000))
     volt_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Volt", 100))
@@ -502,7 +504,7 @@ PlcRes.LoadResFor Me
     Dim IsSimulate As Integer
     IsSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
     If IsSimulate = 1 Then
-        Me.TimerTest.Interval = 85
+        timerMonitor.Interval = 85
     End If
     
 
@@ -515,8 +517,8 @@ PlcRes.LoadResFor Me
     End If
     
     beRecording = False
-    lastTimeInMS = 0
-    timeInMS = 0
+    timeStart = 0
+    timePostFromStart = 0
     rIndex = 0
 
     weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
@@ -524,113 +526,129 @@ PlcRes.LoadResFor Me
     SwitchToRecoding STANDBY_MODE
     
     beSigned = False
-End Sub
-
-Private Sub Form_Unload(Cancel As Integer)
-    PLCDrv.UninitPLCConection
+    
+Exit Sub
+ERROR_HANDLE:
+    MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
     Unload Me
 End Sub
 
-Private Sub TimerShow_Timer()
+Private Sub Form_Unload(Cancel As Integer)
+On Error GoTo ERROR_HANDLE
+    PLCDrv.undefPcMonitor
+    PLCDrv.g_BeMonitoring = False
+    PLCDrv.closePLCConection
     
-lblDate.Caption = Format(Date, "YYYY-MM-DD")
-lblTime.Caption = FormatDateTime(Now, vbLongTime)
+    WeldMDIForm.mnuWindow.Enabled = True
+    
+    Unload Me
+ERROR_HANDLE:
+End Sub
 
-If Me.TimerShow.Tag = "ANALYSIS" Then
-   If timeGetTime() - lastTimeInMS > ANALYSIS_DURATION Then
-        SwitchToRecoding (STANDBY_MODE)
-   End If
-   Exit Sub
-End If
-
-If beRecording Then
-    lblBigCenter.Caption = Format(timeInMS / 1000, "000")
-    'lblBigCenter.Caption = Format(timeInMS / 1000, "##0.00")
-End If
-
-If 1 <= wm.data.PlcStage And wm.data.PlcStage <= 12 Then
-    lblPlcStage.Caption = PLCDrv.PlcStages(wm.data.PlcStage)
-End If
-
-
-If 1 <= wm.data.WeldStage And wm.data.WeldStage <= 6 Then
-    lblWeldStage.Caption = PLCDrv.WeldStages(wm.data.WeldStage)
-End If
-
-
-Dim Dist As Long
-Dim Volt As Long
-Dim Amp As Long
-Dim psi As Long
-
-Dist = wm.data.Dist
-If Dist < 0 Then
-    Dist = 0
-End If
-
-Volt = wm.data.Volt
-If Volt < 0 Then
-Volt = 0
-End If
-
-Amp = wm.data.Amp
-If Amp < 0 Then
-    Amp = 0
-End If
-
-psi = PlcAnalysiser.toForce(wm.data.PsiUpset, wm.data.PsiOpen, analysisDefine)
-If psi < 0 Then
-    psi = 0
-End If
-
-
-Dim scale_width As Long
-scale_width = 8000
-Dim scale_height As Long
-scale_height = 4000
-'
-Dim w As Long
-w = Dist * scale_width / dist_scale
-If w >= scale_width Then
-    w = scale_width
-End If
-picDist.Width = w
-
-w = Volt * scale_width / volt_scale
-If w >= scale_width Then
-    w = scale_width
-End If
-picVolt.Width = w
-
-
-w = Amp * scale_width / amp_scale
-If w >= scale_width Then
-    w = scale_width
-End If
-picAmp.Width = w
-
-
-w = psi * scale_width / psi_scale
-If w >= scale_width Then
-    w = scale_width
-End If
-picPsi.Width = w
-
-
-'lblTime.Caption = data.Time
-If PLCDrv.Calibrate_Distance Then
-    lblDist.FontSize = lblVolt.FontSize
-    lblDist.Caption = Format(wm.data.Dist, "##0.0")
-Else
-    lblDist.FontSize = lblVolt.FontSize - 3
-    lblDist.Caption = Format(wm.data.Dist, "##0")
-End If
-lblVolt.Caption = wm.data.Volt
-lblAmp.Caption = wm.data.Amp
-lblPsi.Caption = psi
+Private Sub TimerDisplay_Timer()
+        
+    lblDate.Caption = Format(Date, "YYYY-MM-DD")
+    lblTime.Caption = FormatDateTime(Now, vbLongTime)
+    
+    If Me.timerDisplay.Tag = "ANALYSIS" Then
+       If timeGetTime() - timeStart > ANALYSIS_DURATION Then
+            SwitchToRecoding (STANDBY_MODE)
+       End If
+       Exit Sub
+    End If
+    
+    If beRecording Then
+        lblBigCenter.Caption = Format(timePostFromStart / 1000, "000")
+        'lblBigCenter.Caption = Format(timePostFromStart / 1000, "##0.00")
+    End If
+    
+    If 1 <= wm.data.PlcStage And wm.data.PlcStage <= 12 Then
+        lblPlcStage.Caption = PLCDrv.PlcStages(wm.data.PlcStage)
+    End If
+    
+    
+    If 1 <= wm.data.WeldStage And wm.data.WeldStage <= 6 Then
+        lblWeldStage.Caption = PLCDrv.WeldStages(wm.data.WeldStage)
+    End If
+    
+    
+    Dim Dist As Long
+    Dim Volt As Long
+    Dim Amp As Long
+    Dim psi As Long
+    
+    Dist = wm.data.Dist
+    If Dist < 0 Then
+        Dist = 0
+    End If
+    
+    Volt = wm.data.Volt
+    If Volt < 0 Then
+    Volt = 0
+    End If
+    
+    Amp = wm.data.Amp
+    If Amp < 0 Then
+        Amp = 0
+    End If
+    
+    psi = PlcAnalysiser.toForce(wm.data.PsiUpset, wm.data.PsiOpen, analysisDefine)
+    If psi < 0 Then
+        psi = 0
+    End If
+    
+    
+    Dim scale_width As Long
+    scale_width = 8000
+    Dim scale_height As Long
+    scale_height = 4000
+    '
+    Dim w As Long
+    w = Dist * scale_width / dist_scale
+    If w >= scale_width Then
+        w = scale_width
+    End If
+    picDist.Width = w
+    
+    w = Volt * scale_width / volt_scale
+    If w >= scale_width Then
+        w = scale_width
+    End If
+    picVolt.Width = w
+    
+    
+    w = Amp * scale_width / amp_scale
+    If w >= scale_width Then
+        w = scale_width
+    End If
+    picAmp.Width = w
+    
+    
+    w = psi * scale_width / psi_scale
+    If w >= scale_width Then
+        w = scale_width
+    End If
+    picPsi.Width = w
+    
+    
+    'lblTime.Caption = data.Time
+    If PLCDrv.Calibrate_Distance Then
+        lblDist.FontSize = lblVolt.FontSize
+        lblDist.Caption = Format(wm.data.Dist, "##0.0")
+    Else
+        lblDist.FontSize = lblVolt.FontSize - 3
+        lblDist.Caption = Format(wm.data.Dist, "##0")
+    End If
+    lblVolt.Caption = wm.data.Volt
+    lblAmp.Caption = wm.data.Amp
+    lblPsi.Caption = psi
 
 End Sub
 
+
+
+Private Sub TimerMonitor_Timer()
+On Error GoTo ERROR_HANDLE
 '9   Weld stage 0-init, 1-preflash 2-flash 3-boost 4-upset 5-forge 6-shear
 '11  PLC Stage
 '0   DIST scaled reading in mm * 100
@@ -644,44 +662,43 @@ End Sub
 '?10 (Force???) Bosch valve
 
 
-Private Sub TimerTest_Timer()
-
-
 wm = PLCDrv.readPcMonitor
 
 
 If wm.WeldCycle = 1 And 0 <= wm.data.WeldStage And wm.data.WeldStage <= 6 Then
     If Not beSigned Then
-        lastTimeInMS = timeGetTime()
+        timeStart = timeGetTime()
         beSigned = True
-        timeInMS = 0
+        timePostFromStart = 0
     Else
-        timeInMS = timeGetTime() - lastTimeInMS
+        timePostFromStart = timeGetTime() - timeStart
     End If
         
-    If Not beRecording Then
+    If Not beRecording Then ' Start record
         If canStart() Then
-            lastTimeInMS = timeGetTime()
-            timeInMS = timeGetTime() - lastTimeInMS
+            timeStart = timeGetTime()
+            timePostFromStart = timeGetTime() - timeStart
+            
             beRecording = True
+            
             rIndex = 0
-            wm.data.Time = timeInMS
+            wm.data.Time = timePostFromStart
             rBuf(rIndex) = wm.data
             SwitchToRecoding RECORDING_MODE
         End If
     Else
-        wm.data.Time = timeInMS / 1000
+        wm.data.Time = timePostFromStart / 1000
         rBuf(rIndex) = wm.data
         rIndex = rIndex + 1
     End If
 Else
-    If beRecording = True Then
-        timeInMS = timeGetTime() - lastTimeInMS
-        wm.data.Time = timeInMS / 1000
+    If beRecording = True Then  ' Finish record current poccess
+        timePostFromStart = timeGetTime() - timeStart
+        wm.data.Time = timePostFromStart / 1000
         rBuf(rIndex) = wm.data
         rIndex = rIndex + 1
      
-        lastTimeInMS = timeGetTime()
+        timeStart = timeGetTime()
         
         analysisResult = PlcAnalysiser.Analysis(rBuf, rIndex)
         
@@ -709,6 +726,10 @@ Else
     rIndex = 0
 End If
 
+Exit Sub
+ERROR_HANDLE:
+    MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
+    Unload Me
 End Sub
 
 Public Function canStart() As Boolean
@@ -729,7 +750,7 @@ Public Function canStart() As Boolean
                 canStart = True
             End If
         Case 4:
-            If timeInMS / 1000 >= StartRecodingParam(4) Then
+            If timePostFromStart / 1000 >= StartRecodingParam(4) Then
                 canStart = True
             End If
     End Select

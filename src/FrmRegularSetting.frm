@@ -911,7 +911,7 @@ Private Sub cmdLoad_Click()
     Dim p As New frmProgress
     frmProgress.Show , Me
     Call PLCDrv.WriteRegularData(RegularSetting)
-    Call PLCDrv.UninitPLCConection
+    Call PLCDrv.closePLCConection
     
     Call SaveSetting(App.EXEName, "Parameter", "LastSetting", "Regular:" & cboFileName.Text)
     cmdLoad.Enabled = False
@@ -946,7 +946,7 @@ Private Sub cmdSave_Click()
     
     PLCDrv.InitPLCConnection
     cmdLoad.Enabled = PLCDrv.beActive
-    PLCDrv.UninitPLCConection
+    PLCDrv.closePLCConection
 End Sub
 
 Private Function LoadConfig(name As String)

@@ -84,7 +84,7 @@ Dim DefalutParam As PulseSettingType
     i = i + 1 ' Preflash
     DefalutParam.Stages(i).Value(0) = 10
     DefalutParam.Stages(i).Value(1) = 20
-    DefalutParam.Stages(i).Value(2) = 420
+    DefalutParam.Stages(i).Value(2) = 20
     DefalutParam.Stages(i).Value(3) = 300
     DefalutParam.Stages(i).Value(4) = 350
     DefalutParam.Stages(i).Value(5) = 400
@@ -94,7 +94,7 @@ Dim DefalutParam As PulseSettingType
     i = i + 1 'Flash-I
     DefalutParam.Stages(i).Value(0) = 2.5
     DefalutParam.Stages(i).Value(1) = 40
-    DefalutParam.Stages(i).Value(2) = 380
+    DefalutParam.Stages(i).Value(2) = 20
     DefalutParam.Stages(i).Value(3) = 250
     DefalutParam.Stages(i).Value(4) = 350
     DefalutParam.Stages(i).Value(5) = 450
@@ -104,7 +104,7 @@ Dim DefalutParam As PulseSettingType
     i = i + 1 'Flash-II
     DefalutParam.Stages(i).Value(0) = 10
     DefalutParam.Stages(i).Value(1) = 15
-    DefalutParam.Stages(i).Value(2) = 360
+    DefalutParam.Stages(i).Value(2) = 20
     DefalutParam.Stages(i).Value(3) = 200
     DefalutParam.Stages(i).Value(4) = 300
     DefalutParam.Stages(i).Value(5) = 400
@@ -114,7 +114,7 @@ Dim DefalutParam As PulseSettingType
     i = i + 1 'Flash-III
     DefalutParam.Stages(i).Value(0) = 10
     DefalutParam.Stages(i).Value(1) = 32
-    DefalutParam.Stages(i).Value(2) = 330
+    DefalutParam.Stages(i).Value(2) = 20
     DefalutParam.Stages(i).Value(3) = 200
     DefalutParam.Stages(i).Value(4) = 250
     DefalutParam.Stages(i).Value(5) = 300
@@ -124,7 +124,7 @@ Dim DefalutParam As PulseSettingType
     i = i + 1 'Flash-IV
     DefalutParam.Stages(i).Value(0) = 10
     DefalutParam.Stages(i).Value(1) = 6
-    DefalutParam.Stages(i).Value(2) = 365
+    DefalutParam.Stages(i).Value(2) = 20
     DefalutParam.Stages(i).Value(3) = 180
     DefalutParam.Stages(i).Value(4) = 210
     DefalutParam.Stages(i).Value(5) = 250
@@ -134,7 +134,7 @@ Dim DefalutParam As PulseSettingType
     i = i + 1 'Boost-I
     DefalutParam.Stages(i).Value(0) = 10
     DefalutParam.Stages(i).Value(1) = 5
-    DefalutParam.Stages(i).Value(2) = 390
+    DefalutParam.Stages(i).Value(2) = 20
     DefalutParam.Stages(i).Value(3) = 400
     DefalutParam.Stages(i).Value(4) = 450
     DefalutParam.Stages(i).Value(5) = 500
@@ -144,7 +144,7 @@ Dim DefalutParam As PulseSettingType
     i = i + 1 'Boost-II
     DefalutParam.Stages(i).Value(0) = 0.4
     DefalutParam.Stages(i).Value(1) = 10
-    DefalutParam.Stages(i).Value(2) = 420
+    DefalutParam.Stages(i).Value(2) = 20
     DefalutParam.Stages(i).Value(3) = 430
     DefalutParam.Stages(i).Value(4) = 500
     DefalutParam.Stages(i).Value(5) = 550

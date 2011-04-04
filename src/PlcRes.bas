@@ -49,6 +49,9 @@ Dim v As Integer
 End If
 End Sub
 
+Public Function LoadMsgResString(id As Integer) As String
+    LoadMsgResString = LoadResString(LANGUAGE + id)
+End Function
 
 Private Sub SetContranerRes(index As Integer, bas As Integer, con As Control)
 Dim c As Control
