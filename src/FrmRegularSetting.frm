@@ -929,7 +929,6 @@ Private Sub cmdLoad_Click()
     
 Exit Sub
 ERROR_HANDLE:
-    'MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
 End Sub
 
 Private Sub cmdSave_Click()

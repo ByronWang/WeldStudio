@@ -342,13 +342,14 @@ Dim sTime As Single
     r.UpsetRailUsage = buf(stopPos).Dist - buf(startPos - 1).Dist
     r.UpsetDuration = buf(stopPos).Time - buf(startPos - 1).Time
     
-    For i = startPos To stopPos
-        If i - startPos > 3 Then
-            Exit For
-        End If
-        maxCurrent = buf(i).Amp
-        voltWhenMaxCurrent = buf(i).Volt
-    Next
+'    For i = startPos To stopPos
+'        If i - startPos > 3 Then
+'            Exit For
+'        End If
+'        maxCurrent = buf(i).Amp
+'        voltWhenMaxCurrent = buf(i).Volt
+'    Next
+    
     r.OverallImpedance = (voltWhenMaxCurrent * 1000 * 1000) / (maxCurrent * 60 * 60)
     
     If analysisDefine.SlippageEnable Then
@@ -562,7 +563,7 @@ stage = SHEAR_STAGE
 If buf(pos).WeldStage <> stage Then
     GoTo OVER
 End If
-  
+
 lastPos = pos
 For pos = pos To count
     If buf(pos).WeldStage <> stage Then

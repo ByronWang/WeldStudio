@@ -26,6 +26,7 @@ FlxGdCHS.dll=
 C:\WINDOWS\system32\scrrun.dll=
 
 [Package|WMSPackage|Files Added]
+D:\WeldStudio\T0039.WLD=
 
 [Package|WMSPackage|Files Removed]
 
@@ -55,6 +56,7 @@ C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
 C:\WINDOWS\system32\VB6CHS.DLL=Yes
 C:\WINDOWS\system32\SCRRNCHS.DLL=Yes
 C:\WINDOWS\system32\MSCH2CHS.DLL=Yes
+D:\WeldStudio\T0039.WLD=Yes
 
 [Package|WMSPackage|Configure Registry Files]
 Applicable=No
@@ -91,11 +93,13 @@ C:\WINDOWS\system32\itss.dll=$(WinSysPath)
 C:\WINDOWS\system32\itircl.dll=$(WinSysPath)
 C:\WINDOWS\hh.exe=$(WinSysPath)
 C:\WINDOWS\system32\scrrun.dll=$(WinSysPath)
+D:\WeldStudio\T0039.WLD=$(AppPath)
 
 [Package|WMSPackage|Configure Shared Files]
 Applicable=Yes
 D:\WeldStudio\WMS.exe=No
 C:\WINDOWS\system32\DTL32.DLL=No
+D:\WeldStudio\T0039.WLD=Yes
 
 [Package|WMSPackage|Distribution]
 Type=single

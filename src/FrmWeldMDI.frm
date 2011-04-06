@@ -113,6 +113,10 @@ PlcRes.LoadResFor Me
     
 End Sub
 
+Private Sub MDIForm_Unload(Cancel As Integer)
+    Unload Me
+End Sub
+
 Private Sub menuUserGuide_Click()
     Shell "hh.exe " & App.path & "\WMS.chm ", vbNormalFocus
 End Sub
@@ -417,7 +421,6 @@ Private Sub mnuAbout_Click()
 End Sub
 
 Private Sub mnuConnect_Click()
-On Error GoTo ERROR_HANDLE
 
     frmProgress.LoadMode = PlcDeclare.LOAD_ALL_PARAMETER
     frmProgress.ParamName = name
@@ -427,9 +430,6 @@ On Error GoTo ERROR_HANDLE
         Call FrmGraph.Show
     End If
     
-Exit Sub
-ERROR_HANDLE:
-    MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
 End Sub
 
 Private Sub mnuExit_Click()

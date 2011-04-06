@@ -35,15 +35,15 @@ Begin VB.Form FrmChart
       Width           =   30000
    End
    Begin VB.CommandButton cmdShowMode 
-      Caption         =   "Change Mode"
+      Caption         =   "Data Filter"
       Height          =   495
-      Left            =   13560
+      Left            =   13440
       TabIndex        =   75
       Top             =   240
-      Width           =   1215
+      Width           =   1335
    End
    Begin VB.CommandButton cmdViewDataDetail 
-      Caption         =   "ViewDetial"
+      Caption         =   "ViewDetail"
       Height          =   495
       Left            =   2640
       TabIndex        =   74

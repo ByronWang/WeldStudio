@@ -810,7 +810,6 @@ On Error GoTo ERROR_HANDLE
     
 Exit Sub
 ERROR_HANDLE:
-    'MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
 End Sub
 
 Private Function checkInputedDataValidate() As Boolean

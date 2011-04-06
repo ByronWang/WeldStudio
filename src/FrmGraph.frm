@@ -543,17 +543,18 @@ WeldMDIForm.mnuOptions.Enabled = False
     
 Exit Sub
 ERROR_HANDLE:
-    MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
     Unload Me
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
 On Error GoTo ERROR_HANDLE
+    Me.Hide
 
     Me.timerDisplay.Enabled = False
     Me.timerMonitor.Enabled = False
     Dim i As Integer
     For i = 0 To 100
+        Call Sleep(50)
         If Not beRequest Then
             Exit For
         End If
@@ -709,9 +710,7 @@ Dim Status As Long
 
 Status = PLCDrv.ReadPcMonitor(wmRecord)
 If Status > 0 Then
-    MsgBox "Connection Error!"
-    Unload Me
-    Exit Sub
+    GoTo ERROR_HANDLE
 End If
 
 If wmRecord.WeldCycle = 1 And 0 <= wmRecord.data.WeldStage And wmRecord.data.WeldStage <= 6 And wmRecord.data.WeldStage >= lastStage Then
@@ -784,16 +783,18 @@ End If
 
 
 If ProcessSetting <= 0 Or Not beRecording Then
-    Call PLCDrv.ReadCurrentProcessSetting(ProcessSetting)
-    If ProcessSetting = 1 Then
-        lblProcessSetting.Caption = "Regular"
-        lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "----")
-    ElseIf ProcessSetting = 2 Then
-        lblProcessSetting.Caption = "Pulse"
-        lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "----")
-    Else
-        lblProcessSetting.Caption = "Unknown"
-        lblParameter.Caption = "----"
+    Status = PLCDrv.ReadCurrentProcessSetting(ProcessSetting)
+    If Status = 0 Then
+        If ProcessSetting = 1 Then
+            lblProcessSetting.Caption = "Regular"
+            lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "----")
+        ElseIf ProcessSetting = 2 Then
+            lblProcessSetting.Caption = "Pulse"
+            lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "----")
+        Else
+            lblProcessSetting.Caption = "Unknown"
+            lblParameter.Caption = "----"
+        End If
     End If
 End If
 
@@ -801,7 +802,7 @@ beRequest = False
 Exit Sub
 ERROR_HANDLE:
     beRequest = False
-    MsgBox PlcRes.LoadMsgResString(9000 + Err.Number) & vbCrLf & Trim(PLCDrv.g_Error_String), vbCritical
+    MsgBox "Connection error!¡¡" & vbCrLf & Status
     Unload Me
 End Sub
 
