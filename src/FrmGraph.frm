@@ -69,7 +69,7 @@ Begin VB.Form FrmGraph
       Width           =   8355
    End
    Begin VB.Timer timerMonitor 
-      Interval        =   50
+      Interval        =   30
       Left            =   3480
       Top             =   5640
    End
@@ -512,7 +512,7 @@ PlcRes.LoadResFor Me
     If IsSimulate = 1 Then
         timerMonitor.Interval = 65
     Else
-        timerMonitor.Interval = 50
+        timerMonitor.Interval = 30
     End If
     
 
@@ -759,7 +759,7 @@ Else
             lblBigCenter.ForeColor = &HFF&
         Else
             lblBigCenter.Caption = "INT"
-            lblBigCenter.ForeColor = &HFFFFFF
+            lblBigCenter.ForeColor = &HFF&
         End If
     
         SwitchToRecoding ANALYSIS_MODE

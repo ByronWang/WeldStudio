@@ -155,7 +155,7 @@ ElseIf f.analysisResult.Succeed = PlcDeclare.NO Then
     cellcolors(i) = FAIL_COLOR
 ElseIf f.analysisResult.Succeed = PlcDeclare.INTERRUPT Then
     entry = entry & vbTab & "INT"
-    cellcolors(i) = NOTUSED_COLOR
+    cellcolors(i) = FAIL_COLOR
 Else
     entry = entry & vbTab & " - "
     cellcolors(i) = NOTUSED_COLOR
