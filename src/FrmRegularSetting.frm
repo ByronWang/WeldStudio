@@ -608,7 +608,7 @@ Begin VB.Form FrmRegularSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         Caption         =   "0.00"
+         Caption         =   "0.2"
          Height          =   255
          Index           =   2
          Left            =   4320
@@ -627,7 +627,7 @@ Begin VB.Form FrmRegularSetting
       End
       Begin VB.Label lblMax 
          Alignment       =   2  'Center
-         Caption         =   "3.00"
+         Caption         =   "1.0"
          Height          =   255
          Index           =   2
          Left            =   5160
@@ -666,7 +666,7 @@ Begin VB.Form FrmRegularSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   1  'Right Justify
-         Caption         =   "0"
+         Caption         =   "50"
          Height          =   255
          Index           =   4
          Left            =   4320
@@ -695,7 +695,7 @@ Begin VB.Form FrmRegularSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   1  'Right Justify
-         Caption         =   "0"
+         Caption         =   "50"
          Height          =   255
          Index           =   5
          Left            =   4320
@@ -724,7 +724,7 @@ Begin VB.Form FrmRegularSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   1  'Right Justify
-         Caption         =   "0"
+         Caption         =   "50"
          Height          =   255
          Index           =   6
          Left            =   4320
@@ -874,6 +874,11 @@ Dim regularSetting As RegularSettingType
 Dim path As String
 Dim InitialVoltage As Long
 
+
+Const WARNING_COLOR As Long = &H8080FF
+Const ERROR_COLOR As Long = &HFF&
+Const FINE_COLOR As Long = &HFFFFFF
+
 Private Sub CancelButton_Click()
     Me.Hide
     Unload Me
@@ -947,10 +952,7 @@ Private Sub cmdSave_Click()
     End If
     
     cmdSave.Enabled = False
-    
-    PLCDrv.OpenPLCConnection
     cmdLoad.Enabled = PLCDrv.beActive
-    PLCDrv.ClosePLCConection
 End Sub
 
 Private Function LoadConfig(name As String)
@@ -1015,14 +1017,17 @@ Private Sub txtValue_Change(index As Integer)
         End If
         
         If min <= v And v <= max Then
-            txtValue(index).BackColor = &HFFFFFF
-            regularSetting.Value(index) = CSng(txtValue(index).Text)
-            cmdSave.Enabled = True
-            Exit Sub
+            txtValue(index).BackColor = FINE_COLOR
+        Else
+            txtValue(index).BackColor = WARNING_COLOR
         End If
+        
+        regularSetting.Value(index) = CSng(txtValue(index).Text)
+        cmdSave.Enabled = True
+    Else
+        txtValue(index).BackColor = ERROR_COLOR
     End If
             
-    txtValue(index).BackColor = &HFF&
 End Sub
 Private Function checkInputedDataValidate() As Boolean
     Dim min As Single
@@ -1036,10 +1041,13 @@ Dim i As Integer
         max = CSng(lblMax(i).Caption)
         If IsNumeric(txtValue(i).Text) Then
             v = CSng(txtValue(i).Text)
-            If Not (min <= v And v <= max) Then
-                checkInputedDataValidate = False
-                Exit Function
-            End If
+'            If Not (min <= v And v <= max) Then
+'                checkInputedDataValidate = False
+'                Exit Function
+'            End If
+        Else
+            checkInputedDataValidate = False
+            Exit Function
         End If
     Next i
     checkInputedDataValidate = True

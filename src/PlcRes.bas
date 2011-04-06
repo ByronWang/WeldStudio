@@ -9,7 +9,7 @@ Private Sub Init()
 Dim l As String
 LANGUAGE = -1
 
-    l = GetSetting(App.EXEName, "General", "Language", "ZH")
+    l = GetSetting(App.EXEName, "General", "Language", "EN")
 
     If l = "ZH" Then
         LANGUAGE = 0

@@ -35,7 +35,6 @@ Public Const PlcStages_Res_Start As Integer = 3000
 Public WeldStages(7) As String
 Public PlcStages(12) As String
 
-Public ProcessSetting As Integer
 
 Public beActive As Boolean
 'dim
@@ -345,7 +344,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
     '++
     Dim buffer_signal(1) As Integer
     Dim def_signal As String
-    def_signal = "N21:4,1,WORD,MODIFY,AB:LOCAL,1,SLC500,1"
+    def_signal = "N21:4,1,WORD,MODIFY,AB:LOCAL,1,SLC500,1" 'Initialise parameter 1-reg 2-pulse
     
     Dim handle_signal As Long
     buffer_signal(0) = 2

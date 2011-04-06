@@ -412,6 +412,7 @@ Dim beSigned As Boolean
 Dim Mode_StartRecording As Integer
 Dim ModeParam_StartRecoding(5) As Single
 
+Dim ProcessSetting As Integer
 Dim weldSerailNumber As Long
 'Dim WeldFile As String
 
@@ -530,6 +531,8 @@ WeldMDIForm.mnuOptions.Enabled = False
     timeStart = 0
     timePostFromStart = 0
     wmRecord_Index = 0
+    
+    ProcessSetting = -1
 
     weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
     
@@ -776,17 +779,17 @@ Else
 End If
 
 
-If PLCDrv.ProcessSetting = 0 Or Not beRecording Then
-    Call PLCDrv.ReadCurrentProcessSetting(PLCDrv.ProcessSetting)
-    If PLCDrv.ProcessSetting = 0 Then
-        lblProcessSetting.Caption = "Unknown"
-        lblParameter.Caption = "----"
-    ElseIf PLCDrv.ProcessSetting = 1 Then
+If ProcessSetting <= 0 Or Not beRecording Then
+    Call PLCDrv.ReadCurrentProcessSetting(ProcessSetting)
+    If ProcessSetting = 1 Then
         lblProcessSetting.Caption = "Regular"
         lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "----")
-    Else
+    ElseIf ProcessSetting = 2 Then
         lblProcessSetting.Caption = "Pulse"
         lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "----")
+    Else
+        lblProcessSetting.Caption = "Unknown"
+        lblParameter.Caption = "----"
     End If
 End If
 

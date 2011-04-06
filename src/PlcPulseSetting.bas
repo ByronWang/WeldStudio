@@ -33,7 +33,7 @@ End Type
 
 Type PulseFileItemType
     name As String * 20
-    PulseSetting As PulseSettingType
+    pulseSetting As PulseSettingType
 End Type
 
 
@@ -43,17 +43,17 @@ End Type
 
 Type RegularFileItemType
     name As String * 20
-    RegularSetting As RegularSettingType
+    regularSetting As RegularSettingType
 End Type
 
 Public Function DefalutStagesParameters() As PulseSettingType
 
 Dim DefalutParam As PulseSettingType
 
-    DefalutParam.General.Value(0) = 0.6
-    DefalutParam.General.Value(1) = 10
+    DefalutParam.General.Value(1) = 12
+    DefalutParam.General.Value(0) = 0.5
+    DefalutParam.General.Value(3) = 55
     DefalutParam.General.Value(2) = 0
-    DefalutParam.General.Value(3) = 51
         
     Dim i As Integer
     Dim stage As StageParametersType
@@ -82,74 +82,74 @@ Dim DefalutParam As PulseSettingType
     i = -1
     
     i = i + 1 ' Preflash
-    DefalutParam.Stages(i).Value(0) = 10
-    DefalutParam.Stages(i).Value(1) = 20
-    DefalutParam.Stages(i).Value(2) = 20
+    DefalutParam.Stages(i).Value(0) = 4.5
+    DefalutParam.Stages(i).Value(2) = 30
+    DefalutParam.Stages(i).Value(1) = 98
     DefalutParam.Stages(i).Value(3) = 300
     DefalutParam.Stages(i).Value(4) = 350
     DefalutParam.Stages(i).Value(5) = 400
-    DefalutParam.Stages(i).Value(6) = 0.8
+    DefalutParam.Stages(i).Value(6) = 1.4
     DefalutParam.Stages(i).Value(7) = 0.7
     
     i = i + 1 'Flash-I
-    DefalutParam.Stages(i).Value(0) = 2.5
-    DefalutParam.Stages(i).Value(1) = 40
-    DefalutParam.Stages(i).Value(2) = 20
-    DefalutParam.Stages(i).Value(3) = 250
-    DefalutParam.Stages(i).Value(4) = 350
-    DefalutParam.Stages(i).Value(5) = 450
-    DefalutParam.Stages(i).Value(6) = 1.2
-    DefalutParam.Stages(i).Value(7) = 0.5
+    DefalutParam.Stages(i).Value(0) = 6
+    DefalutParam.Stages(i).Value(2) = 40
+    DefalutParam.Stages(i).Value(1) = 85
+    DefalutParam.Stages(i).Value(3) = 350
+    DefalutParam.Stages(i).Value(4) = 500
+    DefalutParam.Stages(i).Value(5) = 600
+    DefalutParam.Stages(i).Value(6) = 2.75
+    DefalutParam.Stages(i).Value(7) = 0.8
     
     i = i + 1 'Flash-II
-    DefalutParam.Stages(i).Value(0) = 10
-    DefalutParam.Stages(i).Value(1) = 15
-    DefalutParam.Stages(i).Value(2) = 20
+    DefalutParam.Stages(i).Value(0) = 7
+    DefalutParam.Stages(i).Value(2) = 30
+    DefalutParam.Stages(i).Value(1) = 77
     DefalutParam.Stages(i).Value(3) = 200
     DefalutParam.Stages(i).Value(4) = 300
     DefalutParam.Stages(i).Value(5) = 400
-    DefalutParam.Stages(i).Value(6) = 1.6
+    DefalutParam.Stages(i).Value(6) = 2.75
     DefalutParam.Stages(i).Value(7) = 0.7
     
     i = i + 1 'Flash-III
-    DefalutParam.Stages(i).Value(0) = 10
-    DefalutParam.Stages(i).Value(1) = 32
-    DefalutParam.Stages(i).Value(2) = 20
-    DefalutParam.Stages(i).Value(3) = 200
-    DefalutParam.Stages(i).Value(4) = 250
-    DefalutParam.Stages(i).Value(5) = 300
-    DefalutParam.Stages(i).Value(6) = 1.9
-    DefalutParam.Stages(i).Value(7) = 0.6
+    DefalutParam.Stages(i).Value(0) = 6
+    DefalutParam.Stages(i).Value(2) = 15
+    DefalutParam.Stages(i).Value(1) = 89
+    DefalutParam.Stages(i).Value(3) = 190
+    DefalutParam.Stages(i).Value(4) = 350
+    DefalutParam.Stages(i).Value(5) = 450
+    DefalutParam.Stages(i).Value(6) = 0.4
+    DefalutParam.Stages(i).Value(7) = 0.2
     
     i = i + 1 'Flash-IV
-    DefalutParam.Stages(i).Value(0) = 10
-    DefalutParam.Stages(i).Value(1) = 6
-    DefalutParam.Stages(i).Value(2) = 20
+    DefalutParam.Stages(i).Value(0) = 6
+    DefalutParam.Stages(i).Value(2) = 3
+    DefalutParam.Stages(i).Value(1) = 100
     DefalutParam.Stages(i).Value(3) = 180
-    DefalutParam.Stages(i).Value(4) = 210
-    DefalutParam.Stages(i).Value(5) = 250
-    DefalutParam.Stages(i).Value(6) = 1.5
-    DefalutParam.Stages(i).Value(7) = 0.5
+    DefalutParam.Stages(i).Value(4) = 500
+    DefalutParam.Stages(i).Value(5) = 600
+    DefalutParam.Stages(i).Value(6) = 0.8
+    DefalutParam.Stages(i).Value(7) = 0.2
     
     i = i + 1 'Boost-I
-    DefalutParam.Stages(i).Value(0) = 10
-    DefalutParam.Stages(i).Value(1) = 5
-    DefalutParam.Stages(i).Value(2) = 20
-    DefalutParam.Stages(i).Value(3) = 400
-    DefalutParam.Stages(i).Value(4) = 450
-    DefalutParam.Stages(i).Value(5) = 500
-    DefalutParam.Stages(i).Value(6) = 0.9
-    DefalutParam.Stages(i).Value(7) = 0.45
+    DefalutParam.Stages(i).Value(0) = 2.8
+    DefalutParam.Stages(i).Value(2) = 3
+    DefalutParam.Stages(i).Value(1) = 100
+    DefalutParam.Stages(i).Value(3) = 200
+    DefalutParam.Stages(i).Value(4) = 500
+    DefalutParam.Stages(i).Value(5) = 600
+    DefalutParam.Stages(i).Value(6) = 1.2
+    DefalutParam.Stages(i).Value(7) = 0.2
     
     i = i + 1 'Boost-II
-    DefalutParam.Stages(i).Value(0) = 0.4
-    DefalutParam.Stages(i).Value(1) = 10
-    DefalutParam.Stages(i).Value(2) = 20
-    DefalutParam.Stages(i).Value(3) = 430
+    DefalutParam.Stages(i).Value(0) = 10
+    DefalutParam.Stages(i).Value(2) = 3
+    DefalutParam.Stages(i).Value(1) = 100
+    DefalutParam.Stages(i).Value(3) = 225
     DefalutParam.Stages(i).Value(4) = 500
-    DefalutParam.Stages(i).Value(5) = 550
-    DefalutParam.Stages(i).Value(6) = 1.3
-    DefalutParam.Stages(i).Value(7) = 0.2
+    DefalutParam.Stages(i).Value(5) = 600
+    DefalutParam.Stages(i).Value(6) = 1.6
+    DefalutParam.Stages(i).Value(7) = 0.1
     
     
     
@@ -193,7 +193,7 @@ Public Function LoadConfig(filename As String, configName As String) As PulseSet
     Dim i As Integer
     For i = LBound(pFileItemList) To UBound(pFileItemList) - 1
         If Trim(pFileItemList(i).name) = Trim(configName) Then
-            LoadConfig = pFileItemList(i).PulseSetting
+            LoadConfig = pFileItemList(i).pulseSetting
             Exit Function
         End If
     Next i
@@ -202,7 +202,7 @@ Public Function LoadConfig(filename As String, configName As String) As PulseSet
 End Function
 
 
-Public Function SaveConfig(filename As String, configName As String, PulseSetting As PulseSettingType)
+Public Function SaveConfig(filename As String, configName As String, pulseSetting As PulseSettingType)
     Dim pFileItemList() As PulseFileItemType
     pFileItemList = LoadAll(filename)
 
@@ -235,7 +235,7 @@ Public Function SaveConfig(filename As String, configName As String, PulseSettin
     End If
     
     pFileItem.name = configName
-    pFileItem.PulseSetting = PulseSetting
+    pFileItem.pulseSetting = pulseSetting
     
     Open filename For Binary As #1
         Put 1, 1, pFileHeader

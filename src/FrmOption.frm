@@ -48,18 +48,18 @@ Begin VB.Form FrmOption
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   4
+      Tab             =   5
       TabsPerRow      =   10
       TabHeight       =   520
       TabCaption(0)   =   "General"
       TabPicture(0)   =   "FrmOption.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "lblLanguage"
-      Tab(0).Control(1)=   "chkOnlineOnStartUp"
-      Tab(0).Control(2)=   "cboLanguage"
-      Tab(0).Control(3)=   "CommonDialog1"
-      Tab(0).Control(4)=   "Frame5"
-      Tab(0).Control(5)=   "Frame7"
+      Tab(0).Control(0)=   "Frame7"
+      Tab(0).Control(1)=   "Frame5"
+      Tab(0).Control(2)=   "CommonDialog1"
+      Tab(0).Control(3)=   "cboLanguage"
+      Tab(0).Control(4)=   "chkOnlineOnStartUp"
+      Tab(0).Control(5)=   "lblLanguage"
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
@@ -69,10 +69,10 @@ Begin VB.Form FrmOption
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame2(2)"
-      Tab(2).Control(1)=   "Frame2(3)"
-      Tab(2).Control(2)=   "Frame2(0)"
-      Tab(2).Control(3)=   "Frame2(1)"
+      Tab(2).Control(0)=   "Frame2(1)"
+      Tab(2).Control(1)=   "Frame2(0)"
+      Tab(2).Control(2)=   "Frame2(3)"
+      Tab(2).Control(3)=   "Frame2(2)"
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
@@ -81,19 +81,15 @@ Begin VB.Form FrmOption
       Tab(3).ControlCount=   1
       TabCaption(4)   =   "Weld Chart"
       TabPicture(4)   =   "FrmOption.frx":007C
-      Tab(4).ControlEnabled=   -1  'True
-      Tab(4).Control(0)=   "chkFilterData"
-      Tab(4).Control(0).Enabled=   0   'False
-      Tab(4).Control(1)=   "Frame1(2)"
-      Tab(4).Control(1).Enabled=   0   'False
-      Tab(4).Control(2)=   "Frame1(0)"
-      Tab(4).Control(2).Enabled=   0   'False
-      Tab(4).Control(3)=   "Frame1(1)"
-      Tab(4).Control(3).Enabled=   0   'False
+      Tab(4).ControlEnabled=   0   'False
+      Tab(4).Control(0)=   "Frame1(1)"
+      Tab(4).Control(1)=   "Frame1(0)"
+      Tab(4).Control(2)=   "Frame1(2)"
+      Tab(4).Control(3)=   "chkFilterData"
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
-      Tab(5).ControlEnabled=   0   'False
+      Tab(5).ControlEnabled=   -1  'True
       Tab(5).Control(0)=   "Label1"
       Tab(5).Control(0).Enabled=   0   'False
       Tab(5).Control(1)=   "Frame6"
@@ -104,11 +100,11 @@ Begin VB.Form FrmOption
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "cmdReset"
-      Tab(6).Control(1)=   "chkRecordInterrupts"
+      Tab(6).Control(0)=   "Label2"
+      Tab(6).Control(1)=   "Frame4"
       Tab(6).Control(2)=   "txtWeldNumber"
-      Tab(6).Control(3)=   "Frame4"
-      Tab(6).Control(4)=   "Label2"
+      Tab(6).Control(3)=   "chkRecordInterrupts"
+      Tab(6).Control(4)=   "cmdReset"
       Tab(6).ControlCount=   5
       Begin VB.Frame Frame7 
          Caption         =   "Unit Info"
@@ -376,7 +372,7 @@ Begin VB.Form FrmOption
          EndProperty
          Height          =   1215
          Index           =   11
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   170
          Tag             =   "21900"
          Top             =   4560
@@ -496,7 +492,7 @@ Begin VB.Form FrmOption
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3855
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   145
          Top             =   600
          Width           =   10215
@@ -1381,7 +1377,7 @@ Begin VB.Form FrmOption
          Caption         =   "Distance(mm) and Force(T)"
          Height          =   1575
          Index           =   1
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   111
          Tag             =   "20200"
          Top             =   480
@@ -1451,7 +1447,7 @@ Begin VB.Form FrmOption
          Caption         =   "Current(A) and Voltage(V)"
          Height          =   1575
          Index           =   0
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   107
          Tag             =   "20100"
          Top             =   480
@@ -1521,7 +1517,7 @@ Begin VB.Form FrmOption
          Caption         =   "Time (sec)"
          Height          =   1455
          Index           =   2
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   104
          Tag             =   "20300"
          Top             =   2280
@@ -1970,7 +1966,7 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkFilterData 
          Caption         =   "FilterData"
          Height          =   255
-         Left            =   1800
+         Left            =   -73200
          TabIndex        =   80
          Tag             =   "20010"
          Top             =   6840
@@ -2088,7 +2084,7 @@ Begin VB.Form FrmOption
       Begin VB.Label Label1 
          Caption         =   "Label1"
          Height          =   255
-         Left            =   -69360
+         Left            =   5640
          TabIndex        =   146
          Top             =   2040
          Width           =   1815
@@ -2359,7 +2355,7 @@ PlcRes.LoadResFor Me
 
 LANGUAGE = GetSetting(App.EXEName, "General", "Language", "EN")
 cboLanguage.Text = LANGUAGE
- chkRecordInterrupts.Value = GetSetting(App.EXEName, "Weld", "RecordInterrupts", 0)
+chkRecordInterrupts.Value = GetSetting(App.EXEName, "Weld", "RecordInterrupts", 0)
 
 chkOnlineOnStartUp.Value = GetSetting(App.EXEName, "Genaral", "IsSimulate", 0)
 
@@ -2488,7 +2484,7 @@ WeldAnalysis_Data(11) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "CurrentI
 WeldAnalysis_Data(12) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitCurrent", 700))
 WeldAnalysis_Data(13) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitTime", 0.8))
 WeldAnalysis_Data(14) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageTotalRail", 20))
-WeldAnalysis_Data(15) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 20))
+WeldAnalysis_Data(15) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
 'WeldAnalysis_Data(16) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostSpeedTimeRange", 2))
 WeldAnalysis_Data(17) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetCurrentMinimum", 100))
 WeldAnalysis_Data(18) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Pistonside)", 209.55))

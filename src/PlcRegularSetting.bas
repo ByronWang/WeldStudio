@@ -25,16 +25,19 @@ Dim DefalutParam As RegularSettingType
     DefalutParam.Value(1) = 110
     DefalutParam.Value(2) = 0.9
     DefalutParam.Value(3) = 2.5
-    DefalutParam.Value(4) = 80
-    DefalutParam.Value(5) = 60
-    DefalutParam.Value(6) = 80
+    
+    DefalutParam.Value(4) = 100
+    DefalutParam.Value(5) = 75
+    DefalutParam.Value(6) = 100
+    
     DefalutParam.Value(7) = 200
     DefalutParam.Value(8) = 250
     DefalutParam.Value(9) = 290
     DefalutParam.Value(10) = 12.1
+    
+    DefalutParam.Value(13) = 3
     DefalutParam.Value(11) = 0.19
     DefalutParam.Value(12) = 1.3
-    DefalutParam.Value(13) = 3
     'DefalutParam.Value(14) = 0
         
 DefalutStagesParameters = DefalutParam
@@ -75,7 +78,7 @@ Public Function LoadConfig(filename As String, configName As String) As RegularS
     Dim i As Integer
     For i = LBound(pFileItemList) To UBound(pFileItemList) - 1
         If Trim(pFileItemList(i).name) = Trim(configName) Then
-            LoadConfig = pFileItemList(i).RegularSetting
+            LoadConfig = pFileItemList(i).regularSetting
             Exit Function
         End If
     Next i
@@ -84,7 +87,7 @@ Public Function LoadConfig(filename As String, configName As String) As RegularS
 End Function
 
 
-Public Function SaveConfig(filename As String, configName As String, RegularSetting As RegularSettingType)
+Public Function SaveConfig(filename As String, configName As String, regularSetting As RegularSettingType)
     Dim pFileItemList() As RegularFileItemType
     pFileItemList = LoadAll(filename)
 
@@ -117,7 +120,7 @@ Public Function SaveConfig(filename As String, configName As String, RegularSett
     End If
     
     pFileItem.name = configName
-    pFileItem.RegularSetting = RegularSetting
+    pFileItem.regularSetting = regularSetting
     
     Open filename For Binary As #1
         Put 1, 1, pFileHeader

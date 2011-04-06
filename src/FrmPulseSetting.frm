@@ -124,7 +124,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMaxGeneral 
          Alignment       =   2  'Center
-         Caption         =   "3.0"
+         Caption         =   "1"
          Height          =   255
          Index           =   0
          Left            =   5160
@@ -143,7 +143,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMinGeneral 
          Alignment       =   2  'Center
-         Caption         =   "0.00"
+         Caption         =   "0.2"
          Height          =   255
          Index           =   0
          Left            =   4320
@@ -331,7 +331,7 @@ Begin VB.Form FrmPulseSetting
          Left            =   2640
          TabIndex        =   4
          Text            =   "0.00"
-         Top             =   1680
+         Top             =   1320
          Width           =   735
       End
       Begin VB.TextBox txtValue 
@@ -341,7 +341,7 @@ Begin VB.Form FrmPulseSetting
          Left            =   2640
          TabIndex        =   3
          Text            =   "0.00"
-         Top             =   1320
+         Top             =   1680
          Width           =   735
       End
       Begin VB.TextBox txtValue 
@@ -357,11 +357,11 @@ Begin VB.Form FrmPulseSetting
       Begin VB.Label Label2 
          Alignment       =   1  'Right Justify
          Caption         =   "%"
-         Height          =   165
+         Height          =   200
          Index           =   3
          Left            =   3375
          TabIndex        =   72
-         Top             =   1360
+         Top             =   1720
          Width           =   165
       End
       Begin VB.Label lblSign 
@@ -371,7 +371,7 @@ Begin VB.Form FrmPulseSetting
          Index           =   1
          Left            =   3480
          TabIndex        =   73
-         Top             =   1350
+         Top             =   1710
          Width           =   795
       End
       Begin VB.Label lblSepereter 
@@ -471,7 +471,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         Caption         =   "150"
+         Caption         =   "50"
          Height          =   255
          Index           =   5
          Left            =   4320
@@ -500,7 +500,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         Caption         =   "150"
+         Caption         =   "50"
          Height          =   255
          Index           =   4
          Left            =   4320
@@ -529,7 +529,7 @@ Begin VB.Form FrmPulseSetting
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         Caption         =   "150"
+         Caption         =   "50"
          Height          =   255
          Index           =   3
          Left            =   4320
@@ -544,7 +544,7 @@ Begin VB.Form FrmPulseSetting
          Index           =   2
          Left            =   5160
          TabIndex        =   34
-         Top             =   1680
+         Top             =   1320
          Width           =   495
       End
       Begin VB.Label lblSepereter 
@@ -553,7 +553,7 @@ Begin VB.Form FrmPulseSetting
          Index           =   2
          Left            =   4920
          TabIndex        =   33
-         Top             =   1680
+         Top             =   1320
          Width           =   255
       End
       Begin VB.Label lblMin 
@@ -563,7 +563,7 @@ Begin VB.Form FrmPulseSetting
          Index           =   2
          Left            =   4320
          TabIndex        =   32
-         Top             =   1680
+         Top             =   1320
          Width           =   495
       End
       Begin VB.Label lblMax 
@@ -573,7 +573,7 @@ Begin VB.Form FrmPulseSetting
          Index           =   1
          Left            =   5160
          TabIndex        =   31
-         Top             =   1320
+         Top             =   1680
          Width           =   495
       End
       Begin VB.Label lblSepereter 
@@ -582,17 +582,17 @@ Begin VB.Form FrmPulseSetting
          Index           =   1
          Left            =   4920
          TabIndex        =   30
-         Top             =   1320
+         Top             =   1680
          Width           =   255
       End
       Begin VB.Label lblMin 
          Alignment       =   2  'Center
-         Caption         =   "0"
+         Caption         =   "50"
          Height          =   255
          Index           =   1
          Left            =   4320
          TabIndex        =   29
-         Top             =   1320
+         Top             =   1680
          Width           =   495
       End
       Begin VB.Label lblMax 
@@ -681,7 +681,7 @@ Begin VB.Form FrmPulseSetting
          Left            =   240
          TabIndex        =   20
          Tag             =   "30"
-         Top             =   1680
+         Top             =   1320
          Width           =   2415
       End
       Begin VB.Label lblLabel 
@@ -691,7 +691,7 @@ Begin VB.Form FrmPulseSetting
          Left            =   240
          TabIndex        =   19
          Tag             =   "20"
-         Top             =   1320
+         Top             =   1680
          Width           =   2415
       End
       Begin VB.Label lblLabel 
@@ -751,6 +751,12 @@ Dim path As String
 Dim InitialVoltage As Long
 Dim lastCboStageIndex As Integer
 
+
+Const WARNING_COLOR As Long = &H8080FF
+Const ERROR_COLOR As Long = &HFF&
+Const FINE_COLOR As Long = &HFFFFFF
+
+
 Private Sub CancelButton_Click()
     Me.Hide
     Unload Me
@@ -801,27 +807,29 @@ ERROR_HANDLE:
     MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
 End Sub
 
-'Private Function checkInputedDataValidate() As Boolean
-'Dim i As Integer
-'    checkInputedDataValidate = True
-'    For i = 0 To txtValue.count - 1
-'        If txtValue(i).BackColor = &HFF& Then
-'            checkInputedDataValidate = False
-'            Exit Function
-'        End If
-'    Next i
-'
-'        For i = 0 To txtValueGeneral.count - 1
-'        If txtValueGeneral(i).BackColor = &HFF& Then
-'            checkInputedDataValidate = False
-'            Exit Function
-'        End If
-'    Next i
-'
-'End Function
+Private Function checkInputedDataValidate() As Boolean
+Dim i As Integer
+    checkInputedDataValidate = True
+    For i = 0 To txtValue.count - 1
+        If txtValue(i).BackColor = ERROR_COLOR Then
+            checkInputedDataValidate = False
+            Exit Function
+        End If
+    Next i
+
+    For i = 0 To txtValueGeneral.count - 1
+        If txtValueGeneral(i).BackColor = ERROR_COLOR Then
+            checkInputedDataValidate = False
+            Exit Function
+        End If
+    Next i
+
+End Function
 
 Private Sub cmdSave_Click()
-
+    If Not checkInputedDataValidate Then
+        Exit Sub
+    End If
 
     If cboFileName.Text <> "" Then
         Call PlcPulseSetting.SaveConfig(path, cboFileName.Text, pulseSetting)
@@ -927,16 +935,15 @@ Private Sub txtValue_Change(index As Integer)
         End If
         
         If min <= v And v <= max Then
-            txtValue(index).BackColor = &HFFFFFF
-            pulseSetting.Stages(cboStage.ListIndex).Value(index) = CDbl(txtValue(index).Text)
-            cmdSave.Enabled = True
+            txtValue(index).BackColor = FINE_COLOR
         Else
-            txtValue(index).BackColor = &H8080FF
-            pulseSetting.Stages(cboStage.ListIndex).Value(index) = CDbl(txtValue(index).Text)
-            cmdSave.Enabled = True
+            txtValue(index).BackColor = WARNING_COLOR
         End If
+        
+        pulseSetting.Stages(cboStage.ListIndex).Value(index) = CDbl(txtValue(index).Text)
+        cmdSave.Enabled = True
     Else
-        txtValue(index).BackColor = &HFF&
+        txtValue(index).BackColor = ERROR_COLOR
     End If
 End Sub
 
@@ -951,14 +958,17 @@ Private Sub txtValueGeneral_Change(index As Integer)
     
         v = CSng(txtValueGeneral(index).Text)
         If min <= v And v <= max Then
-            txtValueGeneral(index).BackColor = &HFFFFFF
-            pulseSetting.General.Value(index) = CSng(txtValueGeneral(index).Text)
-            cmdSave.Enabled = True
-            Exit Sub
+            txtValueGeneral(index).BackColor = FINE_COLOR
+        Else
+            txtValueGeneral(index).BackColor = WARNING_COLOR
         End If
+        
+        pulseSetting.General.Value(index) = CSng(txtValueGeneral(index).Text)
+        cmdSave.Enabled = True
+    Else
+        txtValueGeneral(index).BackColor = ERROR_COLOR
     End If
             
-    txtValueGeneral(index).BackColor = &HFF&
     
     'txtValueGeneral(index).Text = PulseSetting.General.Value(index)
     

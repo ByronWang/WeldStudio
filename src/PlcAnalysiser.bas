@@ -327,12 +327,14 @@ Private Function anaUpset(buf() As WeldData, startPos As Integer, stopPos As Int
     
 Dim i As Integer
 Dim maxCurrent As Long
+Dim voltWhenMaxCurrent As Long
 Dim bIn As Boolean
 Dim sTime As Single
 
     For i = startPos To stopPos
         If buf(i).Amp > maxCurrent Then
             maxCurrent = buf(i).Amp
+            voltWhenMaxCurrent = buf(i).Volt
         End If
     Next
         
@@ -340,6 +342,7 @@ Dim sTime As Single
     r.UpsetRailUsage = buf(stopPos).Dist - buf(startPos - 1).Dist
     r.UpsetDuration = buf(stopPos).Time - buf(startPos - 1).Time
     
+    r.OverallImpedance = (voltWhenMaxCurrent * 1000 * 1000) / (maxCurrent * 54 * 54)
     
     If analysisDefine.SlippageEnable Then
         If r.UpsetDuration < analysisDefine.SlippageUpsetTime Or r.UpsetRailUsage > analysisDefine.SlippageUpset Then
@@ -444,11 +447,7 @@ Dim i As Integer
         sumVol = sumVol + buf(i).Volt
         sumCurrent = sumCurrent + buf(i).Amp
     Next
-                
-    'TODO
-    r.OverallImpedance = (sumVol / sumCurrent) * (1000000 / 3600) / 2.4
-    
-    
+                    
     'TODO Holding Time
         
     anaAll = r
