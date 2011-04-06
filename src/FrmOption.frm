@@ -48,7 +48,7 @@ Begin VB.Form FrmOption
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   5
+      Tab             =   6
       TabsPerRow      =   10
       TabHeight       =   520
       TabCaption(0)   =   "General"
@@ -69,10 +69,10 @@ Begin VB.Form FrmOption
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame2(1)"
-      Tab(2).Control(1)=   "Frame2(0)"
-      Tab(2).Control(2)=   "Frame2(3)"
-      Tab(2).Control(3)=   "Frame2(2)"
+      Tab(2).Control(0)=   "Frame2(2)"
+      Tab(2).Control(1)=   "Frame2(3)"
+      Tab(2).Control(2)=   "Frame2(0)"
+      Tab(2).Control(3)=   "Frame2(1)"
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
@@ -89,22 +89,24 @@ Begin VB.Form FrmOption
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
-      Tab(5).ControlEnabled=   -1  'True
-      Tab(5).Control(0)=   "Label1"
-      Tab(5).Control(0).Enabled=   0   'False
+      Tab(5).ControlEnabled=   0   'False
+      Tab(5).Control(0)=   "Frame1(11)"
       Tab(5).Control(1)=   "Frame6"
-      Tab(5).Control(1).Enabled=   0   'False
-      Tab(5).Control(2)=   "Frame1(11)"
-      Tab(5).Control(2).Enabled=   0   'False
+      Tab(5).Control(2)=   "Label1"
       Tab(5).ControlCount=   3
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
-      Tab(6).ControlEnabled=   0   'False
+      Tab(6).ControlEnabled=   -1  'True
       Tab(6).Control(0)=   "Label2"
+      Tab(6).Control(0).Enabled=   0   'False
       Tab(6).Control(1)=   "Frame4"
+      Tab(6).Control(1).Enabled=   0   'False
       Tab(6).Control(2)=   "txtWeldNumber"
+      Tab(6).Control(2).Enabled=   0   'False
       Tab(6).Control(3)=   "chkRecordInterrupts"
+      Tab(6).Control(3).Enabled=   0   'False
       Tab(6).Control(4)=   "cmdReset"
+      Tab(6).Control(4).Enabled=   0   'False
       Tab(6).ControlCount=   5
       Begin VB.Frame Frame7 
          Caption         =   "Unit Info"
@@ -338,7 +340,7 @@ Begin VB.Form FrmOption
       Begin VB.CommandButton cmdReset 
          Caption         =   "Reset"
          Height          =   375
-         Left            =   -67800
+         Left            =   7200
          TabIndex        =   178
          Top             =   720
          Width           =   975
@@ -346,14 +348,14 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkRecordInterrupts 
          Caption         =   "Record Interrupts"
          Height          =   375
-         Left            =   -70680
+         Left            =   4320
          TabIndex        =   5
          Top             =   1560
          Width           =   3015
       End
       Begin VB.TextBox txtWeldNumber 
          Height          =   375
-         Left            =   -69600
+         Left            =   5400
          TabIndex        =   4
          Text            =   "A0001"
          Top             =   720
@@ -372,7 +374,7 @@ Begin VB.Form FrmOption
          EndProperty
          Height          =   1215
          Index           =   11
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   170
          Tag             =   "21900"
          Top             =   4560
@@ -492,7 +494,7 @@ Begin VB.Form FrmOption
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3855
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   145
          Top             =   600
          Width           =   10215
@@ -1646,7 +1648,7 @@ Begin VB.Form FrmOption
          End
          Begin VB.Label lblSRB 
             Alignment       =   1  'Right Justify
-            Caption         =   "Pressure(psi):"
+            Caption         =   "Pressure(t):"
             Height          =   255
             Index           =   3
             Left            =   2280
@@ -1976,7 +1978,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame4 
          Caption         =   "Start Recording"
          Height          =   1935
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   79
          Tag             =   "22100"
          Top             =   600
@@ -2076,7 +2078,7 @@ Begin VB.Form FrmOption
       Begin VB.Label Label2 
          Caption         =   "Weld Number:"
          Height          =   375
-         Left            =   -70800
+         Left            =   4200
          TabIndex        =   177
          Top             =   840
          Width           =   1335
@@ -2084,7 +2086,7 @@ Begin VB.Form FrmOption
       Begin VB.Label Label1 
          Caption         =   "Label1"
          Height          =   255
-         Left            =   5640
+         Left            =   -69360
          TabIndex        =   146
          Top             =   2040
          Width           =   1815
@@ -2249,7 +2251,7 @@ Private Sub cmdOK_Click()
     Call SaveSetting(App.EXEName, "SensorReadingBar", "Amp", SRB_Data(0))
     Call SaveSetting(App.EXEName, "SensorReadingBar", "Dist", SRB_Data(1))
     Call SaveSetting(App.EXEName, "SensorReadingBar", "Volt", SRB_Data(2))
-    Call SaveSetting(App.EXEName, "SensorReadingBar", "Press", SRB_Data(3))
+    Call SaveSetting(App.EXEName, "SensorReadingBar", "Force", SRB_Data(3))
     
     
     
@@ -2457,7 +2459,7 @@ WeldChart_Data(7) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeIncr",
 SRB_Data(0) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Amp", 1000))
 SRB_Data(1) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Dist", 100))
 SRB_Data(2) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Volt", 500))
-SRB_Data(3) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Press", 50))
+SRB_Data(3) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Force", 120))
 
 
 WeldAnalysisEnable_Data(0) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "FlashEnable", 1))

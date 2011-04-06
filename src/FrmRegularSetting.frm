@@ -884,6 +884,12 @@ Private Sub CancelButton_Click()
     Unload Me
 End Sub
 
+Private Sub cboFileName_Change()
+    If lastConfigName <> cboFileName.Text Then
+        cmdSave.Enabled = True
+    End If
+End Sub
+
 Private Sub cboFileName_Click()
     If cboFileName.Text <> "" And cboFileName.Text <> lastConfigName Then
         lastConfigName = cboFileName.Text
@@ -923,7 +929,7 @@ Private Sub cmdLoad_Click()
     
 Exit Sub
 ERROR_HANDLE:
-    MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
+    'MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
 End Sub
 
 Private Sub cmdSave_Click()
@@ -952,7 +958,7 @@ Private Sub cmdSave_Click()
     End If
     
     cmdSave.Enabled = False
-    cmdLoad.Enabled = PLCDrv.beActive
+    cmdLoad.Enabled = True
 End Sub
 
 Private Function LoadConfig(name As String)
@@ -970,11 +976,14 @@ PlcRes.LoadResFor Me
 
 Dim pFileItemList() As PulseFileItemType
 
-    lastConfigName = ""
-    regularSetting = PlcRegularSetting.DefalutStagesParameters
     InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
     
     path = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    
+    If Not fso.FileExists(path) Then
+        regularSetting = PlcRegularSetting.DefalutStagesParameters
+        PlcRegularSetting.SaveConfig path, "DEFAULT", regularSetting
+    End If
 
     pFileItemList = PlcRegularSetting.LoadAll(path)
         
@@ -982,18 +991,21 @@ Dim pFileItemList() As PulseFileItemType
     For i = 1 To cboFileName.ListCount
         cboFileName.RemoveItem (cboFileName.ListCount - 1)
     Next
-    
+        
     For i = LBound(pFileItemList) To UBound(pFileItemList) - 1
         cboFileName.AddItem (Trim(pFileItemList(i).name))
     Next
     
-    If UBound(pFileItemList) > 0 Then
-        cboFileName.ListIndex = 0
-        cboFileName_Click
-    Else
-        Call LoadConfig("NONE")
-    End If
+    lastConfigName = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "DEFAULT")
+    Call LoadConfig(lastConfigName)
     
+    For i = 0 To cboFileName.ListCount - 1
+        If cboFileName.List(i) = lastConfigName Then
+            cboFileName.ListIndex = i
+            cboFileName_Click
+            Exit For
+        End If
+    Next
     
     cmdSave.Enabled = False
     cmdLoad.Enabled = False

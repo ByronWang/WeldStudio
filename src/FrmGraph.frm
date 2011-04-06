@@ -469,7 +469,7 @@ WeldMDIForm.mnuOptions.Enabled = False
     amp_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Amp", 500))
     dist_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Dist", 1000))
     volt_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Volt", 100))
-    psi_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Press", 50))
+    psi_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Force", 120))
 
 
     Mode_StartRecording = CInt(GetSetting(App.EXEName, "StartRecording", "StartRecording", 0))
@@ -708,7 +708,11 @@ Dim Status As Long
 
 
 Status = PLCDrv.ReadPcMonitor(wmRecord)
-
+If Status > 0 Then
+    MsgBox "Connection Error!"
+    Unload Me
+    Exit Sub
+End If
 
 If wmRecord.WeldCycle = 1 And 0 <= wmRecord.data.WeldStage And wmRecord.data.WeldStage <= 6 And wmRecord.data.WeldStage >= lastStage Then
     If beRecording Then

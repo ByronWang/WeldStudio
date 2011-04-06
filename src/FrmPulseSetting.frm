@@ -762,6 +762,12 @@ Private Sub CancelButton_Click()
     Unload Me
 End Sub
 
+Private Sub cboFileName_Change()
+    If lastConfigName <> cboFileName.Text Then
+        cmdSave.Enabled = True
+    End If
+End Sub
+
 Private Sub cboFileName_Click()
     If cboFileName.Text <> "" And cboFileName.Text <> lastConfigName Then
         lastConfigName = cboFileName.Text
@@ -804,7 +810,7 @@ On Error GoTo ERROR_HANDLE
     
 Exit Sub
 ERROR_HANDLE:
-    MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
+    'MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
 End Sub
 
 Private Function checkInputedDataValidate() As Boolean
@@ -875,17 +881,17 @@ Private Sub Form_Load()
 PlcRes.LoadResFor Me
 
 
-    PLCDrv.OpenPLCConnection
-    cmdLoad.Enabled = PLCDrv.beActive
-    PLCDrv.ClosePLCConection
+    cmdLoad.Enabled = True
 
 Dim pFileItemList() As PulseFileItemType
 
-    lastConfigName = ""
-    pulseSetting = PlcPulseSetting.DefalutStagesParameters
     InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
     
     path = App.path & "\" & SETTING_PATH & "PulseSetting.config"
+    If Not fso.FileExists(path) Then
+        pulseSetting = PlcPulseSetting.DefalutStagesParameters
+        PlcPulseSetting.SaveConfig path, "DEFAULT", pulseSetting
+    End If
 
     pFileItemList = PlcPulseSetting.LoadAll(path)
         
@@ -897,18 +903,20 @@ Dim pFileItemList() As PulseFileItemType
     For i = LBound(pFileItemList) To UBound(pFileItemList) - 1
         cboFileName.AddItem (Trim(pFileItemList(i).name))
     Next
+
+    lastConfigName = GetSetting(App.EXEName, "Parameter", "LastSetting_Pusle", "DEFAULT")
+    Call LoadConfig(lastConfigName)
     
-    If UBound(pFileItemList) > 0 Then
-        cboFileName.ListIndex = 0
-        cboFileName_Click
-    Else
-        Call LoadConfig("NONE")
-    End If
-    
+    For i = 0 To cboFileName.ListCount - 1
+        If cboFileName.List(i) = lastConfigName Then
+            cboFileName.ListIndex = i
+            cboFileName_Click
+            Exit For
+        End If
+    Next
+        
     cmdSave.Enabled = False
     cmdLoad.Enabled = False
-    
-    
 
 
 '    Debug.Print Frame1(1).Caption
