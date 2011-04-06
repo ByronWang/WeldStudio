@@ -2220,26 +2220,7 @@ Private Sub cmdOK_Click()
 '    Call SaveSetting(App.EXEName, "Calibration", "SendIntoController", True)
     
     
-    Dim i As Integer
-    
-    Dim v As String
-    Dim vo As String
-    vo = GetSetting(App.EXEName, "Calibration", "value", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,")
-    
-    For i = 0 To 19 Step 5
-       v = v & Calibration_Enable(i / 5) & ","
-       v = v & Calibration_Data(i - i / 5) & ","
-       v = v & Calibration_Data(i + 1 - i / 5) & ","
-       v = v & Calibration_Data(i + 2 - i / 5) & ","
-       v = v & Calibration_Data(i + 3 - i / 5) & ","
-    Next
-    
-    
-    If v <> vo Then
-        Call SaveSetting(App.EXEName, "Calibration", "value", v)
-        UpgradeCalibration Calibration_Data, Calibration_Enable
-    End If
-    
+    Call loadCalibration
     
 
     Call SaveSetting(App.EXEName, "Weld", "RecordInterrupts", chkRecordInterrupts.Value)
@@ -2319,6 +2300,43 @@ Private Sub cmdOK_Click()
     Me.Hide
     Unload Me
 End Sub
+
+Private Function loadCalibration()
+On Error GoTo ERROR_HANDLE
+
+
+    Dim i As Integer
+    
+    Dim v As String
+    Dim vo As String
+    vo = GetSetting(App.EXEName, "Calibration", "value", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,")
+    
+    For i = 0 To 19 Step 5
+       v = v & Calibration_Enable(i / 5) & ","
+       v = v & Calibration_Data(i - i / 5) & ","
+       v = v & Calibration_Data(i + 1 - i / 5) & ","
+       v = v & Calibration_Data(i + 2 - i / 5) & ","
+       v = v & Calibration_Data(i + 3 - i / 5) & ","
+    Next
+    
+    'TODO
+    If v <> vo Then
+        Call SaveSetting(App.EXEName, "Calibration", "value", v)
+        UpgradeCalibration Calibration_Data, Calibration_Enable
+    
+'        frmProgress.LoadMode = PlcDeclare.LOAD_CALIBRATION_SETTING
+'        frmProgress.ParamName = cboFileName.Text
+'        frmProgress.Show vbModal, Me
+'        If frmProgress.Status <> 0 Then
+'            GoTo ERROR_HANDLE
+'        End If
+    
+    
+    End If
+Exit Function
+ERROR_HANDLE:
+    MsgBox PlcRes.LoadMsgResString(99000 + Err.Number) & vbCrLf & PLCDrv.g_Error_String, vbCritical
+End Function
 
 Private Sub cmdReset_Click()
    Dim weldSerailNumber As Long

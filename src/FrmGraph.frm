@@ -89,9 +89,9 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H0000FF00&
       Height          =   615
-      Left            =   11160
+      Left            =   11280
       TabIndex        =   19
-      Top             =   1560
+      Top             =   1800
       Width           =   3975
    End
    Begin VB.Label lblDist 
@@ -138,7 +138,7 @@ Begin VB.Form FrmGraph
       Alignment       =   2  'Center
       BackColor       =   &H80000008&
       BackStyle       =   0  'Transparent
-      Caption         =   "Label5"
+      Caption         =   "--"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   21.75
@@ -150,9 +150,9 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H0000FF00&
       Height          =   615
-      Left            =   11160
+      Left            =   11280
       TabIndex        =   14
-      Top             =   2040
+      Top             =   2280
       Width           =   3975
    End
    Begin VB.Label lblTime 
@@ -442,7 +442,7 @@ Function SwitchToRecoding(Status As ShowModeType)
             lblBigCenter.Caption = toWeldNumberShowModel(weldSerailNumber)
             lblBigCenter.ForeColor = &H8000000E
             lblBigCenter.FontSize = 100
-            lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting", "DEFAULT")
+            'lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting", "DEFAULT")
         Case RECORDING_MODE
             weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
             lblTop.Caption = toWeldNumberShowModel(weldSerailNumber)
@@ -773,18 +773,21 @@ Else
     lastStage = -1
     
     
-    Call PLCDrv.ReadCurrentProcessSetting
-    If ProcessSetting = 0 Then
+End If
+
+
+If PLCDrv.ProcessSetting = 0 Or Not beRecording Then
+    Call PLCDrv.ReadCurrentProcessSetting(PLCDrv.ProcessSetting)
+    If PLCDrv.ProcessSetting = 0 Then
         lblProcessSetting.Caption = "Unknown"
         lblParameter.Caption = "----"
-    ElseIf ProcessSetting = 1 Then
+    ElseIf PLCDrv.ProcessSetting = 1 Then
         lblProcessSetting.Caption = "Regular"
         lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "----")
     Else
         lblProcessSetting.Caption = "Pulse"
         lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "----")
     End If
-    
 End If
 
 beRequest = False

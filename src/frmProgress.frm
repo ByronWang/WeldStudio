@@ -149,7 +149,6 @@ Private Function LoadRegularSetting(name As String) As Long
     Status = PLCDrv.ClosePLCConection
     
     Call SaveSetting(App.EXEName, "Parameter", "LastSetting_Regular", name)
-    MsgBox "Succeed!", vbOKOnly
 End Function
 
 Private Function LoadPulseSetting(name As String) As Long

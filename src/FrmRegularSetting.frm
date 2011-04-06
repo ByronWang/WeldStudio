@@ -870,7 +870,7 @@ Option Explicit
 
 Dim fso As New FileSystemObject
 Dim lastConfigName As String
-Dim RegularSetting As RegularSettingType
+Dim regularSetting As RegularSettingType
 Dim path As String
 Dim InitialVoltage As Long
 
@@ -890,15 +890,15 @@ Private Sub cboStage_Change()
 
     Dim i As Integer
     For i = 0 To 14 - 1
-        txtValue(i).Text = RegularSetting.Value(i)
+        txtValue(i).Text = regularSetting.Value(i)
     Next
     
     i = 4
-    lblSign(i).Caption = CStr(RegularSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
+    lblSign(i).Caption = CStr(regularSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
     i = 5
-    lblSign(i).Caption = CStr(RegularSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
+    lblSign(i).Caption = CStr(regularSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
     i = 6
-    lblSign(i).Caption = CStr(RegularSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
+    lblSign(i).Caption = CStr(regularSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
     
 End Sub
 
@@ -908,7 +908,7 @@ End Sub
 
 Private Sub cmdLoad_Click()
     frmProgress.LoadMode = PlcDeclare.LOAD_REGULAR_SETTING
-    frmProgress.ParamName = name
+    frmProgress.ParamName = cboFileName.Text
     frmProgress.Show vbModal, Me
     If frmProgress.Status <> 0 Then
         GoTo ERROR_HANDLE
@@ -928,7 +928,7 @@ Private Sub cmdSave_Click()
     
 
     If cboFileName.Text <> "" Then
-        Call PlcRegularSetting.SaveConfig(path, cboFileName.Text, RegularSetting)
+        Call PlcRegularSetting.SaveConfig(path, cboFileName.Text, regularSetting)
     End If
     Dim i As Integer
     
@@ -954,7 +954,7 @@ Private Sub cmdSave_Click()
 End Sub
 
 Private Function LoadConfig(name As String)
-    RegularSetting = PlcRegularSetting.LoadConfig(path, name)
+    regularSetting = PlcRegularSetting.LoadConfig(path, name)
         
     cboStage_Change
     
@@ -969,7 +969,7 @@ PlcRes.LoadResFor Me
 Dim pFileItemList() As PulseFileItemType
 
     lastConfigName = ""
-    RegularSetting = PlcRegularSetting.DefalutStagesParameters
+    regularSetting = PlcRegularSetting.DefalutStagesParameters
     InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
     
     path = App.path & "\" & SETTING_PATH & "RegularSetting.config"
@@ -1016,7 +1016,7 @@ Private Sub txtValue_Change(index As Integer)
         
         If min <= v And v <= max Then
             txtValue(index).BackColor = &HFFFFFF
-            RegularSetting.Value(index) = CSng(txtValue(index).Text)
+            regularSetting.Value(index) = CSng(txtValue(index).Text)
             cmdSave.Enabled = True
             Exit Sub
         End If

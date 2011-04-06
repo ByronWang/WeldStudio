@@ -112,7 +112,7 @@ Public Function ClosePLCConection()
     Call UtlServer.Uninit(0)
 End Function
 
-Public Function ReadCurrentProcessSetting() As Long
+Public Function ReadCurrentProcessSetting(ByRef ps As Integer) As Long
     Dim buffer_signal(1) As Integer
     Dim def_signal As String
     def_signal = "N21:3,1,WORD,READ,AB:LOCAL,1,SLC500,1"
@@ -135,7 +135,7 @@ Public Function ReadCurrentProcessSetting() As Long
         GoTo ERROR_HANDLE
     End If
     
-    ProcessSetting = buffer_signal(0)
+    ps = buffer_signal(0)
     
     DoEvents
     

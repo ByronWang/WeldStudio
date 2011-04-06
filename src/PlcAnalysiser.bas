@@ -337,8 +337,8 @@ Dim sTime As Single
     Next
         
     r.UpsetMaxCurrent = maxCurrent
-    r.UpsetRailUsage = buf(stopPos + 1).Dist - buf(startPos).Dist
-    r.UpsetDuration = buf(stopPos + 1).Time - buf(startPos).Time
+    r.UpsetRailUsage = buf(stopPos).Dist - buf(startPos - 1).Dist
+    r.UpsetDuration = buf(stopPos).Time - buf(startPos - 1).Time
     
     
     If analysisDefine.SlippageEnable Then

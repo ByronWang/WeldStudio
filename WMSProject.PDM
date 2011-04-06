@@ -16,6 +16,9 @@ ODBCDirect=
 [Package|WMSPackage|Files Found]
 
 [Package|WMSPackage|Files Released]
+CmDlgCHS.dll=
+TabCtCHS.dll=
+FlxGdCHS.dll=
 
 [Package|WMSPackage|Missing Dependency Information]
 
@@ -49,6 +52,9 @@ C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
 C:\WINDOWS\system32\VB6STKIT.DLL=Yes
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+C:\WINDOWS\system32\VB6CHS.DLL=Yes
+C:\WINDOWS\system32\SCRRNCHS.DLL=Yes
+C:\WINDOWS\system32\MSCH2CHS.DLL=Yes
 
 [Package|WMSPackage|Configure Registry Files]
 Applicable=No
