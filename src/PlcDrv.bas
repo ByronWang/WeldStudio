@@ -57,8 +57,7 @@ Public SimulatePath As String
 
 Public Calibrate_Distance As Boolean
 
-
-Public Function OpenPLCConnection() As Integer
+Public Function initSystem()
     IsSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
     SimulatePath = GetSetting(App.EXEName, "Simulate", "SimulateFilename", App.path & "\T0039.WLD")
     Calibrate_Distance = "1" = Left(GetSetting(App.EXEName, "Calibration", "value", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"), 1)
@@ -79,8 +78,10 @@ Public Function OpenPLCConnection() As Integer
     For i = 1 To 12
         PlcStages(i) = LoadResString(PlcStages_Res_Start + i)  'init
     Next
+End Function
 
 
+Public Function OpenPLCConnection() As Integer
    'Create definition table
     Status = UtlServer.Init(10)
     If (Status <> DTL_SUCCESS) Then
