@@ -69,7 +69,7 @@ Begin VB.Form FrmGraph
       Width           =   8355
    End
    Begin VB.Timer timerMonitor 
-      Interval        =   30
+      Interval        =   1
       Left            =   3480
       Top             =   5640
    End
@@ -100,7 +100,7 @@ Begin VB.Form FrmGraph
       Caption         =   "67.98"
       BeginProperty Font 
          Name            =   "Arial"
-         Size            =   60
+         Size            =   75
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -109,10 +109,10 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   1605
-      Left            =   10920
+      Left            =   10120
       TabIndex        =   16
       Top             =   4680
-      Width           =   3900
+      Width           =   5000
    End
    Begin VB.Label lblTop 
       BackColor       =   &H80000008&
@@ -159,7 +159,7 @@ Begin VB.Form FrmGraph
       Alignment       =   2  'Center
       BackColor       =   &H80000008&
       BackStyle       =   0  'Transparent
-      Caption         =   "Label5"
+      Caption         =   "06:01:01"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   21.75
@@ -181,7 +181,7 @@ Begin VB.Form FrmGraph
       Appearance      =   0  'Flat
       BackColor       =   &H80000005&
       BackStyle       =   0  'Transparent
-      Caption         =   "Label5"
+      Caption         =   "2011-01-01"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   21.75
@@ -247,7 +247,7 @@ Begin VB.Form FrmGraph
       Caption         =   "345"
       BeginProperty Font 
          Name            =   "Arial"
-         Size            =   60
+         Size            =   75
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -256,10 +256,10 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   1605
-      Left            =   10920
+      Left            =   10120
       TabIndex        =   8
       Top             =   6120
-      Width           =   3900
+      Width           =   5000
    End
    Begin VB.Label lblPsi 
       Alignment       =   1  'Right Justify
@@ -267,7 +267,7 @@ Begin VB.Form FrmGraph
       Caption         =   "0"
       BeginProperty Font 
          Name            =   "Arial"
-         Size            =   60
+         Size            =   75
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -276,10 +276,10 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   1605
-      Left            =   10920
+      Left            =   10120
       TabIndex        =   7
       Top             =   8880
-      Width           =   3900
+      Width           =   5000
    End
    Begin VB.Label lblAmp 
       Alignment       =   1  'Right Justify
@@ -287,7 +287,7 @@ Begin VB.Form FrmGraph
       Caption         =   "0"
       BeginProperty Font 
          Name            =   "Arial"
-         Size            =   60
+         Size            =   75
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -296,10 +296,10 @@ Begin VB.Form FrmGraph
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   1605
-      Left            =   10920
+      Left            =   10120
       TabIndex        =   6
       Top             =   7440
-      Width           =   3900
+      Width           =   5000
    End
    Begin VB.Label Label4 
       BackStyle       =   0  'Transparent
@@ -462,6 +462,7 @@ PlcRes.LoadResFor Me
     WeldMDIForm.mnuWindow.Enabled = False
     WeldMDIForm.mnuParameters.Enabled = False
     WeldMDIForm.mnuOptions.Enabled = False
+    WeldMDIForm.mnuConnect.Enabled = False
     
     amp_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Amp", 500))
     dist_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Dist", 1000))
@@ -512,7 +513,7 @@ PlcRes.LoadResFor Me
     If IsSimulate = 1 Then
         timerMonitor.Interval = 65
     Else
-        timerMonitor.Interval = 30
+        timerMonitor.Interval = 1
     End If
     
 
@@ -562,6 +563,7 @@ Private Sub Form_Unload(Cancel As Integer)
     WeldMDIForm.mnuWindow.Enabled = True
     WeldMDIForm.mnuParameters.Enabled = True
     WeldMDIForm.mnuOptions.Enabled = True
+    WeldMDIForm.mnuConnect.Enabled = True
     If beRequest Then
         beUnload = True
     Else
