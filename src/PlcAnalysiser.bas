@@ -342,7 +342,14 @@ Dim sTime As Single
     r.UpsetRailUsage = buf(stopPos).Dist - buf(startPos - 1).Dist
     r.UpsetDuration = buf(stopPos).Time - buf(startPos - 1).Time
     
-    r.OverallImpedance = (voltWhenMaxCurrent * 1000 * 1000) / (maxCurrent * 54 * 54)
+    For i = startPos To stopPos
+        If i - startPos > 3 Then
+            Exit For
+        End If
+        maxCurrent = buf(i).Amp
+        voltWhenMaxCurrent = buf(i).Volt
+    Next
+    r.OverallImpedance = (voltWhenMaxCurrent * 1000 * 1000) / (maxCurrent * 60 * 60)
     
     If analysisDefine.SlippageEnable Then
         If r.UpsetDuration < analysisDefine.SlippageUpsetTime Or r.UpsetRailUsage > analysisDefine.SlippageUpset Then
