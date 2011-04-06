@@ -456,15 +456,12 @@ Function SwitchToRecoding(Status As ShowModeType)
 End Function
 
 Private Sub Form_Load()
-On Error GoTo ERROR_HANDLE
 ' Resource
 PlcRes.LoadResFor Me
 
-PLCDrv.PreparePcMonitor
-
-WeldMDIForm.mnuWindow.Enabled = False
-WeldMDIForm.mnuParameters.Enabled = False
-WeldMDIForm.mnuOptions.Enabled = False
+    WeldMDIForm.mnuWindow.Enabled = False
+    WeldMDIForm.mnuParameters.Enabled = False
+    WeldMDIForm.mnuOptions.Enabled = False
     
     amp_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Amp", 500))
     dist_scale = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Dist", 1000))
@@ -540,14 +537,9 @@ WeldMDIForm.mnuOptions.Enabled = False
     
     beSigned = False
     beRequest = False
-    
-Exit Sub
-ERROR_HANDLE:
-    Unload Me
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-On Error GoTo ERROR_HANDLE
     Me.Hide
 
     Me.timerDisplay.Enabled = False
@@ -682,7 +674,6 @@ End Sub
 
 
 Private Sub TimerMonitor_Timer()
-On Error GoTo ERROR_HANDLE
 If beRequest Then
     Exit Sub
 End If

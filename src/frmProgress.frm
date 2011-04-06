@@ -48,6 +48,7 @@ Public ParamName As String
 Public LoadMode As Integer
 Public Status As Long
 Dim step As Integer
+Dim beRuning As Boolean
 
 Private Sub Form_Load()
     step = (frmProgress.Width - seperator) / 50
@@ -55,6 +56,11 @@ Private Sub Form_Load()
     
     Me.timerProgress.Enabled = True
     DoEvents
+    beRuning = False
+    
+End Sub
+
+Private Sub run()
     
     Select Case LoadMode
         Case LOAD_ALL_PARAMETER:
@@ -65,8 +71,8 @@ Private Sub Form_Load()
             Status = LoadRegularSetting(ParamName)
         Case LOAD_CALIBRATION_SETTING:
     End Select
-    
-    
+
+
 End Sub
 
 Private Sub Finish()
@@ -92,6 +98,11 @@ Private Sub timerProgress_Timer()
         lblProgress.Width = lblProgress.Width + step
     Else
         Call Finish
+    End If
+    
+    If Not beRuning Then
+        run
+        beRuning = True
     End If
 End Sub
 

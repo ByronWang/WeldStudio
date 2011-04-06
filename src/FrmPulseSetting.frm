@@ -797,7 +797,6 @@ Private Sub cboStage_Click()
 End Sub
 
 Private Sub cmdLoad_Click()
-On Error GoTo ERROR_HANDLE
 
     frmProgress.LoadMode = PlcDeclare.LOAD_PULSE_SETTING
     frmProgress.ParamName = cboFileName.Text

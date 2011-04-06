@@ -2300,9 +2300,6 @@ Private Sub cmdOK_Click()
 End Sub
 
 Private Function loadCalibration()
-On Error GoTo ERROR_HANDLE
-
-
     Dim i As Integer
     
     Dim v As String
