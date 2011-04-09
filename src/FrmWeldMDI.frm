@@ -4,13 +4,13 @@ Begin VB.MDIForm WeldMDIForm
    AutoShowChildren=   0   'False
    BackColor       =   &H8000000C&
    Caption         =   "Weld Monitoring Studio"
-   ClientHeight    =   9585
+   ClientHeight    =   8190
    ClientLeft      =   165
-   ClientTop       =   555
-   ClientWidth     =   13890
+   ClientTop       =   -840
+   ClientWidth     =   11880
    Icon            =   "FrmWeldMDI.frx":0000
    LinkTopic       =   "MDIForm1"
-   StartUpPosition =   2  'ÆÁÄ»ÖÐÐÄ
+   StartUpPosition =   2  'CenterScreen
    Tag             =   "10000"
    WindowState     =   2  'Maximized
    Begin MSComDlg.CommonDialog CommonDialog1 
@@ -96,8 +96,6 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Declare Function Htmlhelp Lib "hhctrl.ocx " Alias "HtmlHelpA " (ByVal hwndCaller As Long, ByVal pszFile As String, ByVal uCommand As Long, ByVal dwData As Any) As Long
 
-Const ReadOnly As Boolean = False
-
 Private Sub MDIForm_Load()
 
 ' Resource
@@ -109,7 +107,7 @@ PlcRes.LoadResFor Me
     
     If ReadOnly Then
         Me.mnuConnect.Enabled = False
-        Me.mnuTools.Enabled = False
+        'Me.mnuTools.Enabled = False
         Me.mnuParameters.Enabled = False
         Exit Sub
     End If

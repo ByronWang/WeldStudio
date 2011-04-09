@@ -48,18 +48,23 @@ Begin VB.Form FrmOption
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   6
       TabsPerRow      =   10
       TabHeight       =   520
       TabCaption(0)   =   "General"
       TabPicture(0)   =   "FrmOption.frx":000C
-      Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame7"
-      Tab(0).Control(1)=   "Frame5"
-      Tab(0).Control(2)=   "CommonDialog1"
-      Tab(0).Control(3)=   "cboLanguage"
-      Tab(0).Control(4)=   "chkOnlineOnStartUp"
-      Tab(0).Control(5)=   "lblLanguage"
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "lblLanguage"
+      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).Control(1)=   "chkOnlineOnStartUp"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "cboLanguage"
+      Tab(0).Control(2).Enabled=   0   'False
+      Tab(0).Control(3)=   "CommonDialog1"
+      Tab(0).Control(3).Enabled=   0   'False
+      Tab(0).Control(4)=   "Frame5"
+      Tab(0).Control(4).Enabled=   0   'False
+      Tab(0).Control(5)=   "Frame7"
+      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
@@ -69,10 +74,10 @@ Begin VB.Form FrmOption
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame2(2)"
-      Tab(2).Control(1)=   "Frame2(3)"
-      Tab(2).Control(2)=   "Frame2(0)"
-      Tab(2).Control(3)=   "Frame2(1)"
+      Tab(2).Control(0)=   "Frame2(1)"
+      Tab(2).Control(1)=   "Frame2(0)"
+      Tab(2).Control(2)=   "Frame2(3)"
+      Tab(2).Control(3)=   "Frame2(2)"
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
@@ -82,36 +87,31 @@ Begin VB.Form FrmOption
       TabCaption(4)   =   "Weld Chart"
       TabPicture(4)   =   "FrmOption.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Frame1(1)"
-      Tab(4).Control(1)=   "Frame1(0)"
-      Tab(4).Control(2)=   "Frame1(2)"
-      Tab(4).Control(3)=   "chkFilterData"
+      Tab(4).Control(0)=   "chkFilterData"
+      Tab(4).Control(1)=   "Frame1(2)"
+      Tab(4).Control(2)=   "Frame1(0)"
+      Tab(4).Control(3)=   "Frame1(1)"
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Frame1(11)"
+      Tab(5).Control(0)=   "Label1"
       Tab(5).Control(1)=   "Frame6"
-      Tab(5).Control(2)=   "Label1"
+      Tab(5).Control(2)=   "Frame1(11)"
       Tab(5).ControlCount=   3
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
-      Tab(6).ControlEnabled=   -1  'True
+      Tab(6).ControlEnabled=   0   'False
       Tab(6).Control(0)=   "Label2"
-      Tab(6).Control(0).Enabled=   0   'False
       Tab(6).Control(1)=   "Frame4"
-      Tab(6).Control(1).Enabled=   0   'False
       Tab(6).Control(2)=   "txtWeldNumber"
-      Tab(6).Control(2).Enabled=   0   'False
       Tab(6).Control(3)=   "chkRecordInterrupts"
-      Tab(6).Control(3).Enabled=   0   'False
       Tab(6).Control(4)=   "cmdReset"
-      Tab(6).Control(4).Enabled=   0   'False
       Tab(6).ControlCount=   5
       Begin VB.Frame Frame7 
          Caption         =   "Unit Info"
          Height          =   1335
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   189
          Tag             =   "16300"
          Top             =   4800
@@ -158,7 +158,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame5 
          Caption         =   "Company Info"
          Height          =   3855
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   179
          Tag             =   "16200"
          Top             =   720
@@ -340,7 +340,7 @@ Begin VB.Form FrmOption
       Begin VB.CommandButton cmdReset 
          Caption         =   "Reset"
          Height          =   375
-         Left            =   7200
+         Left            =   -67800
          TabIndex        =   178
          Top             =   720
          Width           =   975
@@ -348,14 +348,14 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkRecordInterrupts 
          Caption         =   "Record Interrupts"
          Height          =   375
-         Left            =   4320
+         Left            =   -70680
          TabIndex        =   5
          Top             =   1560
          Width           =   3015
       End
       Begin VB.TextBox txtWeldNumber 
          Height          =   375
-         Left            =   5400
+         Left            =   -69600
          TabIndex        =   4
          Text            =   "A0001"
          Top             =   720
@@ -363,15 +363,6 @@ Begin VB.Form FrmOption
       End
       Begin VB.Frame Frame1 
          Caption         =   $"FrmOption.frx":00D0
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
          Height          =   1215
          Index           =   11
          Left            =   -74760
@@ -484,15 +475,6 @@ Begin VB.Form FrmOption
       End
       Begin VB.Frame Frame6 
          Caption         =   "Criteria"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
          Height          =   3855
          Left            =   -74760
          TabIndex        =   145
@@ -500,15 +482,6 @@ Begin VB.Form FrmOption
          Width           =   10215
          Begin VB.Frame Frame1 
             Caption         =   "Total Rail Usage"
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
             Height          =   1575
             Index           =   10
             Left            =   7680
@@ -549,15 +522,6 @@ Begin VB.Form FrmOption
          End
          Begin VB.Frame Frame1 
             Caption         =   "Short-Circuit in Boost "
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
             Height          =   1575
             Index           =   9
             Left            =   5160
@@ -687,15 +651,6 @@ Begin VB.Form FrmOption
          End
          Begin VB.Frame Frame1 
             Caption         =   "Slippage Thresholds"
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
             Height          =   1575
             Index           =   7
             Left            =   120
@@ -756,15 +711,6 @@ Begin VB.Form FrmOption
          End
          Begin VB.Frame Frame1 
             Caption         =   "Forge Thresholds"
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
             Height          =   1575
             Index           =   6
             Left            =   7680
@@ -825,15 +771,6 @@ Begin VB.Form FrmOption
          End
          Begin VB.Frame Frame1 
             Caption         =   "Upset Thresholds"
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
             Height          =   1575
             Index           =   5
             Left            =   5160
@@ -894,15 +831,6 @@ Begin VB.Form FrmOption
          End
          Begin VB.Frame Frame1 
             Caption         =   "Boost Speed Thresholds"
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
             Height          =   1575
             Index           =   4
             Left            =   2640
@@ -963,15 +891,6 @@ Begin VB.Form FrmOption
          End
          Begin VB.Frame Frame1 
             Caption         =   "Flash Speed Thresholds"
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
             Height          =   1575
             Index           =   3
             Left            =   120
@@ -1369,7 +1288,7 @@ Begin VB.Form FrmOption
          End
       End
       Begin MSComDlg.CommonDialog CommonDialog1 
-         Left            =   -73440
+         Left            =   1560
          Top             =   5520
          _ExtentX        =   847
          _ExtentY        =   847
@@ -1659,9 +1578,9 @@ Begin VB.Form FrmOption
          End
       End
       Begin VB.ComboBox cboLanguage 
-         Height          =   300
+         Height          =   315
          ItemData        =   "FrmOption.frx":0106
-         Left            =   -67440
+         Left            =   7560
          List            =   "FrmOption.frx":0113
          Style           =   2  'Dropdown List
          TabIndex        =   76
@@ -1671,7 +1590,7 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkOnlineOnStartUp 
          Caption         =   "OnlineOnStartup"
          Height          =   375
-         Left            =   -68400
+         Left            =   6600
          TabIndex        =   77
          Tag             =   "16120"
          Top             =   1440
@@ -1978,7 +1897,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame4 
          Caption         =   "Start Recording"
          Height          =   1935
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   79
          Tag             =   "22100"
          Top             =   600
@@ -2078,7 +1997,7 @@ Begin VB.Form FrmOption
       Begin VB.Label Label2 
          Caption         =   "Weld Number:"
          Height          =   375
-         Left            =   4200
+         Left            =   -70800
          TabIndex        =   177
          Top             =   840
          Width           =   1335
@@ -2094,7 +2013,7 @@ Begin VB.Form FrmOption
       Begin VB.Label lblLanguage 
          Caption         =   "Language:"
          Height          =   255
-         Left            =   -68520
+         Left            =   6480
          TabIndex        =   115
          Tag             =   "16110"
          Top             =   795
@@ -2203,7 +2122,7 @@ End Function
 
 
 Private Sub cmdOK_Click()
-    If Not checkForms Then
+    If Not PlcDeclare.ReadOnly And Not checkForms Then
         Exit Sub
     End If
 
@@ -2351,6 +2270,18 @@ End Sub
 Private Sub Form_Load()
 ' Resource
 PlcRes.LoadResFor Me
+
+If PlcDeclare.ReadOnly Then
+    Me.tabs.TabEnabled(0) = False
+    Me.tabs.TabEnabled(1) = False
+    Me.tabs.TabEnabled(2) = False
+    Me.tabs.TabEnabled(3) = False
+    Me.tabs.TabEnabled(5) = False
+    Me.tabs.TabEnabled(6) = False
+    Me.tabs.Tab = 4
+Else
+    Me.tabs.Tab = 0
+End If
 
 LANGUAGE = GetSetting(App.EXEName, "General", "Language", "EN")
 cboLanguage.Text = LANGUAGE

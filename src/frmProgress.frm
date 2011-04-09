@@ -174,7 +174,7 @@ Private Function LoadPulseSetting(name As String) As Long
 
     Dim pulseSetting As PulseSettingType
     Dim path As String
-    path = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    path = App.path & "\" & SETTING_PATH & "PulseSetting.config"
     
     pulseSetting = PlcPulseSetting.LoadConfig(path, name)
     

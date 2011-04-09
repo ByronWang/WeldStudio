@@ -1,5 +1,6 @@
 Attribute VB_Name = "PlcDeclare"
 Option Explicit
+Public Const ReadOnly As Boolean = False
 
 Public Const LOAD_ALL_PARAMETER  As Integer = 0
 Public Const LOAD_PULSE_SETTING As Integer = 1
