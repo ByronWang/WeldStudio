@@ -96,6 +96,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Declare Function Htmlhelp Lib "hhctrl.ocx " Alias "HtmlHelpA " (ByVal hwndCaller As Long, ByVal pszFile As String, ByVal uCommand As Long, ByVal dwData As Any) As Long
 
+Const ReadOnly As Boolean = False
+
 Private Sub MDIForm_Load()
 
 ' Resource
@@ -104,6 +106,13 @@ PlcRes.LoadResFor Me
     App.HelpFile = App.path & "\weld.chm "
     
     PLCDrv.initSystem
+    
+    If ReadOnly Then
+        Me.mnuConnect.Enabled = False
+        Me.mnuTools.Enabled = False
+        Me.mnuParameters.Enabled = False
+        Exit Sub
+    End If
     
     If GetSetting(App.EXEName, "UserData", "CompanyName", "") = "" Or _
         GetSetting(App.EXEName, "UserData", "Unit", "") = "" Or _
