@@ -1454,12 +1454,14 @@ Const NOTUSED_COLOR As Long = &H80000012
 
 Dim lastTime As Long
 
+Public weldFileName As String
 
 Dim fr As FileR
-Public Sub Load(filename As String)
+Public Sub Load(fileName As String)
 ' Resource
 PlcRes.LoadResFor Me
-    fr = PlcWld.LoadData(filename)
+    fr = PlcWld.LoadData(fileName)
+    weldFileName = fileName
     
     model = COMMON
         
@@ -1478,11 +1480,11 @@ Next
     lblCompany.Caption = Trim(fr.header1.CompanyName)
     
     If fr.analysisResult.Succeed = OK Then
-        lblParam.Caption = Trim(fr.header2.filename) & "-OK"
+        lblParam.Caption = Trim(fr.header2.fileName) & "-OK"
     ElseIf fr.analysisResult.Succeed = NO Then
-        lblParam.Caption = Trim(fr.header2.filename) & "-NO"
+        lblParam.Caption = Trim(fr.header2.fileName) & "-NO"
     Else
-        lblParam.Caption = Trim(fr.header2.filename) & "-INT"
+        lblParam.Caption = Trim(fr.header2.fileName) & "-INT"
     End If
     
     

@@ -103,7 +103,7 @@ PlcRes.LoadResFor Me
 
     App.HelpFile = App.path & "\weld.chm "
     
-    PLCDrv.initSystem
+    PLCDrv.InitSystem
     
     If ReadOnly Then
         Me.mnuConnect.Enabled = False
@@ -447,7 +447,7 @@ Private Sub mnuConnect_Click()
     frmProgress.ParamName = name
     frmProgress.Show vbModal, Me
     
-    If frmProgress.Status = 0 Then
+    If frmProgress.status = 0 Then
         Call FrmGraph.Show
     End If
     
@@ -458,28 +458,48 @@ Private Sub mnuExit_Click()
 End Sub
 
 Private Sub mnuOpen_Click()
-    'CommonDialog1.Filter = "Weld Data File (*.wdd) | *.wdd |Old Data File (*.wld) | *.wld"
     CommonDialog1.Filter = "Data File (*.WLD) |*.wld|Daily Report(*.DLY)|*.DLY"
     CommonDialog1.InitDir = ".\data\"
     
+    Dim i As Integer
+    Dim f As Form
+    Dim fc As FrmChart
+    Dim fd As FrmDailyReport
+    
     CommonDialog1.ShowOpen
-    If CommonDialog1.filename <> "" And UCase(Right(CommonDialog1.filename, 4)) = ".WLD" Then
+    If CommonDialog1.fileName <> "" And UCase(Right(CommonDialog1.fileName, 4)) = ".WLD" Then
         
-        Dim i As Integer
-        For i = 0 To WeldMDIForm.count
-            'WeldMDIForm.
+        For i = 0 To Forms.count - 1
+            Set f = Forms(i)
+            If TypeOf f Is FrmChart Then
+                Set fc = f
+                If UCase(fc.weldFileName) = UCase(CommonDialog1.fileName) Then
+                    fc.SetFocus
+                    Exit Sub
+                End If
+            End If
+        Next i
+                
+        Set fc = New FrmChart
+        fc.Load CommonDialog1.fileName
+        fc.Caption = CommonDialog1.fileName
+        fc.Show
+    ElseIf CommonDialog1.fileName <> "" And UCase(Right(CommonDialog1.fileName, 4)) = ".DLY" Then
+        For i = 0 To Forms.count - 1
+            Set f = Forms(i)
+            If TypeOf f Is FrmDailyReport Then
+                Set fd = f
+                If UCase(fd.DailyReportFileName) = UCase(CommonDialog1.fileName) Then
+                    fd.SetFocus
+                    Exit Sub
+                End If
+            End If
         Next i
         
-        
-        Dim f As New FrmChart
-        f.Load CommonDialog1.filename
-        f.Caption = CommonDialog1.filename
-        f.Show
-    ElseIf CommonDialog1.filename <> "" And UCase(Right(CommonDialog1.filename, 4)) = ".DLY" Then
-        Dim frmDR  As New FrmDailyReport
-        frmDR.Load CommonDialog1.filename
-        frmDR.Caption = CommonDialog1.filename
-        frmDR.Show
+        Set fd = New FrmDailyReport
+        fd.Load CommonDialog1.fileName
+        fd.Caption = CommonDialog1.fileName
+        fd.Show
     End If
 End Sub
 

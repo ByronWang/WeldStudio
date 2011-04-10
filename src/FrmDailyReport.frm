@@ -110,13 +110,16 @@ Const SUCCEED_COLOR As Long = &HFF00&
 Const FAIL_COLOR As Long = &HFF&
 Const NOTUSED_COLOR As Long = &HFFFFFF
 
-Public Sub Load(filename As String)
+Public DailyReportFileName As String
+
+Public Sub Load(fileName As String)
  Dim data() As DailyReport
   
-data = PlcDailyReport.LoadData(filename)
+data = PlcDailyReport.LoadData(fileName)
+Me.DailyReportFileName = fileName
 
 Dim path As String
-path = Left(filename, InStrRev(filename, "\"))
+path = Left(fileName, InStrRev(fileName, "\"))
 
 Dim sa() As String
 ReDim sa(UBound(data))
@@ -143,7 +146,7 @@ ReDim cellcolors(UBound(data))
 
 
 
-entry = f.header2.filename
+entry = f.header2.fileName
 
 
 '   Result
