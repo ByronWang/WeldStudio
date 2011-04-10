@@ -74,10 +74,10 @@ Begin VB.Form FrmOption
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame2(1)"
-      Tab(2).Control(1)=   "Frame2(0)"
-      Tab(2).Control(2)=   "Frame2(3)"
-      Tab(2).Control(3)=   "Frame2(2)"
+      Tab(2).Control(0)=   "Frame2(2)"
+      Tab(2).Control(1)=   "Frame2(3)"
+      Tab(2).Control(2)=   "Frame2(0)"
+      Tab(2).Control(3)=   "Frame2(1)"
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
@@ -87,26 +87,26 @@ Begin VB.Form FrmOption
       TabCaption(4)   =   "Weld Chart"
       TabPicture(4)   =   "FrmOption.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "chkFilterData"
-      Tab(4).Control(1)=   "Frame1(2)"
-      Tab(4).Control(2)=   "Frame1(0)"
-      Tab(4).Control(3)=   "Frame1(1)"
+      Tab(4).Control(0)=   "Frame1(1)"
+      Tab(4).Control(1)=   "Frame1(0)"
+      Tab(4).Control(2)=   "Frame1(2)"
+      Tab(4).Control(3)=   "chkFilterData"
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Label1"
+      Tab(5).Control(0)=   "Frame1(11)"
       Tab(5).Control(1)=   "Frame6"
-      Tab(5).Control(2)=   "Frame1(11)"
+      Tab(5).Control(2)=   "Label1"
       Tab(5).ControlCount=   3
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "Label2"
-      Tab(6).Control(1)=   "Frame4"
+      Tab(6).Control(0)=   "cmdReset"
+      Tab(6).Control(1)=   "chkRecordInterrupts"
       Tab(6).Control(2)=   "txtWeldNumber"
-      Tab(6).Control(3)=   "chkRecordInterrupts"
-      Tab(6).Control(4)=   "cmdReset"
+      Tab(6).Control(3)=   "Frame4"
+      Tab(6).Control(4)=   "Label2"
       Tab(6).ControlCount=   5
       Begin VB.Frame Frame7 
          Caption         =   "Unit Info"
@@ -1447,7 +1447,7 @@ Begin VB.Form FrmOption
             Alignment       =   1  'Right Justify
             Height          =   270
             Index           =   7
-            Left            =   1800
+            Left            =   2760
             TabIndex        =   40
             Text            =   "0"
             Top             =   705
@@ -1471,7 +1471,7 @@ Begin VB.Form FrmOption
             TabIndex        =   106
             Tag             =   "20"
             Top             =   720
-            Width           =   1455
+            Width           =   2535
          End
          Begin VB.Label lblAV 
             Caption         =   "Minimum Weld Cycle Time(s):"
@@ -1578,7 +1578,7 @@ Begin VB.Form FrmOption
          End
       End
       Begin VB.ComboBox cboLanguage 
-         Height          =   315
+         Height          =   300
          ItemData        =   "FrmOption.frx":0106
          Left            =   7560
          List            =   "FrmOption.frx":0113
@@ -2127,7 +2127,7 @@ Private Sub cmdOK_Click()
     End If
 
     Call SaveSetting(App.EXEName, "General", "Language", LANGUAGE)
-    Call SaveSetting(App.EXEName, "General", "IsSimulate", chkOnlineOnStartUp.Value)
+    Call SaveSetting(App.EXEName, "General", "OnlineOnStartUp", chkOnlineOnStartUp.Value)
     
     Call SaveSetting(App.EXEName, "Simulate", "IsSimulate", chkSimulate.Value)
     Call SaveSetting(App.EXEName, "Simulate", "SimulateFilename", txtSimulate.Text)
@@ -2287,7 +2287,7 @@ LANGUAGE = GetSetting(App.EXEName, "General", "Language", "EN")
 cboLanguage.Text = LANGUAGE
 chkRecordInterrupts.Value = GetSetting(App.EXEName, "Weld", "RecordInterrupts", 0)
 
-chkOnlineOnStartUp.Value = GetSetting(App.EXEName, "Genaral", "IsSimulate", 0)
+chkOnlineOnStartUp.Value = GetSetting(App.EXEName, "General", "OnlineOnStartUp", 0)
 
 chkSimulate.Value = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
 txtSimulate.Text = GetSetting(App.EXEName, "Simulate", "SimulateFilename", App.path & "\T0039.WLD")

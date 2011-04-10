@@ -2,18 +2,18 @@ VERSION 5.00
 Begin VB.Form FrmAbout 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "About"
-   ClientHeight    =   3195
+   ClientHeight    =   3105
    ClientLeft      =   2340
    ClientTop       =   1935
-   ClientWidth     =   5775
+   ClientWidth     =   5760
    ClipControls    =   0   'False
    Icon            =   "FrmAbout.frx":0000
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2205.246
+   ScaleHeight     =   2143.126
    ScaleMode       =   0  'User
-   ScaleWidth      =   5423.023
+   ScaleWidth      =   5408.937
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  '所有者中心
    Tag             =   "23000"
@@ -42,7 +42,7 @@ Begin VB.Form FrmAbout
       Width           =   1500
    End
    Begin VB.Label Label1 
-      Caption         =   "SYSTEM"
+      Caption         =   "STUDIO"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   15
@@ -134,11 +134,11 @@ Begin VB.Form FrmAbout
       Y2              =   1697.936
    End
    Begin VB.Label lblVersion 
-      Caption         =   "0.91"
+      Caption         =   "1.1"
       Height          =   225
-      Left            =   6480
+      Left            =   960
       TabIndex        =   4
-      Top             =   1440
+      Top             =   1800
       Width           =   3885
    End
 End

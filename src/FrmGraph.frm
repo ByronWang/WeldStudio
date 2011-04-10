@@ -10,7 +10,6 @@ Begin VB.Form FrmGraph
    Icon            =   "FrmGraph.frx":0000
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   MinButton       =   0   'False
    ScaleHeight     =   10605
    ScaleWidth      =   15240
    Tag             =   "12000"
@@ -606,21 +605,34 @@ Private Sub TimerDisplay_Timer()
     Dim psi As Long
     
     Dist = wmRecord.data.Dist
+    Volt = wmRecord.data.Volt
+    Amp = wmRecord.data.Amp
+    psi = PlcAnalysiser.toForce(wmRecord.data.PsiUpset, wmRecord.data.PsiOpen, analysisDefine)
+    
+    'lblTime.Caption = data.Time
+    If PLCDrv.Calibrate_Distance Then
+        lblDist.FontSize = lblVolt.FontSize
+        lblDist.Caption = Format(wmRecord.data.Dist, "##0.0")
+    Else
+        lblDist.FontSize = lblVolt.FontSize - 3
+        lblDist.Caption = Format(wmRecord.data.Dist, "##0")
+    End If
+    lblVolt.Caption = wmRecord.data.Volt
+    lblAmp.Caption = wmRecord.data.Amp
+    lblPsi.Caption = psi
+    
     If Dist < 0 Then
         Dist = 0
     End If
     
-    Volt = wmRecord.data.Volt
     If Volt < 0 Then
-    Volt = 0
+        Volt = 0
     End If
     
-    Amp = wmRecord.data.Amp
     If Amp < 0 Then
         Amp = 0
     End If
     
-    psi = PlcAnalysiser.toForce(wmRecord.data.PsiUpset, wmRecord.data.PsiOpen, analysisDefine)
     If psi < 0 Then
         psi = 0
     End If
@@ -659,17 +671,7 @@ Private Sub TimerDisplay_Timer()
     picPsi.Width = w
     
     
-    'lblTime.Caption = data.Time
-    If PLCDrv.Calibrate_Distance Then
-        lblDist.FontSize = lblVolt.FontSize
-        lblDist.Caption = Format(wmRecord.data.Dist, "##0.0")
-    Else
-        lblDist.FontSize = lblVolt.FontSize - 3
-        lblDist.Caption = Format(wmRecord.data.Dist, "##0")
-    End If
-    lblVolt.Caption = wmRecord.data.Volt
-    lblAmp.Caption = wmRecord.data.Amp
-    lblPsi.Caption = psi
+
 
 End Sub
 

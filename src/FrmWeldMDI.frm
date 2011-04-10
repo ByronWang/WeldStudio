@@ -10,7 +10,7 @@ Begin VB.MDIForm WeldMDIForm
    ClientWidth     =   11880
    Icon            =   "FrmWeldMDI.frx":0000
    LinkTopic       =   "MDIForm1"
-   StartUpPosition =   2  'CenterScreen
+   StartUpPosition =   2  'ÆÁÄ»ÖÐÐÄ
    Tag             =   "10000"
    WindowState     =   2  'Maximized
    Begin MSComDlg.CommonDialog CommonDialog1 
@@ -119,7 +119,19 @@ PlcRes.LoadResFor Me
         Call mnuOptions_Click
     End If
     
+    If GetSetting(App.EXEName, "UserData", "CompanyName", "") = "" Or _
+        GetSetting(App.EXEName, "UserData", "Unit", "") = "" Or _
+        GetSetting(App.EXEName, "UserData", "Location", "") = "" Then
+        Unload Me
+    End If
     
+    
+    Dim onlineStartUp As Integer
+    
+    onlineStartUp = GetSetting(App.EXEName, "General", "OnlineOnStartUp", 0)
+    If onlineStartUp = 1 Then
+        mnuConnect_Click
+    End If
 End Sub
 
 Private Sub MDIForm_Unload(Cancel As Integer)
@@ -182,7 +194,7 @@ Private Sub mnuPrint_Click()
         Dim fd As FrmDailyReport
         Set fd = f
         For i = 1 To CommonDialog1.Copies
-            Call printDailyReport(fd)
+            Call PrintDailyReport(fd)
         Next i
     End If
     
@@ -354,7 +366,7 @@ Private Function printChart(fc As FrmChart)
         Printer.EndDoc
 End Function
 
-Private Function printDailyReport(f As FrmDailyReport)
+Private Function PrintDailyReport(f As FrmDailyReport)
 Printer.Orientation = vbPRORLandscape
     
 Dim x, y As Long
@@ -452,6 +464,13 @@ Private Sub mnuOpen_Click()
     
     CommonDialog1.ShowOpen
     If CommonDialog1.filename <> "" And UCase(Right(CommonDialog1.filename, 4)) = ".WLD" Then
+        
+        Dim i As Integer
+        For i = 0 To WeldMDIForm.count
+            'WeldMDIForm.
+        Next i
+        
+        
         Dim f As New FrmChart
         f.Load CommonDialog1.filename
         f.Caption = CommonDialog1.filename
