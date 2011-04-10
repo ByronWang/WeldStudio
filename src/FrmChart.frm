@@ -10,6 +10,7 @@ Begin VB.Form FrmChart
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
    ScaleHeight     =   10170
+   ScaleMode       =   0  'User
    ScaleWidth      =   15240
    ShowInTaskbar   =   0   'False
    Tag             =   "11000"
@@ -37,18 +38,18 @@ Begin VB.Form FrmChart
    Begin VB.CommandButton cmdShowMode 
       Caption         =   "Data Filter"
       Height          =   495
-      Left            =   13440
+      Left            =   13680
       TabIndex        =   75
-      Top             =   240
+      Top             =   120
       Width           =   1335
    End
    Begin VB.CommandButton cmdViewDataDetail 
-      Caption         =   "ViewDetail"
+      Caption         =   "View Detail"
       Height          =   495
-      Left            =   2640
+      Left            =   13680
       TabIndex        =   74
-      Top             =   9240
-      Width           =   1215
+      Top             =   720
+      Width           =   1335
    End
    Begin VB.Frame Frame1 
       BorderStyle     =   0  'None
