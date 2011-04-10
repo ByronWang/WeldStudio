@@ -164,6 +164,7 @@ Public Function IServer_ReadInt(ByVal NameId&, ByRef Variable() As Integer, Iost
 End Function
 
 Public Function IServer_ReadSingle(ByVal NameId&, ByRef Variable() As Single, Iostat&, ByVal timeout&) As Long
+    
     IServer_ReadSingle = PlcDeclare.DTL_SUCCESS
 End Function
 
@@ -172,11 +173,38 @@ Public Function IServer_WriteInt(ByVal NameId&, ByRef Variable() As Integer, Ios
     IServer_WriteInt = PlcDeclare.DTL_SUCCESS
 End Function
 
-Public Function IServer_WriteSingle(ByVal NameId&, ByRef Variable() As Single, Iostat&, ByVal timeout&) As Long
+Public Function IServer_WriteSingle(ByVal NameId&, Variable() As Single, Iostat&, ByVal timeout&) As Long
+    Dim def As String
+    
+    def = defines(NameId&)
+    
+    Dim sa() As String
+    sa = Split(def, ",")
+
+    Dim saa() As String
+    saa = Split(sa(0), ":")
+    from = CInt(saa(1))
+    length = CInt(sa(1))
+    Paragram = saa(0)
+    
+    
+    Select Case Paragram
+        Case "F62":
+            Variable(0) = 10 * 100
+            Variable(1) = 17
+            Variable(2) = 98
+            Variable(3) = 90
+            Variable(4) = 90
+            Variable(8) = 0
+            Variable(9) = 90
+            Variable(11) = 90
+                
+    End Select
+    
     IServer_WriteSingle = PlcDeclare.DTL_SUCCESS
 End Function
 
-Public Sub IServer_ErrorStr(ByVal Status&, ByVal errstr$, ByVal StrSize%)
+Public Sub IServer_ErrorStr(ByVal status&, ByVal errstr$, ByVal StrSize%)
 End Sub
 
 

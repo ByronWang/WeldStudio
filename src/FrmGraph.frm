@@ -14,6 +14,11 @@ Begin VB.Form FrmGraph
    ScaleWidth      =   15240
    Tag             =   "12000"
    WindowState     =   2  'Maximized
+   Begin VB.Timer TimerSetting 
+      Interval        =   1000
+      Left            =   4320
+      Top             =   6000
+   End
    Begin VB.PictureBox picVolt 
       Appearance      =   0  'Flat
       BackColor       =   &H0000FFFF&
@@ -431,8 +436,8 @@ End Enum
 Dim analysisDefine As WeldAnalysisDefineType
 Dim analysisResult As WeldAnalysisResultType
 
-Function SwitchToRecoding(Status As ShowModeType)
-    Select Case Status
+Function SwitchToRecoding(status As ShowModeType)
+    Select Case status
         Case STANDBY_MODE
             timerMonitor.Enabled = True
             timerDisplay.Tag = ""
@@ -451,7 +456,7 @@ Function SwitchToRecoding(Status As ShowModeType)
             timerMonitor.Enabled = False
             timerDisplay.Tag = "ANALYSIS"
     End Select
-    showMode = Status
+    showMode = status
 End Function
 
 Private Sub Form_Load()
@@ -700,11 +705,11 @@ beRequest = True
 '
 '?10 (Force???) Bosch valve
 
-Dim Status As Long
+Dim status As Long
 
 
-Status = PLCDrv.ReadPcMonitor(wmRecord)
-If Status > 0 Then
+status = PLCDrv.ReadPcMonitor(wmRecord)
+If status > 0 Then
     GoTo ERROR_HANDLE
 End If
 
@@ -777,27 +782,12 @@ Else
 End If
 
 
-If ProcessSetting <= 0 Or Not beRecording Then
-    Status = PLCDrv.ReadCurrentProcessSetting(ProcessSetting)
-    If Status = 0 Then
-        If ProcessSetting = 1 Then
-            lblProcessSetting.Caption = "Regular"
-            lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "----")
-        ElseIf ProcessSetting = 2 Then
-            lblProcessSetting.Caption = "Pulse"
-            lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "----")
-        Else
-            lblProcessSetting.Caption = "Unknown"
-            lblParameter.Caption = "----"
-        End If
-    End If
-End If
 
 beRequest = False
 Exit Sub
 ERROR_HANDLE:
     beRequest = False
-    MsgBox "Connection error!¡¡" & vbCrLf & Status
+    MsgBox "Connection error!¡¡" & vbCrLf & status
     Unload Me
 End Sub
 
@@ -872,3 +862,48 @@ Dim WeldFile As String
 
 End Function
 
+Private Sub TimerSetting_Timer()
+Dim status As Long
+Dim configName As String
+                
+    If ProcessSetting <= 0 Or Not beRecording Then
+        status = PLCDrv.ReadCurrentProcessSetting(ProcessSetting)
+        
+        If status = 0 Then
+            If ProcessSetting = 1 Then
+                lblProcessSetting.Caption = "Regular"
+                
+                Dim rSetting As RegularSettingType
+                Dim rDest As RegularSettingType
+                
+                status = PLCDrv.ReadRegularData(rSetting)
+                
+                configName = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "Unknown")
+                rDest = PlcRegularSetting.LoadConfig(path, configName)
+                If PlcRegularSetting.AssertEqualRegularData(rSetting, rDest) Then
+                    lblParameter.Caption = configName
+                Else
+                    lblParameter.Caption = "Unkown"
+                End If
+            ElseIf ProcessSetting = 2 Then
+                lblProcessSetting.Caption = "Pulse"
+                
+                Dim pSetting As PulseSettingType
+                Dim pDest As PulseSettingType
+                                
+                status = PLCDrv.ReadPulseData(pSetting)
+                
+                configName = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "Unknown")
+                pDest = PlcPulseSetting.LoadConfig(configName)
+                If PlcPulseSetting.AssertEqualPulseData(pSetting, pDest) Then
+                    lblParameter.Caption = configName
+                Else
+                    lblParameter.Caption = "Unkown"
+                End If
+            Else
+                lblProcessSetting.Caption = "Unknown"
+                lblParameter.Caption = "Unknown"
+            End If
+        End If
+    End If
+End Sub

@@ -46,7 +46,7 @@ Option Explicit
 Const seperator As Integer = 400
 Public ParamName As String
 Public LoadMode As Integer
-Public Status As Long
+Public status As Long
 Dim step As Integer
 Dim beRuning As Boolean
 
@@ -64,11 +64,11 @@ Private Sub run()
     
     Select Case LoadMode
         Case LOAD_ALL_PARAMETER:
-            Status = LoadAllSetting
+            status = LoadAllSetting
         Case LOAD_PULSE_SETTING:
-            Status = LoadPulseSetting(ParamName)
+            status = LoadPulseSetting(ParamName)
         Case LOAD_REGULAR_SETTING:
-            Status = LoadRegularSetting(ParamName)
+            status = LoadRegularSetting(ParamName)
         Case LOAD_CALIBRATION_SETTING:
     End Select
 
@@ -77,12 +77,12 @@ End Sub
 
 Private Sub Finish()
     Me.Hide
-    If Status = 0 Then
+    If status = 0 Then
         If LoadMode = LOAD_ALL_PARAMETER Then
         Else
             MsgBox "Succeed!", vbOKOnly
         End If
-    ElseIf Status = 1000 Then
+    ElseIf status = 1000 Then
     
     Else
         MsgBox "Connection Error"
@@ -91,7 +91,7 @@ Private Sub Finish()
 End Sub
 
 Private Sub timerProgress_Timer()
-    If Status <> 0 Then
+    If status <> 0 Then
         lblProgress.BackColor = &HFF
     End If
     If lblProgress.Width < frmProgress.Width - seperator - seperator / 2 Then
@@ -108,21 +108,21 @@ End Sub
 
 
 Private Function LoadAllSetting()
-    Status = PLCDrv.OpenPLCConnection
-    If Status <> 0 Then
-        LoadAllSetting = Status
+    status = PLCDrv.OpenPLCConnection
+    If status <> 0 Then
+        LoadAllSetting = status
         Exit Function
     End If
     
-    Status = PLCDrv.PreparePcMonitor
-    If Status <> 0 Then
-        LoadAllSetting = Status
+    status = PLCDrv.PreparePcMonitor
+    If status <> 0 Then
+        LoadAllSetting = status
         Exit Function
     End If
     Dim wm As WeldMonitor
-    Status = PLCDrv.ReadPcMonitor(wm)
-    If Status <> 0 Then
-        LoadAllSetting = Status
+    status = PLCDrv.ReadPcMonitor(wm)
+    If status <> 0 Then
+        LoadAllSetting = status
         Exit Function
     End If
     
@@ -145,19 +145,19 @@ Private Function LoadRegularSetting(name As String) As Long
     
     regularSetting = PlcRegularSetting.LoadConfig(path, name)
     
-    Status = PLCDrv.OpenPLCConnection
-    If Status <> 0 Then
-        LoadRegularSetting = Status
+    status = PLCDrv.OpenPLCConnection
+    If status <> 0 Then
+        LoadRegularSetting = status
         Exit Function
     End If
     DoEvents
-    Status = PLCDrv.WriteRegularData(regularSetting)
-    If Status <> 0 Then
-        LoadRegularSetting = Status
+    status = PLCDrv.WriteRegularData(regularSetting)
+    If status <> 0 Then
+        LoadRegularSetting = status
         Exit Function
     End If
     DoEvents
-    Status = PLCDrv.ClosePLCConection
+    status = PLCDrv.ClosePLCConection
     
     Call SaveSetting(App.EXEName, "Parameter", "LastSetting_Regular", name)
 End Function
@@ -173,20 +173,18 @@ Private Function LoadPulseSetting(name As String) As Long
     End If
 
     Dim pulseSetting As PulseSettingType
-    Dim path As String
-    path = App.path & "\" & SETTING_PATH & "PulseSetting.config"
     
-    pulseSetting = PlcPulseSetting.LoadConfig(path, name)
+    pulseSetting = PlcPulseSetting.LoadConfig(name)
     
-    Status = PLCDrv.OpenPLCConnection
-    If Status <> 0 Then
-        LoadPulseSetting = Status
+    status = PLCDrv.OpenPLCConnection
+    If status <> 0 Then
+        LoadPulseSetting = status
         Exit Function
     End If
     DoEvents
-    Status = PLCDrv.WritePulseData(pulseSetting)
-    If Status <> 0 Then
-        LoadPulseSetting = Status
+    status = PLCDrv.WritePulseData(pulseSetting)
+    If status <> 0 Then
+        LoadPulseSetting = status
         Exit Function
     End If
     DoEvents
@@ -195,4 +193,3 @@ Private Function LoadPulseSetting(name As String) As Long
     Call SaveSetting(App.EXEName, "Parameter", "LastSetting_Pulse", name)
     
 End Function
-

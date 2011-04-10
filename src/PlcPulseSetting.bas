@@ -158,7 +158,10 @@ Dim DefalutParam As PulseSettingType
 DefalutStagesParameters = DefalutParam
 End Function
 
-Public Function LoadAll(filename As String) As PulseFileItemType()
+Public Function LoadAll() As PulseFileItemType()
+    Dim filename As String
+    filename = App.path & "\" & SETTING_PATH & "PulseSetting.config"
+    
     Dim pFileHeader As FileHeaderType
     Dim pFileItem As PulseFileItemType
     Dim pFileItemList() As PulseFileItemType
@@ -186,9 +189,10 @@ End Function
 
 
 
-Public Function LoadConfig(filename As String, configName As String) As PulseSettingType
+Public Function LoadConfig(configName As String) As PulseSettingType
+                
     Dim pFileItemList() As PulseFileItemType
-    pFileItemList = LoadAll(filename)
+    pFileItemList = LoadAll()
     
     Dim i As Integer
     For i = LBound(pFileItemList) To UBound(pFileItemList) - 1
@@ -202,9 +206,12 @@ Public Function LoadConfig(filename As String, configName As String) As PulseSet
 End Function
 
 
-Public Function SaveConfig(filename As String, configName As String, pulseSetting As PulseSettingType)
+Public Function SaveConfig(configName As String, pulseSetting As PulseSettingType)
+    Dim filename As String
+    filename = App.path & "\" & SETTING_PATH & "PulseSetting.config"
+    
     Dim pFileItemList() As PulseFileItemType
-    pFileItemList = LoadAll(filename)
+    pFileItemList = LoadAll()
 
 
     Dim haved As Boolean
@@ -242,3 +249,33 @@ Public Function SaveConfig(filename As String, configName As String, pulseSettin
         Put 1, pos + 1, pFileItem
     Close 1
 End Function
+
+
+Public Function AssertEqualPulseData(ByRef pulseSetting As PulseSettingType, ByRef dest As PulseSettingType) As Boolean
+    
+    Dim i As Integer
+    Dim j As Integer
+    
+        
+    For i = 0 To 7
+        For j = 0 To 6
+            If pulseSetting.Stages(j).Value(i) <> dest.Stages(j).Value(i) Then
+                GoTo NotEqual
+            End If
+        Next
+    Next
+    
+    For j = 1 To 4
+        If pulseSetting.General.Value(j - 1) <> dest.General.Value(j - 1) Then
+            GoTo NotEqual
+        End If
+    Next
+
+
+    AssertEqualPulseData = True
+
+Exit Function
+NotEqual:
+    AssertEqualPulseData = False
+End Function
+

@@ -127,3 +127,25 @@ Public Function SaveConfig(filename As String, configName As String, regularSett
         Put 1, pos + 1, pFileItem
     Close 1
 End Function
+
+
+Public Function AssertEqualRegularData(ByRef regularSetting As RegularSettingType, ByRef dest As RegularSettingType) As Boolean
+ 
+    Dim j As Integer
+    
+    DoEvents
+    
+    For j = 1 To 14
+        If (regularSetting.Value(j - 1) = dest.Value(j - 1)) Then
+            GoTo NotEqual
+        End If
+    Next
+            
+    AssertEqualRegularData = True
+
+Exit Function
+NotEqual:
+    AssertEqualRegularData = False
+End Function
+
+

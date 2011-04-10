@@ -801,7 +801,7 @@ Private Sub cmdLoad_Click()
     frmProgress.LoadMode = PlcDeclare.LOAD_PULSE_SETTING
     frmProgress.ParamName = cboFileName.Text
     frmProgress.Show vbModal, Me
-    If frmProgress.Status <> 0 Then
+    If frmProgress.status <> 0 Then
         GoTo ERROR_HANDLE
     End If
     
@@ -836,7 +836,7 @@ Private Sub cmdSave_Click()
     End If
 
     If cboFileName.Text <> "" Then
-        Call PlcPulseSetting.SaveConfig(path, cboFileName.Text, pulseSetting)
+        Call PlcPulseSetting.SaveConfig(cboFileName.Text, pulseSetting)
     End If
     Dim i As Integer
     
@@ -861,7 +861,7 @@ Private Sub cmdSave_Click()
 End Sub
 
 Private Function LoadConfig(name As String)
-    pulseSetting = PlcPulseSetting.LoadConfig(path, name)
+    pulseSetting = PlcPulseSetting.LoadConfig(name)
     
     txtValueGeneral(0).Text = pulseSetting.General.Value(0)
     txtValueGeneral(1).Text = pulseSetting.General.Value(1)
@@ -885,13 +885,12 @@ Dim pFileItemList() As PulseFileItemType
 
     InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
     
-    path = App.path & "\" & SETTING_PATH & "PulseSetting.config"
     If Not fso.FileExists(path) Then
         pulseSetting = PlcPulseSetting.DefalutStagesParameters
-        PlcPulseSetting.SaveConfig path, "DEFAULT", pulseSetting
+        PlcPulseSetting.SaveConfig "DEFAULT", pulseSetting
     End If
 
-    pFileItemList = PlcPulseSetting.LoadAll(path)
+    pFileItemList = PlcPulseSetting.LoadAll()
         
     Dim i As Integer
     For i = 1 To cboFileName.ListCount
