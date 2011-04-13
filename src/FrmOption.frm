@@ -48,23 +48,18 @@ Begin VB.Form FrmOption
       _Version        =   393216
       Style           =   1
       Tabs            =   7
+      Tab             =   4
       TabsPerRow      =   10
       TabHeight       =   520
       TabCaption(0)   =   "General"
       TabPicture(0)   =   "FrmOption.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "lblLanguage"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "chkOnlineOnStartUp"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "cboLanguage"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "CommonDialog1"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Frame5"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Frame7"
-      Tab(0).Control(5).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "Frame7"
+      Tab(0).Control(1)=   "Frame5"
+      Tab(0).Control(2)=   "CommonDialog1"
+      Tab(0).Control(3)=   "cboLanguage"
+      Tab(0).Control(4)=   "chkOnlineOnStartUp"
+      Tab(0).Control(5)=   "lblLanguage"
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
@@ -86,11 +81,15 @@ Begin VB.Form FrmOption
       Tab(3).ControlCount=   1
       TabCaption(4)   =   "Weld Chart"
       TabPicture(4)   =   "FrmOption.frx":007C
-      Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Frame1(1)"
-      Tab(4).Control(1)=   "Frame1(0)"
-      Tab(4).Control(2)=   "Frame1(2)"
-      Tab(4).Control(3)=   "chkFilterData"
+      Tab(4).ControlEnabled=   -1  'True
+      Tab(4).Control(0)=   "chkFilterData"
+      Tab(4).Control(0).Enabled=   0   'False
+      Tab(4).Control(1)=   "Frame1(2)"
+      Tab(4).Control(1).Enabled=   0   'False
+      Tab(4).Control(2)=   "Frame1(0)"
+      Tab(4).Control(2).Enabled=   0   'False
+      Tab(4).Control(3)=   "Frame1(1)"
+      Tab(4).Control(3).Enabled=   0   'False
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
@@ -111,7 +110,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame7 
          Caption         =   "Unit Info"
          Height          =   1335
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   189
          Tag             =   "16300"
          Top             =   4800
@@ -158,7 +157,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame5 
          Caption         =   "Company Info"
          Height          =   3855
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   179
          Tag             =   "16200"
          Top             =   720
@@ -1288,7 +1287,7 @@ Begin VB.Form FrmOption
          End
       End
       Begin MSComDlg.CommonDialog CommonDialog1 
-         Left            =   1560
+         Left            =   -73440
          Top             =   5520
          _ExtentX        =   847
          _ExtentY        =   847
@@ -1298,7 +1297,7 @@ Begin VB.Form FrmOption
          Caption         =   "Distance(mm) and Force(T)"
          Height          =   1575
          Index           =   1
-         Left            =   -71160
+         Left            =   3840
          TabIndex        =   111
          Tag             =   "20200"
          Top             =   480
@@ -1368,7 +1367,7 @@ Begin VB.Form FrmOption
          Caption         =   "Current(A) and Voltage(V)"
          Height          =   1575
          Index           =   0
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   107
          Tag             =   "20100"
          Top             =   480
@@ -1438,7 +1437,7 @@ Begin VB.Form FrmOption
          Caption         =   "Time (sec)"
          Height          =   1455
          Index           =   2
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   104
          Tag             =   "20300"
          Top             =   2280
@@ -1580,7 +1579,7 @@ Begin VB.Form FrmOption
       Begin VB.ComboBox cboLanguage 
          Height          =   300
          ItemData        =   "FrmOption.frx":0106
-         Left            =   7560
+         Left            =   -67440
          List            =   "FrmOption.frx":0113
          Style           =   2  'Dropdown List
          TabIndex        =   76
@@ -1590,7 +1589,7 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkOnlineOnStartUp 
          Caption         =   "OnlineOnStartup"
          Height          =   375
-         Left            =   6600
+         Left            =   -68400
          TabIndex        =   77
          Tag             =   "16120"
          Top             =   1440
@@ -1887,7 +1886,7 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkFilterData 
          Caption         =   "FilterData"
          Height          =   255
-         Left            =   -73200
+         Left            =   1800
          TabIndex        =   80
          Tag             =   "20010"
          Top             =   6840
@@ -2013,7 +2012,7 @@ Begin VB.Form FrmOption
       Begin VB.Label lblLanguage 
          Caption         =   "Language:"
          Height          =   255
-         Left            =   6480
+         Left            =   -68520
          TabIndex        =   115
          Tag             =   "16110"
          Top             =   795
@@ -2126,37 +2125,77 @@ Private Sub cmdOK_Click()
         Exit Sub
     End If
 
-    Call SaveSetting(App.EXEName, "General", "Language", LANGUAGE)
-    Call SaveSetting(App.EXEName, "General", "OnlineOnStartUp", chkOnlineOnStartUp.Value)
-    
-    Call SaveSetting(App.EXEName, "Simulate", "IsSimulate", chkSimulate.Value)
-    Call SaveSetting(App.EXEName, "Simulate", "SimulateFilename", txtSimulate.Text)
-    
-    
-    
-'    Call SaveSetting(App.EXEName, "Calibration", "SendIntoController", True)
-    
-    
-    Call loadCalibration
-    
+    If Not PlcDeclare.ReadOnly Then
+        
+        Call SaveSetting(App.EXEName, "General", "Language", LANGUAGE)
+        Call SaveSetting(App.EXEName, "General", "OnlineOnStartUp", chkOnlineOnStartUp.Value)
+        
+        Call SaveSetting(App.EXEName, "Simulate", "IsSimulate", chkSimulate.Value)
+        Call SaveSetting(App.EXEName, "Simulate", "SimulateFilename", txtSimulate.Text)
+        
+        Call loadCalibration
+        
+        Call SaveSetting(App.EXEName, "Weld", "RecordInterrupts", chkRecordInterrupts.Value)
+        
+        Call SaveSetting(App.EXEName, "UserData", "CompanyName", User_Data(0))
+        Call SaveSetting(App.EXEName, "UserData", "Address", User_Data(1))
+        Call SaveSetting(App.EXEName, "UserData", "City", User_Data(2))
+        Call SaveSetting(App.EXEName, "UserData", "ZipCode", User_Data(3))
+        Call SaveSetting(App.EXEName, "UserData", "Country", User_Data(4))
+        Call SaveSetting(App.EXEName, "UserData", "ContactName", User_Data(5))
+        Call SaveSetting(App.EXEName, "UserData", "Telphone", User_Data(6))
+        Call SaveSetting(App.EXEName, "UserData", "Fax", User_Data(7))
+        Call SaveSetting(App.EXEName, "UserData", "Email", User_Data(8))
+        Call SaveSetting(App.EXEName, "UserData", "Unit", User_Data(9))
+        Call SaveSetting(App.EXEName, "UserData", "Location", User_Data(10))
 
-    Call SaveSetting(App.EXEName, "Weld", "RecordInterrupts", chkRecordInterrupts.Value)
+        Call SaveSetting(App.EXEName, "SensorReadingBar", "Amp", SRB_Data(0))
+        Call SaveSetting(App.EXEName, "SensorReadingBar", "Dist", SRB_Data(1))
+        Call SaveSetting(App.EXEName, "SensorReadingBar", "Volt", SRB_Data(2))
+        Call SaveSetting(App.EXEName, "SensorReadingBar", "Force", SRB_Data(3))
+        
+        
+        
+        Call SaveSetting(App.EXEName, "StartRecording", "StartRecording", Mode_StartRecording)
+        Call SaveSetting(App.EXEName, "StartRecording", "Dist", ModeParam_StartRecoding(1))
+        Call SaveSetting(App.EXEName, "StartRecording", "Amp", ModeParam_StartRecoding(2))
+        Call SaveSetting(App.EXEName, "StartRecording", "Volt", ModeParam_StartRecoding(3))
+        Call SaveSetting(App.EXEName, "StartRecording", "Time", ModeParam_StartRecoding(4))
+        
+        
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "FlashMin", WeldAnalysis_Data(0))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "FlashMax", WeldAnalysis_Data(1))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "BoostMin", WeldAnalysis_Data(2))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "BoostMax", WeldAnalysis_Data(3))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetMin", WeldAnalysis_Data(4))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetMax", WeldAnalysis_Data(5))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "ForgeMin", WeldAnalysis_Data(6))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "ForgeMax", WeldAnalysis_Data(7))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "SlippageUpsetTime", WeldAnalysis_Data(8))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "SlippageUpset", WeldAnalysis_Data(9))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptCurrent", WeldAnalysis_Data(10))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptTime", WeldAnalysis_Data(11))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "ShortCircuitCurrent", WeldAnalysis_Data(12))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "ShortCircuitTime", WeldAnalysis_Data(13))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageTotalRail", WeldAnalysis_Data(14))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", WeldAnalysis_Data(15))
+        'Call SaveSetting(App.EXEName, "AnalysisDefine", "BoostSpeedTimeRange", WeldAnalysis_Data(16))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetCurrentMinimum", WeldAnalysis_Data(17))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Pistonside)", WeldAnalysis_Data(18))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Rodside)", WeldAnalysis_Data(19))
+        
+        
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "FlashEnable", WeldAnalysisEnable_Data(0))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "BoostEnable", WeldAnalysisEnable_Data(1))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetEnable", WeldAnalysisEnable_Data(2))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "ForgeEnable", WeldAnalysisEnable_Data(3))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "SlippageEnable", WeldAnalysisEnable_Data(4))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptEnable", WeldAnalysisEnable_Data(5))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "ShortCircuitEnable", WeldAnalysisEnable_Data(6))
+        Call SaveSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageEnable", WeldAnalysisEnable_Data(7))
+        
+    End If
     
-    Call SaveSetting(App.EXEName, "UserData", "CompanyName", User_Data(0))
-    Call SaveSetting(App.EXEName, "UserData", "Address", User_Data(1))
-    Call SaveSetting(App.EXEName, "UserData", "City", User_Data(2))
-    Call SaveSetting(App.EXEName, "UserData", "ZipCode", User_Data(3))
-    Call SaveSetting(App.EXEName, "UserData", "Country", User_Data(4))
-    Call SaveSetting(App.EXEName, "UserData", "ContactName", User_Data(5))
-    Call SaveSetting(App.EXEName, "UserData", "Telphone", User_Data(6))
-    Call SaveSetting(App.EXEName, "UserData", "Fax", User_Data(7))
-    Call SaveSetting(App.EXEName, "UserData", "Email", User_Data(8))
-    Call SaveSetting(App.EXEName, "UserData", "Unit", User_Data(9))
-    Call SaveSetting(App.EXEName, "UserData", "Location", User_Data(10))
-    
-    
-    
-
     Call SaveSetting(App.EXEName, "WeldChartSetting", "AVMin", WeldChart_Data(0))
     Call SaveSetting(App.EXEName, "WeldChartSetting", "AVMax", WeldChart_Data(1))
     Call SaveSetting(App.EXEName, "WeldChartSetting", "AVIncr", WeldChart_Data(2))
@@ -2165,54 +2204,7 @@ Private Sub cmdOK_Click()
     Call SaveSetting(App.EXEName, "WeldChartSetting", "DFIncr", WeldChart_Data(5))
     Call SaveSetting(App.EXEName, "WeldChartSetting", "TimeMaxCycleTime", WeldChart_Data(6))
     Call SaveSetting(App.EXEName, "WeldChartSetting", "TimeIncr", WeldChart_Data(7))
-    
-        
-    Call SaveSetting(App.EXEName, "SensorReadingBar", "Amp", SRB_Data(0))
-    Call SaveSetting(App.EXEName, "SensorReadingBar", "Dist", SRB_Data(1))
-    Call SaveSetting(App.EXEName, "SensorReadingBar", "Volt", SRB_Data(2))
-    Call SaveSetting(App.EXEName, "SensorReadingBar", "Force", SRB_Data(3))
-    
-    
-    
-    Call SaveSetting(App.EXEName, "StartRecording", "StartRecording", Mode_StartRecording)
-    Call SaveSetting(App.EXEName, "StartRecording", "Dist", ModeParam_StartRecoding(1))
-    Call SaveSetting(App.EXEName, "StartRecording", "Amp", ModeParam_StartRecoding(2))
-    Call SaveSetting(App.EXEName, "StartRecording", "Volt", ModeParam_StartRecoding(3))
-    Call SaveSetting(App.EXEName, "StartRecording", "Time", ModeParam_StartRecoding(4))
-    
-  
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "FlashMin", WeldAnalysis_Data(0))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "FlashMax", WeldAnalysis_Data(1))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "BoostMin", WeldAnalysis_Data(2))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "BoostMax", WeldAnalysis_Data(3))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetMin", WeldAnalysis_Data(4))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetMax", WeldAnalysis_Data(5))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "ForgeMin", WeldAnalysis_Data(6))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "ForgeMax", WeldAnalysis_Data(7))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "SlippageUpsetTime", WeldAnalysis_Data(8))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "SlippageUpset", WeldAnalysis_Data(9))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptCurrent", WeldAnalysis_Data(10))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptTime", WeldAnalysis_Data(11))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "ShortCircuitCurrent", WeldAnalysis_Data(12))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "ShortCircuitTime", WeldAnalysis_Data(13))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageTotalRail", WeldAnalysis_Data(14))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", WeldAnalysis_Data(15))
-  'Call SaveSetting(App.EXEName, "AnalysisDefine", "BoostSpeedTimeRange", WeldAnalysis_Data(16))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetCurrentMinimum", WeldAnalysis_Data(17))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Pistonside)", WeldAnalysis_Data(18))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Rodside)", WeldAnalysis_Data(19))
-
-    
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "FlashEnable", WeldAnalysisEnable_Data(0))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "BoostEnable", WeldAnalysisEnable_Data(1))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "UpsetEnable", WeldAnalysisEnable_Data(2))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "ForgeEnable", WeldAnalysisEnable_Data(3))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "SlippageEnable", WeldAnalysisEnable_Data(4))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptEnable", WeldAnalysisEnable_Data(5))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "ShortCircuitEnable", WeldAnalysisEnable_Data(6))
-  Call SaveSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageEnable", WeldAnalysisEnable_Data(7))
-
-
+            
     
     Me.Hide
     Unload Me
@@ -2261,9 +2253,9 @@ Private Sub cmdReset_Click()
 End Sub
 
 Private Sub cmdSimulate_Click()
-     CommonDialog1.filename = txtSimulate.Text
+     CommonDialog1.fileName = txtSimulate.Text
     CommonDialog1.ShowOpen
-    txtSimulate.Text = CommonDialog1.filename
+    txtSimulate.Text = CommonDialog1.fileName
     
 End Sub
 
@@ -2271,181 +2263,185 @@ Private Sub Form_Load()
 ' Resource
 PlcRes.LoadResFor Me
 
-If PlcDeclare.ReadOnly Then
-    Me.tabs.TabEnabled(0) = False
-    Me.tabs.TabEnabled(1) = False
-    Me.tabs.TabEnabled(2) = False
-    Me.tabs.TabEnabled(3) = False
-    Me.tabs.TabEnabled(5) = False
-    Me.tabs.TabEnabled(6) = False
-    Me.tabs.Tab = 4
-Else
-    Me.tabs.Tab = 0
-End If
-
-LANGUAGE = GetSetting(App.EXEName, "General", "Language", "EN")
-cboLanguage.Text = LANGUAGE
-chkRecordInterrupts.Value = GetSetting(App.EXEName, "Weld", "RecordInterrupts", 0)
-
-chkOnlineOnStartUp.Value = GetSetting(App.EXEName, "General", "OnlineOnStartUp", 0)
-
-chkSimulate.Value = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
-txtSimulate.Text = GetSetting(App.EXEName, "Simulate", "SimulateFilename", App.path & "\T0039.WLD")
-
-
+    If PlcDeclare.ReadOnly Then
+        Me.tabs.TabEnabled(0) = False
+        Me.tabs.TabEnabled(1) = False
+        Me.tabs.TabEnabled(2) = False
+        Me.tabs.TabEnabled(3) = False
+        Me.tabs.TabEnabled(5) = False
+        Me.tabs.TabEnabled(6) = False
+        Me.tabs.Tab = 4
+    Else
+        Me.tabs.Tab = 0
+    End If
     
-Mode_StartRecording = CInt(GetSetting(App.EXEName, "StartRecording", "StartRecording", 0))
-ModeParam_StartRecoding(1) = CSng(GetSetting(App.EXEName, "StartRecording", "Dist", 2.5))
-ModeParam_StartRecoding(2) = CSng(GetSetting(App.EXEName, "StartRecording", "Amp", 100))
-ModeParam_StartRecoding(3) = CSng(GetSetting(App.EXEName, "StartRecording", "Volt", 450))
-ModeParam_StartRecoding(4) = CSng(GetSetting(App.EXEName, "StartRecording", "Time", 25))
-    
-    
-    Dim i As Integer
-    For i = 0 To 4
-        optStartRecording(i).Value = False
-    Next
-    optStartRecording(Mode_StartRecording).Value = True
-    
-     Dim vo As String
-    vo = GetSetting(App.EXEName, "Calibration", "value", "1,6245,23390,150,2,1,3277,16384,1000,0,1,0,32767,460,0,1,3277,16384,5000,0,")
-    Dim cd() As String
-    cd = Split(vo, ",")
-    
-    
-    '----------------
- 
-    Dim k As Integer
-    Dim j As Integer
+    If Not PlcDeclare.ReadOnly Then
+        LANGUAGE = GetSetting(App.EXEName, "General", "Language", "EN")
+        cboLanguage.Text = LANGUAGE
+        chkRecordInterrupts.Value = GetSetting(App.EXEName, "Weld", "RecordInterrupts", 0)
+        
+        chkOnlineOnStartUp.Value = GetSetting(App.EXEName, "General", "OnlineOnStartUp", 0)
+        
+        chkSimulate.Value = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
+        txtSimulate.Text = GetSetting(App.EXEName, "Simulate", "SimulateFilename", App.path & "\T0039.WLD")
+        
+        
+            
+        Mode_StartRecording = CInt(GetSetting(App.EXEName, "StartRecording", "StartRecording", 0))
+        ModeParam_StartRecoding(1) = CSng(GetSetting(App.EXEName, "StartRecording", "Dist", 2.5))
+        ModeParam_StartRecoding(2) = CSng(GetSetting(App.EXEName, "StartRecording", "Amp", 100))
+        ModeParam_StartRecoding(3) = CSng(GetSetting(App.EXEName, "StartRecording", "Volt", 450))
+        ModeParam_StartRecoding(4) = CSng(GetSetting(App.EXEName, "StartRecording", "Time", 25))
+            
+            
+        Dim i As Integer
+        For i = 0 To 4
+            optStartRecording(i).Value = False
+        Next
+        optStartRecording(Mode_StartRecording).Value = True
+            
+        Dim vo As String
+        vo = GetSetting(App.EXEName, "Calibration", "value", "1,6245,23390,150,2,1,3277,16384,1000,0,1,0,32767,460,0,1,3277,16384,5000,0,")
+        Dim cd() As String
+        cd = Split(vo, ",")
+        
+        
+        '----------------
+        
+        Dim k As Integer
+        Dim j As Integer
+               
+        For i = 0 To 3
+            k = 4 * i
+            j = 5 * i
+            
+            Calibration_Enable(i) = CSng(cd(j))
+            chkCalibration(i).Value = Calibration_Enable(i)
+                    
+            If Calibration_Enable(i) = 1 Then
+                Call CalibrationSwitchTo(i, True)
+            Else
+                Call CalibrationSwitchTo(i, False)
+            End If
            
-    For i = 0 To 3
-        k = 4 * i
-        j = 5 * i
+           
+            j = j + 1
+            Calibration_Data(k) = CSng(cd(j))
+            txt(k).Text = Calibration_Data(k)
+            
+            k = k + 1
+            j = j + 1
+            Calibration_Data(k) = CSng(cd(j))
+            txt(k).Text = Calibration_Data(k)
+            
+            k = k + 1
+            j = j + 1
+            Calibration_Data(k) = CSng(cd(j))
+            txt(k).Text = Calibration_Data(k)
+            
+            k = k + 1
+            j = j + 1
+            Calibration_Data(k) = CSng(cd(j))
+            txt(k).Text = Calibration_Data(k)
+        Next
+    
+
+    
         
-        Calibration_Enable(i) = CSng(cd(j))
-        chkCalibration(i).Value = Calibration_Enable(i)
-                
-        If Calibration_Enable(i) = 1 Then
-            Call CalibrationSwitchTo(i, True)
-        Else
-            Call CalibrationSwitchTo(i, False)
-        End If
-       
-       
-        j = j + 1
-        Calibration_Data(k) = CSng(cd(j))
-        txt(k).Text = Calibration_Data(k)
+        txtStartRecording(1).Text = ModeParam_StartRecoding(1)
+        txtStartRecording(2).Text = ModeParam_StartRecoding(2)
+        txtStartRecording(3).Text = ModeParam_StartRecoding(3)
+        txtStartRecording(4).Text = ModeParam_StartRecoding(4)
         
-        k = k + 1
-        j = j + 1
-        Calibration_Data(k) = CSng(cd(j))
-        txt(k).Text = Calibration_Data(k)
         
-        k = k + 1
-        j = j + 1
-        Calibration_Data(k) = CSng(cd(j))
-        txt(k).Text = Calibration_Data(k)
         
-        k = k + 1
-        j = j + 1
-        Calibration_Data(k) = CSng(cd(j))
-        txt(k).Text = Calibration_Data(k)
-    Next
-    
+        User_Data(0) = GetSetting(App.EXEName, "UserData", "CompanyName", "")
+        User_Data(1) = GetSetting(App.EXEName, "UserData", "Address", "")
+        User_Data(2) = GetSetting(App.EXEName, "UserData", "City", "")
+        User_Data(3) = GetSetting(App.EXEName, "UserData", "ZipCode", "")
+        User_Data(4) = GetSetting(App.EXEName, "UserData", "Country", "")
+        User_Data(5) = GetSetting(App.EXEName, "UserData", "ContactName", "")
+        User_Data(6) = GetSetting(App.EXEName, "UserData", "Telphone", "")
+        User_Data(7) = GetSetting(App.EXEName, "UserData", "Fax", "")
+        User_Data(8) = GetSetting(App.EXEName, "UserData", "Email", "")
+        User_Data(9) = GetSetting(App.EXEName, "UserData", "Unit", "")
+        User_Data(10) = GetSetting(App.EXEName, "UserData", "Location", "")
+        
+        SRB_Data(0) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Amp", 1000))
+        SRB_Data(1) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Dist", 100))
+        SRB_Data(2) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Volt", 500))
+        SRB_Data(3) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Force", 120))
+        
+        
+        WeldAnalysisEnable_Data(0) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "FlashEnable", 1))
+        WeldAnalysisEnable_Data(1) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "BoostEnable", 1))
+        WeldAnalysisEnable_Data(2) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "UpsetEnable", 1))
+        WeldAnalysisEnable_Data(3) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "ForgeEnable", 1))
+        WeldAnalysisEnable_Data(4) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "SlippageEnable", 1))
+        WeldAnalysisEnable_Data(5) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptEnable", 1))
+        WeldAnalysisEnable_Data(6) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitEnable", 1))
+        WeldAnalysisEnable_Data(7) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageEnable", 1))
+        
+        WeldAnalysis_Data(0) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "FlashMin", 0.04))
+        WeldAnalysis_Data(1) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "FlashMax", 0.45))
+        WeldAnalysis_Data(2) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostMin", 0.45))
+        WeldAnalysis_Data(3) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostMax", 3.2))
+        WeldAnalysis_Data(4) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetMin", 8#))
+        WeldAnalysis_Data(5) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetMax", 20#))
+        WeldAnalysis_Data(6) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ForgeMin", 30))
+        WeldAnalysis_Data(7) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ForgeMax", 60))
+        WeldAnalysis_Data(8) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "SlippageUpsetTime", 0.2))
+        WeldAnalysis_Data(9) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "SlippageUpset", 22#))
+        WeldAnalysis_Data(10) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptCurrent", 100))
+        WeldAnalysis_Data(11) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptTime", 2#))
+        WeldAnalysis_Data(12) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitCurrent", 700))
+        WeldAnalysis_Data(13) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitTime", 0.8))
+        WeldAnalysis_Data(14) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageTotalRail", 20))
+        WeldAnalysis_Data(15) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
+        'WeldAnalysis_Data(16) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostSpeedTimeRange", 2))
+        WeldAnalysis_Data(17) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetCurrentMinimum", 100))
+        WeldAnalysis_Data(18) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Pistonside)", 209.55))
+        WeldAnalysis_Data(19) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Rodside)", 82.55))
+        
 
     
+        For i = 0 To 10
+            txtComp(i).Text = User_Data(i)
+        Next
     
-txtStartRecording(1).Text = ModeParam_StartRecoding(1)
-txtStartRecording(2).Text = ModeParam_StartRecoding(2)
-txtStartRecording(3).Text = ModeParam_StartRecoding(3)
-txtStartRecording(4).Text = ModeParam_StartRecoding(4)
-
-
-
-User_Data(0) = GetSetting(App.EXEName, "UserData", "CompanyName", "")
-User_Data(1) = GetSetting(App.EXEName, "UserData", "Address", "")
-User_Data(2) = GetSetting(App.EXEName, "UserData", "City", "")
-User_Data(3) = GetSetting(App.EXEName, "UserData", "ZipCode", "")
-User_Data(4) = GetSetting(App.EXEName, "UserData", "Country", "")
-User_Data(5) = GetSetting(App.EXEName, "UserData", "ContactName", "")
-User_Data(6) = GetSetting(App.EXEName, "UserData", "Telphone", "")
-User_Data(7) = GetSetting(App.EXEName, "UserData", "Fax", "")
-User_Data(8) = GetSetting(App.EXEName, "UserData", "Email", "")
-User_Data(9) = GetSetting(App.EXEName, "UserData", "Unit", "")
-User_Data(10) = GetSetting(App.EXEName, "UserData", "Location", "")
+        For i = 0 To 3
+            txtSRB(i).Text = SRB_Data(i)
+        Next
+        
+        For i = 0 To 19
+            txtWA(i).Text = WeldAnalysis_Data(i)
+        Next
+        
+        
+        For i = 0 To 7
+            chkEnableAnalysis(i).Value = WeldAnalysisEnable_Data(i)
+        Next
+        
+        Dim weldSerailNumber As Long
+        weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
+        txtWeldNumber.Text = PlcCommon.toWeldNumberShowModel(weldSerailNumber)
+        
+    End If
     
     
-WeldChart_Data(0) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "AVMin", 0))
-WeldChart_Data(1) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "AVMax", 1000))
-WeldChart_Data(2) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "AVIncr", 100))
-WeldChart_Data(3) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "DFMin", 0))
-WeldChart_Data(4) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "DFMax", 160))
-WeldChart_Data(5) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "DFIncr", 16))
-WeldChart_Data(6) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeMaxCycleTime", 200))
-WeldChart_Data(7) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeIncr", 10))
+    WeldChart_Data(0) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "AVMin", 0))
+    WeldChart_Data(1) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "AVMax", 1000))
+    WeldChart_Data(2) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "AVIncr", 100))
+    WeldChart_Data(3) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "DFMin", 0))
+    WeldChart_Data(4) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "DFMax", 160))
+    WeldChart_Data(5) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "DFIncr", 16))
+    WeldChart_Data(6) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeMaxCycleTime", 200))
+    WeldChart_Data(7) = CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeIncr", 10))
 
-SRB_Data(0) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Amp", 1000))
-SRB_Data(1) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Dist", 100))
-SRB_Data(2) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Volt", 500))
-SRB_Data(3) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Force", 120))
-
-
-WeldAnalysisEnable_Data(0) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "FlashEnable", 1))
-WeldAnalysisEnable_Data(1) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "BoostEnable", 1))
-WeldAnalysisEnable_Data(2) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "UpsetEnable", 1))
-WeldAnalysisEnable_Data(3) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "ForgeEnable", 1))
-WeldAnalysisEnable_Data(4) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "SlippageEnable", 1))
-WeldAnalysisEnable_Data(5) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptEnable", 1))
-WeldAnalysisEnable_Data(6) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitEnable", 1))
-WeldAnalysisEnable_Data(7) = CInt(GetSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageEnable", 1))
-
-WeldAnalysis_Data(0) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "FlashMin", 0.04))
-WeldAnalysis_Data(1) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "FlashMax", 0.45))
-WeldAnalysis_Data(2) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostMin", 0.45))
-WeldAnalysis_Data(3) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostMax", 3.2))
-WeldAnalysis_Data(4) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetMin", 8#))
-WeldAnalysis_Data(5) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetMax", 20#))
-WeldAnalysis_Data(6) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ForgeMin", 30))
-WeldAnalysis_Data(7) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ForgeMax", 60))
-WeldAnalysis_Data(8) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "SlippageUpsetTime", 0.2))
-WeldAnalysis_Data(9) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "SlippageUpset", 22#))
-WeldAnalysis_Data(10) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptCurrent", 100))
-WeldAnalysis_Data(11) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "CurrentInterruptTime", 2#))
-WeldAnalysis_Data(12) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitCurrent", 700))
-WeldAnalysis_Data(13) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "ShortCircuitTime", 0.8))
-WeldAnalysis_Data(14) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageTotalRail", 20))
-WeldAnalysis_Data(15) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
-'WeldAnalysis_Data(16) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostSpeedTimeRange", 2))
-WeldAnalysis_Data(17) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetCurrentMinimum", 100))
-WeldAnalysis_Data(18) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Pistonside)", 209.55))
-WeldAnalysis_Data(19) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Rodside)", 82.55))
-
-
-
-    For i = 0 To 10
-        txtComp(i).Text = User_Data(i)
-    Next
-
-    For i = 0 To 3
-        txtSRB(i).Text = SRB_Data(i)
-    Next
-    
     For i = 0 To 7
         txtWC(i).Text = WeldChart_Data(i)
     Next
     
-    For i = 0 To 19
-        txtWA(i).Text = WeldAnalysis_Data(i)
-    Next
-    
-    
-    For i = 0 To 7
-        chkEnableAnalysis(i).Value = WeldAnalysisEnable_Data(i)
-    Next
-    
-    Dim weldSerailNumber As Long
-    weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
-    txtWeldNumber.Text = PlcCommon.toWeldNumberShowModel(weldSerailNumber)
     
 End Sub
 

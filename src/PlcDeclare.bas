@@ -1,6 +1,6 @@
 Attribute VB_Name = "PlcDeclare"
 Option Explicit
-Public Const ReadOnly As Boolean = False
+Public Const ReadOnly As Boolean = True
 
 Public Const LOAD_ALL_PARAMETER  As Integer = 0
 Public Const LOAD_PULSE_SETTING As Integer = 1
@@ -97,7 +97,7 @@ Type FileHeader1
 End Type
 
 Type FileHeader2
-     filename As String * &H5
+     fileName As String * &H5
      Xc1a As Byte
      Date As String * &HB
      Xc25 As String * &HB
