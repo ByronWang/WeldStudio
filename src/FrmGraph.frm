@@ -545,6 +545,7 @@ PlcRes.LoadResFor Me
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
+    beUnload = True
     Me.Hide
 
     Me.timerDisplay.Enabled = False
@@ -687,7 +688,6 @@ If beRequest Then
     Exit Sub
 End If
 If beUnload Then
-    Unload Me
     Exit Sub
 End If
 
@@ -787,7 +787,9 @@ beRequest = False
 Exit Sub
 ERROR_HANDLE:
     beRequest = False
-    MsgBox "Connection error!¡¡" & vbCrLf & status
+    If Not beUnload Then
+        MsgBox "Connection error!¡¡" & vbCrLf & status
+    End If
     Unload Me
 End Sub
 
