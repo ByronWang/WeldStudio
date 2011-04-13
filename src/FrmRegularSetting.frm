@@ -871,7 +871,6 @@ Option Explicit
 Dim fso As New FileSystemObject
 Dim lastConfigName As String
 Dim regularSetting As RegularSettingType
-Dim path As String
 Dim InitialVoltage As Long
 
 
@@ -921,7 +920,7 @@ Private Sub cmdLoad_Click()
     frmProgress.LoadMode = PlcDeclare.LOAD_REGULAR_SETTING
     frmProgress.ParamName = cboFileName.Text
     frmProgress.Show vbModal, Me
-    If frmProgress.Status <> 0 Then
+    If frmProgress.status <> 0 Then
         GoTo ERROR_HANDLE
     End If
     
@@ -938,7 +937,7 @@ Private Sub cmdSave_Click()
     
 
     If cboFileName.Text <> "" Then
-        Call PlcRegularSetting.SaveConfig(path, cboFileName.Text, regularSetting)
+        Call PlcRegularSetting.SaveConfig(cboFileName.Text, regularSetting)
     End If
     Dim i As Integer
     
@@ -961,7 +960,7 @@ Private Sub cmdSave_Click()
 End Sub
 
 Private Function LoadConfig(name As String)
-    regularSetting = PlcRegularSetting.LoadConfig(path, name)
+    regularSetting = PlcRegularSetting.LoadConfig(name)
         
     cboStage_Change
     
@@ -976,15 +975,15 @@ PlcRes.LoadResFor Me
 Dim pFileItemList() As PulseFileItemType
 
     InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
-    
+        
+    Dim path As String 'TODO
     path = App.path & "\" & SETTING_PATH & "RegularSetting.config"
-    
     If Not fso.FileExists(path) Then
         regularSetting = PlcRegularSetting.DefalutStagesParameters
-        PlcRegularSetting.SaveConfig path, "DEFAULT", regularSetting
+        PlcRegularSetting.SaveConfig "DEFAULT", regularSetting
     End If
 
-    pFileItemList = PlcRegularSetting.LoadAll(path)
+    pFileItemList = PlcRegularSetting.LoadAll()
         
     Dim i As Integer
     For i = 1 To cboFileName.ListCount

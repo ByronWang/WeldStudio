@@ -832,7 +832,7 @@ Dim WeldFile As String
     
     fh2.Date = Date
     fh2.Time = Time
-    fh2.filename = WeldFile
+    fh2.fileName = WeldFile
     fh2.BaseRed = lblParameter.Caption
         
     If Not fso.FolderExists(path & "\" & Format(Date, "YYYY-MM-DD")) Then
@@ -879,7 +879,7 @@ Dim configName As String
                 status = PLCDrv.ReadRegularData(rSetting)
                 
                 configName = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "Unknown")
-                rDest = PlcRegularSetting.LoadConfig(path, configName)
+                rDest = PlcRegularSetting.LoadConfig(configName)
                 If PlcRegularSetting.AssertEqualRegularData(rSetting, rDest) Then
                     lblParameter.Caption = configName
                 Else

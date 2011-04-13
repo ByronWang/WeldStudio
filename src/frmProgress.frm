@@ -143,7 +143,7 @@ Private Function LoadRegularSetting(name As String) As Long
     Dim path As String
     path = App.path & "\" & SETTING_PATH & "PulseSetting.config"
     
-    regularSetting = PlcRegularSetting.LoadConfig(path, name)
+    regularSetting = PlcRegularSetting.LoadConfig(name)
     
     status = PLCDrv.OpenPLCConnection
     If status <> 0 Then

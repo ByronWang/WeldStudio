@@ -747,7 +747,6 @@ Option Explicit
 Dim fso As New FileSystemObject
 Dim lastConfigName As String
 Dim pulseSetting As PulseSettingType
-Dim path As String
 Dim InitialVoltage As Long
 Dim lastCboStageIndex As Integer
 
@@ -885,6 +884,8 @@ Dim pFileItemList() As PulseFileItemType
 
     InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
     
+    Dim path As String
+    path = App.path & "\" & SETTING_PATH & "PulseSetting.config"
     If Not fso.FileExists(path) Then
         pulseSetting = PlcPulseSetting.DefalutStagesParameters
         PlcPulseSetting.SaveConfig "DEFAULT", pulseSetting

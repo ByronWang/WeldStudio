@@ -41,12 +41,9 @@ Public beActive As Boolean
 'dim
 Dim UtlServer As IServer
 
-Dim handle, handle_PC_Data&, handle_PC_Monitor&, response&
-
-
+Dim handle_PC_Monitor&, response&
 
 Public g_Error_String As String * 80
-
 
 Public RUN_PHASE As String
 
@@ -244,7 +241,8 @@ ERROR_HANDLE:
 End Function
 
 Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
-    
+    Dim handle_Pulse&
+        
     '    Distance As Single
     '    Voltage As Single
     '    Time As Single
@@ -279,7 +277,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
     For i = 0 To 7
         DoEvents
     
-        status = UtlServer.Define(handle, def(i))
+        status = UtlServer.Define(handle_Pulse, def(i))
         If (status <> DTL_SUCCESS) Then
             RUN_PHASE = "DEFINE FOR WRITE PULSE SETTING " & i
             GoTo ERROR_HANDLE
@@ -287,7 +285,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
         
         DoEvents
     
-        status = UtlServer.ReadSingle(handle, bufSingle, IO_STATUS, 1000)
+        status = UtlServer.ReadSingle(handle_Pulse, bufSingle, IO_STATUS, 1000)
         If (status <> DTL_SUCCESS) Then
             RUN_PHASE = "DO WRITE PULSE SETTING " & i
             GoTo ERROR_HANDLE
@@ -295,7 +293,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
         
         DoEvents
     
-        status = UtlServer.Undef(handle)
+        status = UtlServer.Undef(handle_Pulse)
         If (status <> DTL_SUCCESS) Then
             RUN_PHASE = "UNDEF FOR WRITE PULSE SETTING " & i
             GoTo ERROR_HANDLE
@@ -324,7 +322,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
     
     DoEvents
     
-    status = UtlServer.Define(handle, def(8))
+    status = UtlServer.Define(handle_Pulse, def(8))
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DEFINE FOR WRITE PULSE SETTING GENERAL"
         GoTo ERROR_HANDLE
@@ -332,7 +330,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
     
     DoEvents
     
-    status = UtlServer.WriteSingle(handle, bufSingle, IO_STATUS, 1000)
+    status = UtlServer.WriteSingle(handle_Pulse, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DO WRITE PULSE SETTING GENERAL"
         GoTo ERROR_HANDLE
@@ -340,7 +338,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
     
     DoEvents
     
-    status = UtlServer.Undef(handle)
+    status = UtlServer.Undef(handle_Pulse)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "UNDEF FOR WRITE PULSE SETTING GENERAL"
         GoTo ERROR_HANDLE
@@ -354,7 +352,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
     Next
 
     ReadPulseData = 0
-    
+        
 Exit Function
 ERROR_HANDLE:
 
@@ -366,6 +364,7 @@ ERROR_HANDLE:
 End Function
 
 Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
+    Dim handle_Pulse&
     
     '    Distance As Single
     '    Voltage As Single
@@ -413,7 +412,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
     
         DoEvents
     
-        status = UtlServer.Define(handle, def(i))
+        status = UtlServer.Define(handle_Pulse, def(i))
         If (status <> DTL_SUCCESS) Then
             RUN_PHASE = "DEFINE FOR WRITE PULSE SETTING " & i
             GoTo ERROR_HANDLE
@@ -421,7 +420,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
         
         DoEvents
     
-        status = UtlServer.WriteSingle(handle, bufSingle, IO_STATUS, 1000)
+        status = UtlServer.WriteSingle(handle_Pulse, bufSingle, IO_STATUS, 1000)
         If (status <> DTL_SUCCESS) Then
             RUN_PHASE = "DO WRITE PULSE SETTING " & i
             GoTo ERROR_HANDLE
@@ -429,7 +428,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
         
         DoEvents
     
-        status = UtlServer.Undef(handle)
+        status = UtlServer.Undef(handle_Pulse)
         If (status <> DTL_SUCCESS) Then
             RUN_PHASE = "UNDEF FOR WRITE PULSE SETTING " & i
             GoTo ERROR_HANDLE
@@ -448,7 +447,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
     
     DoEvents
     
-    status = UtlServer.Define(handle, def(8))
+    status = UtlServer.Define(handle_Pulse, def(8))
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DEFINE FOR WRITE PULSE SETTING GENERAL"
         GoTo ERROR_HANDLE
@@ -456,7 +455,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
     
     DoEvents
     
-    status = UtlServer.WriteSingle(handle, bufSingle, IO_STATUS, 1000)
+    status = UtlServer.WriteSingle(handle_Pulse, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DO WRITE PULSE SETTING GENERAL"
         GoTo ERROR_HANDLE
@@ -464,7 +463,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
     
     DoEvents
     
-    status = UtlServer.Undef(handle)
+    status = UtlServer.Undef(handle_Pulse)`
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "UNDEF FOR WRITE PULSE SETTING GENERAL"
         GoTo ERROR_HANDLE
@@ -521,6 +520,7 @@ ERROR_HANDLE:
 End Function
 
 Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As Long
+    Dim handle_Regular&
     
     '0   1   Parameter set index
     '1   2   High volt timer in seconds
@@ -550,7 +550,7 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
     
     DoEvents
     
-    status = UtlServer.Define(handle, def)
+    status = UtlServer.Define(handle_Regular, def)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DEFINE FOR WRITE REGULAR SETTING GENERAL"
         GoTo ERROR_HANDLE
@@ -558,7 +558,7 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
     
     DoEvents
     
-    status = UtlServer.WriteSingle(handle, bufSingle, IO_STATUS, 1000)
+    status = UtlServer.WriteSingle(handle_Regular, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DO WRITE REGULAR SETTING GENERAL"
         GoTo ERROR_HANDLE
@@ -566,7 +566,7 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
     
     DoEvents
     
-    status = UtlServer.Undef(handle)
+    status = UtlServer.Undef(handle_Regular)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "UNDEF FOR WRITE REGULAR SETTING GENERAL"
         GoTo ERROR_HANDLE
@@ -587,6 +587,9 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
     regularSetting.Value(j - 1) = 100 * bufSingle(j) / InitialVoltage 'Voltage
             
     ReadRegularData = 0
+    
+    'TODO TEST
+    regularSetting = PlcRegularSetting.DefalutStagesParameters
 
 Exit Function
 ERROR_HANDLE:
@@ -599,6 +602,7 @@ ERROR_HANDLE:
 End Function
 
 Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
+    Dim handle_Regular&
     
     '0   1   Parameter set index
     '1   2   High volt timer in seconds
@@ -641,7 +645,7 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
     
     DoEvents
     
-    status = UtlServer.Define(handle, def)
+    status = UtlServer.Define(handle_Regular, def)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DEFINE FOR WRITE REGULAR SETTING GENERAL"
         GoTo ERROR_HANDLE
@@ -649,7 +653,7 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
     
     DoEvents
     
-    status = UtlServer.WriteSingle(handle, bufSingle, IO_STATUS, 1000)
+    status = UtlServer.WriteSingle(handle_Regular, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DO WRITE REGULAR SETTING GENERAL"
         GoTo ERROR_HANDLE
@@ -657,7 +661,7 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
     
     DoEvents
     
-    status = UtlServer.Undef(handle)
+    status = UtlServer.Undef(handle_Regular)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "UNDEF FOR WRITE REGULAR SETTING GENERAL"
         GoTo ERROR_HANDLE

@@ -159,8 +159,8 @@ DefalutStagesParameters = DefalutParam
 End Function
 
 Public Function LoadAll() As PulseFileItemType()
-    Dim filename As String
-    filename = App.path & "\" & SETTING_PATH & "PulseSetting.config"
+    Dim fileName As String
+    fileName = App.path & "\" & SETTING_PATH & "PulseSetting.config"
     
     Dim pFileHeader As FileHeaderType
     Dim pFileItem As PulseFileItemType
@@ -170,7 +170,7 @@ Public Function LoadAll() As PulseFileItemType()
     Dim pos As Integer
     pos = 0
     
-    Open filename For Binary As #1
+    Open fileName For Binary As #1
     Get 1, 1, pFileHeader
     
     ReDim pFileItemList(pFileHeader.count)
@@ -207,8 +207,8 @@ End Function
 
 
 Public Function SaveConfig(configName As String, pulseSetting As PulseSettingType)
-    Dim filename As String
-    filename = App.path & "\" & SETTING_PATH & "PulseSetting.config"
+    Dim fileName As String
+    fileName = App.path & "\" & SETTING_PATH & "PulseSetting.config"
     
     Dim pFileItemList() As PulseFileItemType
     pFileItemList = LoadAll()
@@ -244,7 +244,7 @@ Public Function SaveConfig(configName As String, pulseSetting As PulseSettingTyp
     pFileItem.name = configName
     pFileItem.pulseSetting = pulseSetting
     
-    Open filename For Binary As #1
+    Open fileName For Binary As #1
         Put 1, 1, pFileHeader
         Put 1, pos + 1, pFileItem
     Close 1
@@ -259,6 +259,7 @@ Public Function AssertEqualPulseData(ByRef pulseSetting As PulseSettingType, ByR
         
     For i = 0 To 7
         For j = 0 To 6
+            Debug.Print pulseSetting.Stages(j).Value(i) & "  ===  " & dest.Stages(j).Value(i)
             If pulseSetting.Stages(j).Value(i) <> dest.Stages(j).Value(i) Then
                 GoTo NotEqual
             End If

@@ -1,4 +1,5 @@
 Attribute VB_Name = "PlcRegularSetting"
+Public fileName As String
 
 Public Function DefalutStagesParameters() As RegularSettingType
 
@@ -43,7 +44,11 @@ Dim DefalutParam As RegularSettingType
 DefalutStagesParameters = DefalutParam
 End Function
 
-Public Function LoadAll(filename As String) As RegularFileItemType()
+Public Function LoadAll() As RegularFileItemType()
+    Dim fileName As String
+    fileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    
+    
     Dim pFileHeader As FileHeaderType
     Dim pFileItem As RegularFileItemType
     Dim pFileItemList() As RegularFileItemType
@@ -52,7 +57,7 @@ Public Function LoadAll(filename As String) As RegularFileItemType()
     Dim pos As Integer
     pos = 0
     
-    Open filename For Binary As #1
+    Open fileName For Binary As #1
     Get 1, 1, pFileHeader
     
     ReDim pFileItemList(pFileHeader.count)
@@ -71,9 +76,12 @@ End Function
 
 
 
-Public Function LoadConfig(filename As String, configName As String) As RegularSettingType
+Public Function LoadConfig(configName As String) As RegularSettingType
+    Dim fileName As String
+    fileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    
     Dim pFileItemList() As RegularFileItemType
-    pFileItemList = LoadAll(filename)
+    pFileItemList = LoadAll()
     
     Dim i As Integer
     For i = LBound(pFileItemList) To UBound(pFileItemList) - 1
@@ -87,9 +95,12 @@ Public Function LoadConfig(filename As String, configName As String) As RegularS
 End Function
 
 
-Public Function SaveConfig(filename As String, configName As String, regularSetting As RegularSettingType)
+Public Function SaveConfig(configName As String, regularSetting As RegularSettingType)
+    Dim fileName As String
+    fileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    
     Dim pFileItemList() As RegularFileItemType
-    pFileItemList = LoadAll(filename)
+    pFileItemList = LoadAll()
 
 
     Dim haved As Boolean
@@ -122,7 +133,7 @@ Public Function SaveConfig(filename As String, configName As String, regularSett
     pFileItem.name = configName
     pFileItem.regularSetting = regularSetting
     
-    Open filename For Binary As #1
+    Open fileName For Binary As #1
         Put 1, 1, pFileHeader
         Put 1, pos + 1, pFileItem
     Close 1
@@ -136,7 +147,7 @@ Public Function AssertEqualRegularData(ByRef regularSetting As RegularSettingTyp
     DoEvents
     
     For j = 1 To 14
-        If (regularSetting.Value(j - 1) = dest.Value(j - 1)) Then
+        If (regularSetting.Value(j - 1) <> dest.Value(j - 1)) Then
             GoTo NotEqual
         End If
     Next
