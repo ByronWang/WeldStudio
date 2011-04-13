@@ -15,6 +15,23 @@ Begin VB.Form FrmRegularSetting
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  '所有者中心
    Tag             =   "14000"
+   Begin VB.CommandButton cmdDelete 
+      Caption         =   "-"
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   14.25
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Left            =   5280
+      TabIndex        =   86
+      Top             =   360
+      Width           =   375
+   End
    Begin VB.ComboBox cboFileName 
       Height          =   300
       Left            =   2160
@@ -878,6 +895,8 @@ Const WARNING_COLOR As Long = &H8080FF
 Const ERROR_COLOR As Long = &HFF&
 Const FINE_COLOR As Long = &HFFFFFF
 
+Dim loading As Boolean
+
 Private Sub CancelButton_Click()
     Me.Hide
     Unload Me
@@ -886,6 +905,7 @@ End Sub
 Private Sub cboFileName_Change()
     If lastConfigName <> cboFileName.Text Then
         cmdSave.Enabled = True
+        cmdDelete.Enabled = False
     End If
 End Sub
 
@@ -914,6 +934,37 @@ End Sub
 
 Private Sub cboStage_Click()
     cboStage_Change
+End Sub
+
+Private Sub cmdDelete_Click()
+    If Me.cboFileName.ListCount <= 1 Then
+        MsgBox "At lest one setting!"
+        Exit Sub
+    End If
+    
+    If cmdSave.Enabled Then
+        MsgBox "Please save data first!"
+        Exit Sub
+    End If
+    
+    Dim loadedName As String
+    loadedName = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "")
+    If loadedName = Me.cboFileName.Text Then
+        MsgBox "Can't delete loaded setting ! " & vbCrLf & "Please load another config first!"
+        Exit Sub
+    End If
+    
+    Dim index As Integer
+    index = Me.cboFileName.ListIndex
+    
+    Call PlcRegularSetting.DeleteConfig(index)
+    
+    Form_Load
+        
+    If index < Me.cboFileName.ListCount Then
+        Me.cboFileName.ListIndex = index
+    End If
+       
 End Sub
 
 Private Sub cmdLoad_Click()
@@ -956,14 +1007,18 @@ Private Sub cmdSave_Click()
     End If
     
     cmdSave.Enabled = False
+    cmdDelete.Enabled = True
     cmdLoad.Enabled = True
 End Sub
 
 Private Function LoadConfig(name As String)
+loading = True
     regularSetting = PlcRegularSetting.LoadConfig(name)
         
     cboStage_Change
     
+    cmdLoad.Enabled = True
+loading = False
 End Function
 
 
@@ -1006,6 +1061,7 @@ Dim pFileItemList() As PulseFileItemType
     Next
     
     cmdSave.Enabled = False
+    cmdDelete.Enabled = True
     cmdLoad.Enabled = False
         
 End Sub
@@ -1033,7 +1089,12 @@ Private Sub txtValue_Change(index As Integer)
         End If
         
         regularSetting.Value(index) = CSng(txtValue(index).Text)
-        cmdSave.Enabled = True
+        
+        If Not loading Then
+            cmdSave.Enabled = True
+            cmdDelete.Enabled = False
+            cmdLoad.Enabled = False
+        End If
     Else
         txtValue(index).BackColor = ERROR_COLOR
     End If

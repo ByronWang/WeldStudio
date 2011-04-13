@@ -37,15 +37,6 @@ Type PulseFileItemType
 End Type
 
 
-Type RegularSettingType
-    Value(15 - 1) As Single
-End Type
-
-Type RegularFileItemType
-    name As String * 20
-    regularSetting As RegularSettingType
-End Type
-
 Public Function DefalutStagesParameters() As PulseSettingType
 
 Dim DefalutParam As PulseSettingType
@@ -187,6 +178,36 @@ Close 1
 LoadAll = pFileItemList
 End Function
 
+
+Public Function DeleteConfig(ByVal i As Integer) As Boolean
+    Dim fileName As String
+    fileName = App.path & "\" & SETTING_PATH & "PulseSetting.config"
+    
+    Dim pFileItemList() As PulseFileItemType
+    pFileItemList = LoadAll()
+
+    Dim pFileHeader As FileHeaderType
+    Dim pFileItem As PulseFileItemType
+    Dim pos As Integer
+    
+    pFileHeader.count = UBound(pFileItemList)
+    pFileHeader.count = pFileHeader.count - 1
+        
+    pos = 0
+    pos = pos + LenB(pFileHeader)
+    pos = pos + (i) * LenB(pFileItem)
+        
+    Open fileName For Binary As #1
+        Put 1, 1, pFileHeader
+            
+        For i = i To pFileHeader.count - 1
+            pFileItem.name = pFileItemList(i + 1).name
+            pFileItem.pulseSetting = pFileItemList(i + 1).pulseSetting
+            Put 1, pos + 1, pFileItem
+            pos = pos + LenB(pFileItem)
+        Next i
+    Close 1
+End Function
 
 
 Public Function LoadConfig(configName As String) As PulseSettingType

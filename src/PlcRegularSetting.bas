@@ -1,6 +1,16 @@
 Attribute VB_Name = "PlcRegularSetting"
 Public fileName As String
 
+
+Type RegularSettingType
+    Value(15 - 1) As Single
+End Type
+
+Type RegularFileItemType
+    name As String * 20
+    regularSetting As RegularSettingType
+End Type
+
 Public Function DefalutStagesParameters() As RegularSettingType
 
 Dim DefalutParam As RegularSettingType
@@ -136,6 +146,36 @@ Public Function SaveConfig(configName As String, regularSetting As RegularSettin
     Open fileName For Binary As #1
         Put 1, 1, pFileHeader
         Put 1, pos + 1, pFileItem
+    Close 1
+End Function
+
+Public Function DeleteConfig(ByVal i As Integer) As Boolean
+    Dim fileName As String
+    fileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    
+    Dim pFileItemList() As RegularFileItemType
+    pFileItemList = LoadAll()
+
+    Dim pFileHeader As FileHeaderType
+    Dim pFileItem As RegularFileItemType
+    Dim pos As Integer
+    
+    pFileHeader.count = UBound(pFileItemList)
+    pFileHeader.count = pFileHeader.count - 1
+        
+    pos = 0
+    pos = pos + LenB(pFileHeader)
+    pos = pos + (i) * LenB(pFileItem)
+        
+    Open fileName For Binary As #1
+        Put 1, 1, pFileHeader
+            
+        For i = i To pFileHeader.count - 1
+            pFileItem.name = pFileItemList(i + 1).name
+            pFileItem.regularSetting = pFileItemList(i + 1).regularSetting
+            Put 1, pos + 1, pFileItem
+            pos = pos + LenB(pFileItem)
+        Next i
     Close 1
 End Function
 

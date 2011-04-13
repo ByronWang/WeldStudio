@@ -15,6 +15,23 @@ Begin VB.Form FrmPulseSetting
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  '所有者中心
    Tag             =   "13000"
+   Begin VB.CommandButton cmdDelete 
+      Caption         =   "-"
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   14.25
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Left            =   5280
+      TabIndex        =   74
+      Top             =   360
+      Width           =   375
+   End
    Begin VB.Frame Frame1 
       Caption         =   "General Parameters:"
       Height          =   1935
@@ -755,6 +772,7 @@ Const WARNING_COLOR As Long = &H8080FF
 Const ERROR_COLOR As Long = &HFF&
 Const FINE_COLOR As Long = &HFFFFFF
 
+Dim loading As Boolean
 
 Private Sub CancelButton_Click()
     Me.Hide
@@ -764,6 +782,8 @@ End Sub
 Private Sub cboFileName_Change()
     If lastConfigName <> cboFileName.Text Then
         cmdSave.Enabled = True
+        cmdDelete.Enabled = False
+        cmdLoad.Enabled = False
     End If
 End Sub
 
@@ -793,6 +813,36 @@ Private Sub cboStage_Click()
 '        cboStage.ListIndex = lastCboStageIndex
 '    End If
 
+End Sub
+
+Private Sub cmdDelete_Click()
+    If Me.cboFileName.ListCount <= 1 Then
+        MsgBox "At lest one setting!"
+        Exit Sub
+    End If
+    
+    If cmdSave.Enabled Then
+        MsgBox "Please save data first!"
+        Exit Sub
+    End If
+    
+    Dim loadedName As String
+    loadedName = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "")
+    If loadedName = Me.cboFileName.Text Then
+        MsgBox "Can't delete loaded setting ! " & vbCrLf & "Please load another config first!"
+        Exit Sub
+    End If
+    
+    Dim index As Integer
+    index = Me.cboFileName.ListIndex
+    
+    Call PlcPulseSetting.DeleteConfig(index)
+    
+    Form_Load
+        
+    If index < Me.cboFileName.ListCount Then
+        Me.cboFileName.ListIndex = index
+    End If
 End Sub
 
 Private Sub cmdLoad_Click()
@@ -854,12 +904,14 @@ Private Sub cmdSave_Click()
     End If
     
     cmdLoad.Enabled = True
+    cmdDelete.Enabled = True
     cmdSave.Enabled = False
     lastConfigName = cboFileName.Text
     
 End Sub
 
 Private Function LoadConfig(name As String)
+loading = True
     pulseSetting = PlcPulseSetting.LoadConfig(name)
     
     txtValueGeneral(0).Text = pulseSetting.General.Value(0)
@@ -870,6 +922,8 @@ Private Function LoadConfig(name As String)
     cboStage.ListIndex = 0
     cboStage_Change
     
+    cmdLoad.Enabled = True
+loading = False
 End Function
 
 
@@ -914,6 +968,7 @@ Dim pFileItemList() As PulseFileItemType
     Next
         
     cmdSave.Enabled = False
+    cmdDelete.Enabled = True
     cmdLoad.Enabled = False
 
 
@@ -947,7 +1002,12 @@ Private Sub txtValue_Change(index As Integer)
         End If
         
         pulseSetting.Stages(cboStage.ListIndex).Value(index) = CDbl(txtValue(index).Text)
-        cmdSave.Enabled = True
+        
+        If Not loading Then
+            cmdSave.Enabled = True
+            cmdLoad.Enabled = False
+            cmdDelete.Enabled = False
+        End If
     Else
         txtValue(index).BackColor = ERROR_COLOR
     End If
@@ -970,7 +1030,12 @@ Private Sub txtValueGeneral_Change(index As Integer)
         End If
         
         pulseSetting.General.Value(index) = CSng(txtValueGeneral(index).Text)
-        cmdSave.Enabled = True
+        
+        If Not loading Then
+            cmdSave.Enabled = True
+            cmdLoad.Enabled = False
+            cmdDelete.Enabled = False
+        End If
     Else
         txtValueGeneral(index).BackColor = ERROR_COLOR
     End If

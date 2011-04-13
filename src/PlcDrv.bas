@@ -463,7 +463,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
     
     DoEvents
     
-    status = UtlServer.Undef(handle_Pulse)`
+    status = UtlServer.Undef(handle_Pulse)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "UNDEF FOR WRITE PULSE SETTING GENERAL"
         GoTo ERROR_HANDLE
