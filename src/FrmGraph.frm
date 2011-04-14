@@ -868,8 +868,12 @@ Private Sub TimerSetting_Timer()
 Dim status As Long
 Dim configName As String
                 
+    out.log "start check Setting"
+
     If ProcessSetting <= 0 Or Not beRecording Then
         status = PLCDrv.ReadCurrentProcessSetting(ProcessSetting)
+        out.log "status = PLCDrv.ReadCurrentProcessSetting(ProcessSetting)"
+        out.log "status= " & status & "  ProcessSetting=" & ProcessSetting & " "
         
         If status = 0 Then
             If ProcessSetting = 1 Then
@@ -882,10 +886,11 @@ Dim configName As String
                 
                 configName = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "Unknown")
                 rDest = PlcRegularSetting.LoadConfig(configName)
+                out.log "before compare " & configName
                 If PlcRegularSetting.AssertEqualRegularData(rSetting, rDest) Then
                     lblParameter.Caption = configName
                 Else
-                    lblParameter.Caption = "Unkown"
+                    lblParameter.Caption = "Unknown"
                 End If
             ElseIf ProcessSetting = 2 Then
                 lblProcessSetting.Caption = "Pulse"
@@ -897,10 +902,11 @@ Dim configName As String
                 
                 configName = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "Unknown")
                 pDest = PlcPulseSetting.LoadConfig(configName)
+                out.log "before compare " & configName
                 If PlcPulseSetting.AssertEqualPulseData(pSetting, pDest) Then
                     lblParameter.Caption = configName
                 Else
-                    lblParameter.Caption = "Unkown"
+                    lblParameter.Caption = "Unknown"
                 End If
             Else
                 lblProcessSetting.Caption = "Unknown"

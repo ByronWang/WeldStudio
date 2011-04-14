@@ -186,17 +186,22 @@ Public Function AssertEqualRegularData(ByRef regularSetting As RegularSettingTyp
     
     DoEvents
     
+    out.log "in AssertEqualRegularData"
+    out.log "compare regularSetting.Value(j - 1) <> dest.Value(j - 1)"
+    
     For j = 1 To 14
+        out.log "i=" & i & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
         If (regularSetting.Value(j - 1) <> dest.Value(j - 1)) Then
             GoTo NotEqual
         End If
     Next
             
     AssertEqualRegularData = True
-
+    out.log "return true"
 Exit Function
 NotEqual:
     AssertEqualRegularData = False
+    out.log "return false"
 End Function
 
 

@@ -277,17 +277,23 @@ Public Function AssertEqualPulseData(ByRef pulseSetting As PulseSettingType, ByR
     Dim i As Integer
     Dim j As Integer
     
+    out.log "<<<<<<<<<<<<<<<<<<<<<     AssertEqualPulseData   <<<<<<<<<<<<<<<<<<<"
+        
+    out.log "start compare pulseSetting.Stages(j).Value(i) <> dest.Stages(j).Value(i)"
         
     For i = 0 To 7
         For j = 0 To 6
-            Debug.Print pulseSetting.Stages(j).Value(i) & "  ===  " & dest.Stages(j).Value(i)
+            out.log "i=" & i & " j=" & j & "  " & pulseSetting.Stages(j).Value(i) & "  >-<  " & dest.Stages(j).Value(i)
             If pulseSetting.Stages(j).Value(i) <> dest.Stages(j).Value(i) Then
                 GoTo NotEqual
             End If
         Next
     Next
     
+    out.log "pulseSetting.General.Value(j - 1) <> dest.General.Value(j - 1) "
+    
     For j = 1 To 4
+        out.log "i=" & i & " j=" & j & "  " & pulseSetting.General.Value(j - 1) & "  >-<  " & pulseSetting.General.Value(j - 1)
         If pulseSetting.General.Value(j - 1) <> dest.General.Value(j - 1) Then
             GoTo NotEqual
         End If
@@ -295,9 +301,10 @@ Public Function AssertEqualPulseData(ByRef pulseSetting As PulseSettingType, ByR
 
 
     AssertEqualPulseData = True
-
+    out.log ">>>>>>>>>>>>>>>>>>       return true           >>>>>>>>>>>>>>>>>>>>"
 Exit Function
 NotEqual:
     AssertEqualPulseData = False
+    out.log ">>>>>>>>>>>>>>>>>>       return false          >>>>>>>>>>>>>>>>>>>>"
 End Function
 

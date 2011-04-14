@@ -588,9 +588,6 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
             
     ReadRegularData = 0
     
-    'TODO TEST
-    regularSetting = PlcRegularSetting.DefalutStagesParameters
-
 Exit Function
 ERROR_HANDLE:
 
