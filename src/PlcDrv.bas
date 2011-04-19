@@ -253,16 +253,16 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
     '    ReverseSpeed As Single
     
     Dim def(8) As String
-    def(0) = "F62:1,7,FLOAT,MODIFY,AB:LOCAL,1,SLC500,1"
-    def(1) = "F64:1,7,FLOAT,MODIFY,AB:LOCAL,1,SLC500,1"
-    def(2) = "F66:1,7,FLOAT,MODIFY,AB:LOCAL,1,SLC500,1"
-    def(3) = "F68:1,7,FLOAT,MODIFY,AB:LOCAL,1,SLC500,1"
-    def(4) = "F70:1,7,FLOAT,MODIFY,AB:LOCAL,1,SLC500,1"
-    def(5) = "F72:1,7,FLOAT,MODIFY,AB:LOCAL,1,SLC500,1"
-    def(6) = "F74:1,7,FLOAT,MODIFY,AB:LOCAL,1,SLC500,1"
-    def(7) = "F76:1,7,FLOAT,MODIFY,AB:LOCAL,1,SLC500,1"
+    def(0) = "F62:1,7,FLOAT,READ,AB:LOCAL,1,SLC500,1"
+    def(1) = "F64:1,7,FLOAT,READ,AB:LOCAL,1,SLC500,1"
+    def(2) = "F66:1,7,FLOAT,READ,AB:LOCAL,1,SLC500,1"
+    def(3) = "F68:1,7,FLOAT,READ,AB:LOCAL,1,SLC500,1"
+    def(4) = "F70:1,7,FLOAT,READ,AB:LOCAL,1,SLC500,1"
+    def(5) = "F72:1,7,FLOAT,READ,AB:LOCAL,1,SLC500,1"
+    def(6) = "F74:1,7,FLOAT,READ,AB:LOCAL,1,SLC500,1"
+    def(7) = "F76:1,7,FLOAT,READ,AB:LOCAL,1,SLC500,1"
     
-    def(8) = "F78:0,5,FLOAT,MODIFY,AB:LOCAL,1,SLC500,1" 'General
+    def(8) = "F78:0,5,FLOAT,READ,AB:LOCAL,1,SLC500,1" 'General
     
     Dim i As Integer
     Dim j As Integer
@@ -305,7 +305,6 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
             Next j
         Else
             For j = 0 To 6
-                bufSingle(j) = pulseSetting.Stages(j).Value(i)
                 pulseSetting.Stages(j).Value(i) = bufSingle(j)
             Next
         End If
@@ -539,7 +538,7 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
     '14  15  Pre-flash distance in millimeter
     
     Dim def As String
-    def = "F60:0,15,FLOAT,MODIFY,AB:LOCAL,1,SLC500,1" 'General
+    def = "F60:0,15,FLOAT,READ,AB:LOCAL,1,SLC500,1" 'General
     
     Dim j As Integer
     Dim handle As Long
