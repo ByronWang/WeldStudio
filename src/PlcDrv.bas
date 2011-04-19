@@ -40,6 +40,7 @@ Public driverOpened As Boolean
 Public beActive As Boolean
 'dim
 Dim UtlServer As IServer
+Public WeldNumberDriver As IWeldNumber
 
 Dim handle_PC_Monitor&, response&
 
@@ -67,6 +68,16 @@ Public Function InitSystem()
     Else
         Set UtlServer = New CPlcDrv
     End If
+    
+    Select Case WeldNumberMode
+        Case EngMode:
+            Set WeldNumberDriver = New EngWeldNumber
+        Case JinanMode:
+            Set WeldNumberDriver = New JinanWeldNumber
+        Case Default:
+            Set WeldNumberDriver = New GeneralWeldNumber
+    End Select
+    
     Dim i As Integer
     
     For i = 0 To 6

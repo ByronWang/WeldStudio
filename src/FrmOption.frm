@@ -48,7 +48,7 @@ Begin VB.Form FrmOption
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   4
+      Tab             =   6
       TabsPerRow      =   10
       TabHeight       =   520
       TabCaption(0)   =   "General"
@@ -81,15 +81,11 @@ Begin VB.Form FrmOption
       Tab(3).ControlCount=   1
       TabCaption(4)   =   "Weld Chart"
       TabPicture(4)   =   "FrmOption.frx":007C
-      Tab(4).ControlEnabled=   -1  'True
-      Tab(4).Control(0)=   "chkFilterData"
-      Tab(4).Control(0).Enabled=   0   'False
-      Tab(4).Control(1)=   "Frame1(2)"
-      Tab(4).Control(1).Enabled=   0   'False
-      Tab(4).Control(2)=   "Frame1(0)"
-      Tab(4).Control(2).Enabled=   0   'False
-      Tab(4).Control(3)=   "Frame1(1)"
-      Tab(4).Control(3).Enabled=   0   'False
+      Tab(4).ControlEnabled=   0   'False
+      Tab(4).Control(0)=   "Frame1(1)"
+      Tab(4).Control(1)=   "Frame1(0)"
+      Tab(4).Control(2)=   "Frame1(2)"
+      Tab(4).Control(3)=   "chkFilterData"
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
@@ -100,21 +96,34 @@ Begin VB.Form FrmOption
       Tab(5).ControlCount=   3
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
-      Tab(6).ControlEnabled=   0   'False
+      Tab(6).ControlEnabled=   -1  'True
       Tab(6).Control(0)=   "Label2"
+      Tab(6).Control(0).Enabled=   0   'False
       Tab(6).Control(1)=   "Frame4"
+      Tab(6).Control(1).Enabled=   0   'False
       Tab(6).Control(2)=   "txtWeldNumber"
+      Tab(6).Control(2).Enabled=   0   'False
       Tab(6).Control(3)=   "chkRecordInterrupts"
+      Tab(6).Control(3).Enabled=   0   'False
       Tab(6).Control(4)=   "cmdReset"
+      Tab(6).Control(4).Enabled=   0   'False
       Tab(6).ControlCount=   5
       Begin VB.Frame Frame7 
          Caption         =   "Unit Info"
-         Height          =   1335
+         Height          =   1575
          Left            =   -74640
          TabIndex        =   189
          Tag             =   "16300"
          Top             =   4800
          Width           =   5775
+         Begin VB.TextBox txtComp 
+            Height          =   375
+            Index           =   11
+            Left            =   1920
+            TabIndex        =   195
+            Top             =   1080
+            Width           =   3375
+         End
          Begin VB.TextBox txtComp 
             Height          =   375
             Index           =   10
@@ -133,13 +142,24 @@ Begin VB.Form FrmOption
          End
          Begin VB.Label lblComp 
             Alignment       =   1  'Right Justify
+            Caption         =   "Operator:"
+            Height          =   375
+            Index           =   11
+            Left            =   240
+            TabIndex        =   194
+            Tag             =   "20"
+            Top             =   1140
+            Width           =   1575
+         End
+         Begin VB.Label lblComp 
+            Alignment       =   1  'Right Justify
             Caption         =   "Location:"
             Height          =   375
             Index           =   10
             Left            =   240
             TabIndex        =   191
             Tag             =   "20"
-            Top             =   720
+            Top             =   780
             Width           =   1575
          End
          Begin VB.Label lblComp 
@@ -150,7 +170,7 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   190
             Tag             =   "10"
-            Top             =   360
+            Top             =   400
             Width           =   1575
          End
       End
@@ -339,7 +359,7 @@ Begin VB.Form FrmOption
       Begin VB.CommandButton cmdReset 
          Caption         =   "Reset"
          Height          =   375
-         Left            =   -67800
+         Left            =   7200
          TabIndex        =   178
          Top             =   720
          Width           =   975
@@ -347,14 +367,15 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkRecordInterrupts 
          Caption         =   "Record Interrupts"
          Height          =   375
-         Left            =   -70680
+         Left            =   4320
          TabIndex        =   5
          Top             =   1560
          Width           =   3015
       End
       Begin VB.TextBox txtWeldNumber 
+         ForeColor       =   &H00000000&
          Height          =   375
-         Left            =   -69600
+         Left            =   5400
          TabIndex        =   4
          Text            =   "A0001"
          Top             =   720
@@ -1297,7 +1318,7 @@ Begin VB.Form FrmOption
          Caption         =   "Distance(mm) and Force(T)"
          Height          =   1575
          Index           =   1
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   111
          Tag             =   "20200"
          Top             =   480
@@ -1367,7 +1388,7 @@ Begin VB.Form FrmOption
          Caption         =   "Current(A) and Voltage(V)"
          Height          =   1575
          Index           =   0
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   107
          Tag             =   "20100"
          Top             =   480
@@ -1437,7 +1458,7 @@ Begin VB.Form FrmOption
          Caption         =   "Time (sec)"
          Height          =   1455
          Index           =   2
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   104
          Tag             =   "20300"
          Top             =   2280
@@ -1886,7 +1907,7 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkFilterData 
          Caption         =   "FilterData"
          Height          =   255
-         Left            =   1800
+         Left            =   -73200
          TabIndex        =   80
          Tag             =   "20010"
          Top             =   6840
@@ -1896,7 +1917,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame4 
          Caption         =   "Start Recording"
          Height          =   1935
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   79
          Tag             =   "22100"
          Top             =   600
@@ -1996,7 +2017,7 @@ Begin VB.Form FrmOption
       Begin VB.Label Label2 
          Caption         =   "Weld Number:"
          Height          =   375
-         Left            =   -70800
+         Left            =   4200
          TabIndex        =   177
          Top             =   840
          Width           =   1335
@@ -2148,6 +2169,7 @@ Private Sub cmdOK_Click()
         Call SaveSetting(App.EXEName, "UserData", "Email", User_Data(8))
         Call SaveSetting(App.EXEName, "UserData", "Unit", User_Data(9))
         Call SaveSetting(App.EXEName, "UserData", "Location", User_Data(10))
+        Call SaveSetting(App.EXEName, "UserData", "Operator", User_Data(11))
 
         Call SaveSetting(App.EXEName, "SensorReadingBar", "Amp", SRB_Data(0))
         Call SaveSetting(App.EXEName, "SensorReadingBar", "Dist", SRB_Data(1))
@@ -2245,17 +2267,15 @@ ERROR_HANDLE:
 End Function
 
 Private Sub cmdReset_Click()
-   Dim weldSerailNumber As Long
-   weldSerailNumber = fromWeldNumberShowModel(txtWeldNumber.Text)
-   
-   Call SaveSetting(App.EXEName, "WELD", "LastSerialNumber", weldSerailNumber)
-    
+    If PLCDrv.WeldNumberDriver.Update(txtWeldNumber.Text) Then
+        txtWeldNumber.ForeColor = &H80000012
+    End If
 End Sub
 
 Private Sub cmdSimulate_Click()
-     CommonDialog1.fileName = txtSimulate.Text
+     CommonDialog1.FileName = txtSimulate.Text
     CommonDialog1.ShowOpen
-    txtSimulate.Text = CommonDialog1.fileName
+    txtSimulate.Text = CommonDialog1.FileName
     
 End Sub
 
@@ -2345,15 +2365,10 @@ PlcRes.LoadResFor Me
             txt(k).Text = Calibration_Data(k)
         Next
     
-
-    
-        
         txtStartRecording(1).Text = ModeParam_StartRecoding(1)
         txtStartRecording(2).Text = ModeParam_StartRecoding(2)
         txtStartRecording(3).Text = ModeParam_StartRecoding(3)
         txtStartRecording(4).Text = ModeParam_StartRecoding(4)
-        
-        
         
         User_Data(0) = GetSetting(App.EXEName, "UserData", "CompanyName", "")
         User_Data(1) = GetSetting(App.EXEName, "UserData", "Address", "")
@@ -2366,7 +2381,8 @@ PlcRes.LoadResFor Me
         User_Data(8) = GetSetting(App.EXEName, "UserData", "Email", "")
         User_Data(9) = GetSetting(App.EXEName, "UserData", "Unit", "")
         User_Data(10) = GetSetting(App.EXEName, "UserData", "Location", "")
-        
+        User_Data(11) = GetSetting(App.EXEName, "UserData", "Operator", "")
+                
         SRB_Data(0) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Amp", 1000))
         SRB_Data(1) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Dist", 100))
         SRB_Data(2) = CInt(GetSetting(App.EXEName, "SensorReadingBar", "Volt", 500))
@@ -2405,7 +2421,7 @@ PlcRes.LoadResFor Me
         
 
     
-        For i = 0 To 10
+        For i = 0 To 11
             txtComp(i).Text = User_Data(i)
         Next
     
@@ -2422,9 +2438,14 @@ PlcRes.LoadResFor Me
             chkEnableAnalysis(i).Value = WeldAnalysisEnable_Data(i)
         Next
         
-        Dim weldSerailNumber As Long
-        weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
-        txtWeldNumber.Text = out.toWeldNumberShowModel(weldSerailNumber)
+        'Dim weldSerailNumber As Long
+        'weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
+        txtWeldNumber.Text = WeldNumberDriver.FileName '  out.toWeldNumberShowModel(weldSerailNumber)
+        
+        If PlcDeclare.WeldNumberMode = PlcDeclare.EngMode Then
+            lblComp(11).Visible = False
+            txtComp(11).Visible = False
+        End If
         
     End If
     
@@ -2503,9 +2524,14 @@ Private Sub txtWC_Change(index As Integer)
     Else
         txtWC(index).Text = WeldChart_Data(index)
     End If
-
 End Sub
 
 Private Sub chkEnableAnalysis_Click(index As Integer)
     WeldAnalysisEnable_Data(index) = chkEnableAnalysis(index).Value
+End Sub
+
+Private Sub txtWeldNumber_Change()
+    If PLCDrv.WeldNumberDriver.FileName <> txtWeldNumber.Text Then
+        txtWeldNumber.ForeColor = &H80FF&
+    End If
 End Sub

@@ -136,7 +136,7 @@ Begin VB.Form FrmGraph
       Left            =   240
       TabIndex        =   15
       Top             =   2160
-      Width           =   3735
+      Width           =   5415
    End
    Begin VB.Label lblParameter 
       Alignment       =   2  'Center
@@ -417,7 +417,7 @@ Dim Mode_StartRecording As Integer
 Dim ModeParam_StartRecoding(5) As Single
 
 Dim ProcessSetting As Integer
-Dim weldSerailNumber As Long
+'Dim weldSerailNumber As Long
 'Dim WeldFile As String
 
 Const ANALYSIS_DURATION As Integer = 6000
@@ -443,18 +443,26 @@ Function SwitchToRecoding(status As ShowModeType)
             timerDisplay.Tag = ""
             
             lblTop.Caption = "Ready"
-            weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
-            lblBigCenter.Caption = toWeldNumberShowModel(weldSerailNumber)
+            'TODO weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
+            lblBigCenter.Caption = WeldNumberDriver.Display  ' toWeldNumberShowModel(weldSerailNumber)
             lblBigCenter.ForeColor = &H8000000E
-            lblBigCenter.FontSize = 100
+            If PlcDeclare.WeldNumberMode = PlcDeclare.GeneralMode Then
+                lblBigCenter.FontSize = 100
+                lblBigCenter.Top = 720
+            Else
+                lblBigCenter.FontSize = 60
+                lblBigCenter.Top = 1620
+            End If
             'lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting", "DEFAULT")
         Case RECORDING_MODE
-            weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
-            lblTop.Caption = toWeldNumberShowModel(weldSerailNumber)
+            'weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
+            lblTop.Caption = WeldNumberDriver.Display ' toWeldNumberShowModel(weldSerailNumber)
             lblBigCenter.FontSize = 140
+            lblBigCenter.Top = 720
         Case ANALYSIS_MODE
             timerMonitor.Enabled = False
             timerDisplay.Tag = "ANALYSIS"
+            lblBigCenter.Top = 720
     End Select
     showMode = status
 End Function
@@ -515,7 +523,7 @@ PlcRes.LoadResFor Me
     Dim IsSimulate As Integer
     IsSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
     If IsSimulate = 1 Then
-        timerMonitor.Interval = 65
+        timerMonitor.Interval = 1 ' 65
     Else
         timerMonitor.Interval = 1
     End If
@@ -536,7 +544,7 @@ PlcRes.LoadResFor Me
     
     ProcessSetting = -1
 
-    weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
+    'weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
     
     SwitchToRecoding STANDBY_MODE
     
@@ -823,18 +831,15 @@ Function SaveData()
 Dim fh1 As FileHeader1
 Dim fh2 As FileHeader2
 Dim WeldFile As String
-    WeldFile = toWeldNumberShowModel(weldSerailNumber)
-    
-    
+    WeldFile = WeldNumberDriver.FileName    'toWeldNumberShowModel(weldSerailNumber)
+        
     fh1.CompanyName = GetSetting(App.EXEName, "UserData", "CompanyName", "")
-    fh1.UnitName = GetSetting(App.EXEName, "UserData", "Unit", "")
+    fh1.unitname = GetSetting(App.EXEName, "UserData", "Unit", "")
     fh1.Location = GetSetting(App.EXEName, "UserData", "Location", "")
-        
-        
-    
+
     fh2.Date = Date
     fh2.Time = Time
-    fh2.fileName = WeldFile
+    fh2.FileName = WeldFile
     fh2.BaseRed = lblParameter.Caption
         
     If Not fso.FolderExists(path & "\" & Format(Date, "YYYY-MM-DD")) Then
@@ -846,22 +851,14 @@ Dim WeldFile As String
     
     Dim dr As DailyReport
     
-    dr.Serial = Left(WeldFile, 1)
-    dr.Sequence = weldSerailNumber - CInt(weldSerailNumber / 10000) * 10000
-    
-    
+    dr.Serial = WeldNumberDriver.LeaderChar ' Left(WeldFile, 1)
+    dr.Sequence = WeldNumberDriver.Sequence 'weldSerailNumber - CInt(weldSerailNumber / 10000) * 10000
+        
+        
     PlcDailyReport.SaveData path & "\" & Format(Date, "YYYY-MM-DD") & "\" & Format(Date, "YYYY-MM-DD") & ".DLY", dr
 
-    Dim wn As Integer
-    wn = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
+    WeldNumberDriver.MoveNext
     
-    If wn = weldSerailNumber Then
-        weldSerailNumber = weldSerailNumber + 1
-        Call SaveSetting(App.EXEName, "WELD", "LastSerialNumber", weldSerailNumber)
-       
-    End If
-    
-
 End Function
 
 Private Sub TimerSetting_Timer()

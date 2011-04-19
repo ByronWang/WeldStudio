@@ -1,6 +1,12 @@
 Attribute VB_Name = "PlcDeclare"
 Option Explicit
+
+Public Const GeneralMode As Integer = 1
+Public Const JinanMode As Integer = 2
+Public Const EngMode As Integer = 3
+
 Public Const ReadOnly As Boolean = False
+Public Const WeldNumberMode As Integer = JinanMode 'GeneralMode
 
 Public Const LOAD_ALL_PARAMETER  As Integer = 0
 Public Const LOAD_PULSE_SETTING As Integer = 1
@@ -80,7 +86,7 @@ Type FileHeader1
      
      
      X900 As String * &HA
-     UnitName As String * &H1A
+     unitname As String * &H1A
      X922 As String * &HC
      
      X930 As String * &HD0
@@ -97,7 +103,7 @@ Type FileHeader1
 End Type
 
 Type FileHeader2
-     fileName As String * &H5
+     FileName As String * &H5
      Xc1a As Byte
      Date As String * &HB
      Xc25 As String * &HB
