@@ -150,8 +150,8 @@ DefalutStagesParameters = DefalutParam
 End Function
 
 Public Function LoadAll() As PulseFileItemType()
-    Dim fileName As String
-    fileName = App.path & "\" & SETTING_PATH & "PulseSetting.config"
+    Dim FileName As String
+    FileName = App.path & "\" & SETTING_PATH & "PulseSetting.config"
     
     Dim pFileHeader As FileHeaderType
     Dim pFileItem As PulseFileItemType
@@ -161,7 +161,7 @@ Public Function LoadAll() As PulseFileItemType()
     Dim pos As Integer
     pos = 0
     
-    Open fileName For Binary As #1
+    Open FileName For Binary As #1
     Get 1, 1, pFileHeader
     
     ReDim pFileItemList(pFileHeader.count)
@@ -180,8 +180,8 @@ End Function
 
 
 Public Function DeleteConfig(ByVal i As Integer) As Boolean
-    Dim fileName As String
-    fileName = App.path & "\" & SETTING_PATH & "PulseSetting.config"
+    Dim FileName As String
+    FileName = App.path & "\" & SETTING_PATH & "PulseSetting.config"
     
     Dim pFileItemList() As PulseFileItemType
     pFileItemList = LoadAll()
@@ -197,7 +197,7 @@ Public Function DeleteConfig(ByVal i As Integer) As Boolean
     pos = pos + LenB(pFileHeader)
     pos = pos + (i) * LenB(pFileItem)
         
-    Open fileName For Binary As #1
+    Open FileName For Binary As #1
         Put 1, 1, pFileHeader
             
         For i = i To pFileHeader.count - 1
@@ -228,8 +228,8 @@ End Function
 
 
 Public Function SaveConfig(configName As String, pulseSetting As PulseSettingType)
-    Dim fileName As String
-    fileName = App.path & "\" & SETTING_PATH & "PulseSetting.config"
+    Dim FileName As String
+    FileName = App.path & "\" & SETTING_PATH & "PulseSetting.config"
     
     Dim pFileItemList() As PulseFileItemType
     pFileItemList = LoadAll()
@@ -265,7 +265,7 @@ Public Function SaveConfig(configName As String, pulseSetting As PulseSettingTyp
     pFileItem.name = configName
     pFileItem.pulseSetting = pulseSetting
     
-    Open fileName For Binary As #1
+    Open FileName For Binary As #1
         Put 1, 1, pFileHeader
         Put 1, pos + 1, pFileItem
     Close 1
@@ -276,6 +276,8 @@ Public Function AssertEqualPulseData(ByRef pulseSetting As PulseSettingType, ByR
     
     Dim i As Integer
     Dim j As Integer
+        
+    Dim hasNotEqual As Boolean
     
     out.log "<<<<<<<<<<<<<<<<<<<<<     AssertEqualPulseData   <<<<<<<<<<<<<<<<<<<"
         
@@ -283,9 +285,11 @@ Public Function AssertEqualPulseData(ByRef pulseSetting As PulseSettingType, ByR
         
     For i = 0 To 7
         For j = 0 To 6
-            out.log "i=" & i & " j=" & j & "  " & pulseSetting.Stages(j).Value(i) & "  >-<  " & dest.Stages(j).Value(i)
             If Not out.eq(pulseSetting.Stages(j).Value(i), dest.Stages(j).Value(i)) Then
-                GoTo NotEqual
+                out.log "<>  i=" & i & " j=" & j & "  " & pulseSetting.Stages(j).Value(i) & "  >-<  " & dest.Stages(j).Value(i)
+                hasNotEqual = True
+            Else
+                out.log "==  i=" & i & " j=" & j & "  " & pulseSetting.Stages(j).Value(i) & "  >-<  " & dest.Stages(j).Value(i)
             End If
         Next
     Next
@@ -293,19 +297,21 @@ Public Function AssertEqualPulseData(ByRef pulseSetting As PulseSettingType, ByR
     out.log "pulseSetting.General.Value(j - 1) <> dest.General.Value(j - 1) "
     
     For j = 1 To 4
-        out.log " j=" & j & "  " & pulseSetting.General.Value(j - 1) & "  >-<  " & dest.General.Value(j - 1)
         If Not out.eq(pulseSetting.General.Value(j - 1), dest.General.Value(j - 1)) Then
-            GoTo NotEqual
+            out.log "<> j=" & j & "  " & pulseSetting.General.Value(j - 1) & "  >-<  " & dest.General.Value(j - 1)
+            hasNotEqual = True
+        Else
+            out.log "== j=" & j & "  " & pulseSetting.General.Value(j - 1) & "  >-<  " & dest.General.Value(j - 1)
         End If
     Next
 
 
-    AssertEqualPulseData = True
-    out.log ">>>>>>>>>>>>>>>>>>       return true           >>>>>>>>>>>>>>>>>>>>"
-Exit Function
-NotEqual:
-    AssertEqualPulseData = False
-    out.log ">>>>>>>>>>>>>>>>>>       return false          >>>>>>>>>>>>>>>>>>>>"
+    AssertEqualPulseData = Not hasNotEqual
+    out.log ">>>>>>>>>>>>>>>>>>       return " & AssertEqualPulseData & "           >>>>>>>>>>>>>>>>>>>>"
+'Exit Function
+'NotEqual:
+'    AssertEqualPulseData = False
+'    out.log ">>>>>>>>>>>>>>>>>>       return false          >>>>>>>>>>>>>>>>>>>>"
 End Function
 
 

@@ -11,6 +11,22 @@ Public Sub log(msg As String)
 End Sub
 
 
+Public Sub logSingleArray(msg As String, a() As Single)
+    out.log "   " & msg & " -> "
+    Dim i As Integer
+    For i = LBound(a) To UBound(a)
+        out.log "         " & i & " : " & a(i)
+    Next i
+End Sub
+
+Public Sub logIntegerArray(msg As String, a() As Integer)
+    out.log "   " & msg & " -> "
+    Dim i As Integer
+    For i = LBound(a) To UBound(a)
+        out.log "         " & i & " : " & a(i)
+    Next i
+
+End Sub
 
 Public Function eq(x As Single, y As Single) As Boolean
     If x = y Then

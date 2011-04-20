@@ -1,5 +1,5 @@
 Attribute VB_Name = "PlcRegularSetting"
-Public fileName As String
+Public FileName As String
 
 
 Type RegularSettingType
@@ -55,8 +55,8 @@ DefalutStagesParameters = DefalutParam
 End Function
 
 Public Function LoadAll() As RegularFileItemType()
-    Dim fileName As String
-    fileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    Dim FileName As String
+    FileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
     
     
     Dim pFileHeader As FileHeaderType
@@ -67,7 +67,7 @@ Public Function LoadAll() As RegularFileItemType()
     Dim pos As Integer
     pos = 0
     
-    Open fileName For Binary As #1
+    Open FileName For Binary As #1
     Get 1, 1, pFileHeader
     
     ReDim pFileItemList(pFileHeader.count)
@@ -87,8 +87,8 @@ End Function
 
 
 Public Function LoadConfig(configName As String) As RegularSettingType
-    Dim fileName As String
-    fileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    Dim FileName As String
+    FileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
     
     Dim pFileItemList() As RegularFileItemType
     pFileItemList = LoadAll()
@@ -106,8 +106,8 @@ End Function
 
 
 Public Function SaveConfig(configName As String, regularSetting As RegularSettingType)
-    Dim fileName As String
-    fileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    Dim FileName As String
+    FileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
     
     Dim pFileItemList() As RegularFileItemType
     pFileItemList = LoadAll()
@@ -143,15 +143,15 @@ Public Function SaveConfig(configName As String, regularSetting As RegularSettin
     pFileItem.name = configName
     pFileItem.regularSetting = regularSetting
     
-    Open fileName For Binary As #1
+    Open FileName For Binary As #1
         Put 1, 1, pFileHeader
         Put 1, pos + 1, pFileItem
     Close 1
 End Function
 
 Public Function DeleteConfig(ByVal i As Integer) As Boolean
-    Dim fileName As String
-    fileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    Dim FileName As String
+    FileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
     
     Dim pFileItemList() As RegularFileItemType
     pFileItemList = LoadAll()
@@ -167,7 +167,7 @@ Public Function DeleteConfig(ByVal i As Integer) As Boolean
     pos = pos + LenB(pFileHeader)
     pos = pos + (i) * LenB(pFileItem)
         
-    Open fileName For Binary As #1
+    Open FileName For Binary As #1
         Put 1, 1, pFileHeader
             
         For i = i To pFileHeader.count - 1
@@ -184,24 +184,33 @@ Public Function AssertEqualRegularData(ByRef regularSetting As RegularSettingTyp
  
     Dim j As Integer
     
+    Dim hasNotEqual As Boolean
+    
     DoEvents
+    
+    out.log "<<<<<<<<<<<<<<<<<<<<<     AssertEqualRegularData   <<<<<<<<<<<<<<<<<<<"
     
     out.log "in AssertEqualRegularData"
     out.log "compare regularSetting.Value(j - 1) <> dest.Value(j - 1)"
+    hasNotEqual = False
     
     For j = 1 To 14
-        out.log "i=" & i & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
+        
         If Not out.eq(regularSetting.Value(j - 1), dest.Value(j - 1)) Then
-            GoTo NotEqual
+            out.log "<>  i=" & i & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
+            hasNotEqual = True
+        Else
+            out.log "==  i=" & i & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
         End If
     Next
             
-    AssertEqualRegularData = True
-    out.log "return true"
-Exit Function
-NotEqual:
-    AssertEqualRegularData = False
-    out.log "return false"
+    AssertEqualRegularData = Not hasNotEqual
+    out.log ">>>>>>>>>>>>>>>>>>       return " & AssertEqualRegularData & "           >>>>>>>>>>>>>>>>>>>>"
+    
+'Exit Function
+'NotEqual:
+'    AssertEqualRegularData = False
+'    out.log "return false"
 End Function
 
 

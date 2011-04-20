@@ -24,8 +24,8 @@ Declare Sub DTL_ERROR_S Lib "DTL32.DLL" (ByVal status&, ByVal errstr$, ByVal Str
 
 
 
-Global buffer(50) As Integer
-Global bufSingle(50) As Single
+Global buffer(20) As Integer
+Global bufSingle(20) As Single
 
 Public Const DATA_PATH As String = "Data"
 Public Const SETTING_PATH As String = "Set"
@@ -302,6 +302,8 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
             GoTo ERROR_HANDLE
         End If
         
+        Call out.logSingleArray("ReadPulseData Pulse [" & i & "]", bufSingle)
+        
         DoEvents
     
         status = UtlServer.Undef(handle_Pulse)
@@ -340,11 +342,12 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
     
     DoEvents
     
-    status = UtlServer.WriteSingle(handle_Pulse, bufSingle, IO_STATUS, 1000)
+    status = UtlServer.ReadSingle(handle_Pulse, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DO WRITE PULSE SETTING GENERAL"
         GoTo ERROR_HANDLE
     End If
+    Call out.logSingleArray("ReadPulseData . General ", bufSingle)
     
     DoEvents
     
@@ -429,7 +432,9 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
         End If
         
         DoEvents
-    
+        
+        Call out.logSingleArray("WritePulseData Pulse [" & i & "]", bufSingle)
+        
         status = UtlServer.WriteSingle(handle_Pulse, bufSingle, IO_STATUS, 1000)
         If (status <> DTL_SUCCESS) Then
             RUN_PHASE = "DO WRITE PULSE SETTING " & i
@@ -464,6 +469,8 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
     End If
     
     DoEvents
+    
+    Call out.logSingleArray("WritePulseData . General ", bufSingle)
     
     status = UtlServer.WriteSingle(handle_Pulse, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
@@ -568,11 +575,13 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
     
     DoEvents
     
-    status = UtlServer.WriteSingle(handle_Regular, bufSingle, IO_STATUS, 1000)
+    status = UtlServer.ReadSingle(handle_Regular, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DO WRITE REGULAR SETTING GENERAL"
         GoTo ERROR_HANDLE
     End If
+    
+    Call out.logSingleArray("ReadRegularData ", bufSingle)
     
     DoEvents
     
@@ -589,11 +598,11 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
         regularSetting.Value(j - 1) = bufSingle(j)
     Next
     
-    j = 4
-    regularSetting.Value(j - 1) = 100 * bufSingle(j) / InitialVoltage 'Voltage
     j = 5
     regularSetting.Value(j - 1) = 100 * bufSingle(j) / InitialVoltage 'Voltage
     j = 6
+    regularSetting.Value(j - 1) = 100 * bufSingle(j) / InitialVoltage 'Voltage
+    j = 7
     regularSetting.Value(j - 1) = 100 * bufSingle(j) / InitialVoltage 'Voltage
             
     ReadRegularData = 0
@@ -641,11 +650,11 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
         bufSingle(j) = regularSetting.Value(j - 1)
     Next
     
-    j = 4
-    bufSingle(j) = CInt(regularSetting.Value(j - 1) * InitialVoltage / 100) 'Voltage
     j = 5
     bufSingle(j) = CInt(regularSetting.Value(j - 1) * InitialVoltage / 100) 'Voltage
     j = 6
+    bufSingle(j) = CInt(regularSetting.Value(j - 1) * InitialVoltage / 100) 'Voltage
+    j = 7
     bufSingle(j) = CInt(regularSetting.Value(j - 1) * InitialVoltage / 100) 'Voltage
     
     
@@ -660,6 +669,7 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
     
     DoEvents
     
+    Call out.logSingleArray("WriteRegularData ", bufSingle)
     status = UtlServer.WriteSingle(handle_Regular, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DO WRITE REGULAR SETTING GENERAL"

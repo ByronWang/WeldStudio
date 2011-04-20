@@ -151,6 +151,7 @@ Private Function LoadRegularSetting(name As String) As Long
         Exit Function
     End If
     DoEvents
+    out.log " PLCDrv.WriteRegularData " & name
     status = PLCDrv.WriteRegularData(regularSetting)
     If status <> 0 Then
         LoadRegularSetting = status
@@ -182,6 +183,7 @@ Private Function LoadPulseSetting(name As String) As Long
         Exit Function
     End If
     DoEvents
+    out.log " PLCDrv.WritePulseData " & name
     status = PLCDrv.WritePulseData(pulseSetting)
     If status <> 0 Then
         LoadPulseSetting = status

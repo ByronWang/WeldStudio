@@ -164,17 +164,7 @@ Public Function IServer_ReadInt(ByVal NameId&, ByRef Variable() As Integer, Iost
 End Function
 
 Public Function IServer_ReadSingle(ByVal NameId&, ByRef Variable() As Single, Iostat&, ByVal timeout&) As Long
-    
-    IServer_ReadSingle = PlcDeclare.DTL_SUCCESS
-End Function
-
-
-Public Function IServer_WriteInt(ByVal NameId&, ByRef Variable() As Integer, Iostat&, ByVal timeout&) As Long
-    IServer_WriteInt = PlcDeclare.DTL_SUCCESS
-End Function
-
-Public Function IServer_WriteSingle(ByVal NameId&, Variable() As Single, Iostat&, ByVal timeout&) As Long
-    Dim def As String
+        Dim def As String
     
     def = defines(NameId&)
     
@@ -201,6 +191,15 @@ Public Function IServer_WriteSingle(ByVal NameId&, Variable() As Single, Iostat&
                 
     End Select
     
+    IServer_ReadSingle = PlcDeclare.DTL_SUCCESS
+End Function
+
+
+Public Function IServer_WriteInt(ByVal NameId&, ByRef Variable() As Integer, Iostat&, ByVal timeout&) As Long
+    IServer_WriteInt = PlcDeclare.DTL_SUCCESS
+End Function
+
+Public Function IServer_WriteSingle(ByVal NameId&, Variable() As Single, Iostat&, ByVal timeout&) As Long
     IServer_WriteSingle = PlcDeclare.DTL_SUCCESS
 End Function
 
