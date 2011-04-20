@@ -284,7 +284,7 @@ Public Function AssertEqualPulseData(ByRef pulseSetting As PulseSettingType, ByR
     For i = 0 To 7
         For j = 0 To 6
             out.log "i=" & i & " j=" & j & "  " & pulseSetting.Stages(j).Value(i) & "  >-<  " & dest.Stages(j).Value(i)
-            If Abs(pulseSetting.Stages(j).Value(i) - dest.Stages(j).Value(i)) > 0.0999 Then
+            If Not out.eq(pulseSetting.Stages(j).Value(i), dest.Stages(j).Value(i)) Then
                 GoTo NotEqual
             End If
         Next
@@ -293,8 +293,8 @@ Public Function AssertEqualPulseData(ByRef pulseSetting As PulseSettingType, ByR
     out.log "pulseSetting.General.Value(j - 1) <> dest.General.Value(j - 1) "
     
     For j = 1 To 4
-        out.log "i=" & i & " j=" & j & "  " & pulseSetting.General.Value(j - 1) & "  >-<  " & pulseSetting.General.Value(j - 1)
-        If Abs(pulseSetting.General.Value(j - 1) - dest.General.Value(j - 1)) > 0.0999 Then
+        out.log " j=" & j & "  " & pulseSetting.General.Value(j - 1) & "  >-<  " & dest.General.Value(j - 1)
+        If Not out.eq(pulseSetting.General.Value(j - 1), dest.General.Value(j - 1)) Then
             GoTo NotEqual
         End If
     Next
@@ -307,4 +307,6 @@ NotEqual:
     AssertEqualPulseData = False
     out.log ">>>>>>>>>>>>>>>>>>       return false          >>>>>>>>>>>>>>>>>>>>"
 End Function
+
+
 

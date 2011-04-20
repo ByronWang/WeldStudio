@@ -6,7 +6,7 @@ Public Const JinanMode As Integer = 2
 Public Const EngMode As Integer = 3
 
 Public Const ReadOnly As Boolean = False
-Public Const WeldNumberMode As Integer = JinanMode 'GeneralMode
+Public Const WeldNumberMode As Integer = EngMode 'GeneralMode
 
 Public Const LOAD_ALL_PARAMETER  As Integer = 0
 Public Const LOAD_PULSE_SETTING As Integer = 1
@@ -103,7 +103,7 @@ Type FileHeader1
 End Type
 
 Type FileHeader2
-     FileName As String * &H5
+     fileName As String * &H5
      Xc1a As Byte
      Date As String * &HB
      Xc25 As String * &HB
@@ -272,3 +272,5 @@ Global Const OK As Integer = 1
 Global Const NO As Integer = 2
 Global Const INTERRUPT As Integer = 3
 Global Const NotUsed As Integer = 4
+
+

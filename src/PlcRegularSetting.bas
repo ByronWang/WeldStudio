@@ -191,7 +191,7 @@ Public Function AssertEqualRegularData(ByRef regularSetting As RegularSettingTyp
     
     For j = 1 To 14
         out.log "i=" & i & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
-        If Abs(regularSetting.Value(j - 1) - dest.Value(j - 1)) > 0.0999 Then
+        If Not out.eq(regularSetting.Value(j - 1), dest.Value(j - 1)) Then
             GoTo NotEqual
         End If
     Next

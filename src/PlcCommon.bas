@@ -10,3 +10,15 @@ Public Sub log(msg As String)
 
 End Sub
 
+
+
+Public Function eq(x As Single, y As Single) As Boolean
+    If x = y Then
+        eq = True
+    ElseIf Abs((x - y) / ((x + y) / 2)) < 1 / 50 And Abs(x - y) < 1 Then
+        eq = True
+    Else
+        eq = False
+    End If
+End Function
+

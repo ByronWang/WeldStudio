@@ -70,12 +70,12 @@ Public Function InitSystem()
     End If
     
     Select Case WeldNumberMode
+        Case GeneralMode:
+            Set WeldNumberDriver = New GeneralWeldNumber
         Case EngMode:
             Set WeldNumberDriver = New EngWeldNumber
         Case JinanMode:
             Set WeldNumberDriver = New JinanWeldNumber
-        Case Default:
-            Set WeldNumberDriver = New GeneralWeldNumber
     End Select
     
     Dim i As Integer
