@@ -130,7 +130,7 @@ End Function
 
 Private Function LoadRegularSetting(name As String) As Long
     If name = "" Then
-        name = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "")
+        name = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "DEFAULT")
     End If
     
     If name = "" Then
@@ -141,7 +141,7 @@ Private Function LoadRegularSetting(name As String) As Long
         
     Dim regularSetting As RegularSettingType
     Dim path As String
-    path = App.path & "\" & SETTING_PATH & "PulseSetting.config"
+    path = App.path & "\" & SETTING_PATH & "PulseSetting.cfg"
     
     regularSetting = PlcRegularSetting.LoadConfig(name)
     
@@ -165,7 +165,7 @@ End Function
 
 Private Function LoadPulseSetting(name As String) As Long
     If name = "" Then
-        name = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "")
+        name = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "DEFAULT")
     End If
     
     If name = "" Then

@@ -887,13 +887,16 @@ Option Explicit
 
 Dim fso As New FileSystemObject
 Dim lastConfigName As String
-Dim regularSetting As RegularSettingType
+Dim plcSetting As RegularSettingType
 Dim InitialVoltage As Long
 
 
 Const WARNING_COLOR As Long = &H8080FF
 Const ERROR_COLOR As Long = &HFF&
 Const FINE_COLOR As Long = &HFFFFFF
+
+Const SETTING_FILE_NAME As String = "RegularSetting.cfg"
+Const REG_NAME As String = "LastSetting_Regular"
 
 Dim loading As Boolean
 
@@ -906,34 +909,16 @@ Private Sub cboFileName_Change()
     If lastConfigName <> cboFileName.Text Then
         cmdSave.Enabled = True
         cmdDelete.Enabled = False
+        cmdLoad.Enabled = False
     End If
 End Sub
 
 Private Sub cboFileName_Click()
     If cboFileName.Text <> "" And cboFileName.Text <> lastConfigName Then
         lastConfigName = cboFileName.Text
+        
         Call LoadConfig(lastConfigName)
     End If
-End Sub
-
-Private Sub cboStage_Change()
-
-    Dim i As Integer
-    For i = 0 To 14 - 1
-        txtValue(i).Text = regularSetting.Value(i)
-    Next
-    
-    i = 4
-    lblSign(i).Caption = CStr(regularSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
-    i = 5
-    lblSign(i).Caption = CStr(regularSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
-    i = 6
-    lblSign(i).Caption = CStr(regularSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
-    
-End Sub
-
-Private Sub cboStage_Click()
-    cboStage_Change
 End Sub
 
 Private Sub cmdDelete_Click()
@@ -948,7 +933,7 @@ Private Sub cmdDelete_Click()
     End If
     
     Dim loadedName As String
-    loadedName = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "")
+    loadedName = GetSetting(App.EXEName, "Parameter", REG_NAME, "DEFAULT")
     If loadedName = Me.cboFileName.Text Then
         MsgBox "Can't delete loaded setting ! " & vbCrLf & "Please load another config first!"
         Exit Sub
@@ -964,11 +949,11 @@ Private Sub cmdDelete_Click()
     If index < Me.cboFileName.ListCount Then
         Me.cboFileName.ListIndex = index
     End If
-       
 End Sub
 
 Private Sub cmdLoad_Click()
     frmProgress.LoadMode = PlcDeclare.LOAD_REGULAR_SETTING
+    
     frmProgress.ParamName = cboFileName.Text
     frmProgress.Show vbModal, Me
     If frmProgress.status <> 0 Then
@@ -981,14 +966,27 @@ Exit Sub
 ERROR_HANDLE:
 End Sub
 
+Private Function checkInputedDataValidate() As Boolean
+    Dim i As Integer
+    Dim v As Single
+    
+    checkInputedDataValidate = True
+    
+    For i = 0 To txtValue.count - 1
+        If Not IsNumeric(txtValue(i).Text) Then
+            checkInputedDataValidate = False
+            Exit Function
+        End If
+    Next i
+End Function
+
 Private Sub cmdSave_Click()
     If Not checkInputedDataValidate Then
         Exit Sub
     End If
     
-
     If cboFileName.Text <> "" Then
-        Call PlcRegularSetting.SaveConfig(cboFileName.Text, regularSetting)
+        Call PlcRegularSetting.SaveConfig(cboFileName.Text, plcSetting)
     End If
     Dim i As Integer
     
@@ -1006,36 +1004,50 @@ Private Sub cmdSave_Click()
         cboFileName.AddItem (cboFileName.Text)
     End If
     
-    cmdSave.Enabled = False
-    cmdDelete.Enabled = True
     cmdLoad.Enabled = True
+    cmdDelete.Enabled = True
+    cmdSave.Enabled = False
+    
+    lastConfigName = cboFileName.Text
 End Sub
 
 Private Function LoadConfig(name As String)
 loading = True
-    regularSetting = PlcRegularSetting.LoadConfig(name)
-        
-    cboStage_Change
+    plcSetting = PlcRegularSetting.LoadConfig(name)
+    
+    Call ResetValue
     
     cmdLoad.Enabled = True
 loading = False
 End Function
 
+Private Sub ResetValue()
+    Dim i As Integer
+    For i = 0 To 14 - 1
+        txtValue(i).Text = plcSetting.Value(i)
+    Next
+    
+    i = 4
+    lblSign(i).Caption = CStr(plcSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
+    i = 5
+    lblSign(i).Caption = CStr(plcSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
+    i = 6
+    lblSign(i).Caption = CStr(plcSetting.Value(i) * InitialVoltage / 100) & "/" & InitialVoltage
+End Sub
 
 Private Sub Form_Load()
 ' Resource
 PlcRes.LoadResFor Me
 
-
-Dim pFileItemList() As PulseFileItemType
+    Dim pFileItemList() As PulseFileItemType
 
     InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
-        
-    Dim path As String 'TODO
-    path = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    
+    Dim path As String
+    path = App.path & "\" & SETTING_PATH & SETTING_FILE_NAME
     If Not fso.FileExists(path) Then
-        regularSetting = PlcRegularSetting.DefalutStagesParameters
-        PlcRegularSetting.SaveConfig "DEFAULT", regularSetting
+        plcSetting = PlcRegularSetting.DefalutStagesParameters
+        PlcRegularSetting.SaveConfig "DEFAULT", plcSetting
     End If
 
     pFileItemList = PlcRegularSetting.LoadAll()
@@ -1044,12 +1056,12 @@ Dim pFileItemList() As PulseFileItemType
     For i = 1 To cboFileName.ListCount
         cboFileName.RemoveItem (cboFileName.ListCount - 1)
     Next
-        
+    
     For i = LBound(pFileItemList) To UBound(pFileItemList) - 1
         cboFileName.AddItem (Trim(pFileItemList(i).name))
     Next
     
-    lastConfigName = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "DEFAULT")
+    lastConfigName = GetSetting(App.EXEName, "Parameter", REG_NAME, "DEFAULT")
     Call LoadConfig(lastConfigName)
     
     For i = 0 To cboFileName.ListCount - 1
@@ -1063,7 +1075,6 @@ Dim pFileItemList() As PulseFileItemType
     cmdSave.Enabled = False
     cmdDelete.Enabled = True
     cmdLoad.Enabled = False
-        
 End Sub
 
 Private Sub txtValue_Change(index As Integer)
@@ -1073,9 +1084,10 @@ Private Sub txtValue_Change(index As Integer)
     
     min = CSng(lblMin(index).Caption)
     max = CSng(lblMax(index).Caption)
-    If IsNumeric(txtValue(index).Text) Then
     
+    If IsNumeric(txtValue(index).Text) Then
         v = CSng(txtValue(index).Text)
+        
         If 4 <= index And index <= 6 Then
             Dim i As Integer
             i = index
@@ -1088,7 +1100,7 @@ Private Sub txtValue_Change(index As Integer)
             txtValue(index).BackColor = WARNING_COLOR
         End If
         
-        regularSetting.Value(index) = CSng(txtValue(index).Text)
+        plcSetting.Value(index) = CSng(txtValue(index).Text)
         
         If Not loading Then
             cmdSave.Enabled = True
@@ -1098,31 +1110,7 @@ Private Sub txtValue_Change(index As Integer)
     Else
         txtValue(index).BackColor = ERROR_COLOR
     End If
-            
 End Sub
-Private Function checkInputedDataValidate() As Boolean
-    Dim min As Single
-    Dim max As Single
-    Dim v As Single
-    
-    
-Dim i As Integer
-    For i = 0 To txtValue.count - 1
-        min = CSng(lblMin(i).Caption)
-        max = CSng(lblMax(i).Caption)
-        If IsNumeric(txtValue(i).Text) Then
-            v = CSng(txtValue(i).Text)
-'            If Not (min <= v And v <= max) Then
-'                checkInputedDataValidate = False
-'                Exit Function
-'            End If
-        Else
-            checkInputedDataValidate = False
-            Exit Function
-        End If
-    Next i
-    checkInputedDataValidate = True
-End Function
 
 Private Sub txtValue_GotFocus(index As Integer)
     txtValue(index).SelLength = Len(txtValue(index).Text)

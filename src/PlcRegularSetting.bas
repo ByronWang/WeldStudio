@@ -1,19 +1,5 @@
 Attribute VB_Name = "PlcRegularSetting"
-Public FileName As String
-
-
-Type RegularSettingType
-    Value(15 - 1) As Single
-End Type
-
-Type RegularFileItemType
-    name As String * 20
-    regularSetting As RegularSettingType
-End Type
-
-Public Function DefalutStagesParameters() As RegularSettingType
-
-Dim DefalutParam As RegularSettingType
+Option Explicit
 
 '0   1   Parameter set index
 '1   2   High volt timer in seconds
@@ -30,8 +16,18 @@ Dim DefalutParam As RegularSettingType
 '12  13  Flash speed in mm/s
 '13  14  Boost speed in mm/s
 '14  15  Pre-flash distance in millimeter
-'
+Type RegularSettingType
+    Value(15 - 1) As Single
+End Type
 
+Type RegularFileItemType
+    name As String * 20
+    regularSetting As RegularSettingType
+End Type
+
+Public Function DefalutStagesParameters() As RegularSettingType
+    Dim DefalutParam As RegularSettingType
+    
     DefalutParam.Value(0) = 47
     DefalutParam.Value(1) = 110
     DefalutParam.Value(2) = 0.9
@@ -56,9 +52,8 @@ End Function
 
 Public Function LoadAll() As RegularFileItemType()
     Dim FileName As String
-    FileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
-    
-    
+    FileName = App.path & "\" & SETTING_PATH & "RegularSetting.cfg"
+        
     Dim pFileHeader As FileHeaderType
     Dim pFileItem As RegularFileItemType
     Dim pFileItemList() As RegularFileItemType
@@ -84,12 +79,7 @@ Close 1
 LoadAll = pFileItemList
 End Function
 
-
-
 Public Function LoadConfig(configName As String) As RegularSettingType
-    Dim FileName As String
-    FileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
-    
     Dim pFileItemList() As RegularFileItemType
     pFileItemList = LoadAll()
     
@@ -104,15 +94,13 @@ Public Function LoadConfig(configName As String) As RegularSettingType
     LoadConfig = DefalutStagesParameters
 End Function
 
-
 Public Function SaveConfig(configName As String, regularSetting As RegularSettingType)
     Dim FileName As String
-    FileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    FileName = App.path & "\" & SETTING_PATH & "RegularSetting.cfg"
     
     Dim pFileItemList() As RegularFileItemType
     pFileItemList = LoadAll()
-
-
+    
     Dim haved As Boolean
     Dim i As Integer
     For i = LBound(pFileItemList) To UBound(pFileItemList) - 1
@@ -122,8 +110,6 @@ Public Function SaveConfig(configName As String, regularSetting As RegularSettin
         End If
     Next i
     
-    
-
     Dim pFileHeader As FileHeaderType
     Dim pFileItem As RegularFileItemType
     Dim pos As Integer
@@ -151,7 +137,7 @@ End Function
 
 Public Function DeleteConfig(ByVal i As Integer) As Boolean
     Dim FileName As String
-    FileName = App.path & "\" & SETTING_PATH & "RegularSetting.config"
+    FileName = App.path & "\" & SETTING_PATH & "RegularSetting.cfg"
     
     Dim pFileItemList() As RegularFileItemType
     pFileItemList = LoadAll()
@@ -179,38 +165,25 @@ Public Function DeleteConfig(ByVal i As Integer) As Boolean
     Close 1
 End Function
 
-
 Public Function AssertEqualRegularData(ByRef regularSetting As RegularSettingType, ByRef dest As RegularSettingType) As Boolean
- 
     Dim j As Integer
     
-    Dim hasNotEqual As Boolean
-    
-    DoEvents
-    
     out.log "<<<<<<<<<<<<<<<<<<<<<     AssertEqualRegularData   <<<<<<<<<<<<<<<<<<<"
+    out.log "start compare regularSetting.Value(j - 1) <> dest.Value(j - 1)"
     
-    out.log "in AssertEqualRegularData"
-    out.log "compare regularSetting.Value(j - 1) <> dest.Value(j - 1)"
+    Dim hasNotEqual As Boolean
     hasNotEqual = False
     
     For j = 1 To 14
         
         If Not out.eq(regularSetting.Value(j - 1), dest.Value(j - 1)) Then
-            out.log "<>  i=" & i & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
+            out.log "<>  j=" & j & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
             hasNotEqual = True
         Else
-            out.log "==  i=" & i & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
+            out.log "==  j=" & j & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
         End If
     Next
-            
+    
     AssertEqualRegularData = Not hasNotEqual
     out.log ">>>>>>>>>>>>>>>>>>       return " & AssertEqualRegularData & "           >>>>>>>>>>>>>>>>>>>>"
-    
-'Exit Function
-'NotEqual:
-'    AssertEqualRegularData = False
-'    out.log "return false"
 End Function
-
-
