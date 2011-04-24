@@ -54,12 +54,12 @@ Begin VB.Form FrmOption
       TabCaption(0)   =   "General"
       TabPicture(0)   =   "FrmOption.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame7"
-      Tab(0).Control(1)=   "Frame5"
-      Tab(0).Control(2)=   "CommonDialog1"
-      Tab(0).Control(3)=   "cboLanguage"
-      Tab(0).Control(4)=   "chkOnlineOnStartUp"
-      Tab(0).Control(5)=   "lblLanguage"
+      Tab(0).Control(0)=   "lblLanguage"
+      Tab(0).Control(1)=   "chkOnlineOnStartUp"
+      Tab(0).Control(2)=   "cboLanguage"
+      Tab(0).Control(3)=   "CommonDialog1"
+      Tab(0).Control(4)=   "Frame5"
+      Tab(0).Control(5)=   "Frame7"
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
@@ -69,10 +69,10 @@ Begin VB.Form FrmOption
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame2(2)"
-      Tab(2).Control(1)=   "Frame2(3)"
-      Tab(2).Control(2)=   "Frame2(0)"
-      Tab(2).Control(3)=   "Frame2(1)"
+      Tab(2).Control(0)=   "Frame2(1)"
+      Tab(2).Control(1)=   "Frame2(0)"
+      Tab(2).Control(2)=   "Frame2(3)"
+      Tab(2).Control(3)=   "Frame2(2)"
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
@@ -82,17 +82,17 @@ Begin VB.Form FrmOption
       TabCaption(4)   =   "Weld Chart"
       TabPicture(4)   =   "FrmOption.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "chkFilterData"
-      Tab(4).Control(1)=   "Frame1(2)"
-      Tab(4).Control(2)=   "Frame1(0)"
-      Tab(4).Control(3)=   "Frame1(1)"
+      Tab(4).Control(0)=   "Frame1(1)"
+      Tab(4).Control(1)=   "Frame1(0)"
+      Tab(4).Control(2)=   "Frame1(2)"
+      Tab(4).Control(3)=   "chkFilterData"
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Frame1(11)"
+      Tab(5).Control(0)=   "Label1"
       Tab(5).Control(1)=   "Frame6"
-      Tab(5).Control(2)=   "Label1"
+      Tab(5).Control(2)=   "Frame1(11)"
       Tab(5).ControlCount=   3
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
@@ -2274,9 +2274,9 @@ Private Sub cmdReset_Click()
 End Sub
 
 Private Sub cmdSimulate_Click()
-     CommonDialog1.fileName = txtSimulate.Text
+     CommonDialog1.FileName = txtSimulate.Text
     CommonDialog1.ShowOpen
-    txtSimulate.Text = CommonDialog1.fileName
+    txtSimulate.Text = CommonDialog1.FileName
     
 End Sub
 
@@ -2441,7 +2441,7 @@ PlcRes.LoadResFor Me
         
         'Dim weldSerailNumber As Long
         'weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
-        txtWeldNumber.Text = WeldNumberDriver.fileName '  out.toWeldNumberShowModel(weldSerailNumber)
+        txtWeldNumber.Text = WeldNumberDriver.Compacted  '  out.ToDisplay(weldSerailNumber)
         
         If PlcDeclare.WeldNumberMode = PlcDeclare.EngMode Then
             lblComp(11).Visible = True
@@ -2535,7 +2535,7 @@ Private Sub chkEnableAnalysis_Click(index As Integer)
 End Sub
 
 Private Sub txtWeldNumber_Change()
-    If PLCDrv.WeldNumberDriver.fileName <> txtWeldNumber.Text Then
+    If PLCDrv.WeldNumberDriver.Compacted <> txtWeldNumber.Text Then
         txtWeldNumber.ForeColor = &H80FF&
     End If
 End Sub

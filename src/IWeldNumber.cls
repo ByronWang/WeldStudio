@@ -12,25 +12,37 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
+
+Public Function Compacted() As String
+
+End Function
+
 Public Function Display() As String
+
 End Function
 
 Public Function MoveNext()
 
 End Function
 
-Public Function LeaderChar() As String
+Public Function Update(str As String) As Boolean
 
 End Function
 
-Public Function Sequence() As Integer
+Public Function FromCompact(s As String) As Long
 
 End Function
 
-Public Function FileName() As String
+Public Function ToCompact(n As Long) As String
 
 End Function
 
-Public Function Update(strWeldNumber As String) As Boolean
+Public Function FromDisplay(sFull As String) As Long
 
 End Function
+
+Public Function ToDisplay(dat As Date, n As Long) As String
+
+End Function
+
+

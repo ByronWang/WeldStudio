@@ -416,7 +416,7 @@ Dim beSigned As Boolean
 Dim Mode_StartRecording As Integer
 Dim ModeParam_StartRecoding(5) As Single
 
-Dim ProcessSetting As Integer
+Dim ProcessSettingMode As Integer
 'Dim weldSerailNumber As Long
 'Dim WeldFile As String
 
@@ -444,7 +444,7 @@ Function SwitchToRecoding(status As ShowModeType)
             
             lblTop.Caption = "Ready"
             'TODO weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
-            lblBigCenter.Caption = WeldNumberDriver.Display  ' toWeldNumberShowModel(weldSerailNumber)
+            lblBigCenter.Caption = WeldNumberDriver.Display  ' ToDisplay(weldSerailNumber)
             lblBigCenter.ForeColor = &H8000000E
             If PlcDeclare.WeldNumberMode = PlcDeclare.GeneralMode Then
                 lblBigCenter.FontSize = 100
@@ -456,7 +456,7 @@ Function SwitchToRecoding(status As ShowModeType)
             'lblParameter.Caption = GetSetting(App.EXEName, "Parameter", "LastSetting", "DEFAULT")
         Case RECORDING_MODE
             'weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
-            lblTop.Caption = WeldNumberDriver.Display ' toWeldNumberShowModel(weldSerailNumber)
+            lblTop.Caption = WeldNumberDriver.Display ' ToDisplay(weldSerailNumber)
             lblBigCenter.FontSize = 140
             lblBigCenter.Top = 720
         Case ANALYSIS_MODE
@@ -523,7 +523,7 @@ PlcRes.LoadResFor Me
     Dim IsSimulate As Integer
     IsSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
     If IsSimulate = 1 Then
-        timerMonitor.Interval = 1 ' 65
+        timerMonitor.Interval = 20 ' 65
     Else
         timerMonitor.Interval = 1
     End If
@@ -542,7 +542,7 @@ PlcRes.LoadResFor Me
     timePostFromStart = 0
     wmRecord_Index = 0
     
-    ProcessSetting = -1
+    ProcessSettingMode = -1
 
     'weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
     
@@ -826,35 +826,43 @@ End Function
 Function SaveData()
 Dim fh1 As FileHeader1
 Dim fh2 As FileHeader2
-Dim WeldFile As String
-    WeldFile = WeldNumberDriver.FileName    'toWeldNumberShowModel(weldSerailNumber)
+Dim CompactedWeldNumber As String
+    CompactedWeldNumber = WeldNumberDriver.Compacted     'ToDisplay(weldSerailNumber)
         
     fh1.CompanyName = GetSetting(App.EXEName, "UserData", "CompanyName", "")
-    fh1.unitname = GetSetting(App.EXEName, "UserData", "Unit", "")
+    fh1.unitName = GetSetting(App.EXEName, "UserData", "Unit", "")
+    fh1.operator = GetSetting(App.EXEName, "UserData", "Operator", "")
     fh1.Location = GetSetting(App.EXEName, "UserData", "Location", "")
 
     fh2.Date = Date
     fh2.Time = Time
-    fh2.FileName = WeldFile
-    fh2.BaseRed = lblParameter.Caption
-        
+    
+    fh2.WeldNumberMode = PlcDeclare.WeldNumberMode
+    fh2.CompactedWeldNumber = CompactedWeldNumber
+    
+    If ProcessSettingMode = 1 Then
+        fh2.ParamSettingMode = "R"
+    Else
+        fh2.ParamSettingMode = "P"
+    End If
+    
+    fh2.ParamSettingName = lblParameter.Caption
+    
     If Not fso.FolderExists(path & "\" & Format(Date, "YYYY-MM-DD")) Then
         fso.CreateFolder (path & "\" & Format(Date, "YYYY-MM-DD"))
         fso.CreateTextFile (path & "\" & Format(Date, "YYYY-MM-DD") & "\" & Format(Date, "YYYY-MM-DD") & ".DLY")
     End If
     
-    Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & WeldFile & ".WLD", fh1, fh2, buffer, wmRecord_Index, analysisDefine, analysisResult)
+    Call PlcWld.SaveData(path & "\" & Format(Date, "YYYY-MM-DD") & "\" & CompactedWeldNumber & ".WLD", fh1, fh2, buffer, wmRecord_Index, analysisDefine, analysisResult)
     
     Dim dr As DailyReport
     
-    dr.Serial = WeldNumberDriver.LeaderChar ' Left(WeldFile, 1)
-    dr.Sequence = WeldNumberDriver.Sequence 'weldSerailNumber - CInt(weldSerailNumber / 10000) * 10000
-        
+    dr.Serial = Left(CompactedWeldNumber, 1)
+    dr.Sequence = CInt(Mid(CompactedWeldNumber, 2))
         
     PlcDailyReport.SaveData path & "\" & Format(Date, "YYYY-MM-DD") & "\" & Format(Date, "YYYY-MM-DD") & ".DLY", dr
 
     WeldNumberDriver.MoveNext
-    
 End Function
 
 Private Sub TimerSetting_Timer()
@@ -863,13 +871,13 @@ Dim configName As String
                 
     out.log "start check Setting"
 
-    If ProcessSetting <= 0 Or Not beRecording Then
-        status = PLCDrv.ReadCurrentProcessSetting(ProcessSetting)
-        out.log "status = PLCDrv.ReadCurrentProcessSetting(ProcessSetting)"
-        out.log "status= " & status & "  ProcessSetting=" & ProcessSetting & " "
+    If ProcessSettingMode <= 0 Or Not beRecording Then
+        status = PLCDrv.ReadCurrentProcessSetting(ProcessSettingMode)
+        out.log "status = PLCDrv.ReadCurrentProcessSetting(ProcessSettingMode)"
+        out.log "status= " & status & "  ProcessSettingMode=" & ProcessSettingMode & " "
         
         If status = 0 Then
-            If ProcessSetting = 1 Then
+            If ProcessSettingMode = 1 Then
                 lblProcessSetting.Caption = "Regular"
                 
                 Dim rSetting As RegularSettingType
@@ -885,7 +893,7 @@ Dim configName As String
                 Else
                     lblParameter.Caption = "Unknown"
                 End If
-            ElseIf ProcessSetting = 2 Then
+            ElseIf ProcessSettingMode = 2 Then
                 lblProcessSetting.Caption = "Pulse"
                 
                 Dim pSetting As PulseSettingType

@@ -1,12 +1,12 @@
 Attribute VB_Name = "PlcDeclare"
 Option Explicit
 
-Public Const GeneralMode As Integer = 1
-Public Const JinanMode As Integer = 2
-Public Const EngMode As Integer = 3
+Public Const GeneralMode As String = "G"
+Public Const JinanMode As String = "J"
+Public Const EngMode As String = "E"
 
 Public Const ReadOnly As Boolean = False
-Public Const WeldNumberMode As Integer = EngMode 'GeneralMode
+Public Const WeldNumberMode As String = EngMode   'GeneralMode
 
 Public Const LOAD_ALL_PARAMETER  As Integer = 0
 Public Const LOAD_PULSE_SETTING As Integer = 1
@@ -86,8 +86,9 @@ Type FileHeader1
      
      
      X900 As String * &HA
-     unitname As String * &H1A
-     X922 As String * &HC
+     unitName As String * &H1A
+     operator As String * &H2
+     X922 As String * &HA
      
      X930 As String * &HD0
      
@@ -103,10 +104,11 @@ Type FileHeader1
 End Type
 
 Type FileHeader2
-     fileName As String * &H5
-     Xc1a As Byte
+     CompactedWeldNumber As String * &H5
+     WeldNumberMode As String * &H1
      Date As String * &HB
-     Xc25 As String * &HB
+     ParamSettingMode As String * &H1
+     Xc25 As String * &HA
      
      XC30 As String * &HE0
      
@@ -121,7 +123,7 @@ Type FileHeader2
      XE20 As String * &H5F0
 
      X1410 As String * &HA
-     BaseRed As String * &H7
+     ParamSettingName As String * &H7
      X1423 As String * &HD
 
      H6(&H20 - 1) As Byte

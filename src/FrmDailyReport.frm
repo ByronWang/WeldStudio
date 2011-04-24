@@ -112,14 +112,14 @@ Const NOTUSED_COLOR As Long = &HFFFFFF
 
 Public DailyReportFileName As String
 
-Public Sub Load(fileName As String)
+Public Sub Load(FileName As String)
  Dim data() As DailyReport
   
-data = PlcDailyReport.LoadData(fileName)
-Me.DailyReportFileName = fileName
+data = PlcDailyReport.LoadData(FileName)
+Me.DailyReportFileName = FileName
 
 Dim path As String
-path = Left(fileName, InStrRev(fileName, "\"))
+path = Left(FileName, InStrRev(FileName, "\"))
 
 Dim sa() As String
 ReDim sa(UBound(data))
@@ -137,17 +137,45 @@ ReDim cellcolors(UBound(data))
             f = PlcWld.LoadData(WeldFile)
             
 
+
     lblCompany.Caption = Trim(f.header1.CompanyName)
         
     lblDate.Caption = "DailyReport: " & Trim(f.header2.Date)
     
-    lblUnit.Caption = "UNIT:" & Trim(f.header1.UnitName)
+    lblUnit.Caption = "UNIT:" & Trim(f.header1.unitName)
     lblLocation.Caption = "LOCATION:" & Trim(f.header1.Location)
+    
 
+Dim WeldNumberDriver As IWeldNumber
+Dim displayName As String
+    
+Select Case f.header2.WeldNumberMode
+    Case GeneralMode:
+        Set WeldNumberDriver = New GeneralWeldNumber
+    Case EngMode:
+        Set WeldNumberDriver = New EngWeldNumber
+    Case JinanMode:
+        Set WeldNumberDriver = New JinanWeldNumber
+    Case Else:
+        Set WeldNumberDriver = New GeneralWeldNumber
+End Select
 
+Dim unitName As String
+Dim operator As String
 
-entry = f.header2.fileName
-
+unitName = f.header1.unitName
+operator = f.header1.operator
+    
+displayName = WeldNumberDriver.ToDisplay(CDate(f.header2.Date), WeldNumberDriver.FromCompact(Trim(f.header2.CompactedWeldNumber)))
+    
+Select Case f.header2.WeldNumberMode
+    Case EngMode:
+        displayName = Trim(f.header1.unitName) & displayName & Trim(f.header1.operator)
+    Case JinanMode:
+        displayName = Trim(f.header1.unitName) & displayName
+End Select
+    
+entry = displayName
 
 '   Result
 If f.analysisResult.Succeed = PlcDeclare.OK Then
@@ -240,7 +268,7 @@ i = 0
 MSFlexGrid1.RemoveItem (1)
 
 MSFlexGrid1.TextMatrix(0, i) = "Weld#"
-MSFlexGrid1.ColWidth(i) = 800
+MSFlexGrid1.ColWidth(i) = 1500
 MSFlexGrid1.ColAlignment(i) = AlignmentSettings.flexAlignLeftCenter
 i = i + 1
 

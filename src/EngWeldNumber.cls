@@ -23,6 +23,10 @@ Private Sub Class_Initialize()
     Set base = New GeneralWeldNumber
 End Sub
 
+Private Function IWeldNumber_Compacted() As String
+    IWeldNumber_Compacted = base.Compacted
+End Function
+
 Private Function IWeldNumber_Display() As String
     Dim unit As String
     Dim operator As String
@@ -33,23 +37,27 @@ Private Function IWeldNumber_Display() As String
     IWeldNumber_Display = unit & base.Display & operator
 End Function
 
-Private Function IWeldNumber_FileName() As String
-    IWeldNumber_FileName = base.fileName
-End Function
-
-Private Function IWeldNumber_LeaderChar() As String
-    IWeldNumber_LeaderChar = base.LeaderChar
-End Function
-
 Private Function IWeldNumber_MoveNext() As Variant
-    base.MoveNext
-End Function
-
-Private Function IWeldNumber_Sequence() As Integer
     base.MoveNext
 End Function
 
 Private Function IWeldNumber_Update(strWeldNumber As String) As Boolean
     IWeldNumber_Update = base.Update(strWeldNumber)
+End Function
+
+Private Function IWeldNumber_FromCompact(s As String) As Long
+    IWeldNumber_FromCompact = base.FromCompact(s)
+End Function
+
+Private Function IWeldNumber_ToCompact(n As Long) As String
+    IWeldNumber_ToCompact = base.ToCompact(n)
+End Function
+
+Private Function IWeldNumber_FromDisplay(sFull As String) As Long
+    IWeldNumber_FromDisplay = base.FromDisplay(sFull)
+End Function
+
+Private Function IWeldNumber_ToDisplay(dat As Date, n As Long) As String
+    IWeldNumber_ToDisplay = base.ToDisplay(dat, n)
 End Function
 

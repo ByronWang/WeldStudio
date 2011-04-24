@@ -1458,11 +1458,11 @@ Dim lastTime As Long
 Public weldFileName As String
 
 Dim fr As FileR
-Public Sub Load(fileName As String)
+Public Sub Load(FileName As String)
 ' Resource
 PlcRes.LoadResFor Me
-    fr = PlcWld.LoadData(fileName)
-    weldFileName = fileName
+    fr = PlcWld.LoadData(FileName)
+    weldFileName = FileName
     
     model = COMMON
         
@@ -1480,21 +1480,59 @@ Next
     
     lblCompany.Caption = Trim(fr.header1.CompanyName)
     
+    Dim WeldNumberDriver As IWeldNumber
+    Dim displayName As String
+        
+    Select Case fr.header2.WeldNumberMode
+        Case GeneralMode:
+            Set WeldNumberDriver = New GeneralWeldNumber
+        Case EngMode:
+            Set WeldNumberDriver = New EngWeldNumber
+        Case JinanMode:
+            Set WeldNumberDriver = New JinanWeldNumber
+        Case Else:
+            Set WeldNumberDriver = New GeneralWeldNumber
+    End Select
+    
+    Dim unitName As String
+    Dim operator As String
+    
+    unitName = fr.header1.unitName
+    operator = fr.header1.operator
+        
+    displayName = WeldNumberDriver.ToDisplay(CDate(fr.header2.Date), WeldNumberDriver.FromCompact(Trim(fr.header2.CompactedWeldNumber)))
+    
+    Select Case fr.header2.WeldNumberMode
+        Case EngMode:
+            displayName = Trim(fr.header1.unitName) & displayName & Trim(fr.header1.operator)
+        Case JinanMode:
+            displayName = Trim(fr.header1.unitName) & displayName
+    End Select
+        
     If fr.analysisResult.Succeed = OK Then
-        lblParam.Caption = Trim(fr.header2.fileName) & "-OK"
+        lblParam.Caption = displayName & "-OK"
     ElseIf fr.analysisResult.Succeed = NO Then
-        lblParam.Caption = Trim(fr.header2.fileName) & "-NO"
+        lblParam.Caption = displayName & "-NO"
     Else
-        lblParam.Caption = Trim(fr.header2.fileName) & "-INT"
+        lblParam.Caption = displayName & "-INT"
     End If
     
+    Dim paramType As String
+    Select Case fr.header2.ParamSettingMode
+        Case "R":
+            paramType = "REGULAR"
+        Case "P":
+            paramType = "PULSE"
+        Case Else:
+            paramType = "PULSE"
+    End Select
     
-    lblProgram.Caption = Trim(fr.header2.BaseRed)
+    lblProgram.Caption = paramType & ":" & Trim(fr.header2.ParamSettingName)
     
     lblDate.Caption = Trim(fr.header2.Date)
     lblTime.Caption = Trim(fr.header2.Time)
     
-    lblUnit.Caption = "UNIT:" & Trim(fr.header1.UnitName)
+    lblUnit.Caption = "UNIT:" & Trim(fr.header1.unitName)
     lblLocation.Caption = "LOCATION:" & Trim(fr.header1.Location)
     
     

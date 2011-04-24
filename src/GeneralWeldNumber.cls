@@ -16,23 +16,21 @@ Option Explicit
 Implements IWeldNumber
 
 Dim weldSerailNumber As Long
-Private Function IWeldNumber_Display() As String
-    IWeldNumber_Display = IWeldNumber_FileName
-End Function
 
-Private Function IWeldNumber_FileName() As String
+Private Sub Class_Initialize()
     weldSerailNumber = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
-    IWeldNumber_FileName = toWeldNumberShowModel(weldSerailNumber)
+End Sub
+
+Private Function IWeldNumber_Compacted() As String
+    IWeldNumber_Compacted = IWeldNumber_ToCompact(weldSerailNumber)
 End Function
 
-Private Function IWeldNumber_LeaderChar() As String
-    Dim sn As String
-    sn = IWeldNumber_FileName
-    IWeldNumber_LeaderChar = Left(sn, 1)
+Private Function IWeldNumber_Display() As String
+    IWeldNumber_Display = IWeldNumber_Compacted
 End Function
 
 Private Function IWeldNumber_MoveNext() As Variant
-    Dim wn As Integer
+    Dim wn As Long
     wn = GetSetting(App.EXEName, "WELD", "LastSerialNumber", 1)
     If wn = weldSerailNumber Then
         weldSerailNumber = weldSerailNumber + 1
@@ -40,28 +38,36 @@ Private Function IWeldNumber_MoveNext() As Variant
     End If
 End Function
 
-Private Function IWeldNumber_Sequence() As Integer
-    Dim sn As String
-    sn = IWeldNumber_FileName
-    IWeldNumber_Sequence = CInt(Mid(sn, 2))
-End Function
-
-Private Function IWeldNumber_Update(strWeldNumber As String) As Boolean
-    If Len(strWeldNumber) <> 5 Then
-        IWeldNumber_Update = False
-        Exit Function
+Private Function IWeldNumber_Update(str As String) As Boolean
+    If Len(str) <> 5 Then
+        GoTo CHECK_ERROR
     End If
     
-   Dim weldSerailNumber As Long
-   weldSerailNumber = fromWeldNumberShowModel(strWeldNumber)
+   weldSerailNumber = IWeldNumber_FromCompact(str)
    Call SaveSetting(App.EXEName, "WELD", "LastSerialNumber", weldSerailNumber)
    IWeldNumber_Update = True
+   
+Exit Function
+CHECK_ERROR:
+        IWeldNumber_Update = False
 End Function
 
+Private Function IWeldNumber_FromCompact(s As String) As Long
+    Dim leadNumber As Long
+    Dim leadChar As String
+    Dim leaveNumber As Long
+    
+    leadChar = Left(s, 1)
+    leadNumber = Asc(leadChar) - Asc("A")
 
-Public Function toWeldNumberShowModel(n As Long) As String
-Dim leadNumber As Long
-Dim leadChar As String
+    leaveNumber = CInt(Mid(s, 2, 4))
+    
+    IWeldNumber_FromCompact = leadNumber * 10000 + leaveNumber
+End Function
+
+Private Function IWeldNumber_ToCompact(n As Long) As String
+    Dim leadNumber As Long
+    Dim leadChar As String
     
     leadNumber = (n / 10000)
     
@@ -70,35 +76,20 @@ Dim leadChar As String
     End If
     
     leadChar = Chr(Asc("A") + leadNumber)
-        
+    
     Dim leaveNumber As Long
     leaveNumber = n - 10000# * CInt(n / 10000)
     
     Dim showString As String
     showString = CStr(leaveNumber)
     
-    toWeldNumberShowModel = "" & leadChar & Left("0000", 4 - Len(showString)) & showString
+    IWeldNumber_ToCompact = "" & leadChar & Left("0000", 4 - Len(showString)) & showString
 End Function
 
-
-Public Function fromWeldNumberShowModel(s As String) As Long
-
-
-Dim leadNumber As Long
-Dim leadChar As String
-Dim leaveNumber As Long
-    
-    leadChar = UCase(Left(s, 1))
-    leadNumber = Asc(leadChar) - Asc("A")
-
-
-    leaveNumber = CInt(Mid(s, 2, 4))
-    
-    fromWeldNumberShowModel = leadNumber * 10000 + leaveNumber
-    
+Private Function IWeldNumber_FromDisplay(sFull As String) As Long
+    IWeldNumber_FromDisplay = IWeldNumber_FromCompact(sFull)
 End Function
 
-
-
-
-
+Private Function IWeldNumber_ToDisplay(dat As Date, n As Long) As String
+    IWeldNumber_ToDisplay = IWeldNumber_ToCompact(n)
+End Function
