@@ -577,11 +577,7 @@ Private Sub Form_Unload(Cancel As Integer)
     WeldMDIForm.mnuParameters.Enabled = True
     WeldMDIForm.mnuOptions.Enabled = True
     WeldMDIForm.mnuConnect.Enabled = True
-    If beRequest Then
-        beUnload = True
-    Else
-        beUnload = False
-    End If
+    
     Unload Me
 ERROR_HANDLE:
 End Sub
