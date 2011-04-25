@@ -1,7 +1,7 @@
 Attribute VB_Name = "PlcPulseSetting"
 Option Explicit
 
-Type FileHeaderType
+Private Type FileHeaderType
     count As Integer
 End Type
 
@@ -13,7 +13,7 @@ End Type
 '    CurrentSetpoint3 As Single
 '    ForwardSpeed As Single
 '    ReverseSpeed As Single
-Type StageParametersType
+Private Type StageParametersType
     Value(8 - 1) As Single
 End Type
 
@@ -22,7 +22,7 @@ End Type
 '    UpsetInMillimeter As Single
 '    HoldingTimerForTensionUseInSeconds As Single
 '    ForgingForceInTonnes As Single
-Type GeneralParametersType
+Private Type GeneralParametersType
     Value(4 - 1) As Single
 End Type
 
@@ -126,6 +126,8 @@ Public Function LoadAll() As PulseFileItemType()
     Dim FileName As String
     FileName = App.path & "\" & SETTING_PATH & "PulseSetting.cfg"
     
+    out.log "<<<<<<<<<<<<<<<<<<<<<     LoadAll  PulseFileItemType <<<<<<<<<<<<<<<<<<<"
+    
     Dim pFileHeader As FileHeaderType
     Dim pFileItem As PulseFileItemType
     Dim pFileItemList() As PulseFileItemType
@@ -137,6 +139,8 @@ Public Function LoadAll() As PulseFileItemType()
     Open FileName For Binary As #1
     Get 1, 1, pFileHeader
     
+    out.log " " & 1 & " > pFileHeader.count = " & pFileHeader.count
+    
     ReDim pFileItemList(pFileHeader.count)
     
     pos = pos + LenB(pFileHeader)
@@ -145,8 +149,14 @@ Public Function LoadAll() As PulseFileItemType()
         Get 1, pos + 1, pFileItem
         pos = pos + LenB(pFileItem)
         pFileItemList(i) = pFileItem
+        
+        out.log " " & pos & " > pFileItem.name = " & pFileItem.name
+        out.logSingleArray "pFileItem.pulseSetting.General.Value", pFileItem.pulseSetting.General.Value
+        out.logSingleArray "pFileItem.pulseSetting.Stages(1).Value", pFileItem.pulseSetting.Stages(1).Value
     Next i
-Close 1
+    Close 1
+    
+    out.log ">>>>>>>>>>>>>>>>>>     Finish LoadAll PulseFileItemType  >>>>>>>>>>>>>>>>>>>>"
 
 LoadAll = pFileItemList
 End Function

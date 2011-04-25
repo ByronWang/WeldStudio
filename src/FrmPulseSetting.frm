@@ -248,7 +248,16 @@ Begin VB.Form FrmPulseSetting
       Width           =   1215
    End
    Begin VB.ComboBox cboFileName 
-      Height          =   300
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   345
       Left            =   2160
       TabIndex        =   0
       Top             =   360
@@ -962,23 +971,30 @@ PlcRes.LoadResFor Me
     Next
     
     For i = LBound(pFileItemList) To UBound(pFileItemList) - 1
+        out.log Me.name & ".Form_Load > name." & i & " = " & Trim(pFileItemList(i).name)
         cboFileName.AddItem (Trim(pFileItemList(i).name))
     Next
     
-    lastConfigName = GetSetting(App.EXEName, "Parameter", REG_NAME, "DEFAULT")
-    Call LoadConfig(lastConfigName)
-    
+    Dim configName As String
+    configName = GetSetting(App.EXEName, "Parameter", REG_NAME, "DEFAULT")
+
     For i = 0 To cboFileName.ListCount - 1
-        If cboFileName.List(i) = lastConfigName Then
+        If cboFileName.List(i) = configName Then
             cboFileName.ListIndex = i
-            cboFileName_Click
             Exit For
         End If
     Next
+    If cboFileName.ListIndex < 0 Then
+        cboFileName.ListIndex = 0
+    End If
     
     cmdSave.Enabled = False
     cmdDelete.Enabled = True
     cmdLoad.Enabled = False
+End Sub
+
+Private Sub Form_Unload(Cancel As Integer)
+    Unload Me
 End Sub
 
 Private Sub txtValue_Change(index As Integer)

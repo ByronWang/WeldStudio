@@ -467,13 +467,13 @@ Private Sub mnuOpen_Click()
     Dim fd As FrmDailyReport
     
     CommonDialog1.ShowOpen
-    If CommonDialog1.fileName <> "" And UCase(Right(CommonDialog1.fileName, 4)) = ".WLD" Then
+    If CommonDialog1.FileName <> "" And UCase(Right(CommonDialog1.FileName, 4)) = ".WLD" Then
         
         For i = 0 To Forms.count - 1
             Set f = Forms(i)
             If TypeOf f Is FrmChart Then
                 Set fc = f
-                If UCase(fc.weldFileName) = UCase(CommonDialog1.fileName) Then
+                If UCase(fc.weldFileName) = UCase(CommonDialog1.FileName) Then
                     fc.SetFocus
                     Exit Sub
                 End If
@@ -481,15 +481,15 @@ Private Sub mnuOpen_Click()
         Next i
                 
         Set fc = New FrmChart
-        fc.Load CommonDialog1.fileName
-        fc.Caption = CommonDialog1.fileName
+        fc.Load CommonDialog1.FileName
+        fc.Caption = CommonDialog1.FileName
         fc.Show
-    ElseIf CommonDialog1.fileName <> "" And UCase(Right(CommonDialog1.fileName, 4)) = ".DLY" Then
+    ElseIf CommonDialog1.FileName <> "" And UCase(Right(CommonDialog1.FileName, 4)) = ".DLY" Then
         For i = 0 To Forms.count - 1
             Set f = Forms(i)
             If TypeOf f Is FrmDailyReport Then
                 Set fd = f
-                If UCase(fd.DailyReportFileName) = UCase(CommonDialog1.fileName) Then
+                If UCase(fd.DailyReportFileName) = UCase(CommonDialog1.FileName) Then
                     fd.SetFocus
                     Exit Sub
                 End If
@@ -497,8 +497,8 @@ Private Sub mnuOpen_Click()
         Next i
         
         Set fd = New FrmDailyReport
-        fd.Load CommonDialog1.fileName
-        fd.Caption = CommonDialog1.fileName
+        fd.Load CommonDialog1.FileName
+        fd.Caption = CommonDialog1.FileName
         fd.Show
     End If
 End Sub
@@ -513,7 +513,8 @@ Dim fpwd As New FrmPWD
     fpwd.Show vbModal, Me
     
     If fpwd.pass Then
-        FrmPulseSetting.Show , Me
+        Dim frm As New FrmPulseSetting
+        frm.Show vbModal, Me
     End If
 End Sub
 
@@ -523,7 +524,8 @@ Dim fpwd As New FrmPWD
     fpwd.Show vbModal, Me
     
     If fpwd.pass Then
-       FrmRegularSetting.Show , Me
+        Dim frm As New FrmRegularSetting
+        frm.Show vbModal, Me
     End If
 End Sub
 

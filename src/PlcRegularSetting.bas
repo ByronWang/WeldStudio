@@ -1,6 +1,10 @@
 Attribute VB_Name = "PlcRegularSetting"
 Option Explicit
 
+Private Type FileHeaderType
+    count As Integer
+End Type
+
 '0   1   Parameter set index
 '1   2   High volt timer in seconds
 '2   3   Low volt timer in seconds
@@ -54,6 +58,8 @@ Public Function LoadAll() As RegularFileItemType()
     Dim FileName As String
     FileName = App.path & "\" & SETTING_PATH & "RegularSetting.cfg"
         
+    out.log "<<<<<<<<<<<<<<<<<<<<<     LoadAll  RegularFileItemType <<<<<<<<<<<<<<<<<<<"
+    
     Dim pFileHeader As FileHeaderType
     Dim pFileItem As RegularFileItemType
     Dim pFileItemList() As RegularFileItemType
@@ -65,6 +71,8 @@ Public Function LoadAll() As RegularFileItemType()
     Open FileName For Binary As #1
     Get 1, 1, pFileHeader
     
+    out.log " " & 1 & " > pFileHeader.count = " & pFileHeader.count
+    
     ReDim pFileItemList(pFileHeader.count)
     
     pos = pos + LenB(pFileHeader)
@@ -73,8 +81,14 @@ Public Function LoadAll() As RegularFileItemType()
         Get 1, pos + 1, pFileItem
         pos = pos + LenB(pFileItem)
         pFileItemList(i) = pFileItem
+        
+        out.log " " & pos & " > pFileItem.name = " & pFileItem.name
+        out.logSingleArray "pFileItem.regularSetting.Value", pFileItem.regularSetting.Value
     Next i
-Close 1
+    
+    Close 1
+
+    out.log ">>>>>>>>>>>>>>>>>>     Finish LoadAll RegularFileItemType  >>>>>>>>>>>>>>>>>>>>"
 
 LoadAll = pFileItemList
 End Function
