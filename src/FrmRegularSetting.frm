@@ -1048,7 +1048,7 @@ Private Sub Form_Load()
 ' Resource
 PlcRes.LoadResFor Me
 
-    Dim pFileItemList() As PulseFileItemType
+    Dim pFileItemList() As RegularFileItemType
 
     InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
     
