@@ -73,7 +73,7 @@ Begin VB.Form FrmGraph
       Width           =   8355
    End
    Begin VB.Timer timerMonitor 
-      Interval        =   1
+      Interval        =   65
       Left            =   3480
       Top             =   5640
    End
@@ -523,7 +523,7 @@ PlcRes.LoadResFor Me
     Dim IsSimulate As Integer
     IsSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
     If IsSimulate = 1 Then
-        timerMonitor.Interval = 20 ' 65
+        timerMonitor.Interval = 65 ' 65
     Else
         timerMonitor.Interval = 1
     End If
@@ -695,7 +695,7 @@ If beUnload Then
     Exit Sub
 End If
 
-
+Debug.Print wmRecord_Index
 beRequest = True
 '9   Weld stage 0-init, 1-preflash 2-flash 3-boost 4-upset 5-forge 6-shear
 '11  PLC Stage
