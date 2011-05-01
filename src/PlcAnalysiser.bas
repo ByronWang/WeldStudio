@@ -532,8 +532,8 @@ r = PlcAnalysiser.anaBoost(buf, lastPos, pos - 1, r)
 '=====================================================
 stage = UPSET_STAGE
 If buf(pos).WeldStage <> stage Then
-    GoTo OVER
-End If
+    'GoTo OVER
+Else
   
 lastPos = pos
 For pos = pos To count
@@ -542,6 +542,8 @@ For pos = pos To count
     End If
 Next
 r = PlcAnalysiser.anaUpset(buf, lastPos, pos - 1, r)
+
+End If
  
 '=====================================================
 stage = FORGE_STAGE
