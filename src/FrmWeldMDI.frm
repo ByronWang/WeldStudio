@@ -6,11 +6,11 @@ Begin VB.MDIForm WeldMDIForm
    Caption         =   "Weld Monitoring Studio"
    ClientHeight    =   8190
    ClientLeft      =   165
-   ClientTop       =   -840
+   ClientTop       =   855
    ClientWidth     =   11880
    Icon            =   "FrmWeldMDI.frx":0000
    LinkTopic       =   "MDIForm1"
-   StartUpPosition =   2  '屏幕中心
+   StartUpPosition =   3  '窗口缺省
    Tag             =   "10000"
    WindowState     =   2  'Maximized
    Begin MSComDlg.CommonDialog CommonDialog1 

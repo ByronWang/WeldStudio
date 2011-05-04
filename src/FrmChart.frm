@@ -1344,10 +1344,10 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   9120
+      Left            =   8520
       TabIndex        =   5
       Top             =   600
-      Width           =   1575
+      Width           =   2895
    End
    Begin VB.Label lblCompany 
       Alignment       =   2  'Center

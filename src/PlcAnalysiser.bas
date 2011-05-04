@@ -488,7 +488,7 @@ startPos = pos
 
 stage = PREFLASH_STAGE
 If buf(pos).WeldStage <> stage Then
-    GoTo OVER
+    GoTo FLASH_S
 End If
 
 
@@ -502,9 +502,11 @@ Next
 r = PlcAnalysiser.anaPreFlash(buf, lastPos, pos - 1, r)
  
 '=====================================================
+FLASH_S:
+
 stage = FLASH_STAGE
 If buf(pos).WeldStage <> stage Then
-    GoTo OVER
+    GoTo BOOST_S
 End If
 
 lastPos = pos
@@ -516,9 +518,10 @@ Next
 r = PlcAnalysiser.anaFlash(buf, lastPos, pos - 1, r)
  
 '=====================================================
+BOOST_S:
 stage = BOOST_STAGE
 If buf(pos).WeldStage <> stage Then
-    GoTo OVER
+    GoTo UPSET_S
 End If
 
 lastPos = pos
@@ -530,9 +533,10 @@ Next
 r = PlcAnalysiser.anaBoost(buf, lastPos, pos - 1, r)
  
 '=====================================================
+UPSET_S:
 stage = UPSET_STAGE
 If buf(pos).WeldStage <> stage Then
-    'GoTo OVER
+    GoTo FORGE_S
 Else
   
 lastPos = pos
@@ -546,9 +550,10 @@ r = PlcAnalysiser.anaUpset(buf, lastPos, pos - 1, r)
 End If
  
 '=====================================================
+FORGE_S:
 stage = FORGE_STAGE
 If buf(pos).WeldStage <> stage Then
-    GoTo OVER
+    GoTo SHEAR_S
 End If
   
 lastPos = pos
@@ -561,9 +566,10 @@ r = PlcAnalysiser.anaForge(buf, lastPos, pos - 1, r)
 r = PlcAnalysiser.anaAll(buf, startPos, pos - 1, r)
  
 '=====================================================
+SHEAR_S:
 stage = SHEAR_STAGE
 If buf(pos).WeldStage <> stage Then
-    GoTo OVER
+    GoTo FINISH_S
 End If
 
 lastPos = pos
@@ -574,11 +580,11 @@ For pos = pos To count
 Next
  
 
+FINISH_S:
+    If buf(pos).PlcStage < 11 Then
+        r.Succeed = INTERRUPT
+    End If
 
-Analysis = r
-Exit Function
-OVER:
-    r.Succeed = INTERRUPT
     Analysis = r
 End Function
 
