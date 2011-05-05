@@ -695,7 +695,7 @@ If beUnload Then
     Exit Sub
 End If
 
-Debug.Print wmRecord_Index
+'Debug.Print wmRecord_Index
 beRequest = True
 '9   Weld stage 0-init, 1-preflash 2-flash 3-boost 4-upset 5-forge 6-shear
 '11  PLC Stage
@@ -756,9 +756,9 @@ Else
      
         timeStart = timeGetTime()
         
-        analysisResult = PlcAnalysiser.Analysis(buffer, wmRecord_Index)
+        analysisResult = PlcAnalysiser.Analysis(buffer, ProcessSettingMode, wmRecord_Index)
         
-        If buffer(wmRecord_Index - 2).WeldStage >= 6 Then
+        If buffer(wmRecord_Index - 2).WeldStage >= SHEAR_STAGE Then
             SaveData
         ElseIf GetSetting(App.EXEName, "Weld", "RecordInterrupts", 0) = 1 Then
             SaveData
@@ -877,7 +877,7 @@ Dim configName As String
         out.log "status= " & status & "  ProcessSettingMode=" & ProcessSettingMode & " "
         
         If status = 0 Then
-            If ProcessSettingMode = 1 Then
+            If ProcessSettingMode = REGULAR_MODE Then
                 lblProcessSetting.Caption = "Regular"
                 
                 Dim rSetting As RegularSettingType
@@ -893,7 +893,7 @@ Dim configName As String
                 Else
                     lblParameter.Caption = "Unknown"
                 End If
-            ElseIf ProcessSettingMode = 2 Then
+            ElseIf ProcessSettingMode = PULSE_MODE Then
                 lblProcessSetting.Caption = "Pulse"
                 
                 Dim pSetting As PulseSettingType

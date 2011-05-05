@@ -25,6 +25,7 @@ Const SHEAR_III As Integer = 12
 
 
 Private analysisDefine As WeldAnalysisDefineType
+Private m_processSetting As Integer
 
 
 Private buf(30000) As WeldData
@@ -118,7 +119,7 @@ Dim sumCurrent As Double
     r.FlashRailUsed = buf(stopPos + 1).Dist - buf(startPos).Dist
     r.FlashDuration = buf(stopPos + 1).Time - buf(startPos).Time
     
-           
+            
     ' OLD LOGIC
     '    For i = stopPos To startPos Step -1
     '        If buf(stopPos).Time - buf(i).Time >= analysisDefine.FlashSpeedTimeRange Then
@@ -136,17 +137,17 @@ Dim sumCurrent As Double
     Dim bStart As Long
     Dim bStop As Long
     
-    
     bStartOK = False
+    
     For i = startPos To stopPos
-        If buf(i).PlcStage = FLASH_I Then
-            bStartOK = True
-            bStart = i
+        If buf(i).PlcStage >= FLASH_I Then
             Exit For
         End If
     Next i
+
+    If m_processSetting = PULSE_MODE Then
+        bStart = i
         
-    If bStartOK Then
         For i = i To stopPos
             If buf(i).PlcStage <> FLASH_I Then
                 Exit For
@@ -165,6 +166,32 @@ Dim sumCurrent As Double
         Next i
         
         bStop = i
+    Else
+        For i = i To stopPos
+            If buf(i).PlcStage <> FLASH_I Then
+                Exit For
+            End If
+        Next i
+        
+        bStartOK = True
+        bStart = i
+        
+        For i = i To stopPos
+            If buf(i).PlcStage <> FLASH_II Then
+                Exit For
+            End If
+        Next i
+                
+        For i = i To stopPos
+            If buf(i).PlcStage <> FLASH_III Then
+                Exit For
+            End If
+        Next i
+        
+        bStop = i
+    End If
+        
+    If bStartOK Then
         r.FlashSpeed = (buf(bStop - 1).Dist - buf(bStart).Dist) / (buf(bStop - 1).Time - buf(bStart).Time)
     Else
         r.FlashSpeed = 0
@@ -172,8 +199,6 @@ Dim sumCurrent As Double
     
 '   End of new logic
 
-
-    
     If analysisDefine.FlashEnable Then
     
     If analysisDefine.FlashMin > r.FlashSpeed Or r.FlashSpeed > analysisDefine.FlashMax Then
@@ -188,9 +213,6 @@ Dim sumCurrent As Double
         
     anaFlash = r
 End Function
-
-
-
 
 Private Function anaBoost(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
     
@@ -225,27 +247,41 @@ Dim sumCurrent As Double
     Dim bStart As Long
     Dim bStop As Long
     
-    
-    bStartOK = False
-    For i = startPos To stopPos
-        If buf(i).PlcStage = BOOST_II Then
-            bStartOK = True
-            bStart = i
-            Exit For
-        End If
-    Next i
+    If m_processSetting = REGULAR_MODE Then
+        Dim startTime As Single
+        startTime = buf(stopPos).Time - 3
         
-    If bStartOK Then
-        For i = i To stopPos
-            If buf(i).PlcStage <> BOOST_II Then
+        For i = startPos To stopPos
+            If buf(i).Time > startTime Then
+                bStartOK = True
+                bStart = i
+                Exit For
+            End If
+        Next i
+        bStop = stopPos
+        r.BoostSpeed = (buf(bStop - 1).Dist - buf(bStart).Dist) / (buf(bStop - 1).Time - buf(bStart).Time)
+    Else
+        bStartOK = False
+        For i = startPos To stopPos
+            If buf(i).PlcStage = BOOST_II Then
+                bStartOK = True
+                bStart = i
                 Exit For
             End If
         Next i
         
-        bStop = i
-        r.BoostSpeed = (buf(bStop - 1).Dist - buf(bStart).Dist) / (buf(bStop - 1).Time - buf(bStart).Time)
-    Else
-        r.BoostSpeed = 0
+        If bStartOK Then
+            For i = i To stopPos
+                If buf(i).PlcStage <> BOOST_II Then
+                    Exit For
+                End If
+            Next i
+            
+            bStop = i
+            r.BoostSpeed = (buf(bStop - 1).Dist - buf(bStart).Dist) / (buf(bStop - 1).Time - buf(bStart).Time)
+        Else
+            r.BoostSpeed = 0
+        End If
     End If
     
 '   End of new logic
@@ -463,8 +499,8 @@ End Function
 
 
 
-
-Public Function Analysis(buf() As WeldData, count As Integer) As WeldAnalysisResultType
+Public Function Analysis(buf() As WeldData, processSetting As Integer, count As Integer) As WeldAnalysisResultType
+m_processSetting = processSetting
 
 Call GetAnalysisDefine
 

@@ -13,6 +13,8 @@ Public Const LOAD_PULSE_SETTING As Integer = 1
 Public Const LOAD_REGULAR_SETTING As Integer = 2
 Public Const LOAD_CALIBRATION_SETTING As Integer = 3
 
+Public Const REGULAR_MODE As Integer = 1
+Public Const PULSE_MODE As Integer = 2
 
 Public Const INIT_STAGE  As Integer = 0
 Public Const PREFLASH_STAGE As Integer = 1

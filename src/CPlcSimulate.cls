@@ -156,7 +156,7 @@ Public Function IServer_ReadInt(ByVal NameId&, ByRef Variable() As Integer, Iost
             End If
         Case "N21":
             If from = "3" Then
-                Variable(0) = 1
+                Variable(0) = REGULAR_MODE
             End If
     End Select
    ' IServer_ReadInt = PlcDeclare.DTL_READ_W(NameId, Variable(0), Iostat, timeout)
