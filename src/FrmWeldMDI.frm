@@ -406,8 +406,16 @@ Printer.EndDoc
 End Function
 
 Private Function navControlForDailyReport(con As Label)
-    Printer.CurrentX = con.Left + 2000
     Printer.CurrentY = con.Top + 1100
+    
+    Select Case con.Alignment
+        Case vbLeftJustify:
+            Printer.CurrentX = con.Left + 0 + 2000
+        Case vbRightJustify:
+            Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 30 + 2000
+        Case vbCenter:
+            Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 60 + 2000
+    End Select
     
     Printer.FontSize = con.FontSize
     Printer.FontBold = con.FontBold
@@ -418,8 +426,17 @@ End Function
 
 
 Private Function navControl(con As Label)
-    Printer.CurrentX = con.Left
     Printer.CurrentY = con.Top + 1100
+    
+    Select Case con.Alignment
+        Case vbLeftJustify:
+            Printer.CurrentX = con.Left + 0
+        Case vbRightJustify:
+            Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 30
+        Case vbCenter:
+            Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 60
+    End Select
+    
     
     Printer.FontSize = con.FontSize
     Printer.FontBold = con.FontBold

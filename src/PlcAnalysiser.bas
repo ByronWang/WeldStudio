@@ -146,6 +146,7 @@ Dim sumCurrent As Double
     Next i
 
     If m_processSetting = PULSE_MODE Then
+        bStartOK = True
         bStart = i
         
         For i = i To stopPos
@@ -190,9 +191,7 @@ Dim sumCurrent As Double
         
         bStop = i
     End If
-    
-    On Error GoTo ERROR_HANDLE
-        
+            
     If bStartOK Then
         r.FlashSpeed = (buf(bStop - 1).Dist - buf(bStart).Dist) / (buf(bStop - 1).Time - buf(bStart).Time)
     Else
@@ -212,12 +211,8 @@ Dim sumCurrent As Double
         
     End If
     
-        
     anaFlash = r
     
-Exit Function
-ERROR_HANDLE:
-    MsgBox "ERROR at r.FlashSpeed = (buf(bStop - 1).Dist - buf(bStart).Dist) / (buf(bStop - 1).Time - buf(bStart).Time)  " & bStart & " : " & bStop & "  in " & startPos & " " & stopPos
 End Function
 
 Private Function anaBoost(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType

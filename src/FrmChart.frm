@@ -1306,10 +1306,10 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   10080
+      Left            =   10320
       TabIndex        =   7
       Top             =   840
-      Width           =   1095
+      Width           =   3600
    End
    Begin VB.Label lblDate 
       Alignment       =   1  'Right Justify
@@ -1325,14 +1325,14 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   8400
+      Left            =   6120
       TabIndex        =   6
       Top             =   840
-      Width           =   1335
+      Width           =   3600
    End
    Begin VB.Label lblProgram 
       Alignment       =   2  'Center
-      Caption         =   "P:BASERED"
+      Caption         =   "PULSE"
       BeginProperty Font 
          Name            =   "ËÎÌו"
          Size            =   10.5
@@ -1344,10 +1344,10 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   8520
+      Left            =   8280
       TabIndex        =   5
       Top             =   600
-      Width           =   2895
+      Width           =   3600
    End
    Begin VB.Label lblCompany 
       Alignment       =   2  'Center
@@ -1363,10 +1363,10 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   8880
+      Left            =   8280
       TabIndex        =   4
       Top             =   120
-      Width           =   2055
+      Width           =   3600
    End
    Begin VB.Label lblParam 
       Alignment       =   2  'Center
@@ -1382,10 +1382,10 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   9000
+      Left            =   8280
       TabIndex        =   3
       Top             =   360
-      Width           =   1815
+      Width           =   3600
    End
    Begin VB.Label lblLocation 
       Caption         =   "LOCATION:CRETE ILL"
@@ -1400,10 +1400,10 @@ Begin VB.Form FrmChart
       EndProperty
       ForeColor       =   &H0000C000&
       Height          =   255
-      Left            =   10080
+      Left            =   10320
       TabIndex        =   2
       Top             =   1080
-      Width           =   2415
+      Width           =   3600
    End
    Begin VB.Label lblUnit 
       Alignment       =   1  'Right Justify
@@ -1422,7 +1422,7 @@ Begin VB.Form FrmChart
       Left            =   6120
       TabIndex        =   1
       Top             =   1080
-      Width           =   3615
+      Width           =   3600
    End
 End
 Attribute VB_Name = "FrmChart"
@@ -1520,11 +1520,11 @@ Next
     Dim paramType As String
     Select Case fr.header2.ParamSettingMode
         Case "R":
-            paramType = "REGULAR"
+            paramType = "R"
         Case "P":
-            paramType = "PULSE"
+            paramType = "P"
         Case Else:
-            paramType = "PULSE"
+            paramType = "P"
     End Select
     
     lblProgram.Caption = paramType & ":" & Trim(fr.header2.ParamSettingName)

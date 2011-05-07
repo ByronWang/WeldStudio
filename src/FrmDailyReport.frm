@@ -5,11 +5,11 @@ Begin VB.Form FrmDailyReport
    ClientHeight    =   7365
    ClientLeft      =   60
    ClientTop       =   450
-   ClientWidth     =   9135
+   ClientWidth     =   13560
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
    ScaleHeight     =   7365
-   ScaleWidth      =   9135
+   ScaleWidth      =   13560
    WindowState     =   2  'Maximized
    Begin MSFlexGridLib.MSFlexGrid MSFlexGrid1 
       Height          =   6375
@@ -23,44 +23,6 @@ Begin VB.Form FrmDailyReport
       Cols            =   12
       FixedCols       =   0
       SelectionMode   =   1
-   End
-   Begin VB.Label lblUnit 
-      Alignment       =   2  'Center
-      Caption         =   "UNIT:K922SN99-U101136(CW632)"
-      BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H80000008&
-      Height          =   255
-      Left            =   6240
-      TabIndex        =   4
-      Top             =   600
-      Width           =   3615
-   End
-   Begin VB.Label lblLocation 
-      Alignment       =   1  'Right Justify
-      Caption         =   "LOCATION:CRETE ILL"
-      BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H80000008&
-      Height          =   255
-      Left            =   3360
-      TabIndex        =   3
-      Top             =   600
-      Width           =   2415
    End
    Begin VB.Label lblCompany 
       Alignment       =   2  'Center
@@ -76,10 +38,47 @@ Begin VB.Form FrmDailyReport
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   5160
-      TabIndex        =   2
+      Left            =   4680
+      TabIndex        =   4
       Top             =   360
-      Width           =   2055
+      Width           =   3600
+   End
+   Begin VB.Label lblLocation 
+      Alignment       =   1  'Right Justify
+      Caption         =   "LOCATION:CRETE ILL"
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   10.5
+         Charset         =   134
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   255
+      Left            =   2400
+      TabIndex        =   3
+      Top             =   600
+      Width           =   3600
+   End
+   Begin VB.Label lblUnit 
+      Caption         =   "UNIT:K922SN99-U101136(CW632)"
+      BeginProperty Font 
+         Name            =   "宋体"
+         Size            =   10.5
+         Charset         =   134
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   255
+      Left            =   6960
+      TabIndex        =   2
+      Top             =   600
+      Width           =   3600
    End
    Begin VB.Label lblDate 
       Alignment       =   2  'Center
@@ -98,7 +97,7 @@ Begin VB.Form FrmDailyReport
       Left            =   4680
       TabIndex        =   1
       Top             =   120
-      Width           =   2895
+      Width           =   3600
    End
 End
 Attribute VB_Name = "FrmDailyReport"
