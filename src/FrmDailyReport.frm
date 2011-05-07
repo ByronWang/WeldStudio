@@ -11,16 +11,138 @@ Begin VB.Form FrmDailyReport
    ScaleHeight     =   7365
    ScaleWidth      =   13560
    WindowState     =   2  'Maximized
+   Begin VB.Frame frmSum 
+      BorderStyle     =   0  'None
+      Height          =   735
+      Left            =   120
+      TabIndex        =   5
+      Top             =   6480
+      Width           =   5295
+      Begin VB.Label labelAccepted 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Accepted welds:"
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   10.5
+            Charset         =   134
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   255
+         Left            =   0
+         TabIndex        =   11
+         Top             =   0
+         Width           =   3600
+      End
+      Begin VB.Label labelRejected 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Rejected welds:"
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   10.5
+            Charset         =   134
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   255
+         Left            =   0
+         TabIndex        =   10
+         Top             =   240
+         Width           =   3600
+      End
+      Begin VB.Label labelTotal 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Total welds:"
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   10.5
+            Charset         =   134
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   255
+         Left            =   0
+         TabIndex        =   9
+         Top             =   480
+         Width           =   3600
+      End
+      Begin VB.Label lblAccepted 
+         Alignment       =   1  'Right Justify
+         Caption         =   "2"
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   10.5
+            Charset         =   134
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   255
+         Left            =   3840
+         TabIndex        =   8
+         Top             =   0
+         Width           =   600
+      End
+      Begin VB.Label lblReject 
+         Alignment       =   1  'Right Justify
+         Caption         =   "34"
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   10.5
+            Charset         =   134
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   255
+         Left            =   3840
+         TabIndex        =   7
+         Top             =   240
+         Width           =   600
+      End
+      Begin VB.Label lblTotal 
+         Alignment       =   1  'Right Justify
+         Caption         =   "23"
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   10.5
+            Charset         =   134
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   255
+         Left            =   3840
+         TabIndex        =   6
+         Top             =   480
+         Width           =   600
+      End
+   End
    Begin MSFlexGridLib.MSFlexGrid MSFlexGrid1 
-      Height          =   6375
+      Height          =   5295
       Left            =   0
       TabIndex        =   0
       Top             =   960
-      Width           =   10455
-      _ExtentX        =   18441
-      _ExtentY        =   11245
+      Width           =   11775
+      _ExtentX        =   20770
+      _ExtentY        =   9340
       _Version        =   393216
-      Cols            =   12
+      Cols            =   13
       FixedCols       =   0
       SelectionMode   =   1
    End
@@ -113,8 +235,13 @@ Const NOTUSED_COLOR As Long = &HFFFFFF
 Public DailyReportFileName As String
 
 Public Sub Load(FileName As String)
- Dim data() As DailyReport
-  
+Dim data() As DailyReport
+
+Dim acceptedWelds As Integer
+Dim rejectedWelds As Integer
+Dim totalWelds As Integer
+
+
 data = PlcDailyReport.LoadData(FileName)
 Me.DailyReportFileName = FileName
 
@@ -179,15 +306,21 @@ entry = displayName
 
 '   Result
 If f.analysisResult.Succeed = PlcDeclare.OK Then
+    acceptedWelds = acceptedWelds + 1
+    totalWelds = totalWelds + 1
     entry = entry & vbTab & "OK"
     cellcolors(i) = SUCCEED_COLOR
 ElseIf f.analysisResult.Succeed = PlcDeclare.NO Then
+    rejectedWelds = rejectedWelds + 1
+    totalWelds = totalWelds + 1
     entry = entry & vbTab & "NO"
     cellcolors(i) = FAIL_COLOR
 ElseIf f.analysisResult.Succeed = PlcDeclare.INTERRUPT Then
+    totalWelds = totalWelds + 1
     entry = entry & vbTab & "INT"
     cellcolors(i) = FAIL_COLOR
 Else
+    totalWelds = totalWelds + 1
     entry = entry & vbTab & " - "
     cellcolors(i) = NOTUSED_COLOR
 End If
@@ -224,6 +357,18 @@ Else
     entry = entry & vbTab & "-"
 End If
 
+Dim paramType As String
+Select Case f.header2.ParamSettingMode
+    Case "R":
+        paramType = "R"
+    Case "P":
+        paramType = "P"
+    Case Else:
+        paramType = "P"
+End Select
+
+entry = entry & vbTab & paramType & ":" & Trim(f.header2.ParamSettingName)
+
 'entry = entry & vbTab & f.analysisResult.HasSlippage
 '   Weld Program  ---
 
@@ -251,6 +396,10 @@ sa(i) = entry
         
    Next
    End With
+
+    Me.lblAccepted.Caption = acceptedWelds
+    Me.lblReject.Caption = rejectedWelds
+    Me.lblTotal.Caption = totalWelds
     
     'lblDate.Caption = Trim(fr.header.Date)
     'lblTime.Caption = Trim(fr.header.Time)
@@ -286,26 +435,30 @@ MSFlexGrid1.TextMatrix(0, i) = "Upset"
 MSFlexGrid1.ColWidth(i) = 800
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "Max.Current"
-MSFlexGrid1.ColWidth(i) = 1000
+MSFlexGrid1.ColWidth(i) = 1400
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "Impedance"
-MSFlexGrid1.ColWidth(i) = 1000
+MSFlexGrid1.ColWidth(i) = 1200
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "RailUsage"
 MSFlexGrid1.ColWidth(i) = 1000
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "FlashSpeed"
-MSFlexGrid1.ColWidth(i) = 1000
+MSFlexGrid1.ColWidth(i) = 1200
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "BoostSpeed"
-MSFlexGrid1.ColWidth(i) = 1000
+MSFlexGrid1.ColWidth(i) = 1200
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "ForgeForce"
-MSFlexGrid1.ColWidth(i) = 1000
+MSFlexGrid1.ColWidth(i) = 1200
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "Slippage"
 MSFlexGrid1.ColWidth(i) = 1000
 MSFlexGrid1.ColAlignment(i) = AlignmentSettings.flexAlignCenterCenter
+i = i + 1
+MSFlexGrid1.TextMatrix(0, i) = "Parameter"
+MSFlexGrid1.ColWidth(i) = 1000
+MSFlexGrid1.ColAlignment(i) = AlignmentSettings.flexAlignLeftCenter
 i = i + 1
 'MSFlexGrid1.TextMatrix(0, i) = "WeldProgram"
 'MSFlexGrid1.ColWidth(i) = 1000
@@ -318,7 +471,8 @@ End Function
 
 Private Sub Form_Resize()
     Me.MSFlexGrid1.Width = Me.Width - 120
-    Me.MSFlexGrid1.Height = Me.Height - 500 - MSFlexGrid1.Top
+    Me.MSFlexGrid1.Height = Me.Height - 1500 - MSFlexGrid1.Top
+    Me.frmSum.Top = Me.Height - frmSum.Height - 700
     
 End Sub
 

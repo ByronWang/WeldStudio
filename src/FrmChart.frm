@@ -603,7 +603,7 @@ Begin VB.Form FrmChart
          Width           =   795
       End
       Begin VB.Label lblItem 
-         Caption         =   "Current Iterrupt(Y/N):"
+         Caption         =   "Current Interrupt(Y/N):"
          BeginProperty Font 
             Name            =   "Times New Roman"
             Size            =   8.25

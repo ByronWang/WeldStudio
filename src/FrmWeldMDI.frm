@@ -371,42 +371,74 @@ End Function
 Private Function PrintDailyReport(f As FrmDailyReport)
 Printer.Orientation = vbPRORLandscape
     
-Dim x, y As Long
-x = 1200
-y = 2200
+Dim x, y, k As Long
+Dim pagelines As Integer
+Dim stepTo As Integer
 
-Call navControlForDailyReport(f.lblCompany)
-Call navControlForDailyReport(f.lblDate)
-Call navControlForDailyReport(f.lblLocation)
-Call navControlForDailyReport(f.lblUnit)
+pagelines = 26
 
+For k = 1 To f.MSFlexGrid1.Rows - 1 Step pagelines
+    If k + pagelines < f.MSFlexGrid1.Rows Then
+        stepTo = k + pagelines
+    Else
+        stepTo = f.MSFlexGrid1.Rows
+    End If
+        
+    x = 1000
+    y = 1600
+        
+    Call navControlForDailyReport(f.lblCompany)
+    Call navControlForDailyReport(f.lblDate)
+    Call navControlForDailyReport(f.lblLocation)
+    Call navControlForDailyReport(f.lblUnit)
+    
 
-For j = 0 To f.MSFlexGrid1.Cols - 1
-
-    Printer.CurrentY = y
-    
-    For i = 0 To 0
-        Printer.CurrentX = x
-        Printer.Print f.MSFlexGrid1.TextMatrix(i, j)
-    Next i
-    
-    Printer.CurrentY = Printer.CurrentY + 200
-    
-    
-    For i = 1 To f.MSFlexGrid1.Rows - 1
+    For j = 0 To f.MSFlexGrid1.Cols - 1
+        
+        Printer.CurrentY = y
+        
+        Printer.FontBold = True
+        Printer.FontSize = 10
+        For i = 0 To 0
+            Printer.CurrentX = x
+            Printer.Print f.MSFlexGrid1.TextMatrix(i, j)
+        Next i
+        
         Printer.CurrentY = Printer.CurrentY + 100
-        Printer.CurrentX = x + 100
-        Printer.Print f.MSFlexGrid1.TextMatrix(i, j)
-    Next i
-    x = x + f.MSFlexGrid1.ColWidth(j) * 1.2
-Next j
+                
+        Printer.FontBold = False
+        Printer.FontSize = 10
+        For i = k + 0 To stepTo - 1
+            Printer.CurrentY = Printer.CurrentY + 100
+            Printer.CurrentX = x - 20
+            Printer.Print f.MSFlexGrid1.TextMatrix(i, j)
+        Next i
+        x = x + f.MSFlexGrid1.ColWidth(j) * 1
+    Next j
+    
+    Printer.CurrentY = 10000
+    Printer.CurrentX = 15360
+    Printer.Print CInt((k + pagelines - 1) \ pagelines) & " / " & CInt((f.MSFlexGrid1.Rows - 1 + pagelines - 1) \ pagelines)
+    
+    If f.MSFlexGrid1.Rows > k + pagelines Then
+        Printer.NewPage
+    End If
+Next k
+
+Call navControlForDailyReportBottom(f.frmSum, f.labelAccepted)
+Call navControlForDailyReportBottom(f.frmSum, f.labelRejected)
+Call navControlForDailyReportBottom(f.frmSum, f.labelTotal)
+Call navControlForDailyReportBottom(f.frmSum, f.lblAccepted)
+Call navControlForDailyReportBottom(f.frmSum, f.lblReject)
+Call navControlForDailyReportBottom(f.frmSum, f.lblTotal)
+    
 Printer.EndDoc
 
     
 End Function
 
 Private Function navControlForDailyReport(con As Label)
-    Printer.CurrentY = con.Top + 1100
+    Printer.CurrentY = con.Top - 300
     
     Select Case con.Alignment
         Case vbLeftJustify:
@@ -423,6 +455,23 @@ Private Function navControlForDailyReport(con As Label)
     Printer.Print con.Caption
 End Function
 
+Private Function navControlForDailyReportBottom(fm As Frame, con As Label)
+    Printer.CurrentY = fm.Top + con.Top + 1200
+    
+    Select Case con.Alignment
+        Case vbLeftJustify:
+            Printer.CurrentX = con.Left + 0
+        Case vbRightJustify:
+            Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 30
+        Case vbCenter:
+            Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 60
+    End Select
+    
+    Printer.FontSize = con.FontSize
+    Printer.FontBold = con.FontBold
+    Printer.ForeColor = con.ForeColor
+    Printer.Print con.Caption
+End Function
 
 
 Private Function navControl(con As Label)
@@ -436,7 +485,6 @@ Private Function navControl(con As Label)
         Case vbCenter:
             Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 60
     End Select
-    
     
     Printer.FontSize = con.FontSize
     Printer.FontBold = con.FontBold

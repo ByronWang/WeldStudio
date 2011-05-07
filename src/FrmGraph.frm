@@ -526,7 +526,7 @@ PlcRes.LoadResFor Me
     Dim IsSimulate As Integer
     IsSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
     If IsSimulate = 1 Then
-        timerMonitor.Interval = 65 ' 65
+        timerMonitor.Interval = 1 ' 65
     Else
         timerMonitor.Interval = 1
     End If

@@ -10,13 +10,13 @@ Public Type DailyReport
 End Type
 
 
-Public Function LoadData(filename As String) As DailyReport()
+Public Function LoadData(FileName As String) As DailyReport()
 Dim pos As Long
 Dim i As Long
-Dim r(100) As DailyReport
+Dim r(500) As DailyReport
 Dim dr As DailyReport
 
-Open filename For Binary As #1
+Open FileName For Binary As #1
     pos = 0
     i = 0
     
@@ -42,13 +42,13 @@ End Function
 
 
 
-Public Function SaveData(filename As String, data As DailyReport)
+Public Function SaveData(FileName As String, data As DailyReport)
 Dim pos As Long
 Dim i As Long
 Dim r(100) As DailyReport
 
 
-Open filename For Binary As #1
+Open FileName For Binary As #1
     pos = 0
     i = 0
     

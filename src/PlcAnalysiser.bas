@@ -94,8 +94,8 @@ Dim sumCurrent As Double
     r.PreFlashVoltage = CInt(sumVol / (stopPos - startPos + 1))
     r.PreFlashCurrent = CInt(sumCurrent / (stopPos - startPos + 1))
     
-    r.PreFlashRailUsed = buf(stopPos + 1).Dist - buf(startPos).Dist
-    r.PreFlashDuration = buf(stopPos + 1).Time - buf(startPos).Time
+    r.PreFlashRailUsed = buf(stopPos).Dist - buf(startPos).Dist
+    r.PreFlashDuration = buf(stopPos).Time - buf(startPos).Time
     
     anaPreFlash = r
 End Function
@@ -112,12 +112,12 @@ Dim sumCurrent As Double
         sumVol = sumVol + buf(i).Volt
         sumCurrent = sumCurrent + buf(i).Amp
     Next
-        
+
     r.FlashVoltage = CInt(sumVol / (stopPos - startPos + 1))
     r.FlashCurrent = CInt(sumCurrent / (stopPos - startPos + 1))
     
-    r.FlashRailUsed = buf(stopPos + 1).Dist - buf(startPos).Dist
-    r.FlashDuration = buf(stopPos + 1).Time - buf(startPos).Time
+    r.FlashRailUsed = buf(stopPos).Dist - buf(startPos).Dist
+    r.FlashDuration = buf(stopPos).Time - buf(startPos).Time
     
             
     ' OLD LOGIC
@@ -229,8 +229,8 @@ Dim sumCurrent As Double
     r.BoostVoltage = CInt(sumVol / (stopPos - startPos + 1))
     r.BoostCurrent = CInt(sumCurrent / (stopPos - startPos + 1))
     
-    r.BoostRailUsed = buf(stopPos + 1).Dist - buf(startPos).Dist
-    r.BoostDuration = buf(stopPos + 1).Time - buf(startPos).Time
+    r.BoostRailUsed = buf(stopPos).Dist - buf(startPos).Dist
+    r.BoostDuration = buf(stopPos).Time - buf(startPos).Time
     
     
 '    'TODO   OLD LOGIC
@@ -472,8 +472,8 @@ Dim i As Integer
 
           
             
-    r.TotalRailUsage = buf(stopPos + 1).Dist - buf(startPos).Dist
-    r.TotalDuration = buf(stopPos + 1).Time - buf(startPos).Time
+    r.TotalRailUsage = buf(stopPos).Dist - buf(startPos).Dist
+    r.TotalDuration = buf(stopPos).Time - buf(startPos).Time
     
     If analysisDefine.TotalRailUsageEnable Then
     
