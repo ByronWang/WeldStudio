@@ -400,6 +400,7 @@ Dim path As String
 Dim timeStart As Long
 Dim timePostFromStart As Long
 Dim lastStage As Long
+Dim lastTime As Long
 
 Dim dist_scale As Long
 Dim volt_scale As Long
@@ -695,7 +696,20 @@ If beUnload Then
     Exit Sub
 End If
 
-'Debug.Print wmRecord_Index
+Dim tm As Long
+
+
+'If Not beRecording And Not beSigned Then
+'    tm = timeGetTime()
+'    If 1 < tm - lastTime And tm - lastTime < 30 And timerMonitor.Interval < 100 Then
+'        timerMonitor.Interval = timerMonitor.Interval + 5
+'    ElseIf 66 < tm - lastTime And tm - lastTime < 300 And timerMonitor.Interval > 6 Then
+'        timerMonitor.Interval = timerMonitor.Interval - 5
+'    End If
+'    lastTime = tm
+'End If
+
+Debug.Print wmRecord_Index
 beRequest = True
 '9   Weld stage 0-init, 1-preflash 2-flash 3-boost 4-upset 5-forge 6-shear
 '11  PLC Stage
@@ -722,6 +736,10 @@ If wmRecord.WeldCycle = 1 And 0 <= wmRecord.data.WeldStage And wmRecord.data.Wel
         wmRecord.data.Time = timePostFromStart / 1000
         buffer(wmRecord_Index) = wmRecord.data
         wmRecord_Index = wmRecord_Index + 1
+        out.log "wmRecord_Index: " & wmRecord_Index
+        If wmRecord_Index > 20000 Then
+            MsgBox "Index error ,please contact administrator!"
+        End If
     End If
     
     If Not beSigned Then
@@ -753,6 +771,10 @@ Else
         wmRecord.data.Time = timePostFromStart / 1000
         buffer(wmRecord_Index) = wmRecord.data
         wmRecord_Index = wmRecord_Index + 1
+        If wmRecord_Index > 20000 Then
+            out.log "wmRecord_Index: " & wmRecord_Index
+            MsgBox "Index error ,please contact administrator!"
+        End If
      
         timeStart = timeGetTime()
         
