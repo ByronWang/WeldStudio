@@ -151,8 +151,8 @@ Public Function LoadAll() As PulseFileItemType()
         pFileItemList(i) = pFileItem
         
         ' out.log " " & pos & " > pFileItem.name = " & pFileItem.name
-        out.logSingleArray "pFileItem.pulseSetting.General.Value", pFileItem.pulseSetting.General.Value
-        out.logSingleArray "pFileItem.pulseSetting.Stages(1).Value", pFileItem.pulseSetting.Stages(1).Value
+        'out.logSingleArray "pFileItem.pulseSetting.General.Value", pFileItem.pulseSetting.General.Value
+        'out.logSingleArray "pFileItem.pulseSetting.Stages(1).Value", pFileItem.pulseSetting.Stages(1).Value
     Next i
     Close 1
     

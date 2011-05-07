@@ -452,6 +452,12 @@ Private Sub mnuConnect_Click()
         g.Show
     End If
     
+'    Dim i As Integer
+'    Dim f As Form
+'    For i = LBound(Forms) To UBound(Forms)
+'        Set f = Forms(i)
+'    End If
+    
 End Sub
 
 Private Sub mnuExit_Click()

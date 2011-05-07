@@ -207,7 +207,7 @@ ERROR_HANDLE:
 End Function
 
 Public Function ReadPcMonitor(ByRef wm As WeldMonitor) As Long
-On Error GoTo SYS_ERROR_HANDLE
+'On Error GoTo SYS_ERROR_HANDLE
     status = UtlServer.ReadInt(handle_PC_Monitor, buffer, IO_STATUS, 12345)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "READER PC MONITOR"
@@ -241,7 +241,7 @@ On Error GoTo SYS_ERROR_HANDLE
     '10  Bosch valve
     '11  PLC stage
 
-    out.logIntegerArray "ReadPcMonitor", buffer
+    'out.logIntegerArray "ReadPcMonitor", buffer
 Exit Function
 ERROR_HANDLE:
 
@@ -251,8 +251,8 @@ ERROR_HANDLE:
     ReadPcMonitor = status
     Exit Function
 SYS_ERROR_HANDLE:
-    out.log "ReadPcMonitor ERROR" & Err.Description
-    out.logIntegerArray "ReadPcMonitor", buffer
+    ' out.log "ReadPcMonitor ERROR" & Err.Description
+    'out.logIntegerArray "ReadPcMonitor", buffer
 End Function
 
 Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
@@ -306,7 +306,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
             GoTo ERROR_HANDLE
         End If
         
-        Call out.logSingleArray("ReadPulseData Pulse [" & i & "]", bufSingle)
+        'Call out.logSingleArray("ReadPulseData Pulse [" & i & "]", bufSingle)
         
         DoEvents
     
@@ -351,7 +351,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
         RUN_PHASE = "DO WRITE PULSE SETTING GENERAL"
         GoTo ERROR_HANDLE
     End If
-    Call out.logSingleArray("ReadPulseData . General ", bufSingle)
+    'Call out.logSingleArray("ReadPulseData . General ", bufSingle)
     
     DoEvents
     
@@ -437,7 +437,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
         
         DoEvents
         
-        Call out.logSingleArray("WritePulseData Pulse [" & i & "]", bufSingle)
+        'Call out.logSingleArray("WritePulseData Pulse [" & i & "]", bufSingle)
         
         status = UtlServer.WriteSingle(handle_Pulse, bufSingle, IO_STATUS, 1000)
         If (status <> DTL_SUCCESS) Then
@@ -474,7 +474,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
     
     DoEvents
     
-    Call out.logSingleArray("WritePulseData . General ", bufSingle)
+    'Call out.logSingleArray("WritePulseData . General ", bufSingle)
     
     status = UtlServer.WriteSingle(handle_Pulse, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
@@ -585,7 +585,7 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
         GoTo ERROR_HANDLE
     End If
     
-    Call out.logSingleArray("ReadRegularData ", bufSingle)
+    'Call out.logSingleArray("ReadRegularData ", bufSingle)
     
     DoEvents
     
@@ -673,7 +673,7 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
     
     DoEvents
     
-    Call out.logSingleArray("WriteRegularData ", bufSingle)
+    'Call out.logSingleArray("WriteRegularData ", bufSingle)
     status = UtlServer.WriteSingle(handle_Regular, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DO WRITE REGULAR SETTING GENERAL"

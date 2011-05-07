@@ -737,7 +737,6 @@ If wmRecord.WeldCycle = 1 And 0 <= wmRecord.data.WeldStage And wmRecord.data.Wel
         wmRecord.data.Time = timePostFromStart / 1000
         buffer(wmRecord_Index) = wmRecord.data
         wmRecord_Index = wmRecord_Index + 1
-        out.log "wmRecord_Index: " & wmRecord_Index
         If wmRecord_Index > 20000 Then
             MsgBox "Index error ,please contact administrator!"
         End If
@@ -773,7 +772,6 @@ Else
         buffer(wmRecord_Index) = wmRecord.data
         wmRecord_Index = wmRecord_Index + 1
         If wmRecord_Index > 20000 Then
-            out.log "wmRecord_Index: " & wmRecord_Index
             MsgBox "Index error ,please contact administrator!"
         End If
      
@@ -804,11 +802,7 @@ Else
     beSigned = False
     wmRecord_Index = 0
     lastStage = -1
-    
-    
 End If
-
-
 
 beRequest = False
 Exit Sub
@@ -896,13 +890,11 @@ End Function
 Private Sub TimerSetting_Timer()
 Dim status As Long
 Dim configName As String
-                
-    out.log "start check Setting"
 
     If ProcessSettingMode <= 0 Or Not beRecording Then
         status = PLCDrv.ReadCurrentProcessSetting(ProcessSettingMode)
-        out.log "status = PLCDrv.ReadCurrentProcessSetting(ProcessSettingMode)"
-        out.log "status= " & status & "  ProcessSettingMode=" & ProcessSettingMode & " "
+        ' out.log "status = PLCDrv.ReadCurrentProcessSetting(ProcessSettingMode)"
+        ' out.log "status= " & status & "  ProcessSettingMode=" & ProcessSettingMode & " "
         
         If status = 0 Then
             If ProcessSettingMode = REGULAR_MODE Then
@@ -915,7 +907,7 @@ Dim configName As String
                 
                 configName = GetSetting(App.EXEName, "Parameter", "LastSetting_Regular", "Unknown")
                 rDest = PlcRegularSetting.LoadConfig(configName)
-                out.log "before compare " & configName
+                ' out.log "before compare " & configName
                 If PlcRegularSetting.AssertEqualRegularData(rSetting, rDest) Then
                     lblParameter.Caption = configName
                 Else
@@ -931,7 +923,7 @@ Dim configName As String
                 
                 configName = GetSetting(App.EXEName, "Parameter", "LastSetting_Pulse", "Unknown")
                 pDest = PlcPulseSetting.LoadConfig(configName)
-                out.log "before compare " & configName
+                ' out.log "before compare " & configName
                 If PlcPulseSetting.AssertEqualPulseData(pSetting, pDest) Then
                     lblParameter.Caption = configName
                 Else

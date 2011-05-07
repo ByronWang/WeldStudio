@@ -971,7 +971,7 @@ PlcRes.LoadResFor Me
     Next
     
     For i = LBound(pFileItemList) To UBound(pFileItemList) - 1
-        out.log Me.name & ".Form_Load > name." & i & " = " & Trim(pFileItemList(i).name)
+        ' out.log Me.name & ".Form_Load > name." & i & " = " & Trim(pFileItemList(i).name)
         cboFileName.AddItem (Trim(pFileItemList(i).name))
     Next
     

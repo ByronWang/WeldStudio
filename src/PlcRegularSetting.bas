@@ -58,7 +58,7 @@ Public Function LoadAll() As RegularFileItemType()
     Dim FileName As String
     FileName = App.path & "\" & SETTING_PATH & "RegularSetting.cfg"
         
-    out.log "<<<<<<<<<<<<<<<<<<<<<     LoadAll  RegularFileItemType <<<<<<<<<<<<<<<<<<<"
+    ' out.log "<<<<<<<<<<<<<<<<<<<<<     LoadAll  RegularFileItemType <<<<<<<<<<<<<<<<<<<"
     
     Dim pFileHeader As FileHeaderType
     Dim pFileItem As RegularFileItemType
@@ -71,7 +71,7 @@ Public Function LoadAll() As RegularFileItemType()
     Open FileName For Binary As #1
     Get 1, 1, pFileHeader
     
-    out.log " " & 1 & " > pFileHeader.count = " & pFileHeader.count
+    ' out.log " " & 1 & " > pFileHeader.count = " & pFileHeader.count
     
     ReDim pFileItemList(pFileHeader.count)
     
@@ -82,13 +82,13 @@ Public Function LoadAll() As RegularFileItemType()
         pos = pos + LenB(pFileItem)
         pFileItemList(i) = pFileItem
         
-        out.log " " & pos & " > pFileItem.name = " & pFileItem.name
-        out.logSingleArray "pFileItem.regularSetting.Value", pFileItem.regularSetting.Value
+        ' out.log " " & pos & " > pFileItem.name = " & pFileItem.name
+        ' out.logSingleArray "pFileItem.regularSetting.Value", pFileItem.regularSetting.Value
     Next i
     
     Close 1
 
-    out.log ">>>>>>>>>>>>>>>>>>     Finish LoadAll RegularFileItemType  >>>>>>>>>>>>>>>>>>>>"
+    ' out.log ">>>>>>>>>>>>>>>>>>     Finish LoadAll RegularFileItemType  >>>>>>>>>>>>>>>>>>>>"
 
 LoadAll = pFileItemList
 End Function
@@ -182,8 +182,8 @@ End Function
 Public Function AssertEqualRegularData(ByRef regularSetting As RegularSettingType, ByRef dest As RegularSettingType) As Boolean
     Dim j As Integer
     
-    out.log "<<<<<<<<<<<<<<<<<<<<<     AssertEqualRegularData   <<<<<<<<<<<<<<<<<<<"
-    out.log "start compare regularSetting.Value(j - 1) <> dest.Value(j - 1)"
+    ' out.log "<<<<<<<<<<<<<<<<<<<<<     AssertEqualRegularData   <<<<<<<<<<<<<<<<<<<"
+    ' out.log "start compare regularSetting.Value(j - 1) <> dest.Value(j - 1)"
     
     Dim hasNotEqual As Boolean
     hasNotEqual = False
@@ -191,13 +191,13 @@ Public Function AssertEqualRegularData(ByRef regularSetting As RegularSettingTyp
     For j = 1 To 14
         
         If Not out.eq(regularSetting.Value(j - 1), dest.Value(j - 1)) Then
-            out.log "<>  j=" & j & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
+            ' out.log "<>  j=" & j & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
             hasNotEqual = True
         Else
-            out.log "==  j=" & j & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
+            ' out.log "==  j=" & j & "  " & regularSetting.Value(j - 1) & " >-< " & dest.Value(j - 1)
         End If
     Next
     
     AssertEqualRegularData = Not hasNotEqual
-    out.log ">>>>>>>>>>>>>>>>>>       return " & AssertEqualRegularData & "           >>>>>>>>>>>>>>>>>>>>"
+    ' out.log ">>>>>>>>>>>>>>>>>>       return " & AssertEqualRegularData & "           >>>>>>>>>>>>>>>>>>>>"
 End Function
