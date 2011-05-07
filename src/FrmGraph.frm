@@ -426,13 +426,14 @@ Const ANALYSIS_DURATION As Integer = 6000
 Dim showMode As ShowModeType
 
 Dim beRequest As Boolean
-Dim beUnload As Boolean
 
 Enum ShowModeType
     RECORDING_MODE
     STANDBY_MODE
     ANALYSIS_MODE
 End Enum
+
+Public alive As Boolean
 
 Dim analysisDefine As WeldAnalysisDefineType
 Dim analysisResult As WeldAnalysisResultType
@@ -472,6 +473,8 @@ Private Sub Form_Load()
 ' Resource
 PlcRes.LoadResFor Me
 
+    out.log "Start  Form_Load  <<"
+    
     WeldMDIForm.mnuWindow.Enabled = False
     WeldMDIForm.mnuParameters.Enabled = False
     WeldMDIForm.mnuOptions.Enabled = False
@@ -550,12 +553,20 @@ PlcRes.LoadResFor Me
     
     beSigned = False
     beRequest = False
+    
+    alive = False
+    
+    out.log "Finish Form_Load    >>"
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    beUnload = True
+    alive = False
     
-    out.log "200 in unload "
+    out.log "200 Start Form_UnLoad <<"
+    
+    Me.timerMonitor.Enabled = False
+    Me.timerDisplay.Enabled = False
+    Me.TimerSetting.Enabled = False
     
     WeldMDIForm.mnuWindow.Enabled = True
     WeldMDIForm.mnuParameters.Enabled = True
@@ -567,13 +578,11 @@ Private Sub Form_Unload(Cancel As Integer)
     Me.Hide
     
     out.log "210 in unload "
-
     
-    Me.timerDisplay.Enabled = False
-    Me.timerMonitor.Enabled = False
     Dim i As Integer
     For i = 0 To 100
-        Call Sleep(50)
+        Call Sleep(500)
+        DoEvents
         If Not beRequest Then
             Exit For
         End If
@@ -582,6 +591,8 @@ Private Sub Form_Unload(Cancel As Integer)
 '        Call Sleep(300)
 '        DoEvents
 '    Wend
+
+    beRequest = False
     
     out.log "211 in unload "
     
@@ -589,10 +600,26 @@ Private Sub Form_Unload(Cancel As Integer)
     PLCDrv.ClosePLCConection
     
     out.log "220 in unload "
-ERROR_HANDLE:
+    
+    Me.timerMonitor.Enabled = False
+    Me.timerDisplay.Enabled = False
+    Me.TimerSetting.Enabled = False
+    
+    WeldMDIForm.mnuWindow.Enabled = True
+    WeldMDIForm.mnuParameters.Enabled = True
+    WeldMDIForm.mnuOptions.Enabled = True
+    WeldMDIForm.mnuConnect.Enabled = True
+    
+    out.log "Finish Form_UnLoad    >>"
 End Sub
 
 Private Sub TimerDisplay_Timer()
+    If Not alive Then
+        timerDisplay.Enabled = False
+        Exit Sub
+    End If
+
+    out.log "Start  TimerDisplay_Timer  <<  "
         
     lblDate.Caption = Format(Date, "YYYY-MM-DD")
     lblTime.Caption = FormatDateTime(Now, vbLongTime)
@@ -690,18 +717,23 @@ Private Sub TimerDisplay_Timer()
     End If
     picPsi.Width = w
     
+    out.log "Finish TimerDisplay_Timer   >>"
 End Sub
 
 Private Sub TimerMonitor_Timer()
+out.log "Try    TimerMonitor_Timer  -- "
 On Error GoTo SYS_ERROR_HANDLE
 If beRequest Then
     Exit Sub
 End If
-If beUnload Then
+If Not alive Then
+    beRequest = False
+    timerMonitor.Enabled = False
     Exit Sub
 End If
 
 Dim tm As Long
+out.log "Start  TimerMonitor_Timer  << "
 
 'If Not beRecording And Not beSigned Then
 '    tm = timeGetTime()
@@ -779,7 +811,7 @@ Else
         
         analysisResult = PlcAnalysiser.Analysis(buffer, ProcessSettingMode, wmRecord_Index)
         
-        If buffer(wmRecord_Index - 2).WeldStage >= SHEAR_STAGE Then
+        If analysisResult.Succeed <> PlcDeclare.INTERRUPT Then
             SaveData
         ElseIf GetSetting(App.EXEName, "Weld", "RecordInterrupts", 0) = 1 Then
             SaveData
@@ -803,13 +835,14 @@ Else
     wmRecord_Index = 0
     lastStage = -1
 End If
-
+out.log "Finish TimerMonitor_Timer   >>"
 beRequest = False
 Exit Sub
 
 ERROR_HANDLE:
+    out.log "Error TimerMonitor_Timer"
     beRequest = False
-    If Not beUnload Then
+    If alive Then
         MsgBox "Connection error!¡¡" & vbCrLf & status
     End If
     Unload Me
@@ -888,8 +921,22 @@ Dim CompactedWeldNumber As String
 End Function
 
 Private Sub TimerSetting_Timer()
+out.log "Try    TimerSetting_Timer  -- "
+If beRequest Then
+    Exit Sub
+End If
+If Not alive Then
+    TimerSetting.Enabled = False
+    Exit Sub
+End If
+
 Dim status As Long
 Dim configName As String
+
+out.log "Start  TimerSetting_Timer  << "
+
+beRequest = True
+
 
     If ProcessSettingMode <= 0 Or Not beRecording Then
         status = PLCDrv.ReadCurrentProcessSetting(ProcessSettingMode)
@@ -935,4 +982,7 @@ Dim configName As String
             End If
         End If
     End If
+    
+beRequest = False
+out.log "Finish TimerSetting_Timer  >>"
 End Sub

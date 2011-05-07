@@ -623,13 +623,14 @@ For pos = pos To count
     End If
 Next
 
+Analysis = r
+Exit Function
+
 FINISH_S:
-    If buf(pos).PlcStage < 11 Then
-        r.Succeed = INTERRUPT
-    End If
+    out.log "stage =  " & stage
+    r.Succeed = INTERRUPT
 
     Analysis = r
-    
 Exit Function
 SYS_ERROR_HANDLE:
     MsgBox "System error at Analysis,Please contact! stage = " & stage

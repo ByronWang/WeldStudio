@@ -96,6 +96,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Declare Function Htmlhelp Lib "hhctrl.ocx " Alias "HtmlHelpA " (ByVal hwndCaller As Long, ByVal pszFile As String, ByVal uCommand As Long, ByVal dwData As Any) As Long
 
+Dim fGraph As FrmGraph
+
 Private Sub MDIForm_Load()
 
 ' Resource
@@ -447,9 +449,16 @@ Private Sub mnuConnect_Click()
     frmProgress.ParamName = name
     frmProgress.Show vbModal, Me
     
+    If Not fGraph Is Nothing Then
+        Unload fGraph
+        Set fGraph = Nothing
+    End If
+    
     If frmProgress.status = 0 Then
-        Dim g As New FrmGraph
-        g.Show
+        Set fGraph = New FrmGraph
+        Load fGraph
+        fGraph.alive = True
+        fGraph.Show
     End If
     
 '    Dim i As Integer

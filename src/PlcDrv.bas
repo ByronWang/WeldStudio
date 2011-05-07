@@ -136,15 +136,11 @@ Public Function ReadCurrentProcessSetting(ByRef ps As Integer) As Long
     
     Dim handle_signal As Long
     
-    DoEvents
-    
     status = UtlServer.Define(handle_signal, def_signal)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "DEFINE FOR ACTIVE PULSE SETTING"
         GoTo ERROR_HANDLE
     End If
-    
-    DoEvents
     
     status = UtlServer.ReadInt(handle_signal, buffer_signal, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
@@ -154,15 +150,11 @@ Public Function ReadCurrentProcessSetting(ByRef ps As Integer) As Long
     
     ps = buffer_signal(0)
     
-    DoEvents
-    
     status = UtlServer.Undef(handle_signal)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "UNDEF FOR ACTIVE PULSE SETTING"
         GoTo ERROR_HANDLE
     End If
-
-    DoEvents
     
 Exit Function
 ERROR_HANDLE:
@@ -174,6 +166,7 @@ ERROR_HANDLE:
 End Function
 
 Public Function PreparePcMonitor() As Long
+    out.log "Start  " & "PreparePcMonitor <<<<<<<<<<<<<<<<<<<<<<<<<<<<"
     status = UtlServer.Define(handle_PC_Monitor, "N22:0,12,WORD,READ,AB:LOCAL,0,SLC500,1")
     If (status <> DTL_SUCCESS) Then
       Call UtlServer.ErrorStr(status, g_Error_String, 80)
@@ -186,6 +179,7 @@ ERROR_HANDLE:
     beActive = False
 
     Call UtlServer.ErrorStr(status, g_Error_String, 80)
+    out.log g_Error_String & " at " & "PreparePcMonitor"
     PreparePcMonitor = status
     Exit Function
 End Function
@@ -197,18 +191,22 @@ Public Function ClosePcMonitor() As Long
         GoTo ERROR_HANDLE
     End If
 
+    out.log "Close  " & "PreparePcMonitor >>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 Exit Function
 ERROR_HANDLE:
     beActive = False
 
     Call UtlServer.ErrorStr(status, g_Error_String, 80)
+    out.log g_Error_String & " at " & "ClosePcMonitor"
     ClosePcMonitor = status
     Exit Function
 End Function
 
 Public Function ReadPcMonitor(ByRef wm As WeldMonitor) As Long
 'On Error GoTo SYS_ERROR_HANDLE
+    out.log "Exec " & "ReadPcMonitor handle_PC_Monitor:" & handle_PC_Monitor
     status = UtlServer.ReadInt(handle_PC_Monitor, buffer, IO_STATUS, 12345)
+    out.log "Exec " & "ReadPcMonitor status:" & status
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "READER PC MONITOR"
         GoTo ERROR_HANDLE
@@ -287,10 +285,10 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
     Dim InitialVoltage As Long
     InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
     
-    DoEvents
+    
     
     For i = 0 To 7
-        DoEvents
+        
     
         status = UtlServer.Define(handle_Pulse, def(i))
         If (status <> DTL_SUCCESS) Then
@@ -298,7 +296,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
             GoTo ERROR_HANDLE
         End If
         
-        DoEvents
+        
     
         status = UtlServer.ReadSingle(handle_Pulse, bufSingle, IO_STATUS, 1000)
         If (status <> DTL_SUCCESS) Then
@@ -308,7 +306,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
         
         'Call out.logSingleArray("ReadPulseData Pulse [" & i & "]", bufSingle)
         
-        DoEvents
+        
     
         status = UtlServer.Undef(handle_Pulse)
         If (status <> DTL_SUCCESS) Then
@@ -336,7 +334,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
     '4   5   Forging force in tonnes
 
     
-    DoEvents
+    
     
     status = UtlServer.Define(handle_Pulse, def(8))
     If (status <> DTL_SUCCESS) Then
@@ -344,7 +342,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     status = UtlServer.ReadSingle(handle_Pulse, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
@@ -353,7 +351,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
     End If
     'Call out.logSingleArray("ReadPulseData . General ", bufSingle)
     
-    DoEvents
+    
     
     status = UtlServer.Undef(handle_Pulse)
     If (status <> DTL_SUCCESS) Then
@@ -361,7 +359,7 @@ Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     bufSingle(0) = 6
     For j = 1 To 4
@@ -412,7 +410,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
     Dim InitialVoltage As Long
     InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
     
-    DoEvents
+    
     
     For i = 0 To 7
         If i = 1 Then
@@ -427,7 +425,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
         
         
     
-        DoEvents
+        
     
         status = UtlServer.Define(handle_Pulse, def(i))
         If (status <> DTL_SUCCESS) Then
@@ -435,7 +433,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
             GoTo ERROR_HANDLE
         End If
         
-        DoEvents
+        
         
         'Call out.logSingleArray("WritePulseData Pulse [" & i & "]", bufSingle)
         
@@ -445,7 +443,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
             GoTo ERROR_HANDLE
         End If
         
-        DoEvents
+        
     
         status = UtlServer.Undef(handle_Pulse)
         If (status <> DTL_SUCCESS) Then
@@ -464,7 +462,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
         bufSingle(j) = pulseSetting.General.Value(j - 1)
     Next
     
-    DoEvents
+    
     
     status = UtlServer.Define(handle_Pulse, def(8))
     If (status <> DTL_SUCCESS) Then
@@ -472,7 +470,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     'Call out.logSingleArray("WritePulseData . General ", bufSingle)
     
@@ -482,7 +480,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     status = UtlServer.Undef(handle_Pulse)
     If (status <> DTL_SUCCESS) Then
@@ -490,7 +488,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     '++
     Dim buffer_signal(1) As Integer
@@ -500,7 +498,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
     Dim handle_signal As Long
     buffer_signal(0) = 2
     
-    DoEvents
+    
     
     status = UtlServer.Define(handle_signal, def_signal)
     If (status <> DTL_SUCCESS) Then
@@ -508,7 +506,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     status = UtlServer.WriteInt(handle_signal, buffer_signal, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
@@ -516,7 +514,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     status = UtlServer.Undef(handle_signal)
     If (status <> DTL_SUCCESS) Then
@@ -524,7 +522,7 @@ Public Function WritePulseData(pulseSetting As PulseSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     '++
 
@@ -569,7 +567,7 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
     InitialVoltage = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
         
     
-    DoEvents
+    
     
     status = UtlServer.Define(handle_Regular, def)
     If (status <> DTL_SUCCESS) Then
@@ -577,7 +575,7 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     status = UtlServer.ReadSingle(handle_Regular, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
@@ -587,7 +585,7 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
     
     'Call out.logSingleArray("ReadRegularData ", bufSingle)
     
-    DoEvents
+    
     
     status = UtlServer.Undef(handle_Regular)
     If (status <> DTL_SUCCESS) Then
@@ -595,7 +593,7 @@ Public Function ReadRegularData(ByRef regularSetting As RegularSettingType) As L
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     bufSingle(0) = 6
     For j = 1 To 14
@@ -663,7 +661,7 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
     
     
     
-    DoEvents
+    
     
     status = UtlServer.Define(handle_Regular, def)
     If (status <> DTL_SUCCESS) Then
@@ -671,7 +669,7 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     'Call out.logSingleArray("WriteRegularData ", bufSingle)
     status = UtlServer.WriteSingle(handle_Regular, bufSingle, IO_STATUS, 1000)
@@ -680,7 +678,7 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     status = UtlServer.Undef(handle_Regular)
     If (status <> DTL_SUCCESS) Then
@@ -688,7 +686,7 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     
     
@@ -696,7 +694,7 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
     Dim def_signal As String
     def_signal = "N21:4,1,WORD,MODIFY,AB:LOCAL,1,SLC500,1"
     
-    DoEvents
+    
     
     Dim handle_signal As Long
     buffer_signal(0) = 1
@@ -706,7 +704,7 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     status = UtlServer.WriteInt(handle_signal, buffer_signal, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
@@ -714,7 +712,7 @@ Public Function WriteRegularData(regularSetting As RegularSettingType) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     status = UtlServer.Undef(handle_signal)
     If (status <> DTL_SUCCESS) Then
@@ -761,7 +759,7 @@ Public Function WriteCalibrationData(ca() As Single) As Long
         bufSingle(j) = ca(j)
     Next
     
-    DoEvents
+    
     
     status = UtlServer.Define(handle, def)
     If (status <> DTL_SUCCESS) Then
@@ -769,7 +767,7 @@ Public Function WriteCalibrationData(ca() As Single) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     status = UtlServer.WriteSingle(handle, bufSingle, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
@@ -777,7 +775,7 @@ Public Function WriteCalibrationData(ca() As Single) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     status = UtlServer.Undef(handle)
     If (status <> DTL_SUCCESS) Then
@@ -785,7 +783,7 @@ Public Function WriteCalibrationData(ca() As Single) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     
     '++
@@ -796,7 +794,7 @@ Public Function WriteCalibrationData(ca() As Single) As Long
     Dim handle_signal As Long
     buffer_signal(0) = 1
     
-    DoEvents
+    
     
     status = UtlServer.Define(handle_signal, def_signal)
     If (status <> DTL_SUCCESS) Then
@@ -804,7 +802,7 @@ Public Function WriteCalibrationData(ca() As Single) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     status = UtlServer.WriteInt(handle_signal, buffer_signal, IO_STATUS, 1000)
     If (status <> DTL_SUCCESS) Then
@@ -812,7 +810,7 @@ Public Function WriteCalibrationData(ca() As Single) As Long
         GoTo ERROR_HANDLE
     End If
     
-    DoEvents
+    
     
     status = UtlServer.Undef(handle_signal)
     If (status <> DTL_SUCCESS) Then
