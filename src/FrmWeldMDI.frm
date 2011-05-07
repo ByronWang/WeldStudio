@@ -416,7 +416,7 @@ For k = 1 To f.MSFlexGrid1.Rows - 1 Step pagelines
         x = x + f.MSFlexGrid1.ColWidth(j) * 1
     Next j
     
-    Printer.CurrentY = 10000
+    Printer.CurrentY = 10800
     Printer.CurrentX = 15360
     Printer.Print CInt((k + pagelines - 1) \ pagelines) & " / " & CInt((f.MSFlexGrid1.Rows - 1 + pagelines - 1) \ pagelines)
     
@@ -438,7 +438,7 @@ Printer.EndDoc
 End Function
 
 Private Function navControlForDailyReport(con As Label)
-    Printer.CurrentY = con.Top - 300
+    Printer.CurrentY = con.Top + 700
     
     Select Case con.Alignment
         Case vbLeftJustify:
@@ -456,7 +456,7 @@ Private Function navControlForDailyReport(con As Label)
 End Function
 
 Private Function navControlForDailyReportBottom(fm As Frame, con As Label)
-    Printer.CurrentY = fm.Top + con.Top + 1200
+    Printer.CurrentY = fm.Top + con.Top + 700
     
     Select Case con.Alignment
         Case vbLeftJustify:
