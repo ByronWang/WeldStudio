@@ -25,7 +25,7 @@ Begin VB.Form FrmDailyReport
       SelectionMode   =   1
    End
    Begin VB.Label lblUnit 
-      Alignment       =   1  'Right Justify
+      Alignment       =   2  'Center
       Caption         =   "UNIT:K922SN99-U101136(CW632)"
       BeginProperty Font 
          Name            =   "ËÎÌו"
@@ -44,6 +44,7 @@ Begin VB.Form FrmDailyReport
       Width           =   3615
    End
    Begin VB.Label lblLocation 
+      Alignment       =   1  'Right Justify
       Caption         =   "LOCATION:CRETE ILL"
       BeginProperty Font 
          Name            =   "ËÎÌו"

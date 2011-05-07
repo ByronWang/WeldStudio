@@ -512,6 +512,7 @@ End Sub
 
 Private Sub mnuOptions_Click()
     FrmOption.Show vbModal, Me
+    PLCDrv.InitSystem
 End Sub
 
 Private Sub mnuPulseProcess_Click()
