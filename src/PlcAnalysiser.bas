@@ -190,6 +190,8 @@ Dim sumCurrent As Double
         
         bStop = i
     End If
+    
+    On Error GoTo ERROR_HANDLE
         
     If bStartOK Then
         r.FlashSpeed = (buf(bStop - 1).Dist - buf(bStart).Dist) / (buf(bStop - 1).Time - buf(bStart).Time)
@@ -212,6 +214,10 @@ Dim sumCurrent As Double
     
         
     anaFlash = r
+    
+Exit Function
+ERROR_HANDLE:
+    MsgBox "ERROR at r.FlashSpeed = (buf(bStop - 1).Dist - buf(bStart).Dist) / (buf(bStop - 1).Time - buf(bStart).Time)  " & bStart & " : " & bStop & "  in " & startPos & " " & stopPos
 End Function
 
 Private Function anaBoost(buf() As WeldData, startPos As Integer, stopPos As Integer, r As WeldAnalysisResultType) As WeldAnalysisResultType
@@ -385,8 +391,9 @@ Dim sTime As Single
 '        maxCurrent = buf(i).Amp
 '        voltWhenMaxCurrent = buf(i).Volt
 '    Next
-    
-    r.OverallImpedance = (voltWhenMaxCurrent * 1000 * 1000) / (maxCurrent * 60 * 60)
+    If maxCurrent > 1 Then
+        r.OverallImpedance = (voltWhenMaxCurrent * 1000 * 1000) / (maxCurrent * 60 * 60)
+    End If
     
     If analysisDefine.SlippageEnable Then
         If r.UpsetDuration < analysisDefine.SlippageUpsetTime Or r.UpsetRailUsage > analysisDefine.SlippageUpset Then
@@ -500,6 +507,7 @@ End Function
 
 
 Public Function Analysis(buf() As WeldData, processSetting As Integer, count As Integer) As WeldAnalysisResultType
+On Error GoTo SYS_ERROR_HANDLE
 m_processSetting = processSetting
 
 Call GetAnalysisDefine
@@ -614,7 +622,6 @@ For pos = pos To count
         Exit For
     End If
 Next
- 
 
 FINISH_S:
     If buf(pos).PlcStage < 11 Then
@@ -622,6 +629,10 @@ FINISH_S:
     End If
 
     Analysis = r
+    
+Exit Function
+SYS_ERROR_HANDLE:
+    MsgBox "System error at Analysis,Please contact! stage = " & stage
 End Function
 
 

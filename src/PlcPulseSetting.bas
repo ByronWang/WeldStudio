@@ -126,7 +126,7 @@ Public Function LoadAll() As PulseFileItemType()
     Dim FileName As String
     FileName = App.path & "\" & SETTING_PATH & "PulseSetting.cfg"
     
-    out.log "<<<<<<<<<<<<<<<<<<<<<     LoadAll  PulseFileItemType <<<<<<<<<<<<<<<<<<<"
+    ' out.log "<<<<<<<<<<<<<<<<<<<<<     LoadAll  PulseFileItemType <<<<<<<<<<<<<<<<<<<"
     
     Dim pFileHeader As FileHeaderType
     Dim pFileItem As PulseFileItemType
@@ -139,7 +139,7 @@ Public Function LoadAll() As PulseFileItemType()
     Open FileName For Binary As #1
     Get 1, 1, pFileHeader
     
-    out.log " " & 1 & " > pFileHeader.count = " & pFileHeader.count
+    ' out.log " " & 1 & " > pFileHeader.count = " & pFileHeader.count
     
     ReDim pFileItemList(pFileHeader.count)
     
@@ -150,13 +150,13 @@ Public Function LoadAll() As PulseFileItemType()
         pos = pos + LenB(pFileItem)
         pFileItemList(i) = pFileItem
         
-        out.log " " & pos & " > pFileItem.name = " & pFileItem.name
+        ' out.log " " & pos & " > pFileItem.name = " & pFileItem.name
         out.logSingleArray "pFileItem.pulseSetting.General.Value", pFileItem.pulseSetting.General.Value
         out.logSingleArray "pFileItem.pulseSetting.Stages(1).Value", pFileItem.pulseSetting.Stages(1).Value
     Next i
     Close 1
     
-    out.log ">>>>>>>>>>>>>>>>>>     Finish LoadAll PulseFileItemType  >>>>>>>>>>>>>>>>>>>>"
+    ' out.log ">>>>>>>>>>>>>>>>>>     Finish LoadAll PulseFileItemType  >>>>>>>>>>>>>>>>>>>>"
 
 LoadAll = pFileItemList
 End Function
@@ -251,8 +251,8 @@ Public Function AssertEqualPulseData(ByRef pulseSetting As PulseSettingType, ByR
     Dim i As Integer
     Dim j As Integer
     
-    out.log "<<<<<<<<<<<<<<<<<<<<<     AssertEqualPulseData   <<<<<<<<<<<<<<<<<<<"
-    out.log "start compare pulseSetting.Stages(j).Value(i) <> dest.Stages(j).Value(i)"
+    ' out.log "<<<<<<<<<<<<<<<<<<<<<     AssertEqualPulseData   <<<<<<<<<<<<<<<<<<<"
+    ' out.log "start compare pulseSetting.Stages(j).Value(i) <> dest.Stages(j).Value(i)"
     
     Dim hasNotEqual As Boolean
     hasNotEqual = False
@@ -260,25 +260,25 @@ Public Function AssertEqualPulseData(ByRef pulseSetting As PulseSettingType, ByR
     For i = 0 To 7
         For j = 0 To 6
             If Not out.eq(pulseSetting.Stages(j).Value(i), dest.Stages(j).Value(i)) Then
-                out.log "<>  i=" & i & " j=" & j & "  " & pulseSetting.Stages(j).Value(i) & "  >-<  " & dest.Stages(j).Value(i)
+                ' out.log "<>  i=" & i & " j=" & j & "  " & pulseSetting.Stages(j).Value(i) & "  >-<  " & dest.Stages(j).Value(i)
                 hasNotEqual = True
             Else
-                out.log "==  i=" & i & " j=" & j & "  " & pulseSetting.Stages(j).Value(i) & "  >-<  " & dest.Stages(j).Value(i)
+                ' out.log "==  i=" & i & " j=" & j & "  " & pulseSetting.Stages(j).Value(i) & "  >-<  " & dest.Stages(j).Value(i)
             End If
         Next
     Next
     
-    out.log "pulseSetting.General.Value(j - 1) <> dest.General.Value(j - 1) "
+    ' out.log "pulseSetting.General.Value(j - 1) <> dest.General.Value(j - 1) "
     
     For j = 1 To 4
         If Not out.eq(pulseSetting.General.Value(j - 1), dest.General.Value(j - 1)) Then
-            out.log "<> j=" & j & "  " & pulseSetting.General.Value(j - 1) & "  >-<  " & dest.General.Value(j - 1)
+            ' out.log "<> j=" & j & "  " & pulseSetting.General.Value(j - 1) & "  >-<  " & dest.General.Value(j - 1)
             hasNotEqual = True
         Else
-            out.log "== j=" & j & "  " & pulseSetting.General.Value(j - 1) & "  >-<  " & dest.General.Value(j - 1)
+            ' out.log "== j=" & j & "  " & pulseSetting.General.Value(j - 1) & "  >-<  " & dest.General.Value(j - 1)
         End If
     Next
     
     AssertEqualPulseData = Not hasNotEqual
-    out.log ">>>>>>>>>>>>>>>>>>       return " & AssertEqualPulseData & "           >>>>>>>>>>>>>>>>>>>>"
+    ' out.log ">>>>>>>>>>>>>>>>>>       return " & AssertEqualPulseData & "           >>>>>>>>>>>>>>>>>>>>"
 End Function

@@ -520,7 +520,6 @@ PlcRes.LoadResFor Me
     analysisDefine.UpsetDiameter_Pistonside = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Pistonside)", 0))
     analysisDefine.UpsetDiameter_Rodside = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Rodside)", 0))
 
-
     Dim IsSimulate As Integer
     IsSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
     If IsSimulate = 1 Then
@@ -555,8 +554,21 @@ End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     beUnload = True
+    
+    out.log "200 in unload "
+    
+    WeldMDIForm.mnuWindow.Enabled = True
+    WeldMDIForm.mnuParameters.Enabled = True
+    WeldMDIForm.mnuOptions.Enabled = True
+    WeldMDIForm.mnuConnect.Enabled = True
+    
+    out.log "205 in unload "
+    
     Me.Hide
+    
+    out.log "210 in unload "
 
+    
     Me.timerDisplay.Enabled = False
     Me.timerMonitor.Enabled = False
     Dim i As Integer
@@ -571,15 +583,12 @@ Private Sub Form_Unload(Cancel As Integer)
 '        DoEvents
 '    Wend
     
+    out.log "211 in unload "
+    
     PLCDrv.ClosePcMonitor
     PLCDrv.ClosePLCConection
     
-    WeldMDIForm.mnuWindow.Enabled = True
-    WeldMDIForm.mnuParameters.Enabled = True
-    WeldMDIForm.mnuOptions.Enabled = True
-    WeldMDIForm.mnuConnect.Enabled = True
-    
-    Unload Me
+    out.log "220 in unload "
 ERROR_HANDLE:
 End Sub
 
@@ -681,14 +690,10 @@ Private Sub TimerDisplay_Timer()
     End If
     picPsi.Width = w
     
-    
-
-
 End Sub
 
-
-
 Private Sub TimerMonitor_Timer()
+On Error GoTo SYS_ERROR_HANDLE
 If beRequest Then
     Exit Sub
 End If
@@ -697,7 +702,6 @@ If beUnload Then
 End If
 
 Dim tm As Long
-
 
 'If Not beRecording And Not beSigned Then
 '    tm = timeGetTime()
@@ -709,7 +713,6 @@ Dim tm As Long
 '    lastTime = tm
 'End If
 
-Debug.Print wmRecord_Index
 beRequest = True
 '9   Weld stage 0-init, 1-preflash 2-flash 3-boost 4-upset 5-forge 6-shear
 '11  PLC Stage
@@ -724,8 +727,6 @@ beRequest = True
 '?10 (Force???) Bosch valve
 
 Dim status As Long
-
-
 status = PLCDrv.ReadPcMonitor(wmRecord)
 If status > 0 Then
     GoTo ERROR_HANDLE
@@ -811,12 +812,17 @@ End If
 
 beRequest = False
 Exit Sub
+
 ERROR_HANDLE:
     beRequest = False
     If Not beUnload Then
         MsgBox "Connection error!¡¡" & vbCrLf & status
     End If
     Unload Me
+Exit Sub
+
+SYS_ERROR_HANDLE:
+    out.log "Unknown error in TimerMonitor_Timer " & Err.Description
 End Sub
 
 Public Function canStart() As Boolean

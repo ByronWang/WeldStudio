@@ -207,6 +207,7 @@ ERROR_HANDLE:
 End Function
 
 Public Function ReadPcMonitor(ByRef wm As WeldMonitor) As Long
+On Error GoTo SYS_ERROR_HANDLE
     status = UtlServer.ReadInt(handle_PC_Monitor, buffer, IO_STATUS, 12345)
     If (status <> DTL_SUCCESS) Then
         RUN_PHASE = "READER PC MONITOR"
@@ -240,7 +241,7 @@ Public Function ReadPcMonitor(ByRef wm As WeldMonitor) As Long
     '10  Bosch valve
     '11  PLC stage
 
-
+    out.logIntegerArray "ReadPcMonitor", buffer
 Exit Function
 ERROR_HANDLE:
 
@@ -249,6 +250,9 @@ ERROR_HANDLE:
     Call UtlServer.ErrorStr(status, g_Error_String, 80)
     ReadPcMonitor = status
     Exit Function
+SYS_ERROR_HANDLE:
+    out.log "ReadPcMonitor ERROR" & Err.Description
+    out.logIntegerArray "ReadPcMonitor", buffer
 End Function
 
 Public Function ReadPulseData(ByRef pulseSetting As PulseSettingType) As Long

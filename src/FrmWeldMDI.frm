@@ -448,7 +448,8 @@ Private Sub mnuConnect_Click()
     frmProgress.Show vbModal, Me
     
     If frmProgress.status = 0 Then
-        Call FrmGraph.Show
+        Dim g As New FrmGraph
+        g.Show
     End If
     
 End Sub
