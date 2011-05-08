@@ -303,7 +303,7 @@ Dim sumCurrent As Double
     Dim sTime As Single
     
     If analysisDefine.CurrentInterruptEnable Then
-        r.HasCurrentInterruptinBoost = False
+        r.HasCurrentInterruptinBoost = OK
         
         For i = startPos To stopPos
             If buf(i).Amp <= analysisDefine.CurrentInterruptCurrent Then
@@ -332,7 +332,7 @@ Dim sumCurrent As Double
     sTime = 0
     
     If analysisDefine.ShortCircuitEnable Then
-        r.HasShortCircuitinBoost = False
+        r.HasShortCircuitinBoost = OK
         
         For i = startPos To stopPos
             If buf(i).Amp > analysisDefine.ShortCircuitCurrent Then

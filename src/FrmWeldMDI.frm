@@ -449,6 +449,8 @@ Private Function navControlForDailyReport(con As Label)
             Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 60 + 2000
     End Select
     
+    out.log con.Caption & "  " & Printer.CurrentX
+    
     Printer.FontSize = con.FontSize
     Printer.FontBold = con.FontBold
     Printer.ForeColor = con.ForeColor
@@ -466,6 +468,8 @@ Private Function navControlForDailyReportBottom(fm As Frame, con As Label)
         Case vbCenter:
             Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 60
     End Select
+    
+    out.log con.Caption & "  " & Printer.CurrentX
     
     Printer.FontSize = con.FontSize
     Printer.FontBold = con.FontBold
@@ -485,6 +489,8 @@ Private Function navControl(con As Label)
         Case vbCenter:
             Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 60
     End Select
+    
+    out.log con.Caption & "  " & Printer.CurrentX
     
     Printer.FontSize = con.FontSize
     Printer.FontBold = con.FontBold
