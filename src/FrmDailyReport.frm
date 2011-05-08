@@ -307,24 +307,23 @@ entry = displayName
 '   Result
 If f.analysisResult.Succeed = PlcDeclare.OK Then
     acceptedWelds = acceptedWelds + 1
-    totalWelds = totalWelds + 1
     entry = entry & vbTab & "OK"
     cellcolors(i) = SUCCEED_COLOR
 ElseIf f.analysisResult.Succeed = PlcDeclare.NO Then
     rejectedWelds = rejectedWelds + 1
-    totalWelds = totalWelds + 1
     entry = entry & vbTab & "NO"
     cellcolors(i) = FAIL_COLOR
 ElseIf f.analysisResult.Succeed = PlcDeclare.INTERRUPT Then
-    totalWelds = totalWelds + 1
+    rejectedWelds = rejectedWelds + 1
     entry = entry & vbTab & "INT"
     cellcolors(i) = FAIL_COLOR
 Else
-    totalWelds = totalWelds + 1
+    rejectedWelds = rejectedWelds + 1
     entry = entry & vbTab & " - "
     cellcolors(i) = NOTUSED_COLOR
 End If
 
+totalWelds = totalWelds + 1
 
 
 
@@ -457,7 +456,7 @@ MSFlexGrid1.ColWidth(i) = 1000
 MSFlexGrid1.ColAlignment(i) = AlignmentSettings.flexAlignCenterCenter
 i = i + 1
 MSFlexGrid1.TextMatrix(0, i) = "Parameter"
-MSFlexGrid1.ColWidth(i) = 1000
+MSFlexGrid1.ColWidth(i) = 1500
 MSFlexGrid1.ColAlignment(i) = AlignmentSettings.flexAlignLeftCenter
 i = i + 1
 'MSFlexGrid1.TextMatrix(0, i) = "WeldProgram"

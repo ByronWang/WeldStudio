@@ -56,6 +56,9 @@ Public SimulatePath As String
 
 Public Calibrate_Distance As Boolean
 
+Public RegulareStageMapping(12) As Integer
+Public PulseStageMapping(12) As Integer
+
 Public Function InitSystem()
     IsSimulate = GetSetting(App.EXEName, "Simulate", "IsSimulate", 0)
     SimulatePath = GetSetting(App.EXEName, "Simulate", "SimulateFilename", App.path & "\T0039.WLD")
@@ -87,6 +90,33 @@ Public Function InitSystem()
     For i = 1 To 12
         PlcStages(i) = LoadResString(PlcStages_Res_Start + i)  'init
     Next
+    
+    PulseStageMapping(1) = PREFLASH_STAGE
+    PulseStageMapping(2) = FLASH_STAGE
+    PulseStageMapping(3) = FLASH_STAGE
+    PulseStageMapping(4) = FLASH_STAGE
+    PulseStageMapping(5) = FLASH_STAGE
+    PulseStageMapping(6) = BOOST_STAGE
+    PulseStageMapping(7) = BOOST_STAGE
+    PulseStageMapping(8) = UPSET_STAGE
+    PulseStageMapping(9) = FORGE_STAGE
+    PulseStageMapping(10) = SHEAR_STAGE
+    PulseStageMapping(11) = SHEAR_STAGE
+    PulseStageMapping(12) = SHEAR_STAGE
+    
+    RegulareStageMapping(1) = PREFLASH_STAGE
+    RegulareStageMapping(2) = PREFLASH_STAGE
+    RegulareStageMapping(3) = FLASH_STAGE
+    RegulareStageMapping(4) = FLASH_STAGE
+    RegulareStageMapping(5) = FLASH_STAGE
+    RegulareStageMapping(6) = BOOST_STAGE
+    RegulareStageMapping(7) = BOOST_STAGE
+    RegulareStageMapping(8) = UPSET_STAGE
+    RegulareStageMapping(9) = FORGE_STAGE
+    RegulareStageMapping(10) = SHEAR_STAGE
+    RegulareStageMapping(11) = SHEAR_STAGE
+    RegulareStageMapping(12) = SHEAR_STAGE
+    
 End Function
 
 

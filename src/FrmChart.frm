@@ -1958,13 +1958,34 @@ Dim data As WeldData
 
 Dim entry As String
 
+entry = ""
 For i = 0 To UBound(EmulateData)
 
     data = EmulateData(i)
-    If 0 <= data.WeldStage And data.WeldStage <= 6 Then
-        entry = PLCDrv.WeldStages(data.WeldStage)
+    
+    Dim ws As Long
+    ws = data.WeldStage
+    
+    If 1 < data.PlcStage And data.PlcStage <= 12 Then
+        If fr.header2.ParamSettingMode = "R" Then
+            If PLCDrv.RegulareStageMapping(data.PlcStage) > ws Then
+                ws = PLCDrv.RegulareStageMapping(data.PlcStage)
+            End If
+        Else
+            If PLCDrv.PulseStageMapping(data.PlcStage) < ws Then
+                ws = PLCDrv.PulseStageMapping(data.PlcStage)
+            End If
+            
+            If PLCDrv.PulseStageMapping(data.PlcStage) <> data.WeldStage Then
+                Debug.Print data.PlcStage & " " & PLCDrv.PulseStageMapping(data.PlcStage) & " - " & data.WeldStage
+            End If
+        End If
+    End If
+    
+    If 0 <= ws And ws <= 6 Then
+        entry = PLCDrv.WeldStages(ws)
     Else
-        entry = data.WeldStage
+        entry = ws
     End If
     entry = entry & vbTab & data.PlcStage
     entry = entry & vbTab & Format(data.Dist, "##0.00")
