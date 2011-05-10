@@ -2,10 +2,10 @@ VERSION 5.00
 Object = "{65E121D4-0C60-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCHRT20.OCX"
 Begin VB.Form FrmChart 
    Caption         =   "Form1"
-   ClientHeight    =   10170
+   ClientHeight    =   8490
    ClientLeft      =   60
    ClientTop       =   450
-   ClientWidth     =   15240
+   ClientWidth     =   11880
    Icon            =   "FrmChart.frx":0000
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
@@ -1266,6 +1266,7 @@ Begin VB.Form FrmChart
          Width           =   915
       End
       Begin VB.Label lblCriDatadddd 
+         BackColor       =   &H00FF0000&
          Caption         =   "Min/Max"
          BeginProperty Font 
             Name            =   "Times New Roman"
@@ -1296,9 +1297,9 @@ Begin VB.Form FrmChart
    Begin VB.Label lblTime 
       Caption         =   "19:12:54"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Arial"
          Size            =   10.5
-         Charset         =   134
+         Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
@@ -1315,9 +1316,9 @@ Begin VB.Form FrmChart
       Alignment       =   1  'Right Justify
       Caption         =   "2011-01-01"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Arial"
          Size            =   10.5
-         Charset         =   134
+         Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
@@ -1334,9 +1335,9 @@ Begin VB.Form FrmChart
       Alignment       =   2  'Center
       Caption         =   "PULSE"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Arial"
          Size            =   10.5
-         Charset         =   134
+         Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
@@ -1353,9 +1354,9 @@ Begin VB.Form FrmChart
       Alignment       =   2  'Center
       Caption         =   "YARDWAY LTD."
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Arial"
          Size            =   10.5
-         Charset         =   134
+         Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
@@ -1372,9 +1373,9 @@ Begin VB.Form FrmChart
       Alignment       =   2  'Center
       Caption         =   "K0035 - OK"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Arial"
          Size            =   10.5
-         Charset         =   134
+         Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
@@ -1390,9 +1391,9 @@ Begin VB.Form FrmChart
    Begin VB.Label lblLocation 
       Caption         =   "LOCATION:CRETE ILL"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Arial"
          Size            =   10.5
-         Charset         =   134
+         Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
@@ -1409,9 +1410,9 @@ Begin VB.Form FrmChart
       Alignment       =   1  'Right Justify
       Caption         =   "UNIT:K922SN99-U101136(CW632)"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Arial"
          Size            =   10.5
-         Charset         =   134
+         Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False

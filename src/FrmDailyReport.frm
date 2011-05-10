@@ -2,14 +2,14 @@ VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Begin VB.Form FrmDailyReport 
    Caption         =   "Form1"
-   ClientHeight    =   7365
+   ClientHeight    =   6735
    ClientLeft      =   60
    ClientTop       =   450
-   ClientWidth     =   13560
+   ClientWidth     =   11880
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   7365
-   ScaleWidth      =   13560
+   ScaleHeight     =   6735
+   ScaleWidth      =   11880
    WindowState     =   2  'Maximized
    Begin VB.Frame frmSum 
       BorderStyle     =   0  'None
@@ -22,9 +22,9 @@ Begin VB.Form FrmDailyReport
          Alignment       =   1  'Right Justify
          Caption         =   "Accepted welds:"
          BeginProperty Font 
-            Name            =   "宋体"
+            Name            =   "Arial"
             Size            =   10.5
-            Charset         =   134
+            Charset         =   0
             Weight          =   700
             Underline       =   0   'False
             Italic          =   0   'False
@@ -41,9 +41,9 @@ Begin VB.Form FrmDailyReport
          Alignment       =   1  'Right Justify
          Caption         =   "Rejected welds:"
          BeginProperty Font 
-            Name            =   "宋体"
+            Name            =   "Arial"
             Size            =   10.5
-            Charset         =   134
+            Charset         =   0
             Weight          =   700
             Underline       =   0   'False
             Italic          =   0   'False
@@ -60,9 +60,9 @@ Begin VB.Form FrmDailyReport
          Alignment       =   1  'Right Justify
          Caption         =   "Total welds:"
          BeginProperty Font 
-            Name            =   "宋体"
+            Name            =   "Arial"
             Size            =   10.5
-            Charset         =   134
+            Charset         =   0
             Weight          =   700
             Underline       =   0   'False
             Italic          =   0   'False
@@ -79,9 +79,9 @@ Begin VB.Form FrmDailyReport
          Alignment       =   1  'Right Justify
          Caption         =   "2"
          BeginProperty Font 
-            Name            =   "宋体"
+            Name            =   "Arial"
             Size            =   10.5
-            Charset         =   134
+            Charset         =   0
             Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
@@ -98,9 +98,9 @@ Begin VB.Form FrmDailyReport
          Alignment       =   1  'Right Justify
          Caption         =   "34"
          BeginProperty Font 
-            Name            =   "宋体"
+            Name            =   "Arial"
             Size            =   10.5
-            Charset         =   134
+            Charset         =   0
             Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
@@ -117,9 +117,9 @@ Begin VB.Form FrmDailyReport
          Alignment       =   1  'Right Justify
          Caption         =   "23"
          BeginProperty Font 
-            Name            =   "宋体"
+            Name            =   "Arial"
             Size            =   10.5
-            Charset         =   134
+            Charset         =   0
             Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
@@ -138,8 +138,8 @@ Begin VB.Form FrmDailyReport
       Left            =   0
       TabIndex        =   0
       Top             =   960
-      Width           =   11775
-      _ExtentX        =   20770
+      Width           =   14175
+      _ExtentX        =   25003
       _ExtentY        =   9340
       _Version        =   393216
       Cols            =   13
@@ -150,9 +150,9 @@ Begin VB.Form FrmDailyReport
       Alignment       =   2  'Center
       Caption         =   "YARDWAY LTD."
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Arial"
          Size            =   10.5
-         Charset         =   134
+         Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
@@ -160,7 +160,7 @@ Begin VB.Form FrmDailyReport
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   4680
+      Left            =   6240
       TabIndex        =   4
       Top             =   360
       Width           =   3600
@@ -169,9 +169,9 @@ Begin VB.Form FrmDailyReport
       Alignment       =   1  'Right Justify
       Caption         =   "LOCATION:CRETE ILL"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Arial"
          Size            =   10.5
-         Charset         =   134
+         Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
@@ -179,7 +179,7 @@ Begin VB.Form FrmDailyReport
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   2400
+      Left            =   3960
       TabIndex        =   3
       Top             =   600
       Width           =   3600
@@ -187,9 +187,9 @@ Begin VB.Form FrmDailyReport
    Begin VB.Label lblUnit 
       Caption         =   "UNIT:K922SN99-U101136(CW632)"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Arial"
          Size            =   10.5
-         Charset         =   134
+         Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
@@ -197,7 +197,7 @@ Begin VB.Form FrmDailyReport
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   6960
+      Left            =   8520
       TabIndex        =   2
       Top             =   600
       Width           =   3600
@@ -206,9 +206,9 @@ Begin VB.Form FrmDailyReport
       Alignment       =   2  'Center
       Caption         =   "2011-01-01"
       BeginProperty Font 
-         Name            =   "宋体"
+         Name            =   "Arial"
          Size            =   10.5
-         Charset         =   134
+         Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
@@ -216,7 +216,7 @@ Begin VB.Form FrmDailyReport
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   4680
+      Left            =   6240
       TabIndex        =   1
       Top             =   120
       Width           =   3600

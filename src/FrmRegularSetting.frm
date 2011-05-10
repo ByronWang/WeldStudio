@@ -27,7 +27,7 @@ Begin VB.Form FrmRegularSetting
          Strikethrough   =   0   'False
       EndProperty
       Height          =   360
-      Left            =   5280
+      Left            =   4080
       TabIndex        =   86
       Top             =   360
       Width           =   375
@@ -46,7 +46,7 @@ Begin VB.Form FrmRegularSetting
       Left            =   2160
       TabIndex        =   0
       Top             =   360
-      Width           =   3015
+      Width           =   1815
    End
    Begin VB.Frame Frame1 
       Caption         =   "Weld Parameters"
@@ -866,6 +866,14 @@ Begin VB.Form FrmRegularSetting
       Tag             =   "14020"
       Top             =   7320
       Width           =   1215
+   End
+   Begin VB.Label Label3 
+      Caption         =   "Program name must be 1 to 7 characters long."
+      Height          =   255
+      Left            =   1800
+      TabIndex        =   87
+      Top             =   760
+      Width           =   4455
    End
    Begin VB.Label lblSign 
       Alignment       =   1  'Right Justify

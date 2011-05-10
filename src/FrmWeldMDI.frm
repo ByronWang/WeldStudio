@@ -7,10 +7,10 @@ Begin VB.MDIForm WeldMDIForm
    ClientHeight    =   8190
    ClientLeft      =   165
    ClientTop       =   855
-   ClientWidth     =   11880
+   ClientWidth     =   11400
    Icon            =   "FrmWeldMDI.frx":0000
    LinkTopic       =   "MDIForm1"
-   StartUpPosition =   3  '´°¿ÚÈ±Ê¡
+   StartUpPosition =   3  'Windows Default
    Tag             =   "10000"
    WindowState     =   2  'Maximized
    Begin MSComDlg.CommonDialog CommonDialog1 
@@ -438,63 +438,77 @@ Printer.EndDoc
 End Function
 
 Private Function navControlForDailyReport(con As Label)
+    Printer.FontSize = con.FontSize
+    Printer.FontBold = con.FontBold
+    Printer.ForeColor = con.ForeColor
+    
+    Dim sca As Single
+    sca = 1
+    If con.Width > 3000 Then
+        sca = 3600 / con.Width
+    End If
+    
     Printer.CurrentY = con.Top + 700
     
     Select Case con.Alignment
         Case vbLeftJustify:
-            Printer.CurrentX = con.Left + 0 + 2000
+            Printer.CurrentX = con.Left * sca + 0
         Case vbRightJustify:
-            Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 30 + 2000
+            Printer.CurrentX = con.Left * sca + con.Width * sca - Printer.TextWidth(con.Caption)
         Case vbCenter:
-            Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 60 + 2000
+            Printer.CurrentX = con.Left * sca + (con.Width * sca - Printer.TextWidth(con.Caption)) / 2
     End Select
-    
-    out.log con.Caption & "  " & Printer.CurrentX
-    
-    Printer.FontSize = con.FontSize
-    Printer.FontBold = con.FontBold
-    Printer.ForeColor = con.ForeColor
+
     Printer.Print con.Caption
 End Function
 
 Private Function navControlForDailyReportBottom(fm As Frame, con As Label)
-    Printer.CurrentY = fm.Top + con.Top + 700
-    
-    Select Case con.Alignment
-        Case vbLeftJustify:
-            Printer.CurrentX = con.Left + 0
-        Case vbRightJustify:
-            Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 30
-        Case vbCenter:
-            Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 60
-    End Select
-    
-    out.log con.Caption & "  " & Printer.CurrentX
-    
     Printer.FontSize = con.FontSize
     Printer.FontBold = con.FontBold
     Printer.ForeColor = con.ForeColor
+    
+    Dim sca As Single
+    sca = 1
+    If con.Width > 3000 Then
+        sca = 3600 / con.Width
+    End If
+    
+    Printer.CurrentY = 9600 + con.Top + 700
+    Select Case con.Alignment
+        Case vbLeftJustify:
+            Printer.CurrentX = con.Left * sca + 0
+        Case vbRightJustify:
+            Printer.CurrentX = con.Left * sca + con.Width * sca - Printer.TextWidth(con.Caption)
+        Case vbCenter:
+            Printer.CurrentX = con.Left * sca + (con.Width * sca - Printer.TextWidth(con.Caption)) / 2
+    End Select
+    
     Printer.Print con.Caption
 End Function
 
 
 Private Function navControl(con As Label)
-    Printer.CurrentY = con.Top + 1100
-    
-    Select Case con.Alignment
-        Case vbLeftJustify:
-            Printer.CurrentX = con.Left + 0
-        Case vbRightJustify:
-            Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 30
-        Case vbCenter:
-            Printer.CurrentX = con.Left + (30 - Len(con.Caption)) * con.Width / 60
-    End Select
-    
-    out.log con.Caption & "  " & Printer.CurrentX
-    
     Printer.FontSize = con.FontSize
     Printer.FontBold = con.FontBold
     Printer.ForeColor = con.ForeColor
+    
+    Dim sca As Single
+    sca = 1
+    If con.Width > 3000 Then
+        sca = 3600 / con.Width
+    End If
+    
+    Printer.CurrentY = con.Top * sca + 1100
+    
+    Select Case con.Alignment
+        Case vbLeftJustify:
+            Printer.CurrentX = con.Left * sca + 0
+        Case vbRightJustify:
+            Printer.CurrentX = con.Left * sca + con.Width * sca - Printer.TextWidth(con.Caption)
+        Case vbCenter:
+            Printer.CurrentX = con.Left * sca + (con.Width * sca - Printer.TextWidth(con.Caption)) / 2
+    End Select
+    
     Printer.Print con.Caption
 End Function
 

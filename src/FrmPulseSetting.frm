@@ -27,7 +27,7 @@ Begin VB.Form FrmPulseSetting
          Strikethrough   =   0   'False
       EndProperty
       Height          =   360
-      Left            =   5280
+      Left            =   4080
       TabIndex        =   74
       Top             =   360
       Width           =   375
@@ -261,7 +261,7 @@ Begin VB.Form FrmPulseSetting
       Left            =   2160
       TabIndex        =   0
       Top             =   360
-      Width           =   3015
+      Width           =   1815
    End
    Begin VB.CommandButton CancelButton 
       Caption         =   "E&xit"
@@ -752,6 +752,14 @@ Begin VB.Form FrmPulseSetting
          Top             =   480
          Width           =   495
       End
+   End
+   Begin VB.Label Label3 
+      Caption         =   "Program name must be 1 to 7 characters long."
+      Height          =   255
+      Left            =   1800
+      TabIndex        =   75
+      Top             =   760
+      Width           =   4455
    End
    Begin VB.Label Label1 
       Caption         =   "Program Names :"
