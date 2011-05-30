@@ -10,3 +10,8 @@ data/*
 ~*
 */~*
 Package
+*.log
+*.cfg
+Package*
+WMS.exe
+

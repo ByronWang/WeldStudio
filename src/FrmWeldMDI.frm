@@ -10,7 +10,7 @@ Begin VB.MDIForm WeldMDIForm
    ClientWidth     =   11400
    Icon            =   "FrmWeldMDI.frx":0000
    LinkTopic       =   "MDIForm1"
-   StartUpPosition =   3  'Windows Default
+   StartUpPosition =   3  '´°¿ÚÈ±Ê¡
    Tag             =   "10000"
    WindowState     =   2  'Maximized
    Begin MSComDlg.CommonDialog CommonDialog1 
@@ -50,6 +50,9 @@ Begin VB.MDIForm WeldMDIForm
       End
       Begin VB.Menu mnuPrint 
          Caption         =   "Print"
+      End
+      Begin VB.Menu mnuBatchPrint 
+         Caption         =   "Batch Print"
       End
       Begin VB.Menu mnuExit 
          Caption         =   "E&xit"
@@ -142,6 +145,70 @@ End Sub
 
 Private Sub menuUserGuide_Click()
     Shell "hh.exe " & App.path & "\WMS.chm ", vbNormalFocus
+End Sub
+
+Private Sub mnuBatchPrint_Click()
+    CommonDialog1.Filter = "Data File (*.WLD;*DLY) |*.wld|Daily Report(*.DLY)|*.DLY"
+    CommonDialog1.InitDir = ".\data\"
+    Me.CommonDialog1.Flags = cdlOFNAllowMultiselect Or cdlOFNFileMustExist Or cdlOFNFileMustExist
+    Me.CommonDialog1.ShowOpen
+    
+    If Me.CommonDialog1.filename = "" Then
+        Exit Sub
+    End If
+    Dim fs() As String
+    fs = Split(Me.CommonDialog1.filename, " ")
+    
+        Me.CommonDialog1.PrinterDefault = True
+        CommonDialog1.CancelError = True
+        CommonDialog1.Flags = cdlPDNoPageNums Or cdlPDNoSelection
+        
+        On Error Resume Next
+        Me.CommonDialog1.ShowPrinter
+        If Err.Number = cdlCancel Then
+            Exit Sub
+        End If
+        On Error GoTo 0
+        DoEvents
+        
+        
+        
+'        Dim fc As FrmChart
+'        Set fc = f
+'        For i = 1 To CommonDialog1.Copies
+'            Call printChart(fc)
+'        Next i
+        
+    Dim frm As FrmDraw
+    Dim fname As String
+    
+    If UBound(fs) - LBound(fs) > 1 Then
+        
+        Dim i As Integer
+        
+        Dim path As String
+                
+        path = fs(LBound(fs))
+        For i = LBound(fs) + 1 To UBound(fs)
+            Printer.Orientation = vbPRORLandscape
+            fname = path & fs(i)
+            Set frm = New FrmDraw
+            Load frm
+            frm.LoadData (fname)
+            frm.PrintForm
+            Unload frm
+            Printer.EndDoc
+        Next
+    Else
+        Printer.Orientation = vbPRORLandscape
+        fname = fs(LBound(fs))
+        Set frm = New FrmDraw
+        Load frm
+        frm.LoadData (fname)
+        frm.PrintForm
+        Unload frm
+        Printer.EndDoc
+    End If
 End Sub
 
 Private Sub mnuFile_click()
@@ -568,13 +635,13 @@ Private Sub mnuOpen_Click()
     Dim fd As FrmDailyReport
     
     CommonDialog1.ShowOpen
-    If CommonDialog1.FileName <> "" And UCase(Right(CommonDialog1.FileName, 4)) = ".WLD" Then
+    If CommonDialog1.filename <> "" And UCase(Right(CommonDialog1.filename, 4)) = ".WLD" Then
         
         For i = 0 To Forms.count - 1
             Set f = Forms(i)
             If TypeOf f Is FrmChart Then
                 Set fc = f
-                If UCase(fc.weldFileName) = UCase(CommonDialog1.FileName) Then
+                If UCase(fc.weldFileName) = UCase(CommonDialog1.filename) Then
                     fc.SetFocus
                     Exit Sub
                 End If
@@ -582,15 +649,15 @@ Private Sub mnuOpen_Click()
         Next i
                 
         Set fc = New FrmChart
-        fc.Load CommonDialog1.FileName
-        fc.Caption = CommonDialog1.FileName
+        fc.Load CommonDialog1.filename
+        fc.Caption = CommonDialog1.filename
         fc.Show
-    ElseIf CommonDialog1.FileName <> "" And UCase(Right(CommonDialog1.FileName, 4)) = ".DLY" Then
+    ElseIf CommonDialog1.filename <> "" And UCase(Right(CommonDialog1.filename, 4)) = ".DLY" Then
         For i = 0 To Forms.count - 1
             Set f = Forms(i)
             If TypeOf f Is FrmDailyReport Then
                 Set fd = f
-                If UCase(fd.DailyReportFileName) = UCase(CommonDialog1.FileName) Then
+                If UCase(fd.DailyReportFileName) = UCase(CommonDialog1.filename) Then
                     fd.SetFocus
                     Exit Sub
                 End If
@@ -598,8 +665,8 @@ Private Sub mnuOpen_Click()
         Next i
         
         Set fd = New FrmDailyReport
-        fd.Load CommonDialog1.FileName
-        fd.Caption = CommonDialog1.FileName
+        fd.Load CommonDialog1.filename
+        fd.Caption = CommonDialog1.filename
         fd.Show
     End If
 End Sub

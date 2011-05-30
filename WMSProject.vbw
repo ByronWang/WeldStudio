@@ -26,3 +26,4 @@ IWeldNumber = 110, 145, 513, 597, C
 GeneralWeldNumber = 132, 174, 467, 626, C
 JinanWeldNumber = 132, 174, 642, 626, C
 EngWeldNumber = 110, 145, 620, 597, C
+FrmDraw = 66, 87, 625, 481, Z, 132, 174, 691, 569, C
