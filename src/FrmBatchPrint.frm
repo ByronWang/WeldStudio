@@ -3,12 +3,12 @@ Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form FrmDraw 
    BackColor       =   &H00FFFFFF&
    Caption         =   "Form1"
-   ClientHeight    =   10185
+   ClientHeight    =   11010
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   15240
    LinkTopic       =   "Form1"
-   ScaleHeight     =   10185
+   ScaleHeight     =   11010
    ScaleWidth      =   15240
    StartUpPosition =   3  '窗口缺省
    Begin VB.PictureBox P 
@@ -18,12 +18,12 @@ Begin VB.Form FrmDraw
       DrawWidth       =   6
       ForeColor       =   &H80000008&
       Height          =   8055
-      Left            =   5280
+      Left            =   5520
       ScaleHeight     =   8055
-      ScaleWidth      =   9615
+      ScaleWidth      =   9375
       TabIndex        =   0
       Top             =   1680
-      Width           =   9615
+      Width           =   9375
       Begin MSComDlg.CommonDialog CommonDialog1 
          Left            =   3360
          Top             =   2160
@@ -41,7 +41,7 @@ Begin VB.Form FrmDraw
       TabIndex        =   1
       Tag             =   "11100"
       Top             =   720
-      Width           =   4455
+      Width           =   4215
       Begin VB.Label lblCriDatadddd 
          BackStyle       =   0  'Transparent
          Caption         =   "Min/Max"
@@ -1365,6 +1365,16 @@ Begin VB.Form FrmDraw
          Width           =   2775
       End
    End
+   Begin VB.Label lblPage 
+      Alignment       =   1  'Right Justify
+      BackStyle       =   0  'Transparent
+      Caption         =   "1"
+      Height          =   255
+      Left            =   13320
+      TabIndex        =   74
+      Top             =   10560
+      Width           =   1575
+   End
    Begin VB.Label lblUnit 
       Alignment       =   1  'Right Justify
       BackColor       =   &H00FFFFFF&
@@ -1566,9 +1576,7 @@ Function DrawData(ByVal rStart As Single, ByVal rScale As Single, ByVal dStart A
 End Function
 
 
-Public Sub LoadData(filename As String)
-
-    Call PrepareDraw
+Public Sub LoadData(filename As String, fullWeldCycle As Boolean, page As Integer)
         
     Dim buf() As WeldData
     Dim fr As FileR
@@ -1577,17 +1585,73 @@ Public Sub LoadData(filename As String)
 
     Dim i As Integer
     
-    ReDim buf(fr.header2.RecordCount - 1)
+    If fullWeldCycle Then
+        buf = LoadDataAll(fr.data, fr.header2.RecordCount)
+        DrawChartAll buf, fr.analysisDefine
+    Else
+        buf = LoadDataUpset(fr.data, fr.header2.RecordCount)
+        DrawChartUpset buf, fr.analysisDefine
+    End If
     
-    For i = 0 To fr.header2.RecordCount - 1
-        buf(i) = fr.data(i).data
-    Next
+    Me.lblPage.Caption = page
     
-    DrawChart buf, fr.analysisDefine
     ShowData fr
-    
 
 End Sub
+
+Private Function LoadDataAll(rs() As Record, count As Integer) As WeldData()
+    Dim i As Integer
+    Dim buf() As WeldData
+    ReDim buf(count - 1)
+    For i = 0 To count - 1
+        buf(i) = rs(i).data
+    Next
+    LoadDataAll = buf
+End Function
+
+Private Function LoadDataUpset(rs() As Record, count As Integer) As WeldData()
+    Dim buf() As WeldData
+    Dim i, posStart, posEnd As Integer
+    Dim sTime As Single
+    
+    posStart = 0
+    
+    For i = 0 To count - 1
+        If rs(i).data.WeldStage = BOOST_STAGE Then
+            posStart = i
+            Exit For
+        End If
+    Next
+    
+    If posStart = 0 Then
+        GoTo ERROR_HANDLE
+    End If
+
+    sTime = rs(i).data.Time
+    For i = posStart To count - 1
+        If rs(i).data.Time - sTime > 25 Then
+            Exit For
+        End If
+    Next
+    
+    posEnd = i - 1
+    
+    If posEnd - posStart <= 0 Then
+        GoTo ERROR_HANDLE
+    End If
+    
+    ReDim buf(posEnd - posStart)
+    
+    For i = posStart To posEnd
+        buf(i - posStart) = rs(i).data
+    Next
+
+    LoadDataUpset = buf
+Exit Function
+ERROR_HANDLE:
+    ReDim buf(0)
+    LoadDataUpset = buf
+End Function
 
 Private Sub ShowData(fr As FileR)
        
@@ -1828,7 +1892,10 @@ Private Function updateCueControl(con As Control, Succeed As Integer)
 End Function
 
 
-Private Sub DrawChart(data() As WeldData, analysisDefine As WeldAnalysisDefineType)
+Private Sub DrawChartAll(data() As WeldData, analysisDefine As WeldAnalysisDefineType)
+    
+    Call PrepareDrawAll(data)
+        
     Dim i As Integer
     
     Dim tim() As Single
@@ -1855,10 +1922,49 @@ Private Sub DrawChart(data() As WeldData, analysisDefine As WeldAnalysisDefineTy
     Next
 
     Call DrawData(xStart, xScale, y1Start, y1Scale, &HC000&, tim(), Amp())
-   Call DrawData(xStart, xScale, y1Start, y1Scale, &HFF&, tim(), Volt())
+    Call DrawData(xStart, xScale, y1Start, y1Scale, &HFF&, tim(), Volt())
     
-  Call DrawData(xStart, xScale, y2Start, y2Scale, &H80&, tim(), psi())
+    Call DrawData(xStart, xScale, y2Start, y2Scale, &H80&, tim(), psi())
     Call DrawData(xStart, xScale, y2Start, y2Scale, &HFF0000, tim(), Dist())
+End Sub
+
+Private Sub DrawChartUpset(data() As WeldData, analysisDefine As WeldAnalysisDefineType)
+    Call PrepareDrawUpset(data)
+    If UBound(data) < 1 Then
+        Exit Sub
+    End If
+    
+    
+    Dim i As Integer
+    
+    Dim tim() As Single
+    Dim psi() As Single
+    Dim Volt() As Single
+    Dim Amp() As Single
+    Dim Dist() As Single
+    
+    Dim count As Integer
+    count = UBound(data)
+    
+    ReDim tim(count - 1)
+    ReDim psi(count - 1)
+    ReDim Volt(count - 1)
+    ReDim Amp(count - 1)
+    ReDim Dist(count - 1)
+    
+    For i = 0 To count - 1
+        tim(i) = data(i).Time
+        psi(i) = PlcAnalysiser.toForce(data(i).PsiUpset, data(i).PsiOpen, analysisDefine)
+        Volt(i) = data(i).Volt
+        Amp(i) = data(i).Amp
+        Dist(i) = data(i).Dist
+    Next
+
+    Call DrawData(data(0).Time, xScale, y1Start, y1Scale, &HC000&, tim(), Amp())
+    Call DrawData(data(0).Time, xScale, y1Start, y1Scale, &HFF&, tim(), Volt())
+    
+    Call DrawData(data(0).Time, xScale, y2Start, y2Scale, &H80&, tim(), psi())
+    Call DrawData(data(0).Time, xScale, y2Start, y2Scale, &HFF0000, tim(), Dist())
 End Sub
 
 
@@ -1881,7 +1987,39 @@ Private Sub Form_Load()
     
 End Sub
 
-Private Sub PrepareDraw()
+Private Sub PrepareDrawAll(data() As WeldData)
+
+    y1Start = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVMin", 0))
+    y1Max = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVMax", 1000))
+    y1Major = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVIncr", 100))
+    
+    y2Start = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFMin", 0))
+    y2Max = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFMax", 160))
+    y2Major = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFIncr", 16))
+    
+    xStart = 0
+    xMax = CSng(GetSetting(App.EXEName, "WeldChartSetting", "TimeMaxCycleTime", 200))
+    xMajor = CSng(GetSetting(App.EXEName, "WeldChartSetting", "TimeIncr", 10))
+    
+    DoPrepareDraw
+End Sub
+Private Sub PrepareDrawUpset(data() As WeldData)
+
+    y1Start = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVMin", 0))
+    y1Max = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVMax", 1000))
+    y1Major = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVIncr", 100))
+    
+    y2Start = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFMin", 0))
+    y2Max = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFMax", 160))
+    y2Major = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFIncr", 16))
+    
+    xStart = CInt(data(0).Time)
+    xMax = xStart + 20
+    xMajor = 5
+
+    DoPrepareDraw
+End Sub
+Private Sub DoPrepareDraw()
 Dim tXOffset, tYOffset As Single
 
 '    Me.ScaleMode = 1 '以VB的基本单位作为建立坐标轴以及绘制图形的单位;
@@ -1896,17 +2034,6 @@ Dim tXOffset, tYOffset As Single
     
     
     
-    y1Start = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVMin", 0))
-    y1Max = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVMax", 1000))
-    y1Major = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVIncr", 100))
-    
-    y2Start = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFMin", 0))
-    y2Max = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFMax", 160))
-    y2Major = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFIncr", 16))
-    
-    xStart = 0
-    xMax = CSng(GetSetting(App.EXEName, "WeldChartSetting", "TimeMaxCycleTime", 200))
-    xMajor = CSng(GetSetting(App.EXEName, "WeldChartSetting", "TimeIncr", 10))
 
 
     

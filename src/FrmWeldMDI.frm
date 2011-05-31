@@ -53,6 +53,15 @@ Begin VB.MDIForm WeldMDIForm
       End
       Begin VB.Menu mnuBatchPrint 
          Caption         =   "Batch Print"
+         Begin VB.Menu mnuFullWeldCycle 
+            Caption         =   "Full Weld Cycle"
+         End
+         Begin VB.Menu mnuUpsetAreaOfWeld 
+            Caption         =   "Upset Area of Weld"
+         End
+         Begin VB.Menu mnuBoth 
+            Caption         =   "Both"
+         End
       End
       Begin VB.Menu mnuExit 
          Caption         =   "E&xit"
@@ -147,8 +156,9 @@ Private Sub menuUserGuide_Click()
     Shell "hh.exe " & App.path & "\WMS.chm ", vbNormalFocus
 End Sub
 
-Private Sub mnuBatchPrint_Click()
-    CommonDialog1.Filter = "Data File (*.WLD;*DLY) |*.wld|Daily Report(*.DLY)|*.DLY"
+
+Private Sub BatchPrint(fullWeldCycle As Boolean, upsetCycle As Boolean)
+    CommonDialog1.Filter = "Data File (*.WLD) |*.wld"
     CommonDialog1.InitDir = ".\data\"
     Me.CommonDialog1.Flags = cdlOFNAllowMultiselect Or cdlOFNFileMustExist Or cdlOFNFileMustExist
     Me.CommonDialog1.ShowOpen
@@ -159,7 +169,7 @@ Private Sub mnuBatchPrint_Click()
     Dim fs() As String
     fs = Split(Me.CommonDialog1.filename, " ")
     
-        Me.CommonDialog1.PrinterDefault = True
+        'Me.CommonDialog1.PrinterDefault = True
         CommonDialog1.CancelError = True
         CommonDialog1.Flags = cdlPDNoPageNums Or cdlPDNoSelection
         
@@ -181,6 +191,8 @@ Private Sub mnuBatchPrint_Click()
         
     Dim frm As FrmDraw
     Dim fname As String
+    Dim page As Integer
+    page = 0
     
     If UBound(fs) - LBound(fs) > 1 Then
         
@@ -190,25 +202,53 @@ Private Sub mnuBatchPrint_Click()
                 
         path = fs(LBound(fs))
         For i = LBound(fs) + 1 To UBound(fs)
-            Printer.Orientation = vbPRORLandscape
             fname = path & fs(i)
             Set frm = New FrmDraw
             Load frm
-            frm.LoadData (fname)
-            frm.PrintForm
+            
+            If fullWeldCycle Then
+                page = page + 1
+                Printer.Orientation = vbPRORLandscape
+                Call frm.LoadData(fname, True, page)
+                frm.PrintForm
+                Printer.EndDoc
+            End If
+            If upsetCycle Then
+                page = page + 1
+                Printer.Orientation = vbPRORLandscape
+                Call frm.LoadData(fname, False, page)
+                frm.PrintForm
+                Printer.EndDoc
+            End If
+            
             Unload frm
-            Printer.EndDoc
         Next
     Else
-        Printer.Orientation = vbPRORLandscape
         fname = fs(LBound(fs))
         Set frm = New FrmDraw
         Load frm
-        frm.LoadData (fname)
-        frm.PrintForm
+        
+        If fullWeldCycle Then
+            page = page + 1
+            Printer.Orientation = vbPRORLandscape
+            Call frm.LoadData(fname, True, page)
+            frm.PrintForm
+            Printer.EndDoc
+        End If
+        If upsetCycle Then
+            page = page + 1
+            Printer.Orientation = vbPRORLandscape
+            Call frm.LoadData(fname, False, page)
+            frm.PrintForm
+            Printer.EndDoc
+        End If
+            
         Unload frm
-        Printer.EndDoc
     End If
+End Sub
+
+Private Sub mnuBoth_Click()
+    Call BatchPrint(True, True)
 End Sub
 
 Private Sub mnuFile_click()
@@ -221,6 +261,13 @@ Private Sub mnuFile_click()
     End If
 End Sub
 
+Private Sub mnuUpsetAreaOfWeld_Click()
+    Call BatchPrint(False, True)
+End Sub
+
+Private Sub mnuFullWeldCycle_Click()
+    Call BatchPrint(True, False)
+End Sub
 
 Private Sub mnuPrint_Click()
     Dim f As Form

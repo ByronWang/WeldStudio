@@ -1266,7 +1266,7 @@ Begin VB.Form FrmChart
          Width           =   915
       End
       Begin VB.Label lblCriDatadddd 
-         BackColor       =   &H00FF0000&
+         BackStyle       =   0  'Transparent
          Caption         =   "Min/Max"
          BeginProperty Font 
             Name            =   "Times New Roman"
