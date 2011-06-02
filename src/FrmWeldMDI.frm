@@ -53,15 +53,6 @@ Begin VB.MDIForm WeldMDIForm
       End
       Begin VB.Menu mnuBatchPrint 
          Caption         =   "Batch Print"
-         Begin VB.Menu mnuFullWeldCycle 
-            Caption         =   "Full Weld Cycle"
-         End
-         Begin VB.Menu mnuUpsetAreaOfWeld 
-            Caption         =   "Upset Area of Weld"
-         End
-         Begin VB.Menu mnuBoth 
-            Caption         =   "Both"
-         End
       End
       Begin VB.Menu mnuExit 
          Caption         =   "E&xit"
@@ -163,11 +154,11 @@ Private Sub BatchPrint(fullWeldCycle As Boolean, upsetCycle As Boolean)
     Me.CommonDialog1.Flags = cdlOFNAllowMultiselect Or cdlOFNFileMustExist Or cdlOFNFileMustExist
     Me.CommonDialog1.ShowOpen
     
-    If Me.CommonDialog1.filename = "" Then
+    If Me.CommonDialog1.FileName = "" Then
         Exit Sub
     End If
     Dim fs() As String
-    fs = Split(Me.CommonDialog1.filename, " ")
+    fs = Split(Me.CommonDialog1.FileName, " ")
     
         'Me.CommonDialog1.PrinterDefault = True
         CommonDialog1.CancelError = True
@@ -251,6 +242,12 @@ Private Sub mnuBoth_Click()
     Call BatchPrint(True, True)
 End Sub
 
+Private Sub mnuBatchPrint_Click()
+    Dim dlg As New DlgPrinterPrepare
+    dlg.Show vbModal, Me
+    Unload dlg
+End Sub
+
 Private Sub mnuFile_click()
     If WeldMDIForm.ActiveForm Is Nothing Then
         mnuPrint.Enabled = False
@@ -259,14 +256,6 @@ Private Sub mnuFile_click()
     Else
         mnuPrint.Enabled = False
     End If
-End Sub
-
-Private Sub mnuUpsetAreaOfWeld_Click()
-    Call BatchPrint(False, True)
-End Sub
-
-Private Sub mnuFullWeldCycle_Click()
-    Call BatchPrint(True, False)
 End Sub
 
 Private Sub mnuPrint_Click()
@@ -482,7 +471,7 @@ Private Function printChart(fc As FrmChart)
         Printer.EndDoc
 End Function
 
-Private Function PrintDailyReport(f As FrmDailyReport)
+Public Function PrintDailyReport(f As FrmDailyReport)
 Printer.Orientation = vbPRORLandscape
     
 Dim x, y, k As Long
@@ -682,13 +671,13 @@ Private Sub mnuOpen_Click()
     Dim fd As FrmDailyReport
     
     CommonDialog1.ShowOpen
-    If CommonDialog1.filename <> "" And UCase(Right(CommonDialog1.filename, 4)) = ".WLD" Then
+    If CommonDialog1.FileName <> "" And UCase(Right(CommonDialog1.FileName, 4)) = ".WLD" Then
         
         For i = 0 To Forms.count - 1
             Set f = Forms(i)
             If TypeOf f Is FrmChart Then
                 Set fc = f
-                If UCase(fc.weldFileName) = UCase(CommonDialog1.filename) Then
+                If UCase(fc.weldFileName) = UCase(CommonDialog1.FileName) Then
                     fc.SetFocus
                     Exit Sub
                 End If
@@ -696,15 +685,15 @@ Private Sub mnuOpen_Click()
         Next i
                 
         Set fc = New FrmChart
-        fc.Load CommonDialog1.filename
-        fc.Caption = CommonDialog1.filename
+        fc.Load CommonDialog1.FileName
+        fc.Caption = CommonDialog1.FileName
         fc.Show
-    ElseIf CommonDialog1.filename <> "" And UCase(Right(CommonDialog1.filename, 4)) = ".DLY" Then
+    ElseIf CommonDialog1.FileName <> "" And UCase(Right(CommonDialog1.FileName, 4)) = ".DLY" Then
         For i = 0 To Forms.count - 1
             Set f = Forms(i)
             If TypeOf f Is FrmDailyReport Then
                 Set fd = f
-                If UCase(fd.DailyReportFileName) = UCase(CommonDialog1.filename) Then
+                If UCase(fd.DailyReportFileName) = UCase(CommonDialog1.FileName) Then
                     fd.SetFocus
                     Exit Sub
                 End If
@@ -712,8 +701,8 @@ Private Sub mnuOpen_Click()
         Next i
         
         Set fd = New FrmDailyReport
-        fd.Load CommonDialog1.filename
-        fd.Caption = CommonDialog1.filename
+        fd.Load CommonDialog1.FileName
+        fd.Caption = CommonDialog1.FileName
         fd.Show
     End If
 End Sub

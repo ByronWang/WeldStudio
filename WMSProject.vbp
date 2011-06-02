@@ -35,6 +35,7 @@ Class=JinanWeldNumber; src\JinanWeldNumber.cls
 Class=EngWeldNumber; src\EngWeldNumber.cls
 Form=src\FrmBatchPrint.frm
 ResFile32="src\WeldStudio.RES"
+Form=src\DlgPrinterPrepare.frm
 IconForm="WeldMDIForm"
 Startup="WeldMDIForm"
 HelpFile=""

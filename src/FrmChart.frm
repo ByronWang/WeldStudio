@@ -1832,48 +1832,48 @@ lblItemData(26).Caption = CInt(r.TotalDuration)
 End Function
 
 
-Private Function updateCueWithCri(index As Integer, Succeed As Integer)
+Private Function updateCueWithCri(Index As Integer, Succeed As Integer)
     If Succeed = OK Then
-        lblItem(index).ForeColor = SUCCEED_COLOR
-        lblItemData(index).ForeColor = SUCCEED_COLOR
-        lblCriData(index).ForeColor = SUCCEED_COLOR
-        lblItem(index).FontBold = True
-        lblItemData(index).FontBold = True
-        lblCriData(index).FontBold = True
+        lblItem(Index).ForeColor = SUCCEED_COLOR
+        lblItemData(Index).ForeColor = SUCCEED_COLOR
+        lblCriData(Index).ForeColor = SUCCEED_COLOR
+        lblItem(Index).FontBold = True
+        lblItemData(Index).FontBold = True
+        lblCriData(Index).FontBold = True
     ElseIf Succeed = NO Then
-        lblItem(index).ForeColor = FAIL_COLOR
-        lblItemData(index).ForeColor = FAIL_COLOR
-        lblCriData(index).ForeColor = FAIL_COLOR
-        lblItem(index).FontBold = True
-        lblItemData(index).FontBold = True
-        lblCriData(index).FontBold = True
+        lblItem(Index).ForeColor = FAIL_COLOR
+        lblItemData(Index).ForeColor = FAIL_COLOR
+        lblCriData(Index).ForeColor = FAIL_COLOR
+        lblItem(Index).FontBold = True
+        lblItemData(Index).FontBold = True
+        lblCriData(Index).FontBold = True
     Else
-        lblItem(index).ForeColor = NOTUSED_COLOR
-        lblItemData(index).ForeColor = NOTUSED_COLOR
-        lblCriData(index).ForeColor = NOTUSED_COLOR
-        lblItem(index).FontBold = False
-        lblItemData(index).FontBold = False
-        lblCriData(index).FontBold = False
+        lblItem(Index).ForeColor = NOTUSED_COLOR
+        lblItemData(Index).ForeColor = NOTUSED_COLOR
+        lblCriData(Index).ForeColor = NOTUSED_COLOR
+        lblItem(Index).FontBold = False
+        lblItemData(Index).FontBold = False
+        lblCriData(Index).FontBold = False
     End If
 
 End Function
 
-Private Function updateCue(index As Integer, Succeed As Integer)
+Private Function updateCue(Index As Integer, Succeed As Integer)
     If Succeed = OK Then
-        lblItem(index).ForeColor = SUCCEED_COLOR
-        lblItemData(index).ForeColor = SUCCEED_COLOR
-        lblItem(index).FontBold = True
-        lblItemData(index).FontBold = True
+        lblItem(Index).ForeColor = SUCCEED_COLOR
+        lblItemData(Index).ForeColor = SUCCEED_COLOR
+        lblItem(Index).FontBold = True
+        lblItemData(Index).FontBold = True
     ElseIf Succeed = NO Then
-        lblItem(index).ForeColor = FAIL_COLOR
-        lblItemData(index).ForeColor = FAIL_COLOR
-        lblItem(index).FontBold = True
-        lblItemData(index).FontBold = True
+        lblItem(Index).ForeColor = FAIL_COLOR
+        lblItemData(Index).ForeColor = FAIL_COLOR
+        lblItem(Index).FontBold = True
+        lblItemData(Index).FontBold = True
     Else
-        lblItem(index).ForeColor = NOTUSED_COLOR
-        lblItemData(index).ForeColor = NOTUSED_COLOR
-        lblItem(index).FontBold = False
-        lblItemData(index).FontBold = False
+        lblItem(Index).ForeColor = NOTUSED_COLOR
+        lblItemData(Index).ForeColor = NOTUSED_COLOR
+        lblItem(Index).FontBold = False
+        lblItemData(Index).FontBold = False
     End If
 
 End Function
