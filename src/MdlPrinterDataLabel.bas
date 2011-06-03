@@ -2,6 +2,7 @@ Attribute VB_Name = "MdlPrinterDataLabel"
 Option Explicit
 
 Public Function PrintChart(fc As FrmChart)
+Printer.Orientation = vbPRORLandscape
         
 '        fc.MSChart1.EditCopy
 '        DoEvents   ' may be needed for large datasets
@@ -20,12 +21,12 @@ Public Function PrintChart(fc As FrmChart)
         
         gLeft = 800
         iLeft = 1100
-        idLeft = 3100
+        idLeft = 3200
         
         gSep = 100 ' group sep
         iSep = 50 ' item sep
         
-        Printer.CurrentY = 2300
+        Printer.CurrentY = 1600
         
         Dim lTop As Integer
         
@@ -254,14 +255,17 @@ Private Function navControlForDailyReportBottom(fm As Frame, con As Label)
         sca = 3600 / con.width
     End If
     
+    Dim pLeftOffset As String
+    pLeftOffset = 0
+    
     Printer.CurrentY = 9600 + con.top + 700
     Select Case con.Alignment
         Case vbLeftJustify:
-            Printer.CurrentX = con.left * sca + 0
+            Printer.CurrentX = pLeftOffset + con.left * sca + 0
         Case vbRightJustify:
-            Printer.CurrentX = con.left * sca + con.width * sca - Printer.TextWidth(con.Caption)
+            Printer.CurrentX = pLeftOffset + con.left * sca + con.width * sca - Printer.TextWidth(con.Caption)
         Case vbCenter:
-            Printer.CurrentX = con.left * sca + (con.width * sca - Printer.TextWidth(con.Caption)) / 2
+            Printer.CurrentX = pLeftOffset + con.left * sca + (con.width * sca - Printer.TextWidth(con.Caption)) / 2
     End Select
     
     Printer.Print con.Caption
@@ -279,15 +283,17 @@ Private Function navControl(con As Label)
         sca = 3600 / con.width
     End If
     
-    Printer.CurrentY = con.top * sca + 1100
+    Dim pLeftOffset As String
+    pLeftOffset = 600
+    Printer.CurrentY = con.top * sca + 100
     
     Select Case con.Alignment
         Case vbLeftJustify:
-            Printer.CurrentX = con.left * sca + 0
+            Printer.CurrentX = pLeftOffset + con.left * sca + 0
         Case vbRightJustify:
-            Printer.CurrentX = con.left * sca + con.width * sca - Printer.TextWidth(con.Caption)
+            Printer.CurrentX = pLeftOffset + con.left * sca + con.width * sca - Printer.TextWidth(con.Caption)
         Case vbCenter:
-            Printer.CurrentX = con.left * sca + (con.width * sca - Printer.TextWidth(con.Caption)) / 2
+            Printer.CurrentX = pLeftOffset + con.left * sca + (con.width * sca - Printer.TextWidth(con.Caption)) / 2
     End Select
     
     Printer.Print con.Caption

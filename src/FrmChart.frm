@@ -5,13 +5,13 @@ Begin VB.Form FrmChart
    ClientHeight    =   8490
    ClientLeft      =   60
    ClientTop       =   450
-   ClientWidth     =   11880
+   ClientWidth     =   15240
    Icon            =   "FrmChart.frx":0000
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
    ScaleHeight     =   10170
    ScaleMode       =   0  'User
-   ScaleWidth      =   15240
+   ScaleWidth      =   19550.3
    ShowInTaskbar   =   0   'False
    Tag             =   "11000"
    WindowState     =   2  'Maximized
@@ -1443,7 +1443,7 @@ Enum ModelConstants
     SMALLPURE
 End Enum
 
-Dim model As ModelConstants
+Public model As ModelConstants
 
 Dim dataForm As FrmDataGrid
 
@@ -1459,11 +1459,11 @@ Dim lastTime As Long
 Public weldFileName As String
 
 Dim fr As FileR
-Public Sub Load(filename As String)
+Public Sub Load(FileName As String)
 ' Resource
 PlcRes.LoadResFor Me
-    fr = PlcWld.LoadData(filename)
-    weldFileName = filename
+    fr = PlcWld.LoadData(FileName)
+    weldFileName = FileName
     
     model = COMMON
         
@@ -2014,13 +2014,13 @@ End Function
 
 Private Sub MSChart1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
     If Button = vbRightButton Then
-        lineH.Left = MSChart1.Left + 300
-        lineH.Width = MSChart1.Width - 300
-        lineH.Top = y + MSChart1.Top
+        lineH.left = MSChart1.left + 300
+        lineH.width = MSChart1.width - 300
+        lineH.top = y + MSChart1.top
 
-        lineV.Top = MSChart1.Top + 360
-        lineV.Height = MSChart1.Height - 800
-        lineV.Left = x + MSChart1.Left
+        lineV.top = MSChart1.top + 360
+        lineV.height = MSChart1.height - 800
+        lineV.left = x + MSChart1.left
 
         lineH.Visible = True
         lineV.Visible = True
@@ -2041,13 +2041,13 @@ timeSep = 50
             Me.MousePointer = VtMousePointerArrow
             lastTime = thisTime
             
-        lineH.Left = MSChart1.Left + 360
-        lineH.Width = MSChart1.Width - 1800
-        lineH.Top = y + MSChart1.Top
+        lineH.left = MSChart1.left + 360
+        lineH.width = MSChart1.width - 1800
+        lineH.top = y + MSChart1.top
         
-        lineV.Top = MSChart1.Top + 320
-        lineV.Height = MSChart1.Height - 900
-        lineV.Left = x + MSChart1.Left
+        lineV.top = MSChart1.top + 320
+        lineV.height = MSChart1.height - 900
+        lineV.left = x + MSChart1.left
         End If
     Else
         lineH.Visible = False

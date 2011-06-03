@@ -17,7 +17,7 @@ Dim buf() As WeldData
 
 Dim pLeft, pTop As Single
 
-Public Sub PrintGraph(prnt As Printer, fname As String, fullWeldCycle As Boolean, page As Integer) ', posX As Single, posY As Single, maxX As Single, maxY As Single)
+Public Sub PrintGraph(canvas As Printer, fname As String, fullWeldCycle As Boolean, page As Integer) ', posX As Single, posY As Single, maxX As Single, maxY As Single)
 
     Dim fr As FileR
     
@@ -27,13 +27,18 @@ Public Sub PrintGraph(prnt As Printer, fname As String, fullWeldCycle As Boolean
     
     If fullWeldCycle Then
         buf = LoadDataAll(fr.data, fr.header2.RecordCount)
-        Call PrepareDraw(prnt, prnt.ScaleWidth * 3.3 / 10, prnt.ScaleHeight * 9 / 10, prnt.ScaleWidth * 6.3 / 10, -prnt.ScaleHeight * 7.5 / 10, buf(0).Time)
-        DrawChartAll prnt, buf, fr.analysisDefine
+        Call PrepareDraw(canvas, canvas.ScaleWidth * 2.8 / 10, canvas.ScaleHeight * 8.5 / 10, canvas.ScaleWidth * 6.5 / 10, -canvas.ScaleHeight * 7 / 10, buf(0).Time)
+        DrawChartAll canvas, buf, fr.analysisDefine
     Else
         buf = LoadDataUpset(fr.data, fr.header2.RecordCount)
-        Call PrepareDraw(prnt, prnt.ScaleWidth * 3.3 / 10, prnt.ScaleHeight * 9 / 10, prnt.ScaleWidth * 6.3 / 10, -prnt.ScaleHeight * 7.5 / 10, buf(0).Time)
-        DrawChartUpset prnt, buf, fr.analysisDefine
+        Call PrepareDraw(canvas, canvas.ScaleWidth * 2.8 / 10, canvas.ScaleHeight * 8.5 / 10, canvas.ScaleWidth * 6.5 / 10, -canvas.ScaleHeight * 7 / 10, buf(0).Time)
+        DrawChartUpset canvas, buf, fr.analysisDefine
     End If
+    
+    Printer.FontSize = 10
+    Printer.FontBold = False
+    Printer.ForeColor = vbBlack
+    canvas.CurrentX = canvas.ScaleWidth * 0.94: canvas.CurrentY = canvas.ScaleHeight * 0.94: canvas.Print page
     
 End Sub
 
@@ -165,6 +170,9 @@ Public Sub PrepareDraw(canvas, left As Single, top As Single, width As Single, h
         
     'XXXXX
     canvas.DrawWidth = 1
+    'Printer.FontSize = 12
+    Printer.FontBold = False
+    Printer.ForeColor = vbBlack
     
     xScale = pWidth / (V_X_Max - V_X_Start)
     y1Scale = pHeight / (V_Y1_Max - V_Y1_Start)
