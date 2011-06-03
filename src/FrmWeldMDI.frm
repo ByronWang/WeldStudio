@@ -186,7 +186,7 @@ Private Sub mnuPrint_Click()
         Set fc = f
         For i = 1 To CommonDialog1.Copies
             Call PrintChart(fc)
-            Call PrintGraph(Printer, fc.weldFileName, fc.model = COMMON, 1)
+            Call PrintGraph(Printer, fc.weldFileName, fc.model = COMMON)
             Printer.EndDoc
         Next i
     

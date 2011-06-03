@@ -214,9 +214,6 @@ Call navControlForDailyReportBottom(f.frmSum, f.lblAccepted)
 Call navControlForDailyReportBottom(f.frmSum, f.lblReject)
 Call navControlForDailyReportBottom(f.frmSum, f.lblTotal)
     
-Printer.EndDoc
-
-    
 End Function
 
 Private Function navControlForDailyReport(con As Label)
@@ -242,6 +239,7 @@ Private Function navControlForDailyReport(con As Label)
     End Select
 
     Printer.Print con.Caption
+    
 End Function
 
 Private Function navControlForDailyReportBottom(fm As Frame, con As Label)

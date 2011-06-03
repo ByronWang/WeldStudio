@@ -117,8 +117,14 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
+Dim printing As Boolean
+
 Private Sub CancelButton_Click()
-    Unload Me
+    If printing Then
+        printing = False
+    Else
+        Unload Me
+    End If
 End Sub
 
 Private Sub cmdAdd_Click()
@@ -189,7 +195,6 @@ Private Sub Form_Load()
     
     defaultPrinter = GetSetting(App.EXEName, "Printer", "DefaultPrinter", "")
 
-    
     For i = 0 To Printers.count - 1
         Set P = Printers(i)
         CboPrinter.AddItem P.DeviceName
@@ -207,28 +212,65 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub OKButton_Click()
-'On Error GoTo ERROR_HANDLE
+On Error GoTo ERROR_HANDLE
     Dim i As Integer
     Dim fname As String
     Dim page As Integer
     
+    Me.cmdAdd.Enabled = False
+    Me.cmdRemove.Enabled = False
+    Me.OKButton.Enabled = False
+    Me.CboPrinter.Enabled = False
+    
+    printing = True
+    
     For i = 0 To LstFiles.ListCount - 1
-        page = page + 1
+        
+        If Not printing Then
+            GoTo FINISH
+        End If
+        
         fname = LstFiles.List(i)
+        
+        LstFiles.ListIndex = i
+        LstFiles.List(i) = "Printing - " & fname
+        DoEvents
+        LstFiles.Refresh
+        DoEvents
+        
+        page = page + 1
+        If page > 1 Then
+            Printer.NewPage
+        End If
         Printer.Orientation = vbPRORLandscape
         
         If UCase(Right(fname, 4)) = ".WLD" Then
             Dim f As New FrmChart
             f.Load fname
             PrintChart FrmChart
-            PrintGraph Printer, fname, OptMode(0).Value, page
+            PrintGraph Printer, fname, OptMode(0).Value
             Unload f
+             
+            Printer.FontSize = 10
+            Printer.FontBold = False
+            Printer.ForeColor = vbBlack
+            Printer.CurrentX = Printer.ScaleWidth * 0.94: Printer.CurrentY = Printer.ScaleHeight * 0.94: Printer.Print page
         Else
             Dim fdr As New FrmDailyReport
             fdr.Load fname
             Call PrintDailyReport(fdr)
             Unload fdr
+            
+            Printer.FontSize = 10
+            Printer.FontBold = False
+            Printer.ForeColor = vbBlack
+            Printer.CurrentX = Printer.ScaleWidth * 0.94: Printer.CurrentY = Printer.ScaleHeight * 0.94: Printer.Print page
+
         End If
+        
+        DoEvents
+        LstFiles.List(i) = "Done - " & fname
+        DoEvents
     Next i
     
     Printer.EndDoc
@@ -236,4 +278,19 @@ Private Sub OKButton_Click()
 Exit Sub
 ERROR_HANDLE:
     MsgBox "Print Error ,Please contact administrator!"
+    
+
+FINISH:
+    Printer.EndDoc
+    If fname <> "" Then
+        LstFiles.List(i) = fname
+        For i = i - 1 To 0 Step -1
+            LstFiles.RemoveItem i
+        Next
+    End If
+    
+    Me.cmdAdd.Enabled = True
+    Me.cmdRemove.Enabled = True
+    Me.OKButton.Enabled = True
+    Me.CboPrinter.Enabled = True
 End Sub

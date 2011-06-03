@@ -17,7 +17,7 @@ Dim buf() As WeldData
 
 Dim pLeft, pTop As Single
 
-Public Sub PrintGraph(canvas As Printer, fname As String, fullWeldCycle As Boolean, page As Integer) ', posX As Single, posY As Single, maxX As Single, maxY As Single)
+Public Sub PrintGraph(canvas As Printer, fname As String, fullWeldCycle As Boolean) ', posX As Single, posY As Single, maxX As Single, maxY As Single)
 
     Dim fr As FileR
     
@@ -34,11 +34,7 @@ Public Sub PrintGraph(canvas As Printer, fname As String, fullWeldCycle As Boole
         Call PrepareDraw(canvas, canvas.ScaleWidth * 2.8 / 10, canvas.ScaleHeight * 8.5 / 10, canvas.ScaleWidth * 6.5 / 10, -canvas.ScaleHeight * 7 / 10, buf(0).Time)
         DrawChartUpset canvas, buf, fr.analysisDefine
     End If
-    
-    Printer.FontSize = 10
-    Printer.FontBold = False
-    Printer.ForeColor = vbBlack
-    canvas.CurrentX = canvas.ScaleWidth * 0.94: canvas.CurrentY = canvas.ScaleHeight * 0.94: canvas.Print page
+   
     
 End Sub
 
