@@ -13,12 +13,12 @@ Begin VB.Form FrmDraw
    StartUpPosition =   3  '窗口缺省
    Begin VB.PictureBox P 
       Appearance      =   0  'Flat
-      BackColor       =   &H00FFFFFF&
+      BackColor       =   &H0000FFFF&
       BorderStyle     =   0  'None
       DrawWidth       =   6
       ForeColor       =   &H80000008&
       Height          =   8055
-      Left            =   5520
+      Left            =   4920
       ScaleHeight     =   8055
       ScaleWidth      =   9375
       TabIndex        =   0
@@ -37,10 +37,10 @@ Begin VB.Form FrmDraw
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
       Height          =   9015
-      Left            =   600
+      Left            =   240
       TabIndex        =   1
       Tag             =   "11100"
-      Top             =   720
+      Top             =   480
       Width           =   4215
       Begin VB.Label lblCriDatadddd 
          BackStyle       =   0  'Transparent
@@ -1521,137 +1521,39 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim x, y, X1, y1 As Single
-Dim pi As Single
-
-Dim xDrawMax As Single
-Dim yDrawMax As Single
-
 
 Const SUCCEED_COLOR As Long = &HC000&
 Const FAIL_COLOR As Long = &HFF&
 Const NOTUSED_COLOR As Long = &H80000012
 
-Const GRID_COLOR As Long = &HBBBBBB
-Const Aix_COLOR As Long = &H0
-
-Dim oldX, oldY As Single
-Dim xLeft, yTop As Single
-
-Dim y1Start, y1Max, y1Major As Single
-Dim y2Start, y2Max, y2Major As Single
-Dim xStart, xMax, xMajor As Single
-
-Dim xScale, y1Scale, y2Scale As Single
-
 Dim lastText As String
 
 Dim pen As Integer
 
-'Axis
-'Axis grid major Gridlines
-' Minor gridlines
+Dim buf() As WeldData
 
-Function DrawData(ByVal rStart As Single, ByVal rScale As Single, ByVal dStart As Single, ByVal dScale As Single, color As Long, ref() As Single, d() As Single) As Integer
-    Dim i As Integer
-    i = LBound(d)
+Public Sub LoadData(FileName As String, fullWeldCycle As Boolean)
+    Dim prnt As Form
+    Set prnt = Me
     
-    Dim fx, fy, tx, ty As Single
-    
-    Me.DrawWidth = 1
-    Me.DrawMode = 13
-        
-    fx = 0
-    fy = (d(i) - dStart) * dScale
-        
-    For i = i + 1 To UBound(d)
-        tx = (ref(i) - rStart) * rScale
-        ty = (d(i) - dStart) * dScale
-        
-         Me.Line (fx, fy)-(tx, ty), color ', &HFF0000 * Rnd(1) + &HFF00 * Rnd(1) + &HFF * Rnd(1)
-         fx = tx
-         fy = ty
-    Next i
-    
-End Function
-
-
-Public Sub LoadData(filename As String, fullWeldCycle As Boolean, page As Integer)
-        
-    Dim buf() As WeldData
     Dim fr As FileR
     
-    fr = PlcWld.LoadData(filename)
+    fr = PlcWld.LoadData(FileName)
 
     Dim i As Integer
-    
     If fullWeldCycle Then
         buf = LoadDataAll(fr.data, fr.header2.RecordCount)
-        DrawChartAll buf, fr.analysisDefine
+        Call PrepareDraw(prnt, prnt.ScaleWidth * 3.3 / 10, prnt.ScaleHeight * 9 / 10, prnt.ScaleWidth * 6.3 / 10, -prnt.ScaleHeight * 7.5 / 10, buf(0).Time)
+        DrawChartAll prnt, buf, fr.analysisDefine
     Else
         buf = LoadDataUpset(fr.data, fr.header2.RecordCount)
-        DrawChartUpset buf, fr.analysisDefine
+        Call PrepareDraw(prnt, prnt.ScaleWidth * 3.3 / 10, prnt.ScaleHeight * 9 / 10, prnt.ScaleWidth * 6.3 / 10, -prnt.ScaleHeight * 7.5 / 10, buf(0).Time)
+        DrawChartUpset prnt, buf, fr.analysisDefine
     End If
-    
-    Me.lblPage.Caption = page
     
     ShowData fr
 
 End Sub
-
-Private Function LoadDataAll(rs() As Record, count As Integer) As WeldData()
-    Dim i As Integer
-    Dim buf() As WeldData
-    ReDim buf(count - 1)
-    For i = 0 To count - 1
-        buf(i) = rs(i).data
-    Next
-    LoadDataAll = buf
-End Function
-
-Private Function LoadDataUpset(rs() As Record, count As Integer) As WeldData()
-    Dim buf() As WeldData
-    Dim i, posStart, posEnd As Integer
-    Dim sTime As Single
-    
-    posStart = 0
-    
-    For i = 0 To count - 1
-        If rs(i).data.WeldStage = BOOST_STAGE Then
-            posStart = i
-            Exit For
-        End If
-    Next
-    
-    If posStart = 0 Then
-        GoTo ERROR_HANDLE
-    End If
-
-    sTime = rs(i).data.Time
-    For i = posStart To count - 1
-        If rs(i).data.Time - sTime > 25 Then
-            Exit For
-        End If
-    Next
-    
-    posEnd = i - 1
-    
-    If posEnd - posStart <= 0 Then
-        GoTo ERROR_HANDLE
-    End If
-    
-    ReDim buf(posEnd - posStart)
-    
-    For i = posStart To posEnd
-        buf(i - posStart) = rs(i).data
-    Next
-
-    LoadDataUpset = buf
-Exit Function
-ERROR_HANDLE:
-    ReDim buf(0)
-    LoadDataUpset = buf
-End Function
 
 Private Sub ShowData(fr As FileR)
        
@@ -1888,248 +1790,16 @@ Private Function updateCueControl(con As Control, Succeed As Integer)
         con.ForeColor = NOTUSED_COLOR
         con.FontBold = False
     End If
-
 End Function
 
 
-Private Sub DrawChartAll(data() As WeldData, analysisDefine As WeldAnalysisDefineType)
-    
-    Call PrepareDrawAll(data)
-        
-    Dim i As Integer
-    
-    Dim tim() As Single
-    Dim psi() As Single
-    Dim Volt() As Single
-    Dim Amp() As Single
-    Dim Dist() As Single
-    
-    Dim count As Integer
-    count = UBound(data)
-    
-    ReDim tim(count - 1)
-    ReDim psi(count - 1)
-    ReDim Volt(count - 1)
-    ReDim Amp(count - 1)
-    ReDim Dist(count - 1)
-    
-    For i = 0 To count - 1
-        tim(i) = data(i).Time
-        psi(i) = PlcAnalysiser.toForce(data(i).PsiUpset, data(i).PsiOpen, analysisDefine)
-        Volt(i) = data(i).Volt
-        Amp(i) = data(i).Amp
-        Dist(i) = data(i).Dist
-    Next
-
-    Call DrawData(xStart, xScale, y1Start, y1Scale, &HC000&, tim(), Amp())
-    Call DrawData(xStart, xScale, y1Start, y1Scale, &HFF&, tim(), Volt())
-    
-    Call DrawData(xStart, xScale, y2Start, y2Scale, &H80&, tim(), psi())
-    Call DrawData(xStart, xScale, y2Start, y2Scale, &HFF0000, tim(), Dist())
-End Sub
-
-Private Sub DrawChartUpset(data() As WeldData, analysisDefine As WeldAnalysisDefineType)
-    Call PrepareDrawUpset(data)
-    If UBound(data) < 1 Then
-        Exit Sub
-    End If
-    
-    
-    Dim i As Integer
-    
-    Dim tim() As Single
-    Dim psi() As Single
-    Dim Volt() As Single
-    Dim Amp() As Single
-    Dim Dist() As Single
-    
-    Dim count As Integer
-    count = UBound(data)
-    
-    ReDim tim(count - 1)
-    ReDim psi(count - 1)
-    ReDim Volt(count - 1)
-    ReDim Amp(count - 1)
-    ReDim Dist(count - 1)
-    
-    For i = 0 To count - 1
-        tim(i) = data(i).Time
-        psi(i) = PlcAnalysiser.toForce(data(i).PsiUpset, data(i).PsiOpen, analysisDefine)
-        Volt(i) = data(i).Volt
-        Amp(i) = data(i).Amp
-        Dist(i) = data(i).Dist
-    Next
-
-    Call DrawData(data(0).Time, xScale, y1Start, y1Scale, &HC000&, tim(), Amp())
-    Call DrawData(data(0).Time, xScale, y1Start, y1Scale, &HFF&, tim(), Volt())
-    
-    Call DrawData(data(0).Time, xScale, y2Start, y2Scale, &H80&, tim(), psi())
-    Call DrawData(data(0).Time, xScale, y2Start, y2Scale, &HFF0000, tim(), Dist())
-End Sub
 
 
 Private Sub Form_Load()
-    'xLeft = xDrawMax * Me.TextWidth("100000") / (Me.ScaleWidth - 2 * Me.TextWidth("100000"))
-    'yTop = yDrawMax * Me.TextHeight("10000") / (Me.ScaleHeight - 3 * Me.TextHeight("10000"))
-    
-    xLeft = P.Left
-    yTop = P.Top + P.Height
+    Me.AutoRedraw = True
     P.Visible = False
-    Dim sh, sw As Single
-    
-    xDrawMax = P.Width
-    yDrawMax = P.Height
-    
-    sh = Me.ScaleHeight
-    sw = Me.ScaleWidth
-    
-    Me.Scale (-xLeft, yTop)-(sw - xLeft, yTop - sh)
-    
 End Sub
 
-Private Sub PrepareDrawAll(data() As WeldData)
-
-    y1Start = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVMin", 0))
-    y1Max = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVMax", 1000))
-    y1Major = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVIncr", 100))
-    
-    y2Start = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFMin", 0))
-    y2Max = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFMax", 160))
-    y2Major = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFIncr", 16))
-    
-    xStart = 0
-    xMax = CSng(GetSetting(App.EXEName, "WeldChartSetting", "TimeMaxCycleTime", 200))
-    xMajor = CSng(GetSetting(App.EXEName, "WeldChartSetting", "TimeIncr", 10))
-    
-    DoPrepareDraw
-End Sub
-Private Sub PrepareDrawUpset(data() As WeldData)
-
-    y1Start = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVMin", 0))
-    y1Max = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVMax", 1000))
-    y1Major = CSng(GetSetting(App.EXEName, "WeldChartSetting", "AVIncr", 100))
-    
-    y2Start = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFMin", 0))
-    y2Max = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFMax", 160))
-    y2Major = CSng(GetSetting(App.EXEName, "WeldChartSetting", "DFIncr", 16))
-    
-    xStart = CInt(data(0).Time)
-    xMax = xStart + 20
-    xMajor = 5
-
-    DoPrepareDraw
-End Sub
-Private Sub DoPrepareDraw()
-Dim tXOffset, tYOffset As Single
-
-'    Me.ScaleMode = 1 '以VB的基本单位作为建立坐标轴以及绘制图形的单位;
-'    Me.ScaleTop = -14
-'    Me.ScaleLeft = -200
-'    Me.ScaleHeight = 8000
-'    Me.ScaleWidth = 8000
-'    Me.ScaleMode = 1 '以VB的基本单位作为建立坐标轴以及绘制图形的单位;
-    
-    Me.Cls
-    Me.AutoRedraw = True
-    
-    
-    
 
 
-    
-    Me.DrawWidth = 1
-    Me.DrawStyle = 0
-    
-    tXOffset = -Me.TextWidth(0) - Me.TextWidth(0)
-    tYOffset = Me.TextHeight(0) / 2
-    
-'    max = 1000
-        
-    Dim pos As Single
-    
-    Me.AutoRedraw = True
 
-    
-    'XXXXX
-    Me.DrawWidth = 1
-    
-    xScale = xDrawMax / (xMax - xStart)
-    y1Scale = yDrawMax / (y1Max - y1Start)
-    y2Scale = yDrawMax / (y2Max - y2Start)
-    
-    
-    For pos = xStart To xMax Step xMajor
-        Me.Line ((pos - xStart) * xScale, 0)-((pos - xStart) * xScale, yDrawMax), GRID_COLOR
-    Next pos
-    
-    For pos = xStart To xMax Step xMajor
-        Me.Line ((pos - xStart) * xScale, 0)-((pos - xStart) * xScale, tYOffset), GRID_COLOR
-    Next pos
-'
-    For pos = xStart To xMax Step xMajor
-        Me.CurrentX = (pos - xStart) * xScale - Me.TextWidth(0) / 1.5 - Me.TextWidth(pos) / 2: Me.CurrentY = tYOffset: Me.Print pos
-    Next pos
-
-    'Y1
-    For pos = y1Start To y1Max Step y1Major
-        Me.Line (0, (pos - y1Start) * y1Scale)-(xDrawMax, (pos - y1Start) * y1Scale), GRID_COLOR
-    Next pos
-
-    For pos = y1Start To y1Max Step y1Major
-        Me.Line (0, (pos - y1Start) * y1Scale)-(tXOffset / 3, (pos - y1Start) * y1Scale), GRID_COLOR
-    Next pos
-
-    For pos = y1Start To y1Max Step y1Major
-        Me.CurrentX = tXOffset - Me.TextWidth(pos): Me.CurrentY = (pos - y1Start) * y1Scale - Me.TextHeight(pos) / 2: Me.Print pos
-    Next pos
-    
-    'Y2
-    Me.DrawStyle = 1
-    For pos = y2Start To y2Max Step y2Major
-        Me.Line (0, (pos - y2Start) * y2Scale)-(xDrawMax, (pos - y2Start) * y2Scale), GRID_COLOR
-    Next pos
-
-    Me.DrawStyle = 0
-    For pos = y2Start To y2Max Step y2Major
-        Me.Line (xDrawMax, (pos - y2Start) * y2Scale)-(xDrawMax - tXOffset / 3, (pos - y2Start) * y2Scale), GRID_COLOR
-    Next pos
-
-    For pos = y2Start To y2Max Step y2Major
-        Me.CurrentX = xDrawMax: Me.CurrentY = (pos - y2Start) * y2Scale - Me.TextHeight(pos) / 2: Me.Print pos
-    Next pos
-    
-    Me.DrawWidth = 1
-    Me.Line (0, 0)-(0, yDrawMax), Aix_COLOR
-    Me.Line (0, 0)-(xDrawMax, 0), Aix_COLOR
-    Me.Line (xDrawMax, 0)-(xDrawMax, yDrawMax), Aix_COLOR
-    
-End Sub
-
-'Private Sub P_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-'
-'    If Button = vbLeftButton Then
-'        lblHit.Visible = True
-'        lblHit.Caption = x & " , " & y
-'
-'        Me.AutoRedraw = True
-'        Me.DrawWidth = 1
-'        Me.DrawMode = 7
-'        Static oldX As Single, oldY As Single
-'
-'        If oldX <> 0 Then Me.Line (oldX, 0)-(oldX, yDrawMax), vbWhite
-'        If oldY <> 0 Then Me.Line (0, oldY)-(xDrawMax, oldY), vbWhite
-'
-'        If x <> 0 Then Me.Line (x, 0)-(x, yDrawMax), vbWhite
-'        If y <> 0 Then Me.Line (0, y)-(xDrawMax, y), vbWhite
-'
-'        oldX = x
-'        oldY = y
-'    ElseIf oldX <> 0 Or oldY <> 0 Then
-'        Me.DrawWidth = 1
-'        If oldX <> 0 Then Me.Line (oldX, 0)-(oldX, yDrawMax), vbWhite
-'        If oldY <> 0 Then Me.Line (0, oldY)-(xDrawMax, oldY), vbWhite
-'        oldX = 0
-'        oldY = 0
-'        lblHit.Visible = False
-'    End If
-'End Sub

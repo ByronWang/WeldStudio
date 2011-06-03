@@ -126,8 +126,8 @@ On Error GoTo ERROR_HANDLER
     Dim path As String
     CommonDialog1.Filter = "Data File (*.WLD,*.DLY) |*.wld; *.dly"
     
-    If Me.CommonDialog1.filename <> "" Then
-        path = Left(Me.CommonDialog1.filename, InStrRev(Me.CommonDialog1.filename, "\"))
+    If Me.CommonDialog1.FileName <> "" Then
+        path = left(Me.CommonDialog1.FileName, InStrRev(Me.CommonDialog1.FileName, "\"))
         Me.CommonDialog1.InitDir = path
     Else
         Me.CommonDialog1.InitDir = "./data/"
@@ -138,7 +138,7 @@ On Error GoTo ERROR_HANDLER
     
     
     Dim fs() As String
-    fs = Split(Me.CommonDialog1.filename, " ")
+    fs = Split(Me.CommonDialog1.FileName, " ")
     
     Dim fname As String
     Dim i As Integer
@@ -207,22 +207,33 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub OKButton_Click()
+'On Error GoTo ERROR_HANDLE
     Dim i As Integer
     Dim fname As String
+    Dim page As Integer
     
     For i = 0 To LstFiles.ListCount - 1
+        page = page + 1
         fname = LstFiles.List(i)
-        If UCase(Right(fname, 4)) = ".WLD" Then
-            Dim f As FrmDraw
-            
-            
-            
-        Else
+        Printer.Orientation = vbPRORLandscape
         
+        If UCase(Right(fname, 4)) = ".WLD" Then
+            Dim f As New FrmChart
+            f.Load fname
+            PrintChart FrmChart
+            PrintGraph Printer, fname, OptMode(0).Value, page
+            Unload f
+        Else
+            Dim fdr As New FrmDailyReport
+            fdr.Load fname
+            Call PrintDailyReport(fdr)
+            Unload fdr
         End If
     Next i
     
-    
-    
-    
+    Printer.EndDoc
+    Unload Me
+Exit Sub
+ERROR_HANDLE:
+    MsgBox "Print Error ,Please contact administrator!"
 End Sub

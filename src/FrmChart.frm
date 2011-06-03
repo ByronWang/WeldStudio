@@ -1459,11 +1459,11 @@ Dim lastTime As Long
 Public weldFileName As String
 
 Dim fr As FileR
-Public Sub Load(FileName As String)
+Public Sub Load(filename As String)
 ' Resource
 PlcRes.LoadResFor Me
-    fr = PlcWld.LoadData(FileName)
-    weldFileName = FileName
+    fr = PlcWld.LoadData(filename)
+    weldFileName = filename
     
     model = COMMON
         
@@ -1832,48 +1832,48 @@ lblItemData(26).Caption = CInt(r.TotalDuration)
 End Function
 
 
-Private Function updateCueWithCri(Index As Integer, Succeed As Integer)
+Private Function updateCueWithCri(index As Integer, Succeed As Integer)
     If Succeed = OK Then
-        lblItem(Index).ForeColor = SUCCEED_COLOR
-        lblItemData(Index).ForeColor = SUCCEED_COLOR
-        lblCriData(Index).ForeColor = SUCCEED_COLOR
-        lblItem(Index).FontBold = True
-        lblItemData(Index).FontBold = True
-        lblCriData(Index).FontBold = True
+        lblItem(index).ForeColor = SUCCEED_COLOR
+        lblItemData(index).ForeColor = SUCCEED_COLOR
+        lblCriData(index).ForeColor = SUCCEED_COLOR
+        lblItem(index).FontBold = True
+        lblItemData(index).FontBold = True
+        lblCriData(index).FontBold = True
     ElseIf Succeed = NO Then
-        lblItem(Index).ForeColor = FAIL_COLOR
-        lblItemData(Index).ForeColor = FAIL_COLOR
-        lblCriData(Index).ForeColor = FAIL_COLOR
-        lblItem(Index).FontBold = True
-        lblItemData(Index).FontBold = True
-        lblCriData(Index).FontBold = True
+        lblItem(index).ForeColor = FAIL_COLOR
+        lblItemData(index).ForeColor = FAIL_COLOR
+        lblCriData(index).ForeColor = FAIL_COLOR
+        lblItem(index).FontBold = True
+        lblItemData(index).FontBold = True
+        lblCriData(index).FontBold = True
     Else
-        lblItem(Index).ForeColor = NOTUSED_COLOR
-        lblItemData(Index).ForeColor = NOTUSED_COLOR
-        lblCriData(Index).ForeColor = NOTUSED_COLOR
-        lblItem(Index).FontBold = False
-        lblItemData(Index).FontBold = False
-        lblCriData(Index).FontBold = False
+        lblItem(index).ForeColor = NOTUSED_COLOR
+        lblItemData(index).ForeColor = NOTUSED_COLOR
+        lblCriData(index).ForeColor = NOTUSED_COLOR
+        lblItem(index).FontBold = False
+        lblItemData(index).FontBold = False
+        lblCriData(index).FontBold = False
     End If
 
 End Function
 
-Private Function updateCue(Index As Integer, Succeed As Integer)
+Private Function updateCue(index As Integer, Succeed As Integer)
     If Succeed = OK Then
-        lblItem(Index).ForeColor = SUCCEED_COLOR
-        lblItemData(Index).ForeColor = SUCCEED_COLOR
-        lblItem(Index).FontBold = True
-        lblItemData(Index).FontBold = True
+        lblItem(index).ForeColor = SUCCEED_COLOR
+        lblItemData(index).ForeColor = SUCCEED_COLOR
+        lblItem(index).FontBold = True
+        lblItemData(index).FontBold = True
     ElseIf Succeed = NO Then
-        lblItem(Index).ForeColor = FAIL_COLOR
-        lblItemData(Index).ForeColor = FAIL_COLOR
-        lblItem(Index).FontBold = True
-        lblItemData(Index).FontBold = True
+        lblItem(index).ForeColor = FAIL_COLOR
+        lblItemData(index).ForeColor = FAIL_COLOR
+        lblItem(index).FontBold = True
+        lblItemData(index).FontBold = True
     Else
-        lblItem(Index).ForeColor = NOTUSED_COLOR
-        lblItemData(Index).ForeColor = NOTUSED_COLOR
-        lblItem(Index).FontBold = False
-        lblItemData(Index).FontBold = False
+        lblItem(index).ForeColor = NOTUSED_COLOR
+        lblItemData(index).ForeColor = NOTUSED_COLOR
+        lblItem(index).FontBold = False
+        lblItemData(index).FontBold = False
     End If
 
 End Function
