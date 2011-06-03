@@ -186,7 +186,7 @@ Private Sub mnuPrint_Click()
         Set fc = f
         For i = 1 To CommonDialog1.Copies
             Call PrintChart(fc)
-            Call PrintGraph(Printer, fc.weldFileName, fc.model = COMMON)
+            Call PrintGraph(Printer, fc.weldFileName, fc.model = COMMON Or fc.model = PURE)
             Printer.EndDoc
         Next i
     
@@ -206,7 +206,7 @@ Private Sub mnuPrint_Click()
         Dim fd As FrmDailyReport
         Set fd = f
         For i = 1 To CommonDialog1.Copies
-            Call PrintDailyReport(fd)
+            Call PrintDailyReport(fd, 1)
             Printer.EndDoc
         Next i
     End If

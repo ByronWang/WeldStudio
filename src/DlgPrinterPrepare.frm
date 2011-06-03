@@ -258,13 +258,12 @@ On Error GoTo ERROR_HANDLE
         Else
             Dim fdr As New FrmDailyReport
             fdr.Load fname
-            Call PrintDailyReport(fdr)
+            page = PrintDailyReport(fdr, page)
             Unload fdr
             
             Printer.FontSize = 10
             Printer.FontBold = False
             Printer.ForeColor = vbBlack
-            Printer.CurrentX = Printer.ScaleWidth * 0.94: Printer.CurrentY = Printer.ScaleHeight * 0.94: Printer.Print page
 
         End If
         

@@ -150,7 +150,7 @@ Printer.Orientation = vbPRORLandscape
         End With
 End Function
 
-Public Function PrintDailyReport(f As FrmDailyReport)
+Public Function PrintDailyReport(f As FrmDailyReport, startPage As Integer)
 Printer.Orientation = vbPRORLandscape
     
 Dim x, y, k, i, j As Long
@@ -200,8 +200,9 @@ For k = 1 To f.MSFlexGrid1.Rows - 1 Step pagelines
     
     Printer.CurrentY = 10800
     Printer.CurrentX = 15360
-    Printer.Print CInt((k + pagelines - 1) \ pagelines) & " / " & CInt((f.MSFlexGrid1.Rows - 1 + pagelines - 1) \ pagelines)
-    
+                
+    Printer.CurrentX = Printer.ScaleWidth * 0.94: Printer.CurrentY = Printer.ScaleHeight * 0.94: Printer.Print startPage - 1 + CInt((k + pagelines - 1) \ pagelines)
+ 
     If f.MSFlexGrid1.Rows > k + pagelines Then
         Printer.NewPage
     End If
@@ -213,7 +214,9 @@ Call navControlForDailyReportBottom(f.frmSum, f.labelTotal)
 Call navControlForDailyReportBottom(f.frmSum, f.lblAccepted)
 Call navControlForDailyReportBottom(f.frmSum, f.lblReject)
 Call navControlForDailyReportBottom(f.frmSum, f.lblTotal)
-    
+
+PrintDailyReport = startPage - 1 + CInt((k - 1 + pagelines - 1) \ pagelines)
+
 End Function
 
 Private Function navControlForDailyReport(con As Label)
