@@ -13,6 +13,7 @@ Begin VB.Form DlgPrinterPrepare
    ScaleHeight     =   7005
    ScaleWidth      =   7440
    ShowInTaskbar   =   0   'False
+   StartUpPosition =   1  '所有者中心
    Begin VB.CommandButton cmdRemove 
       Caption         =   "&Remove"
       Height          =   375
@@ -63,7 +64,7 @@ Begin VB.Form DlgPrinterPrepare
       Width           =   5055
    End
    Begin VB.ListBox LstFiles 
-      Height          =   3300
+      Height          =   3120
       Left            =   240
       TabIndex        =   2
       Top             =   1440
@@ -247,7 +248,7 @@ On Error GoTo ERROR_HANDLE
         If UCase(Right(fname, 4)) = ".WLD" Then
             Dim f As New FrmChart
             f.Load fname
-            PrintChart FrmChart
+            PrintChart f
             PrintGraph Printer, fname, OptMode(0).Value
             Unload f
              

@@ -10,7 +10,7 @@ Begin VB.MDIForm WeldMDIForm
    ClientWidth     =   11400
    Icon            =   "FrmWeldMDI.frx":0000
    LinkTopic       =   "MDIForm1"
-   StartUpPosition =   3  '´°¿ÚÈ±Ê¡
+   StartUpPosition =   3  'Windows Default
    Tag             =   "10000"
    WindowState     =   2  'Maximized
    Begin MSComDlg.CommonDialog CommonDialog1 
@@ -264,6 +264,7 @@ Private Sub mnuExit_Click()
 End Sub
 
 Private Sub mnuOpen_Click()
+On Error GoTo ERROR_HANDLE
     CommonDialog1.Filter = "Data File (*.WLD) |*.wld|Daily Report(*.DLY)|*.DLY"
     CommonDialog1.InitDir = ".\data\"
     
@@ -271,7 +272,7 @@ Private Sub mnuOpen_Click()
     Dim f As Form
     Dim fc As FrmChart
     Dim fd As FrmDailyReport
-    
+    CommonDialog1.CancelError = True
     CommonDialog1.ShowOpen
     If CommonDialog1.FileName <> "" And UCase(Right(CommonDialog1.FileName, 4)) = ".WLD" Then
         
@@ -307,6 +308,8 @@ Private Sub mnuOpen_Click()
         fd.Caption = CommonDialog1.FileName
         fd.Show
     End If
+    
+ERROR_HANDLE:
 End Sub
 
 Private Sub mnuOptions_Click()
