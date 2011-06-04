@@ -2,14 +2,14 @@ VERSION 5.00
 Object = "{65E121D4-0C60-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCHRT20.OCX"
 Begin VB.Form FrmChart 
    Caption         =   "Form1"
-   ClientHeight    =   8490
+   ClientHeight    =   9600
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   15240
    Icon            =   "FrmChart.frx":0000
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   10170
+   ScaleHeight     =   11499.65
    ScaleMode       =   0  'User
    ScaleWidth      =   19550.3
    ShowInTaskbar   =   0   'False

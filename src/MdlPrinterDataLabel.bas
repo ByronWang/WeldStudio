@@ -124,7 +124,7 @@ Printer.Orientation = vbPRORLandscape
             Call setFrom(.lblGroup(i))
             Printer.CurrentY = Printer.CurrentY + gSep
             
-            For j = 23 To 24
+            For j = 23 To 26
                 Printer.CurrentX = iLeft
                 lTop = Printer.CurrentY
                 Call setFrom(.lblItem(j))
