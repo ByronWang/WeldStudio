@@ -148,8 +148,8 @@ Public Sub PrepareDraw(canvas, left As Single, top As Single, width As Single, h
         V_X_Major = 5
     Else
         V_X_Start = 0
-        V_X_Max = CSng(GetSetting(App.EXEName, "WeldChartSetting", "TicanvasMaxCycleTicanvas", 200))
-        V_X_Major = CSng(GetSetting(App.EXEName, "WeldChartSetting", "TicanvasIncr", 10))
+        V_X_Max = CSng(GetSetting(App.EXEName, "WeldChartSetting", "TimeMaxCycleTime", 200))
+        V_X_Major = CSng(GetSetting(App.EXEName, "WeldChartSetting", "TimeIncr", 10))
     End If
     
     Dim tXLabelOffset, tYLabelOffset As Single
@@ -248,12 +248,11 @@ Public Sub DrawChartAll(canvas, data() As WeldData, analysisDefine As WeldAnalys
         Amp(i) = data(i).Amp
         Dist(i) = data(i).Dist
     Next
-
-    Call DrawData(canvas, V_X_Start, xScale, V_Y1_Start, y1Scale, &HC000&, tim(), Amp())
+    
+    Call DrawData(canvas, V_X_Start, xScale, V_Y1_Start, y1Scale, &H50580, tim(), Amp())
     Call DrawData(canvas, V_X_Start, xScale, V_Y1_Start, y1Scale, &HFF&, tim(), Volt())
-
-    Call DrawData(canvas, V_X_Start, xScale, V_Y2_Start, y2Scale, &H80&, tim(), psi())
-    Call DrawData(canvas, V_X_Start, xScale, V_Y2_Start, y2Scale, &HFF0000, tim(), Dist())
+    Call DrawData(canvas, V_X_Start, xScale, V_Y2_Start, y2Scale, &H700000, tim(), psi())
+    Call DrawData(canvas, V_X_Start, xScale, V_Y2_Start, y2Scale, &HC000&, tim(), Dist())
 End Sub
 
 Public Sub DrawChartUpset(canvas, data() As WeldData, analysisDefine As WeldAnalysisDefineType)
