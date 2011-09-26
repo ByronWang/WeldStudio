@@ -1266,7 +1266,6 @@ Begin VB.Form FrmChart
          Width           =   915
       End
       Begin VB.Label lblCriDatadddd 
-         BackColor       =   &H00FF0000&
          Caption         =   "Min/Max"
          BeginProperty Font 
             Name            =   "Times New Roman"
@@ -1717,7 +1716,7 @@ With MSChart1.Plot.Axis(VtChAxisIdX).ValueScale
     .MajorDivision = (.Maximum - .Minimum) / CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeIncr", 10))
 End With
 With MSChart1.Plot.Axis(VtChAxisIdX).CategoryScale
-    .DivisionsPerLabel = UBound(EmulateData) * 20 / EmulateData(UBound(EmulateData)).Time
+    .DivisionsPerLabel = UBound(EmulateData) * CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeIncr", 20)) / EmulateData(UBound(EmulateData)).Time
     .DivisionsPerTick = .DivisionsPerLabel
 End With
 MSChart1.ChartData = MyData
