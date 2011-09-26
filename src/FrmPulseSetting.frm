@@ -13,7 +13,7 @@ Begin VB.Form FrmPulseSetting
    ScaleHeight     =   7800
    ScaleWidth      =   6615
    ShowInTaskbar   =   0   'False
-   StartUpPosition =   1  '所有者中心
+   StartUpPosition =   1  'CenterOwner
    Tag             =   "13000"
    Begin VB.CommandButton cmdDelete 
       Caption         =   "-"
