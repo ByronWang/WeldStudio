@@ -4,8 +4,7 @@ SetRegularSetting.config
 doc/WeldsImage/Thumbs.db
 ./install/*
 install
-WeldSystem.exe
-WMSSystem.exe
+*.exe
 data/*
 ~*
 */~*
