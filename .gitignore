@@ -8,5 +8,5 @@ data/*
 */~*
 Package
 *.log
-*.cfg
 *.bak
+*.vbw
