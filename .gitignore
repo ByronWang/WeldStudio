@@ -1,8 +1,6 @@
-SetPulseSetting.config
-SetRegularSetting.config
+*.config
 *.SCC
 doc/WeldsImage/Thumbs.db
-./install/*
 install
 *.exe
 data/*
@@ -11,6 +9,4 @@ data/*
 Package
 *.log
 *.cfg
-Package*
-WMS.exe
-
+*.bak
