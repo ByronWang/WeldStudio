@@ -1,5 +1,4 @@
-SetPulseSetting.config
-SetRegularSetting.config
+*.config
 *.SCC
 doc/WeldsImage/Thumbs.db
 ./install/*
@@ -10,3 +9,4 @@ data/*
 */~*
 Package
 *.bak
+*.vbw
