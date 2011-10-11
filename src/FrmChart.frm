@@ -2056,13 +2056,13 @@ timeSep = 50
             Me.MousePointer = VtMousePointerArrow
             lastTime = thisTime
             
-        lineH.Left = MSChart1.Left + 360
-        lineH.Width = MSChart1.Width - 1800
-        lineH.Top = y + MSChart1.Top
+        lineH.Left = MSChart1.Left
+        lineH.Width = MSChart1.Width
+        lineH.Top = y * 1.2 + MSChart1.Top
         
-        lineV.Top = MSChart1.Top + 320
-        lineV.Height = MSChart1.Height - 900
-        lineV.Left = x + MSChart1.Left
+        lineV.Top = MSChart1.Top
+        lineV.Height = MSChart1.Height
+        lineV.Left = x * 1.28 + MSChart1.Left
         End If
     Else
         lineH.Visible = False
