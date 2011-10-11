@@ -1454,7 +1454,7 @@ Enum ModelConstants
     SMALLPURE
 End Enum
 
-Dim model As ModelConstants
+Public model As ModelConstants
 
 Dim dataForm As FrmDataGrid
 
