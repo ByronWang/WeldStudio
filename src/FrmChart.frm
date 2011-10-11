@@ -2029,13 +2029,13 @@ End Function
 
 Private Sub MSChart1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
     If Button = vbRightButton Then
-        lineH.Left = MSChart1.Left + 300
-        lineH.Width = MSChart1.Width - 300
-        lineH.Top = y + MSChart1.Top
-
-        lineV.Top = MSChart1.Top + 360
-        lineV.Height = MSChart1.Height - 800
-        lineV.Left = x + MSChart1.Left
+        lineH.Left = MSChart1.Left
+        lineH.Width = MSChart1.Width
+        lineH.Top = y * 1.2 + MSChart1.Top
+        
+        lineV.Top = MSChart1.Top
+        lineV.Height = MSChart1.Height
+        lineV.Left = x * 1.28 + MSChart1.Left
 
         lineH.Visible = True
         lineV.Visible = True
