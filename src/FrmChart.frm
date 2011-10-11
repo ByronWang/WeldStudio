@@ -2,19 +2,31 @@ VERSION 5.00
 Object = "{65E121D4-0C60-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCHRT20.OCX"
 Begin VB.Form FrmChart 
    Caption         =   "Form1"
-   ClientHeight    =   8490
+   ClientHeight    =   10635
    ClientLeft      =   60
    ClientTop       =   450
-   ClientWidth     =   11880
+   ClientWidth     =   15240
    Icon            =   "FrmChart.frx":0000
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   10170
+   ScaleHeight     =   12739.45
    ScaleMode       =   0  'User
-   ScaleWidth      =   15240
+   ScaleWidth      =   19550.3
    ShowInTaskbar   =   0   'False
    Tag             =   "11000"
    WindowState     =   2  'Maximized
+   Begin VB.TextBox lblTimeStart 
+      Alignment       =   1  'Right Justify
+      Appearance      =   0  'Flat
+      BackColor       =   &H8000000F&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   4680
+      TabIndex        =   78
+      Text            =   "100 + "
+      Top             =   8760
+      Width           =   735
+   End
    Begin VB.Frame lineV 
       BackColor       =   &H00FF0000&
       BorderStyle     =   0  'None
@@ -1601,7 +1613,9 @@ MyData(3, 0) = "Amp"
 MyData(4, 0) = "Dist"
 
 
-
+sTime = EmulateData(posStart).Time
+lblTimeStart.Visible = True
+lblTimeStart.Text = sTime & " + "
 
 i = posStart
 While i <= UBound(EmulateData) And i <= pos
@@ -1646,6 +1660,8 @@ MSChart1.ChartData = MyData
 End Function
 Private Function setChart(EmulateData() As WeldData, model As ModelConstants)
 Dim TimeMax As Integer
+
+lblTimeStart.Visible = False
 
 TimeMax = CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeMaxCycleTime", 200))
 
