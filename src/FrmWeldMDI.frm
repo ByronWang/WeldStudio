@@ -162,7 +162,7 @@ Private Sub mnuPrint_Click()
     If f Is Nothing Then
         Exit Sub
     ElseIf TypeOf f Is FrmChart Then
-        Me.CommonDialog1.PrinterDefault = True
+        CommonDialog1.PrinterDefault = False
         CommonDialog1.CancelError = True
         CommonDialog1.Flags = cdlPDNoPageNums
         
@@ -181,7 +181,7 @@ Private Sub mnuPrint_Click()
         Next i
     
     ElseIf TypeOf f Is FrmDailyReport Then
-        Me.CommonDialog1.PrinterDefault = True
+        Me.CommonDialog1.PrinterDefault = False
         CommonDialog1.CancelError = True
         CommonDialog1.Flags = cdlPDNoPageNums
         
