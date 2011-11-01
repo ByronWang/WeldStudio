@@ -155,14 +155,13 @@ DTL32.DLL=
 C:\WINDOWS\system32\scrrun.dll=
 
 [Package|PackageOffice|Files Added]
-D:\WeldStudio\T0039.WLD=
+d:\weldstudio\t0039.wld=
 
 [Package|PackageOffice|Files Removed]
 c:\windows\system32\scrrun.dll=
 c:\windows\system32\hh.exe=
 
 [Package|PackageOffice|Files In Project]
-D:\WeldStudio\WMS.exe=Yes
 C:\WINDOWS\system32\msvbvm60.dll=Yes
 C:\WINDOWS\system32\oleaut32.dll=Yes
 C:\WINDOWS\system32\olepro32.dll=Yes
@@ -184,6 +183,7 @@ C:\WINDOWS\system32\VB6STKIT.DLL=Yes
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
 C:\WINDOWS\system32\hh.exe=No
 D:\WeldStudio\T0039.WLD=Yes
+D:\WeldStudio\WMSOffice.exe=Yes
 
 [Package|PackageOffice|Configure Registry Files]
 Applicable=No
@@ -214,26 +214,18 @@ C:\WINDOWS\system32\VB6STKIT.DLL=$(WinSysPathSysFile)
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
 C:\WINDOWS\system32\hh.exe=$(WinSysPath)
 D:\WeldStudio\T0039.WLD=$(AppPath)
+D:\WeldStudio\WMSOffice.exe=$(AppPath)
 
 [Package|PackageOffice|Configure Shared Files]
 Applicable=Yes
 D:\WeldStudio\WMS.exe=No
 D:\WeldStudio\T0039.WLD=No
+D:\WeldStudio\WMSOffice.exe=No
 
 [Package|PackageOffice|Distribution]
 Type=single
 Size=
 Title=Weld Monitoring Studio (Office)
-
-[Package|PackageOffice|Package]
-PackageFolder=D:\PackageOffice
-ProjectFolder=D:\WeldStudio
-ServerSideCab=
-File1=D:\PackageOffice\setup.exe
-File2=D:\PackageOffice\Setup.Lst
-File3=D:\PackageOffice\WMS.CAB
-Handler1=PDWizard.FolderDplySubWiz
-Handler2=PDWizard.WebPostDplySubWiz
 
 [Package|PackageOffice|IconGroups]
 Group0=Weld Monitoring Studio
@@ -241,7 +233,17 @@ PrivateGroup0=True
 Parent0=$(Programs)
 
 [Package|PackageOffice|Weld Monitoring Studio]
-Icon1=WMS.exe
+Icon1=WMSOffice.exe
 Title1=Weld Monitoring Studio(Office)
 StartIn1=$(AppPath)
 Key1=Icon1
+
+[Package|PackageOffice|Package]
+PackageFolder=D:\PackageOffice
+ProjectFolder=D:\WeldStudio
+ServerSideCab=
+File1=D:\PackageOffice\setup.exe
+File2=D:\PackageOffice\Setup.Lst
+File3=D:\PackageOffice\WMSOffice.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
