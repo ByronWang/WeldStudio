@@ -1,12 +1,12 @@
 *.config
 *.SCC
 doc/WeldsImage/Thumbs.db
-./install/*
 install
 *.exe
 data/*
 ~*
 */~*
 Package
+*.log
 *.bak
 *.vbw
