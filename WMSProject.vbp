@@ -34,6 +34,7 @@ Class=GeneralWeldNumber; src\GeneralWeldNumber.cls
 Class=JinanWeldNumber; src\JinanWeldNumber.cls
 Class=EngWeldNumber; src\EngWeldNumber.cls
 ResFile32="src\WeldStudio.RES"
+Module=PLCPrinter; src\PLCPrinter.bas
 IconForm="WeldMDIForm"
 Startup="WeldMDIForm"
 HelpFile=""

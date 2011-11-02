@@ -48,54 +48,49 @@ Begin VB.Form FrmOption
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   4
       TabsPerRow      =   10
       TabHeight       =   520
       TabCaption(0)   =   "General"
       TabPicture(0)   =   "FrmOption.frx":000C
-      Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame7"
-      Tab(0).Control(1)=   "Frame5"
-      Tab(0).Control(2)=   "CommonDialog1"
-      Tab(0).Control(3)=   "cboLanguage"
-      Tab(0).Control(4)=   "chkOnlineOnStartUp"
-      Tab(0).Control(5)=   "lblLanguage"
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "lblLanguage"
+      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).Control(1)=   "chkOnlineOnStartUp"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "cboLanguage"
+      Tab(0).Control(2).Enabled=   0   'False
+      Tab(0).Control(3)=   "CommonDialog1"
+      Tab(0).Control(3).Enabled=   0   'False
+      Tab(0).Control(4)=   "Frame5"
+      Tab(0).Control(4).Enabled=   0   'False
+      Tab(0).Control(5)=   "Frame7"
+      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "FrameP(0)"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Frame2(1)"
-      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "Frame2(0)"
-      Tab(2).Control(1).Enabled=   0   'False
       Tab(2).Control(2)=   "Frame2(3)"
-      Tab(2).Control(2).Enabled=   0   'False
       Tab(2).Control(3)=   "Frame2(2)"
-      Tab(2).Control(3).Enabled=   0   'False
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "Frame3"
-      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).ControlCount=   1
       TabCaption(4)   =   "Weld Chart"
       TabPicture(4)   =   "FrmOption.frx":007C
-      Tab(4).ControlEnabled=   -1  'True
+      Tab(4).ControlEnabled=   0   'False
       Tab(4).Control(0)=   "chkFilterData"
-      Tab(4).Control(0).Enabled=   0   'False
       Tab(4).Control(1)=   "Frame1(2)"
-      Tab(4).Control(1).Enabled=   0   'False
       Tab(4).Control(2)=   "Frame1(0)"
-      Tab(4).Control(2).Enabled=   0   'False
       Tab(4).Control(3)=   "Frame1(1)"
-      Tab(4).Control(3).Enabled=   0   'False
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
@@ -108,20 +103,15 @@ Begin VB.Form FrmOption
       TabPicture(6)   =   "FrmOption.frx":00B4
       Tab(6).ControlEnabled=   0   'False
       Tab(6).Control(0)=   "Label2"
-      Tab(6).Control(0).Enabled=   0   'False
       Tab(6).Control(1)=   "Frame4"
-      Tab(6).Control(1).Enabled=   0   'False
       Tab(6).Control(2)=   "txtWeldNumber"
-      Tab(6).Control(2).Enabled=   0   'False
       Tab(6).Control(3)=   "chkRecordInterrupts"
-      Tab(6).Control(3).Enabled=   0   'False
       Tab(6).Control(4)=   "cmdReset"
-      Tab(6).Control(4).Enabled=   0   'False
       Tab(6).ControlCount=   5
       Begin VB.Frame Frame7 
          Caption         =   "Unit Info"
          Height          =   1575
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   189
          Tag             =   "16300"
          Top             =   4800
@@ -187,7 +177,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame5 
          Caption         =   "Company Info"
          Height          =   3855
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   179
          Tag             =   "16200"
          Top             =   720
@@ -1319,7 +1309,7 @@ Begin VB.Form FrmOption
          End
       End
       Begin MSComDlg.CommonDialog CommonDialog1 
-         Left            =   -73440
+         Left            =   1560
          Top             =   5520
          _ExtentX        =   847
          _ExtentY        =   847
@@ -1329,7 +1319,7 @@ Begin VB.Form FrmOption
          Caption         =   "Distance(mm) and Force(T)"
          Height          =   1575
          Index           =   1
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   111
          Tag             =   "20200"
          Top             =   480
@@ -1399,7 +1389,7 @@ Begin VB.Form FrmOption
          Caption         =   "Current(A) and Voltage(V)"
          Height          =   1575
          Index           =   0
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   107
          Tag             =   "20100"
          Top             =   480
@@ -1469,7 +1459,7 @@ Begin VB.Form FrmOption
          Caption         =   "Time (sec)"
          Height          =   1455
          Index           =   2
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   104
          Tag             =   "20300"
          Top             =   2280
@@ -1609,9 +1599,9 @@ Begin VB.Form FrmOption
          End
       End
       Begin VB.ComboBox cboLanguage 
-         Height          =   300
+         Height          =   315
          ItemData        =   "FrmOption.frx":0106
-         Left            =   -67440
+         Left            =   7560
          List            =   "FrmOption.frx":0113
          Style           =   2  'Dropdown List
          TabIndex        =   76
@@ -1621,7 +1611,7 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkOnlineOnStartUp 
          Caption         =   "OnlineOnStartup"
          Height          =   375
-         Left            =   -68400
+         Left            =   6600
          TabIndex        =   77
          Tag             =   "16120"
          Top             =   1440
@@ -1918,7 +1908,7 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkFilterData 
          Caption         =   "FilterData"
          Height          =   255
-         Left            =   1800
+         Left            =   -73200
          TabIndex        =   80
          Tag             =   "20010"
          Top             =   6840
@@ -2044,7 +2034,7 @@ Begin VB.Form FrmOption
       Begin VB.Label lblLanguage 
          Caption         =   "Language:"
          Height          =   255
-         Left            =   -68520
+         Left            =   6480
          TabIndex        =   115
          Tag             =   "16110"
          Top             =   795
