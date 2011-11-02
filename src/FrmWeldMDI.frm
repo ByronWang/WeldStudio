@@ -156,59 +156,35 @@ End Sub
 
 
 Private Sub mnuPrint_Click()
+On Error GoTo ErrorHandle
     Dim f As Form
-    
     Set f = WeldMDIForm.ActiveForm
     If f Is Nothing Then
         Exit Sub
-    ElseIf TypeOf f Is FrmChart Then
-        CommonDialog1.PrinterDefault = False
-        CommonDialog1.CancelError = True
-        CommonDialog1.Flags = cdlPDNoPageNums
-        
-        On Error Resume Next
-        Me.CommonDialog1.ShowPrinter
-        If Err.Number = cdlCancel Then
-            Exit Sub
-        End If
-        On Error GoTo 0
-        DoEvents
-        
+    End If
+
+    If Not PLCPrinter.ShowPrinter(Me) Then
+        Exit Sub
+    End If
+
+    If TypeOf f Is FrmChart Then
         Dim fc As FrmChart
         Set fc = f
-        For i = 1 To CommonDialog1.Copies
+        For i = 1 To Printer.Copies
             Call printChart(fc)
         Next i
     
     ElseIf TypeOf f Is FrmDailyReport Then
-        Me.CommonDialog1.PrinterDefault = False
-        CommonDialog1.CancelError = True
-        CommonDialog1.Flags = cdlPDNoPageNums
-        
-        On Error Resume Next
-        Me.CommonDialog1.ShowPrinter
-        If Err.Number = cdlCancel Then
-            Exit Sub
-        End If
-        On Error GoTo 0
-        DoEvents
-        
         Dim fd As FrmDailyReport
         Set fd = f
-        For i = 1 To CommonDialog1.Copies
+        For i = 1 To Printer.Copies
             Call PrintDailyReport(fd)
         Next i
     End If
     
-    Exit Sub
-ERRORHANDLE:
-Select Case Err.Number
-Case cdlCancel
-'User clicked Cancel button on Print dialog box
-Case Else
-MsgBox Err.Description
-End Select
-
+Exit Sub
+ErrorHandle:
+    MsgBox Err.Description
 End Sub
 
 
