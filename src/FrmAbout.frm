@@ -15,7 +15,7 @@ Begin VB.Form FrmAbout
    ScaleMode       =   0  'User
    ScaleWidth      =   5408.937
    ShowInTaskbar   =   0   'False
-   StartUpPosition =   1  '所有者中心
+   StartUpPosition =   1  'CenterOwner
    Tag             =   "23000"
    Begin VB.PictureBox picIcon 
       AutoSize        =   -1  'True
@@ -101,8 +101,8 @@ Begin VB.Form FrmAbout
       Index           =   1
       X1              =   84.515
       X2              =   5309.398
-      Y1              =   1687.583
-      Y2              =   1687.583
+      Y1              =   1687.582
+      Y2              =   1687.582
    End
    Begin VB.Label lblDescription 
       Caption         =   "About"
@@ -134,7 +134,7 @@ Begin VB.Form FrmAbout
       Y2              =   1697.936
    End
    Begin VB.Label lblVersion 
-      Caption         =   "1.1"
+      Caption         =   "5.11.0"
       Height          =   225
       Left            =   960
       TabIndex        =   4
