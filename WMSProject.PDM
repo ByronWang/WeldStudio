@@ -12,9 +12,10 @@ Package=PackageOffice
 Handler=PDWizard.FolderDplySubWiz
 Folder=D:\WeldStudio
 
+
 [Package|WMSPackage|Root]
 SubWizProgID=PDWizard.SetupPkgSubWiz
-BuildFolder=D:\Package
+BuildFolder=D:\PackageOffice
 
 [Package|WMSPackage|Configure DAO ISAMs]
 Applicable=No
@@ -33,6 +34,7 @@ DTL32.DLL=
 wms.CHI=
 wms.chm=
 WMSHelp.CHI=
+WMSOfficeHelp.CHI=
 
 [Package|WMSPackage|Missing Dependency Information]
 
@@ -42,15 +44,17 @@ C:\WINDOWS\system32\scrrun.dll=
 [Package|WMSPackage|Files Added]
 d:\weldstudio\t0039.wld=
 d:\weldstudio\wmshelp.chm=
+D:\WeldStudio\WMSOfficeHelp.chm=
 
 [Package|WMSPackage|Files Removed]
 c:\windows\system32\comdlg32.ocx=
 c:\windows\system32\dtl32.dll=
 c:\windows\hh.exe=
 c:\windows\system32\hhctrl.ocx=
+d:\weldstudio\wmshelp.chm=
 
 [Package|WMSPackage|Files In Project]
-D:\WeldStudio\WMS.exe=Yes
+D:\WeldStudio\WMSOffice.exe=Yes
 C:\WINDOWS\system32\msvbvm60.dll=Yes
 C:\WINDOWS\system32\oleaut32.dll=Yes
 C:\WINDOWS\system32\olepro32.dll=Yes
@@ -73,7 +77,8 @@ C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
 D:\WeldStudio\T0039.WLD=Yes
 C:\WINDOWS\hh.exe=No
 C:\WINDOWS\system32\DTL32.DLL=No
-D:\WeldStudio\WMSHelp.chm=Yes
+D:\WeldStudio\WMSHelp.chm=No
+D:\WeldStudio\WMSOfficeHelp.chm=Yes
 
 [Package|WMSPackage|Configure Registry Files]
 Applicable=No
@@ -114,6 +119,8 @@ D:\WeldStudio\T0039.WLD=$(AppPath)
 C:\WINDOWS\system32\hh.exe=$(WinSysPath)
 D:\WeldStudio\wms.chm=$(AppPath)
 D:\WeldStudio\WMSHelp.chm=$(AppPath)
+D:\WeldStudio\WMSOffice.exe=$(AppPath)
+D:\WeldStudio\WMSOfficeHelp.chm=$(AppPath)
 
 [Package|WMSPackage|Configure Shared Files]
 Applicable=Yes
@@ -122,19 +129,21 @@ C:\WINDOWS\system32\DTL32.DLL=No
 D:\WeldStudio\T0039.WLD=No
 D:\WeldStudio\wms.chm=No
 D:\WeldStudio\WMSHelp.chm=No
+D:\WeldStudio\WMSOffice.exe=No
+D:\WeldStudio\WMSOfficeHelp.chm=No
 
 [Package|WMSPackage|Distribution]
 Type=single
 Size=
-Title=Weld Monitoring Studio
+Title=Weld Monitoring Studio(Office)
 
 [Package|WMSPackage|Package]
-PackageFolder=D:\Package
+PackageFolder=D:\PackageOffice
 ProjectFolder=D:\WeldStudio
 ServerSideCab=
-File1=D:\Package\setup.exe
-File2=D:\Package\Setup.Lst
-File3=D:\Package\WMS.CAB
+File1=D:\PackageOffice\setup.exe
+File2=D:\PackageOffice\Setup.Lst
+File3=D:\PackageOffice\WMSOffice.CAB
 Handler1=PDWizard.FolderDplySubWiz
 Handler2=PDWizard.WebPostDplySubWiz
 
@@ -144,7 +153,7 @@ PrivateGroup0=True
 Parent0=$(Programs)
 
 [Package|WMSPackage|Weld Monitoring Studio]
-Icon1=WMS.exe
-Title1=Weld Monitoring Studio
+Icon1=WMSOffice.exe
+Title1=Weld Monitoring Studio(Office)
 StartIn1=$(AppPath)
 Key1=Icon1
