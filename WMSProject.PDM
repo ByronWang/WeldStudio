@@ -88,7 +88,6 @@ C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(Win
 C:\WINDOWS\system32\hh.exe=$(WinSysPath)
 D:\WeldStudio\T0039.WLD=$(AppPath)
 D:\WeldStudio\WMSOffice.exe=$(AppPath)
-D:\WeldStudio\WMSOffice.exe=$(AppPath)
 C:\WINDOWS\system32\DTL32.DLL=$(AppPath)
 D:\WeldStudio\wmsoffice.chm=$(AppPath)
 
@@ -96,7 +95,6 @@ D:\WeldStudio\wmsoffice.chm=$(AppPath)
 Applicable=Yes
 D:\WeldStudio\WMS.exe=No
 D:\WeldStudio\T0039.WLD=No
-D:\WeldStudio\WMSOffice.exe=No
 D:\WeldStudio\WMSOffice.exe=No
 C:\WINDOWS\system32\DTL32.DLL=No
 D:\WeldStudio\wmsoffice.chm=No
