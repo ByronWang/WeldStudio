@@ -70,6 +70,7 @@ Begin VB.Form FrmOption
       TabPicture(1)   =   "FrmOption.frx":0028
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "FrameP(0)"
+      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
@@ -2285,15 +2286,15 @@ Private Sub Form_Load()
 PlcRes.LoadResFor Me
 
     If PlcDeclare.ReadOnly Then
-        Me.tabs.TabEnabled(0) = False
-        Me.tabs.TabEnabled(1) = False
-        Me.tabs.TabEnabled(2) = False
-        Me.tabs.TabEnabled(3) = False
-        Me.tabs.TabEnabled(5) = False
-        Me.tabs.TabEnabled(6) = False
-        Me.tabs.Tab = 4
+        Me.Tabs.TabEnabled(0) = False
+        Me.Tabs.TabEnabled(1) = False
+        Me.Tabs.TabEnabled(2) = False
+        Me.Tabs.TabEnabled(3) = False
+        Me.Tabs.TabEnabled(5) = False
+        Me.Tabs.TabEnabled(6) = False
+        Me.Tabs.Tab = 4
     Else
-        Me.tabs.Tab = 0
+        Me.Tabs.Tab = 0
     End If
     
     If Not PlcDeclare.ReadOnly Then
