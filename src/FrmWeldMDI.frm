@@ -146,7 +146,7 @@ Private Sub MDIForm_Unload(Cancel As Integer)
 End Sub
 
 Private Sub menuUserGuide_Click()
-    Shell "hh.exe " & App.path & "\WMS.chm ", vbNormalFocus
+    Shell "hh.exe " & App.path & "\WMSHelp.chm ", vbNormalFocus
 End Sub
 
 Private Sub mnuBatchPrint_Click()

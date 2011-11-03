@@ -125,6 +125,7 @@ File3=D:\PackageOffice\WMSOffice.CAB
 Handler1=PDWizard.FolderDplySubWiz
 Handler2=PDWizard.WebPostDplySubWiz
 
+
 [Package|WMSPackage|Root]
 SubWizProgID=PDWizard.SetupPkgSubWiz
 BuildFolder=D:\Package
@@ -144,6 +145,8 @@ TabCtCHS.dll=
 FlxGdCHS.dll=
 DTL32.DLL=
 wms.CHI=
+wms.chm=
+WMSHelp.CHI=
 
 [Package|WMSPackage|Missing Dependency Information]
 
@@ -152,7 +155,8 @@ C:\WINDOWS\system32\scrrun.dll=
 
 [Package|WMSPackage|Files Added]
 d:\weldstudio\t0039.wld=
-D:\WeldStudio\wms.chm=
+wms.chm=
+D:\WeldStudio\WMSHelp.chm=
 
 [Package|WMSPackage|Files Removed]
 c:\windows\system32\comdlg32.ocx=
@@ -184,7 +188,7 @@ C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
 D:\WeldStudio\T0039.WLD=Yes
 C:\WINDOWS\hh.exe=No
 C:\WINDOWS\system32\DTL32.DLL=No
-D:\WeldStudio\wms.chm=Yes
+D:\WeldStudio\WMSHelp.chm=Yes
 
 [Package|WMSPackage|Configure Registry Files]
 Applicable=No
@@ -224,6 +228,7 @@ C:\WINDOWS\system32\scrrun.dll=$(WinSysPath)
 D:\WeldStudio\T0039.WLD=$(AppPath)
 C:\WINDOWS\system32\hh.exe=$(WinSysPath)
 D:\WeldStudio\wms.chm=$(AppPath)
+D:\WeldStudio\WMSHelp.chm=$(AppPath)
 
 [Package|WMSPackage|Configure Shared Files]
 Applicable=Yes
@@ -231,21 +236,12 @@ D:\WeldStudio\WMS.exe=No
 C:\WINDOWS\system32\DTL32.DLL=No
 D:\WeldStudio\T0039.WLD=No
 D:\WeldStudio\wms.chm=No
+D:\WeldStudio\WMSHelp.chm=No
 
 [Package|WMSPackage|Distribution]
 Type=single
 Size=
 Title=Weld Monitoring Studio
-
-[Package|WMSPackage|Package]
-PackageFolder=D:\Package
-ProjectFolder=D:\WeldStudio
-ServerSideCab=
-File1=D:\Package\setup.exe
-File2=D:\Package\Setup.Lst
-File3=D:\Package\WMS.CAB
-Handler1=PDWizard.FolderDplySubWiz
-Handler2=PDWizard.WebPostDplySubWiz
 
 [Package|WMSPackage|IconGroups]
 Group0=Weld Monitoring Studio
@@ -257,3 +253,13 @@ Icon1=WMS.exe
 Title1=Weld Monitoring Studio
 StartIn1=$(AppPath)
 Key1=Icon1
+
+[Package|WMSPackage|Package]
+PackageFolder=D:\Package
+ProjectFolder=D:\WeldStudio
+ServerSideCab=
+File1=D:\Package\setup.exe
+File2=D:\Package\Setup.Lst
+File3=D:\Package\WMS.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
