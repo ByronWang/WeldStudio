@@ -1,6 +1,10 @@
 Attribute VB_Name = "MdlPrinterDataLabel"
 Option Explicit
 
+Const SUCCEED_COLOR As Long = &HFF00&
+Const FAIL_COLOR As Long = &HFF&
+Const NOTUSED_COLOR As Long = &HFFFFFF
+
 Public Function PrintChart(fc As FrmChart)
 Printer.Orientation = vbPRORLandscape
         
@@ -178,7 +182,7 @@ For k = 1 To f.MSFlexGrid1.Rows - 1 Step pagelines
     For j = 0 To f.MSFlexGrid1.Cols - 1
         
         Printer.CurrentY = y
-        
+        Printer.ForeColor = vbBlack
         Printer.FontBold = True
         Printer.FontSize = 10
         For i = 0 To 0
@@ -193,6 +197,17 @@ For k = 1 To f.MSFlexGrid1.Rows - 1 Step pagelines
         For i = k + 0 To stepTo - 1
             Printer.CurrentY = Printer.CurrentY + 100
             Printer.CurrentX = x - 20
+            f.MSFlexGrid1.Row = i
+            f.MSFlexGrid1.Col = j
+            If f.MSFlexGrid1.CellBackColor = SUCCEED_COLOR Then
+                Printer.ForeColor = SUCCEED_COLOR
+            ElseIf f.MSFlexGrid1.CellBackColor = FAIL_COLOR Then
+                Printer.ForeColor = FAIL_COLOR
+            ElseIf f.MSFlexGrid1.CellBackColor = NOTUSED_COLOR Then
+                Printer.ForeColor = vbBlack
+            Else
+                Printer.ForeColor = vbBlack
+            End If
             Printer.Print f.MSFlexGrid1.TextMatrix(i, j)
         Next i
         x = x + f.MSFlexGrid1.ColWidth(j) * 1
