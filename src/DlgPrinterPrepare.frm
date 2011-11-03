@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form DlgPrinterPrepare 
    BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "&Add"
+   Caption         =   "Batch Print"
    ClientHeight    =   7005
    ClientLeft      =   2760
    ClientTop       =   3750
@@ -13,7 +13,7 @@ Begin VB.Form DlgPrinterPrepare
    ScaleHeight     =   7005
    ScaleWidth      =   7440
    ShowInTaskbar   =   0   'False
-   StartUpPosition =   1  '所有者中心
+   StartUpPosition =   1  'CenterOwner
    Begin VB.CommandButton cmdRemove 
       Caption         =   "&Remove"
       Height          =   375
@@ -64,7 +64,7 @@ Begin VB.Form DlgPrinterPrepare
       Width           =   5055
    End
    Begin VB.ListBox LstFiles 
-      Height          =   3120
+      Height          =   2985
       Left            =   240
       TabIndex        =   2
       Top             =   1440
@@ -139,7 +139,7 @@ On Error GoTo ERROR_HANDLER
     Else
         Me.CommonDialog1.InitDir = "./data/"
     End If
-    Me.CommonDialog1.Flags = cdlOFNAllowMultiselect Or cdlOFNFileMustExist Or cdlOFNFileMustExist
+    Me.CommonDialog1.flags = cdlOFNAllowMultiselect Or cdlOFNFileMustExist Or cdlOFNFileMustExist
     Me.CommonDialog1.CancelError = True
     Me.CommonDialog1.ShowOpen
     
