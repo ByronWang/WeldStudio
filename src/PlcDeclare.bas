@@ -5,7 +5,7 @@ Public Const GeneralMode As String = "G"
 Public Const JinanMode As String = "J"
 Public Const EngMode As String = "E"
 
-Public Const ReadOnly As Boolean = False
+Public Const ReadOnly As Boolean = True
 Public Const WeldNumberMode As String = EngMode   'GeneralMode
 
 Public Const LOAD_ALL_PARAMETER  As Integer = 0
