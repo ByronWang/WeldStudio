@@ -1,130 +1,16 @@
 [Root]
 Most Recent Package=WMSPackage
+Most Recent Deploy=ww
 
+[Deploy|Folder Deployment 1|Root]
+Package=PackageOffice
+Handler=PDWizard.FolderDplySubWiz
+Folder=D:\WeldStudio
 
-[Package|PackageOffice|Root]
-SubWizProgID=PDWizard.SetupPkgSubWiz
-BuildFolder=D:\PackageOffice
-
-[Package|PackageOffice|Configure DAO ISAMs]
-Applicable=No
-
-[Package|PackageOffice|Configure DAO ODBC]
-JetWorkspace=
-ODBCDirect=
-
-[Package|PackageOffice|Files Found]
-
-[Package|PackageOffice|Files Released]
-DTL32.DLL=
-wmsoffice.CHI=
-
-[Package|PackageOffice|Missing Dependency Information]
-
-[Package|PackageOffice|Out-of-Date Dependency Information]
-C:\WINDOWS\system32\scrrun.dll=
-
-[Package|PackageOffice|Files Added]
-D:\WeldStudio\T0039.WLD=
-D:\WeldStudio\wmsoffice.chm=
-
-[Package|PackageOffice|Files Removed]
-c:\windows\system32\scrrun.dll=
-c:\windows\system32\hh.exe=
-
-[Package|PackageOffice|Files In Project]
-C:\WINDOWS\system32\msvbvm60.dll=Yes
-C:\WINDOWS\system32\oleaut32.dll=Yes
-C:\WINDOWS\system32\olepro32.dll=Yes
-C:\WINDOWS\system32\asycfilt.dll=Yes
-C:\WINDOWS\system32\stdole2.tlb=Yes
-C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
-C:\WINDOWS\system32\hhctrl.ocx=Yes
-C:\WINDOWS\system32\itss.dll=Yes
-C:\WINDOWS\system32\itircl.dll=Yes
-C:\WINDOWS\system32\scrrun.dll=No
-C:\WINDOWS\system32\msvcrt.dll=Yes
-C:\WINDOWS\system32\MSCHRT20.OCX=Yes
-C:\WINDOWS\system32\MSFLXGRD.OCX=Yes
-C:\WINDOWS\system32\TABCTL32.OCX=Yes
-C:\WINDOWS\system32\COMDLG32.OCX=Yes
-C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
-C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
-C:\WINDOWS\system32\VB6STKIT.DLL=Yes
-C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
-D:\WeldStudio\T0039.WLD=Yes
-D:\WeldStudio\WMSOffice.exe=Yes
-C:\WINDOWS\hh.exe=Yes
-C:\WINDOWS\system32\DTL32.DLL=Yes
-D:\WeldStudio\wmsoffice.chm=Yes
-
-[Package|PackageOffice|Configure Registry Files]
-Applicable=No
-
-[Package|PackageOffice|Configure Remote Servers]
-Applicable=No
-
-[Package|PackageOffice|Install Locations]
-D:\WeldStudio\WMS.exe=$(AppPath)
-C:\WINDOWS\system32\msvbvm60.dll=$(WinSysPathSysFile)
-C:\WINDOWS\system32\oleaut32.dll=$(WinSysPathSysFile)
-C:\WINDOWS\system32\olepro32.dll=$(WinSysPathSysFile)
-C:\WINDOWS\system32\asycfilt.dll=$(WinSysPathSysFile)
-C:\WINDOWS\system32\stdole2.tlb=$(WinSysPathSysFile)
-C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
-C:\WINDOWS\system32\hhctrl.ocx=$(WinSysPath)
-C:\WINDOWS\system32\itss.dll=$(WinSysPath)
-C:\WINDOWS\system32\itircl.dll=$(WinSysPath)
-C:\WINDOWS\hh.exe=$(WinSysPath)
-C:\WINDOWS\system32\msvcrt.dll=$(WinSysPathSysFile)
-C:\WINDOWS\system32\MSCHRT20.OCX=$(WinSysPath)
-C:\WINDOWS\system32\MSFLXGRD.OCX=$(WinSysPath)
-C:\WINDOWS\system32\TABCTL32.OCX=$(WinSysPath)
-C:\WINDOWS\system32\COMDLG32.OCX=$(WinSysPath)
-C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
-C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
-C:\WINDOWS\system32\VB6STKIT.DLL=$(WinSysPathSysFile)
-C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
-C:\WINDOWS\system32\hh.exe=$(WinSysPath)
-D:\WeldStudio\T0039.WLD=$(AppPath)
-D:\WeldStudio\WMSOffice.exe=$(AppPath)
-C:\WINDOWS\system32\DTL32.DLL=$(AppPath)
-D:\WeldStudio\wmsoffice.chm=$(AppPath)
-
-[Package|PackageOffice|Configure Shared Files]
-Applicable=Yes
-D:\WeldStudio\WMS.exe=No
-D:\WeldStudio\T0039.WLD=No
-D:\WeldStudio\WMSOffice.exe=No
-C:\WINDOWS\system32\DTL32.DLL=No
-D:\WeldStudio\wmsoffice.chm=No
-
-[Package|PackageOffice|Distribution]
-Type=single
-Size=
-Title=Weld Monitoring Studio (Office)
-
-[Package|PackageOffice|IconGroups]
-Group0=Weld Monitoring Studio
-PrivateGroup0=True
-Parent0=$(Programs)
-
-[Package|PackageOffice|Weld Monitoring Studio]
-Icon1=WMSOffice.exe
-Title1=Weld Monitoring Studio(Office)
-StartIn1=$(AppPath)
-Key1=Icon1
-
-[Package|PackageOffice|Package]
-PackageFolder=D:\PackageOffice
-ProjectFolder=D:\tmp2\WeldStudio
-ServerSideCab=
-File1=D:\PackageOffice\setup.exe
-File2=D:\PackageOffice\Setup.Lst
-File3=D:\PackageOffice\WMSOffice.CAB
-Handler1=PDWizard.FolderDplySubWiz
-Handler2=PDWizard.WebPostDplySubWiz
-
+[Deploy|ww|Root]
+Package=PackageOffice
+Handler=PDWizard.FolderDplySubWiz
+Folder=D:\WeldStudio
 
 [Package|WMSPackage|Root]
 SubWizProgID=PDWizard.SetupPkgSubWiz
@@ -155,8 +41,7 @@ C:\WINDOWS\system32\scrrun.dll=
 
 [Package|WMSPackage|Files Added]
 d:\weldstudio\t0039.wld=
-wms.chm=
-D:\WeldStudio\WMSHelp.chm=
+d:\weldstudio\wmshelp.chm=
 
 [Package|WMSPackage|Files Removed]
 c:\windows\system32\comdlg32.ocx=
@@ -243,6 +128,16 @@ Type=single
 Size=
 Title=Weld Monitoring Studio
 
+[Package|WMSPackage|Package]
+PackageFolder=D:\Package
+ProjectFolder=D:\WeldStudio
+ServerSideCab=
+File1=D:\Package\setup.exe
+File2=D:\Package\Setup.Lst
+File3=D:\Package\WMS.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
+
 [Package|WMSPackage|IconGroups]
 Group0=Weld Monitoring Studio
 PrivateGroup0=True
@@ -253,13 +148,3 @@ Icon1=WMS.exe
 Title1=Weld Monitoring Studio
 StartIn1=$(AppPath)
 Key1=Icon1
-
-[Package|WMSPackage|Package]
-PackageFolder=D:\Package
-ProjectFolder=D:\WeldStudio
-ServerSideCab=
-File1=D:\Package\setup.exe
-File2=D:\Package\Setup.Lst
-File3=D:\Package\WMS.CAB
-Handler1=PDWizard.FolderDplySubWiz
-Handler2=PDWizard.WebPostDplySubWiz
