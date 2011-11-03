@@ -114,8 +114,9 @@ PlcRes.LoadResFor Me
         Me.mnuConnect.Enabled = False
         'Me.mnuTools.Enabled = False
         Me.mnuParameters.Enabled = False
-        Me.mnuBatchPrint.Visible = False
         Exit Sub
+    Else
+        Me.mnuBatchPrint.Visible = False
     End If
     
     If GetSetting(App.EXEName, "UserData", "CompanyName", "") = "" Or _
