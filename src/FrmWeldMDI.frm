@@ -114,6 +114,7 @@ PlcRes.LoadResFor Me
         Me.mnuConnect.Enabled = False
         'Me.mnuTools.Enabled = False
         Me.mnuParameters.Enabled = False
+        Me.mnuBatchPrint.Visible = False
         Exit Sub
     End If
     
@@ -163,63 +164,40 @@ Private Sub mnuFile_click()
     End If
 End Sub
 
+
 Private Sub mnuPrint_Click()
+On Error GoTo ErrorHandle
     Dim f As Form
-    
     Set f = WeldMDIForm.ActiveForm
     If f Is Nothing Then
         Exit Sub
-    ElseIf TypeOf f Is FrmChart Then
-        Me.CommonDialog1.PrinterDefault = False
-        CommonDialog1.CancelError = True
-        CommonDialog1.Flags = cdlPDNoPageNums
-        
-        On Error Resume Next
-        Me.CommonDialog1.ShowPrinter
-        If Err.Number = cdlCancel Then
-            Exit Sub
-        End If
-        On Error GoTo 0
-        DoEvents
-        
+    End If
+
+    If Not PLCPrinter.ShowPrinter(Me) Then
+        Exit Sub
+    End If
+
+    If TypeOf f Is FrmChart Then
         Dim fc As FrmChart
         Set fc = f
-        For i = 1 To CommonDialog1.Copies
+        For i = 1 To Printer.Copies
             Call PrintChart(fc)
             Call PrintGraph(Printer, fc.weldFileName, fc.model = COMMON Or fc.model = PURE)
             Printer.EndDoc
         Next i
     
     ElseIf TypeOf f Is FrmDailyReport Then
-        Me.CommonDialog1.PrinterDefault = False
-        CommonDialog1.CancelError = True
-        CommonDialog1.Flags = cdlPDNoPageNums
-        
-        On Error Resume Next
-        Me.CommonDialog1.ShowPrinter
-        If Err.Number = cdlCancel Then
-            Exit Sub
-        End If
-        On Error GoTo 0
-        DoEvents
-        
         Dim fd As FrmDailyReport
         Set fd = f
-        For i = 1 To CommonDialog1.Copies
+        For i = 1 To Printer.Copies
             Call PrintDailyReport(fd, 1)
             Printer.EndDoc
         Next i
     End If
     
-    Exit Sub
-ERRORHANDLE:
-Select Case Err.Number
-Case cdlCancel
-'User clicked Cancel button on Print dialog box
-Case Else
-MsgBox Err.Description
-End Select
-
+Exit Sub
+ErrorHandle:
+    MsgBox Err.Description
 End Sub
 
 
@@ -272,6 +250,7 @@ On Error GoTo ERROR_HANDLE
     Dim f As Form
     Dim fc As FrmChart
     Dim fd As FrmDailyReport
+    
     CommonDialog1.CancelError = True
     CommonDialog1.ShowOpen
     If CommonDialog1.FileName <> "" And UCase(Right(CommonDialog1.FileName, 4)) = ".WLD" Then
