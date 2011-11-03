@@ -286,9 +286,8 @@ Public Sub DrawChartUpset(canvas, data() As WeldData, analysisDefine As WeldAnal
         Dist(i) = data(i).Dist
     Next
 
-    Call DrawData(canvas, data(0).Time, xScale, V_Y1_Start, y1Scale, &HC000&, tim(), Amp())
-    Call DrawData(canvas, data(0).Time, xScale, V_Y1_Start, y1Scale, &HFF&, tim(), Volt())
-    
-    Call DrawData(canvas, data(0).Time, xScale, V_Y2_Start, y2Scale, &H80&, tim(), psi())
-    Call DrawData(canvas, data(0).Time, xScale, V_Y2_Start, y2Scale, &HFF0000, tim(), Dist())
+     Call DrawData(canvas, data(0).Time, xScale, V_Y1_Start, y1Scale, &H50580, tim(), Amp())
+     Call DrawData(canvas, data(0).Time, xScale, V_Y1_Start, y1Scale, &HFF&, tim(), Volt())
+     Call DrawData(canvas, data(0).Time, xScale, V_Y2_Start, y2Scale, &H700000, tim(), psi())
+     Call DrawData(canvas, data(0).Time, xScale, V_Y2_Start, y2Scale, &HC000&, tim(), Dist())
 End Sub
