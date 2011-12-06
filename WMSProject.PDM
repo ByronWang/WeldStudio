@@ -44,7 +44,7 @@ C:\WINDOWS\system32\scrrun.dll=
 [Package|WMSPackage|Files Added]
 d:\weldstudio\t0039.wld=
 d:\weldstudio\wmshelp.chm=
-D:\WeldStudio\WMSOfficeHelp.chm=
+d:\weldstudio\wmsofficehelp.chm=
 
 [Package|WMSPackage|Files Removed]
 c:\windows\system32\comdlg32.ocx=
@@ -75,8 +75,6 @@ C:\WINDOWS\system32\VB6STKIT.DLL=Yes
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
 D:\WeldStudio\T0039.WLD=Yes
 C:\WINDOWS\hh.exe=No
-
-C:\WINDOWS\system32\DTL32.DLL=No
 D:\WeldStudio\WMSHelp.chm=No
 D:\WeldStudio\WMSOfficeHelp.chm=Yes
 
