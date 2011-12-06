@@ -88,8 +88,8 @@ Type FileHeader1
      
      
      X900 As String * &HA
-     unitName As String * &H1A
-     operator As String * &H2
+     UnitName As String * &H1A
+     Operator As String * &H2
      X922 As String * &HA
      
      X930 As String * &HD0
