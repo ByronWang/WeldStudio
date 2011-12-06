@@ -289,7 +289,9 @@ On Error GoTo ERROR_HANDLE
         fd.Show
     End If
     
+Exit Sub
 ERROR_HANDLE:
+    MsgBox Err.Description
 End Sub
 
 Private Sub mnuOptions_Click()
