@@ -70,15 +70,14 @@ Begin VB.Form FrmOption
       TabPicture(1)   =   "FrmOption.frx":0028
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "FrameP(0)"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Sersor Calibration"
       TabPicture(2)   =   "FrmOption.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame2(1)"
-      Tab(2).Control(1)=   "Frame2(0)"
-      Tab(2).Control(2)=   "Frame2(3)"
-      Tab(2).Control(3)=   "Frame2(2)"
+      Tab(2).Control(0)=   "Frame2(2)"
+      Tab(2).Control(1)=   "Frame2(3)"
+      Tab(2).Control(2)=   "Frame2(0)"
+      Tab(2).Control(3)=   "Frame2(1)"
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Sensor Reading Bar"
       TabPicture(3)   =   "FrmOption.frx":0060
@@ -88,58 +87,97 @@ Begin VB.Form FrmOption
       TabCaption(4)   =   "Weld Chart"
       TabPicture(4)   =   "FrmOption.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "chkFilterData"
-      Tab(4).Control(1)=   "Frame1(2)"
-      Tab(4).Control(2)=   "Frame1(0)"
-      Tab(4).Control(3)=   "Frame1(1)"
+      Tab(4).Control(0)=   "Frame1(1)"
+      Tab(4).Control(1)=   "Frame1(0)"
+      Tab(4).Control(2)=   "Frame1(2)"
+      Tab(4).Control(3)=   "chkFilterData"
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Frame1(11)"
+      Tab(5).Control(0)=   "Label1"
       Tab(5).Control(1)=   "Frame6"
-      Tab(5).Control(2)=   "Label1"
+      Tab(5).Control(2)=   "Frame1(11)"
       Tab(5).ControlCount=   3
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "Label2"
-      Tab(6).Control(1)=   "Frame4"
+      Tab(6).Control(0)=   "cmdReset"
+      Tab(6).Control(1)=   "chkRecordInterrupts"
       Tab(6).Control(2)=   "txtWeldNumber"
-      Tab(6).Control(3)=   "chkRecordInterrupts"
-      Tab(6).Control(4)=   "cmdReset"
+      Tab(6).Control(3)=   "Frame4"
+      Tab(6).Control(4)=   "Label2"
       Tab(6).ControlCount=   5
       Begin VB.Frame Frame7 
          Caption         =   "Unit Info"
-         Height          =   1575
+         Height          =   1935
          Left            =   360
          TabIndex        =   189
          Tag             =   "16300"
-         Top             =   4800
-         Width           =   5775
+         Top             =   4680
+         Width           =   5535
          Begin VB.TextBox txtComp 
-            Height          =   375
+            Height          =   360
             Index           =   11
             Left            =   1920
+            MaxLength       =   2
             TabIndex        =   195
-            Top             =   1080
-            Width           =   3375
+            Top             =   1320
+            Width           =   375
          End
          Begin VB.TextBox txtComp 
-            Height          =   375
+            Height          =   360
             Index           =   10
             Left            =   1920
+            MaxLength       =   16
             TabIndex        =   75
-            Top             =   720
-            Width           =   3375
+            Top             =   960
+            Width           =   2055
          End
          Begin VB.TextBox txtComp 
-            Height          =   375
+            Height          =   360
             Index           =   9
             Left            =   1920
+            MaxLength       =   20
             TabIndex        =   74
-            Top             =   360
-            Width           =   3375
+            Top             =   600
+            Width           =   2400
+         End
+         Begin VB.Label Label8 
+            Alignment       =   1  'Right Justify
+            Caption         =   "2"
+            Height          =   255
+            Left            =   4800
+            TabIndex        =   209
+            Top             =   1440
+            Width           =   495
+         End
+         Begin VB.Label Label7 
+            Alignment       =   1  'Right Justify
+            Caption         =   "16"
+            Height          =   255
+            Left            =   4800
+            TabIndex        =   208
+            Top             =   1080
+            Width           =   495
+         End
+         Begin VB.Label Label6 
+            Alignment       =   1  'Right Justify
+            Caption         =   "20"
+            Height          =   255
+            Left            =   4800
+            TabIndex        =   207
+            Top             =   720
+            Width           =   495
+         End
+         Begin VB.Label Label5 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Max Length"
+            Height          =   255
+            Left            =   3960
+            TabIndex        =   206
+            Top             =   240
+            Width           =   1335
          End
          Begin VB.Label lblComp 
             Alignment       =   1  'Right Justify
@@ -149,7 +187,7 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   194
             Tag             =   "20"
-            Top             =   1140
+            Top             =   1380
             Width           =   1575
          End
          Begin VB.Label lblComp 
@@ -160,7 +198,7 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   191
             Tag             =   "20"
-            Top             =   780
+            Top             =   1020
             Width           =   1575
          End
          Begin VB.Label lblComp 
@@ -171,91 +209,199 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   190
             Tag             =   "10"
-            Top             =   400
+            Top             =   645
             Width           =   1575
          End
       End
       Begin VB.Frame Frame5 
          Caption         =   "Company Info"
-         Height          =   3855
+         Height          =   3975
          Left            =   360
          TabIndex        =   179
          Tag             =   "16200"
-         Top             =   720
-         Width           =   5775
+         Top             =   600
+         Width           =   5535
          Begin VB.TextBox txtComp 
-            Height          =   375
+            Height          =   360
             Index           =   8
             Left            =   1920
+            MaxLength       =   20
             TabIndex        =   73
-            Top             =   3240
-            Width           =   3375
+            Top             =   3480
+            Width           =   2400
          End
          Begin VB.TextBox txtComp 
-            Height          =   375
+            Height          =   360
             Index           =   7
             Left            =   1920
+            MaxLength       =   20
             TabIndex        =   72
-            Top             =   2880
-            Width           =   3375
+            Top             =   3120
+            Width           =   2400
          End
          Begin VB.TextBox txtComp 
-            Height          =   375
+            Height          =   360
             Index           =   6
             Left            =   1920
+            MaxLength       =   20
             TabIndex        =   71
-            Top             =   2520
-            Width           =   3375
+            Top             =   2760
+            Width           =   2400
          End
          Begin VB.TextBox txtComp 
-            Height          =   375
+            Height          =   360
             Index           =   5
             Left            =   1920
+            MaxLength       =   20
             TabIndex        =   70
-            Top             =   2160
-            Width           =   3375
+            Top             =   2400
+            Width           =   2400
          End
          Begin VB.TextBox txtComp 
-            Height          =   375
+            Height          =   360
             Index           =   4
             Left            =   1920
+            MaxLength       =   20
             TabIndex        =   69
             Text            =   "China"
-            Top             =   1800
-            Width           =   3375
+            Top             =   2040
+            Width           =   2400
          End
          Begin VB.TextBox txtComp 
-            Height          =   375
+            Height          =   360
             Index           =   3
             Left            =   1920
+            MaxLength       =   20
             TabIndex        =   68
-            Top             =   1440
-            Width           =   3375
+            Top             =   1680
+            Width           =   2400
          End
          Begin VB.TextBox txtComp 
-            Height          =   375
+            Height          =   360
             Index           =   2
             Left            =   1920
+            MaxLength       =   20
             TabIndex        =   67
-            Top             =   1080
-            Width           =   3375
+            Top             =   1320
+            Width           =   2400
          End
          Begin VB.TextBox txtComp 
-            Height          =   375
+            Height          =   360
             Index           =   1
             Left            =   1920
+            MaxLength       =   20
             TabIndex        =   66
-            Top             =   720
-            Width           =   3375
+            Top             =   960
+            Width           =   2400
          End
          Begin VB.TextBox txtComp 
-            Height          =   375
+            Height          =   360
             Index           =   0
             Left            =   1920
+            MaxLength       =   20
             TabIndex        =   65
             Text            =   "KIWAY"
-            Top             =   360
-            Width           =   3375
+            Top             =   600
+            Width           =   2400
+         End
+         Begin VB.Label lblCompMaxLength 
+            Alignment       =   1  'Right Justify
+            Caption         =   "20"
+            Height          =   255
+            Index           =   8
+            Left            =   4800
+            TabIndex        =   205
+            Top             =   3600
+            Width           =   495
+         End
+         Begin VB.Label lblCompMaxLength 
+            Alignment       =   1  'Right Justify
+            Caption         =   "20"
+            Height          =   255
+            Index           =   7
+            Left            =   4800
+            TabIndex        =   204
+            Top             =   3240
+            Width           =   495
+         End
+         Begin VB.Label lblCompMaxLength 
+            Alignment       =   1  'Right Justify
+            Caption         =   "20"
+            Height          =   255
+            Index           =   6
+            Left            =   4800
+            TabIndex        =   203
+            Top             =   2880
+            Width           =   495
+         End
+         Begin VB.Label lblCompMaxLength 
+            Alignment       =   1  'Right Justify
+            Caption         =   "20"
+            Height          =   255
+            Index           =   5
+            Left            =   4800
+            TabIndex        =   202
+            Top             =   2520
+            Width           =   495
+         End
+         Begin VB.Label lblCompMaxLength 
+            Alignment       =   1  'Right Justify
+            Caption         =   "20"
+            Height          =   255
+            Index           =   4
+            Left            =   4800
+            TabIndex        =   201
+            Top             =   2160
+            Width           =   495
+         End
+         Begin VB.Label lblCompMaxLength 
+            Alignment       =   1  'Right Justify
+            Caption         =   "20"
+            Height          =   255
+            Index           =   3
+            Left            =   4800
+            TabIndex        =   200
+            Top             =   1800
+            Width           =   495
+         End
+         Begin VB.Label lblCompMaxLength 
+            Alignment       =   1  'Right Justify
+            Caption         =   "20"
+            Height          =   255
+            Index           =   2
+            Left            =   4800
+            TabIndex        =   199
+            Top             =   1440
+            Width           =   495
+         End
+         Begin VB.Label lblCompMaxLength 
+            Alignment       =   1  'Right Justify
+            Caption         =   "20"
+            Height          =   255
+            Index           =   1
+            Left            =   4800
+            TabIndex        =   198
+            Top             =   1080
+            Width           =   495
+         End
+         Begin VB.Label lblCompMaxLength 
+            Alignment       =   1  'Right Justify
+            Caption         =   "20"
+            Height          =   255
+            Index           =   0
+            Left            =   4800
+            TabIndex        =   197
+            Top             =   720
+            Width           =   495
+         End
+         Begin VB.Label Label4 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Max Length"
+            Height          =   255
+            Left            =   3960
+            TabIndex        =   196
+            Top             =   240
+            Width           =   1335
          End
          Begin VB.Label lblComp 
             Alignment       =   1  'Right Justify
@@ -265,7 +411,7 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   188
             Tag             =   "90"
-            Top             =   3240
+            Top             =   3480
             Width           =   1575
          End
          Begin VB.Label lblComp 
@@ -276,7 +422,7 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   187
             Tag             =   "80"
-            Top             =   2880
+            Top             =   3120
             Width           =   1575
          End
          Begin VB.Label lblComp 
@@ -287,7 +433,7 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   186
             Tag             =   "70"
-            Top             =   2520
+            Top             =   2760
             Width           =   1575
          End
          Begin VB.Label lblComp 
@@ -298,7 +444,7 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   185
             Tag             =   "60"
-            Top             =   2160
+            Top             =   2400
             Width           =   1575
          End
          Begin VB.Label lblComp 
@@ -309,7 +455,7 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   184
             Tag             =   "50"
-            Top             =   1800
+            Top             =   2040
             Width           =   1575
          End
          Begin VB.Label lblComp 
@@ -320,7 +466,7 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   183
             Tag             =   "40"
-            Top             =   1440
+            Top             =   1680
             Width           =   1575
          End
          Begin VB.Label lblComp 
@@ -331,7 +477,7 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   182
             Tag             =   "30"
-            Top             =   1080
+            Top             =   1320
             Width           =   1575
          End
          Begin VB.Label lblComp 
@@ -342,7 +488,7 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   181
             Tag             =   "20"
-            Top             =   720
+            Top             =   960
             Width           =   1575
          End
          Begin VB.Label lblComp 
@@ -353,7 +499,7 @@ Begin VB.Form FrmOption
             Left            =   240
             TabIndex        =   180
             Tag             =   "10"
-            Top             =   360
+            Top             =   600
             Width           =   1575
          End
       End
@@ -2099,19 +2245,19 @@ End Sub
 Private Function UpgradeCalibration(cd() As Single, Calibration_Enable() As Single)
     Dim ca(11) As Single
     Dim o As Integer
-    Dim p As Integer
+    Dim P As Integer
     Dim i As Integer
     Dim f As Single
     f = 0
     
     For i = 0 To 3
         o = i * 3
-        p = i * 4
+        P = i * 4
         
-        If Calibration_Enable(i) = 1 And cd(p + 1) - cd(p + 0) <> 0 Then
-                ca(o + 0) = cd(p + 2) / (cd(p + 1) - cd(p + 0))
-                ca(o + 1) = cd(p + 0) * ca(o + 0)
-                ca(o + 2) = cd(p + 3)
+        If Calibration_Enable(i) = 1 And cd(P + 1) - cd(P + 0) <> 0 Then
+                ca(o + 0) = cd(P + 2) / (cd(P + 1) - cd(P + 0))
+                ca(o + 1) = cd(P + 0) * ca(o + 0)
+                ca(o + 2) = cd(P + 3)
         Else
             ca(o + 0) = 1
             ca(o + 1) = 0
@@ -2286,15 +2432,15 @@ Private Sub Form_Load()
 PlcRes.LoadResFor Me
 
     If PlcDeclare.ReadOnly Then
-        Me.Tabs.TabEnabled(0) = False
-        Me.Tabs.TabEnabled(1) = False
-        Me.Tabs.TabEnabled(2) = False
-        Me.Tabs.TabEnabled(3) = False
-        Me.Tabs.TabEnabled(5) = False
-        Me.Tabs.TabEnabled(6) = False
-        Me.Tabs.Tab = 4
+        Me.tabs.TabEnabled(0) = False
+        Me.tabs.TabEnabled(1) = False
+        Me.tabs.TabEnabled(2) = False
+        Me.tabs.TabEnabled(3) = False
+        Me.tabs.TabEnabled(5) = False
+        Me.tabs.TabEnabled(6) = False
+        Me.tabs.Tab = 4
     Else
-        Me.Tabs.Tab = 0
+        Me.tabs.Tab = 0
     End If
     
     If Not PlcDeclare.ReadOnly Then
@@ -2471,7 +2617,6 @@ PlcRes.LoadResFor Me
     
 End Sub
 
-
 Private Sub optStartRecording_Click(index As Integer)
     Mode_StartRecording = index
     Dim i As Integer
@@ -2492,7 +2637,7 @@ Private Sub txt_Change(index As Integer)
 End Sub
 
 Private Sub txtComp_Change(index As Integer)
-    If Len(txtComp(index).Text) <= 20 Then
+    If Len(txtComp(index).Text) <= txtComp(index).MaxLength Then
         User_Data(index) = txtComp(index).Text
     Else
         txtComp(index).Text = User_Data(index)
