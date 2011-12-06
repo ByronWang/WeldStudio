@@ -188,9 +188,9 @@ Public Sub PrepareDraw(canvas, left As Single, top As Single, width As Single, h
         
     Dim pos As Single
     
-    'Printer.FontSize = 12
-    Printer.FontBold = False
-    Printer.ForeColor = vbBlack
+    'canvas.FontSize = 12
+    canvas.FontBold = False
+    canvas.ForeColor = vbBlack
     
     xScale = pWidth / (V_X_Max - V_X_Start)
     y1Scale = pHeight / (V_Y1_Max - V_Y1_Start)
