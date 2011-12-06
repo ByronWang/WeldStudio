@@ -1752,7 +1752,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub cmdShowMode_Click()
-    Me.MousePointer = VtMousePointer.VtMousePointerHourGlass
+    Me.MousePointer = MousePointerConstants.vbArrowHourglass
     If model = COMMON Then
         model = PURE
         Call setChart(fr, model)
@@ -1760,7 +1760,7 @@ Private Sub cmdShowMode_Click()
         model = COMMON
         Call setChart(fr, model)
     End If
-    Me.MousePointer = VtMousePointer.VtMousePointerArrow
+    Me.MousePointer = MousePointerConstants.vbArrow
 End Sub
 
 Private Sub P_DblClick()

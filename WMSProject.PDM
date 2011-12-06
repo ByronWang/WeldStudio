@@ -12,6 +12,7 @@ Package=PackageOffice
 Handler=PDWizard.FolderDplySubWiz
 Folder=D:\WeldStudio
 
+
 [Package|WMSPackage|Root]
 SubWizProgID=PDWizard.SetupPkgSubWiz
 BuildFolder=D:\Package
@@ -62,7 +63,6 @@ C:\WINDOWS\system32\itss.dll=Yes
 C:\WINDOWS\system32\itircl.dll=Yes
 C:\WINDOWS\system32\scrrun.dll=Yes
 C:\WINDOWS\system32\msvcrt.dll=Yes
-C:\WINDOWS\system32\MSCHRT20.OCX=Yes
 C:\WINDOWS\system32\MSFLXGRD.OCX=Yes
 C:\WINDOWS\system32\TABCTL32.OCX=Yes
 C:\WINDOWS\system32\COMDLG32.OCX=No
@@ -72,7 +72,6 @@ C:\WINDOWS\system32\VB6STKIT.DLL=Yes
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
 D:\WeldStudio\T0039.WLD=Yes
 C:\WINDOWS\hh.exe=No
-C:\WINDOWS\system32\DTL32.DLL=No
 D:\WeldStudio\WMSHelp.chm=Yes
 
 [Package|WMSPackage|Configure Registry Files]
