@@ -1,57 +1,36 @@
 VERSION 5.00
-Object = "{65E121D4-0C60-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCHRT20.OCX"
 Begin VB.Form FrmChart 
    Caption         =   "Form1"
-   ClientHeight    =   10635
+   ClientHeight    =   10650
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   15240
    Icon            =   "FrmChart.frx":0000
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   12739.45
-   ScaleMode       =   0  'User
-   ScaleWidth      =   19550.3
+   ScaleHeight     =   10650
+   ScaleWidth      =   15240
    ShowInTaskbar   =   0   'False
    Tag             =   "11000"
    WindowState     =   2  'Maximized
-   Begin VB.TextBox lblTimeStart 
-      Alignment       =   1  'Right Justify
+   Begin VB.PictureBox P 
       Appearance      =   0  'Flat
-      BackColor       =   &H8000000F&
       BorderStyle     =   0  'None
-      Height          =   255
-      Left            =   4680
-      TabIndex        =   78
-      Text            =   "100 + "
-      Top             =   8760
-      Width           =   735
-   End
-   Begin VB.Frame lineV 
-      BackColor       =   &H00FF0000&
-      BorderStyle     =   0  'None
-      Height          =   2000
-      Left            =   6840
-      TabIndex        =   77
-      Top             =   600
-      Visible         =   0   'False
-      Width           =   10
-   End
-   Begin VB.Frame lineH 
-      BackColor       =   &H00FF0000&
-      BorderStyle     =   0  'None
-      Height          =   10
-      Left            =   4920
-      TabIndex        =   76
-      Top             =   5040
-      Visible         =   0   'False
-      Width           =   30000
+      DrawWidth       =   6
+      ForeColor       =   &H80000008&
+      Height          =   8535
+      Left            =   4440
+      ScaleHeight     =   8535
+      ScaleWidth      =   10695
+      TabIndex        =   75
+      Top             =   1440
+      Width           =   10695
    End
    Begin VB.CommandButton cmdShowMode 
       Caption         =   "Data Filter"
       Height          =   495
       Left            =   13680
-      TabIndex        =   75
+      TabIndex        =   74
       Top             =   120
       Width           =   1335
    End
@@ -59,7 +38,7 @@ Begin VB.Form FrmChart
       Caption         =   "View Detail"
       Height          =   495
       Left            =   13680
-      TabIndex        =   74
+      TabIndex        =   73
       Top             =   720
       Width           =   1335
    End
@@ -67,7 +46,7 @@ Begin VB.Form FrmChart
       BorderStyle     =   0  'None
       Height          =   9015
       Left            =   240
-      TabIndex        =   8
+      TabIndex        =   7
       Tag             =   "11100"
       Top             =   360
       Width           =   4455
@@ -85,7 +64,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   0
          Left            =   0
-         TabIndex        =   73
+         TabIndex        =   72
          Tag             =   "100"
          Top             =   120
          Width           =   2775
@@ -104,7 +83,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   0
          Left            =   120
-         TabIndex        =   72
+         TabIndex        =   71
          Tag             =   "110"
          Top             =   360
          Width           =   2175
@@ -123,7 +102,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   1
          Left            =   120
-         TabIndex        =   71
+         TabIndex        =   70
          Tag             =   "120"
          Top             =   600
          Width           =   2175
@@ -142,7 +121,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   2
          Left            =   120
-         TabIndex        =   70
+         TabIndex        =   69
          Tag             =   "130"
          Top             =   840
          Width           =   2175
@@ -161,7 +140,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   3
          Left            =   120
-         TabIndex        =   69
+         TabIndex        =   68
          Tag             =   "140"
          Top             =   1080
          Width           =   2175
@@ -180,7 +159,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   0
          Left            =   2400
-         TabIndex        =   68
+         TabIndex        =   67
          Top             =   360
          Width           =   795
       End
@@ -198,7 +177,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   1
          Left            =   2400
-         TabIndex        =   67
+         TabIndex        =   66
          Top             =   600
          Width           =   795
       End
@@ -216,7 +195,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   2
          Left            =   2400
-         TabIndex        =   66
+         TabIndex        =   65
          Top             =   840
          Width           =   795
       End
@@ -234,7 +213,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   3
          Left            =   2400
-         TabIndex        =   65
+         TabIndex        =   64
          Top             =   1080
          Width           =   795
       End
@@ -252,7 +231,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   1
          Left            =   0
-         TabIndex        =   64
+         TabIndex        =   63
          Tag             =   "200"
          Top             =   1440
          Width           =   2175
@@ -271,7 +250,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   4
          Left            =   120
-         TabIndex        =   63
+         TabIndex        =   62
          Tag             =   "210"
          Top             =   1680
          Width           =   2175
@@ -290,7 +269,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   5
          Left            =   120
-         TabIndex        =   62
+         TabIndex        =   61
          Tag             =   "220"
          Top             =   1920
          Width           =   2175
@@ -309,7 +288,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   6
          Left            =   120
-         TabIndex        =   61
+         TabIndex        =   60
          Tag             =   "230"
          Top             =   2160
          Width           =   2175
@@ -329,7 +308,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   7
          Left            =   120
-         TabIndex        =   60
+         TabIndex        =   59
          Tag             =   "240"
          Top             =   2400
          Width           =   2175
@@ -348,7 +327,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   4
          Left            =   2400
-         TabIndex        =   59
+         TabIndex        =   58
          Top             =   1680
          Width           =   795
       End
@@ -367,7 +346,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   5
          Left            =   2400
-         TabIndex        =   58
+         TabIndex        =   57
          Top             =   1920
          Width           =   795
       End
@@ -385,7 +364,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   6
          Left            =   2400
-         TabIndex        =   57
+         TabIndex        =   56
          Top             =   2160
          Width           =   795
       End
@@ -404,7 +383,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   7
          Left            =   2400
-         TabIndex        =   56
+         TabIndex        =   55
          Top             =   2400
          Width           =   795
       End
@@ -422,7 +401,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   8
          Left            =   120
-         TabIndex        =   55
+         TabIndex        =   54
          Tag             =   "250"
          Top             =   2640
          Width           =   2175
@@ -441,7 +420,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   8
          Left            =   2400
-         TabIndex        =   54
+         TabIndex        =   53
          Top             =   2640
          Width           =   795
       End
@@ -459,7 +438,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   2
          Left            =   0
-         TabIndex        =   53
+         TabIndex        =   52
          Tag             =   "300"
          Top             =   3000
          Width           =   1815
@@ -478,7 +457,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   9
          Left            =   120
-         TabIndex        =   52
+         TabIndex        =   51
          Tag             =   "310"
          Top             =   3240
          Width           =   2175
@@ -497,7 +476,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   10
          Left            =   120
-         TabIndex        =   51
+         TabIndex        =   50
          Tag             =   "320"
          Top             =   3480
          Width           =   2175
@@ -516,7 +495,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   11
          Left            =   120
-         TabIndex        =   50
+         TabIndex        =   49
          Tag             =   "330"
          Top             =   3720
          Width           =   2175
@@ -536,7 +515,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   12
          Left            =   120
-         TabIndex        =   49
+         TabIndex        =   48
          Tag             =   "340"
          Top             =   3960
          Width           =   2175
@@ -555,7 +534,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   9
          Left            =   2400
-         TabIndex        =   48
+         TabIndex        =   47
          Top             =   3240
          Width           =   795
       End
@@ -573,7 +552,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   10
          Left            =   2400
-         TabIndex        =   47
+         TabIndex        =   46
          Top             =   3480
          Width           =   795
       End
@@ -591,7 +570,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   11
          Left            =   2400
-         TabIndex        =   46
+         TabIndex        =   45
          Top             =   3720
          Width           =   795
       End
@@ -610,7 +589,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   12
          Left            =   2400
-         TabIndex        =   45
+         TabIndex        =   44
          Top             =   3960
          Width           =   795
       End
@@ -629,7 +608,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   13
          Left            =   120
-         TabIndex        =   44
+         TabIndex        =   43
          Tag             =   "350"
          Top             =   4200
          Width           =   2175
@@ -649,7 +628,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   13
          Left            =   2400
-         TabIndex        =   43
+         TabIndex        =   42
          Top             =   4200
          Width           =   795
       End
@@ -668,7 +647,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   14
          Left            =   120
-         TabIndex        =   42
+         TabIndex        =   41
          Tag             =   "360"
          Top             =   4440
          Width           =   2175
@@ -688,7 +667,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   14
          Left            =   2400
-         TabIndex        =   41
+         TabIndex        =   40
          Top             =   4440
          Width           =   795
       End
@@ -706,7 +685,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   15
          Left            =   120
-         TabIndex        =   40
+         TabIndex        =   39
          Tag             =   "370"
          Top             =   4680
          Width           =   2175
@@ -725,7 +704,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   15
          Left            =   2400
-         TabIndex        =   39
+         TabIndex        =   38
          Top             =   4680
          Width           =   795
       End
@@ -743,7 +722,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   3
          Left            =   0
-         TabIndex        =   38
+         TabIndex        =   37
          Tag             =   "400"
          Top             =   5040
          Width           =   2175
@@ -763,7 +742,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   16
          Left            =   120
-         TabIndex        =   37
+         TabIndex        =   36
          Tag             =   "410"
          Top             =   5280
          Width           =   2175
@@ -783,7 +762,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   17
          Left            =   120
-         TabIndex        =   36
+         TabIndex        =   35
          Tag             =   "420"
          Top             =   5520
          Width           =   2175
@@ -802,7 +781,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   18
          Left            =   120
-         TabIndex        =   35
+         TabIndex        =   34
          Tag             =   "430"
          Top             =   5760
          Width           =   2175
@@ -821,7 +800,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   19
          Left            =   120
-         TabIndex        =   34
+         TabIndex        =   33
          Tag             =   "440"
          Top             =   6000
          Width           =   2175
@@ -841,7 +820,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   16
          Left            =   2400
-         TabIndex        =   33
+         TabIndex        =   32
          Top             =   5280
          Width           =   795
       End
@@ -860,7 +839,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   17
          Left            =   2400
-         TabIndex        =   32
+         TabIndex        =   31
          Top             =   5520
          Width           =   795
       End
@@ -878,7 +857,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   18
          Left            =   2400
-         TabIndex        =   31
+         TabIndex        =   30
          Top             =   5760
          Width           =   795
       End
@@ -896,7 +875,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   19
          Left            =   2400
-         TabIndex        =   30
+         TabIndex        =   29
          Top             =   6000
          Width           =   795
       End
@@ -914,7 +893,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   20
          Left            =   120
-         TabIndex        =   29
+         TabIndex        =   28
          Tag             =   "450"
          Top             =   6240
          Width           =   2175
@@ -933,7 +912,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   20
          Left            =   2400
-         TabIndex        =   28
+         TabIndex        =   27
          Top             =   6240
          Width           =   795
       End
@@ -951,7 +930,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   4
          Left            =   0
-         TabIndex        =   27
+         TabIndex        =   26
          Tag             =   "500"
          Top             =   6600
          Width           =   2175
@@ -971,7 +950,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   21
          Left            =   120
-         TabIndex        =   26
+         TabIndex        =   25
          Tag             =   "510"
          Top             =   6840
          Width           =   2175
@@ -990,7 +969,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   22
          Left            =   120
-         TabIndex        =   25
+         TabIndex        =   24
          Tag             =   "520"
          Top             =   7080
          Width           =   2175
@@ -1010,7 +989,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   21
          Left            =   2400
-         TabIndex        =   24
+         TabIndex        =   23
          Top             =   6840
          Width           =   795
       End
@@ -1028,7 +1007,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   22
          Left            =   2400
-         TabIndex        =   23
+         TabIndex        =   22
          Top             =   7080
          Width           =   795
       End
@@ -1046,7 +1025,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   5
          Left            =   0
-         TabIndex        =   22
+         TabIndex        =   21
          Tag             =   "600"
          Top             =   7440
          Width           =   2175
@@ -1065,7 +1044,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   23
          Left            =   120
-         TabIndex        =   21
+         TabIndex        =   20
          Tag             =   "610"
          Top             =   7680
          Width           =   2175
@@ -1085,7 +1064,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   24
          Left            =   120
-         TabIndex        =   20
+         TabIndex        =   19
          Tag             =   "620"
          Top             =   7920
          Width           =   2175
@@ -1104,7 +1083,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   25
          Left            =   120
-         TabIndex        =   19
+         TabIndex        =   18
          Tag             =   "630"
          Top             =   8160
          Width           =   2175
@@ -1123,7 +1102,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   26
          Left            =   120
-         TabIndex        =   18
+         TabIndex        =   17
          Tag             =   "640"
          Top             =   8400
          Width           =   2175
@@ -1142,7 +1121,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   23
          Left            =   2400
-         TabIndex        =   17
+         TabIndex        =   16
          Top             =   7680
          Width           =   795
       End
@@ -1161,7 +1140,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   24
          Left            =   2400
-         TabIndex        =   16
+         TabIndex        =   15
          Top             =   7920
          Width           =   795
       End
@@ -1179,7 +1158,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   25
          Left            =   2400
-         TabIndex        =   15
+         TabIndex        =   14
          Top             =   8160
          Width           =   795
       End
@@ -1197,7 +1176,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   26
          Left            =   2400
-         TabIndex        =   14
+         TabIndex        =   13
          Top             =   8400
          Width           =   795
       End
@@ -1216,7 +1195,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   7
          Left            =   3240
-         TabIndex        =   13
+         TabIndex        =   12
          Top             =   2400
          Width           =   915
       End
@@ -1235,7 +1214,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   12
          Left            =   3240
-         TabIndex        =   12
+         TabIndex        =   11
          Top             =   3960
          Width           =   915
       End
@@ -1254,7 +1233,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   16
          Left            =   3240
-         TabIndex        =   11
+         TabIndex        =   10
          Top             =   5280
          Width           =   915
       End
@@ -1273,7 +1252,7 @@ Begin VB.Form FrmChart
          Height          =   255
          Index           =   21
          Left            =   3240
-         TabIndex        =   10
+         TabIndex        =   9
          Top             =   6840
          Width           =   915
       End
@@ -1291,19 +1270,11 @@ Begin VB.Form FrmChart
          ForeColor       =   &H80000008&
          Height          =   255
          Left            =   3240
-         TabIndex        =   9
+         TabIndex        =   8
          Tag             =   "5"
          Top             =   0
          Width           =   915
       End
-   End
-   Begin MSChart20Lib.MSChart MSChart1 
-      Height          =   8295
-      Left            =   4560
-      OleObjectBlob   =   "FrmChart.frx":0442
-      TabIndex        =   0
-      Top             =   1320
-      Width           =   12015
    End
    Begin VB.Label lblTime 
       Caption         =   "19:12:54"
@@ -1319,7 +1290,7 @@ Begin VB.Form FrmChart
       ForeColor       =   &H0000C000&
       Height          =   255
       Left            =   10320
-      TabIndex        =   7
+      TabIndex        =   6
       Top             =   840
       Width           =   3600
    End
@@ -1338,7 +1309,7 @@ Begin VB.Form FrmChart
       ForeColor       =   &H0000C000&
       Height          =   255
       Left            =   6120
-      TabIndex        =   6
+      TabIndex        =   5
       Top             =   840
       Width           =   3600
    End
@@ -1357,7 +1328,7 @@ Begin VB.Form FrmChart
       ForeColor       =   &H0000C000&
       Height          =   255
       Left            =   8280
-      TabIndex        =   5
+      TabIndex        =   4
       Top             =   600
       Width           =   3600
    End
@@ -1376,7 +1347,7 @@ Begin VB.Form FrmChart
       ForeColor       =   &H0000C000&
       Height          =   255
       Left            =   8280
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   120
       Width           =   3600
    End
@@ -1395,7 +1366,7 @@ Begin VB.Form FrmChart
       ForeColor       =   &H0000C000&
       Height          =   255
       Left            =   8280
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   360
       Width           =   3600
    End
@@ -1413,7 +1384,7 @@ Begin VB.Form FrmChart
       ForeColor       =   &H0000C000&
       Height          =   255
       Left            =   10320
-      TabIndex        =   2
+      TabIndex        =   1
       Top             =   1080
       Width           =   3600
    End
@@ -1432,7 +1403,7 @@ Begin VB.Form FrmChart
       ForeColor       =   &H0000C000&
       Height          =   255
       Left            =   6120
-      TabIndex        =   1
+      TabIndex        =   0
       Top             =   1080
       Width           =   3600
    End
@@ -1470,6 +1441,12 @@ Dim lastTime As Long
 Public weldFileName As String
 
 Dim fr As FileR
+
+Dim lastX As Integer
+Dim lastY As Integer
+Dim inArea As Boolean
+Const MASK_COLOR As Long = vbWhite
+
 Public Sub Load(FileName As String)
 ' Resource
 PlcRes.LoadResFor Me
@@ -1477,18 +1454,12 @@ PlcRes.LoadResFor Me
     weldFileName = FileName
     
     model = COMMON
-        
 
-Dim i As Integer
+    Dim i As Integer
 
-ReDim buf(fr.header2.RecordCount - 1)
+    ReDim buf(fr.header2.RecordCount - 1)
 
-For i = 0 To fr.header2.RecordCount - 1
-    buf(i) = fr.data(i).data
-Next
-
-
-    Call setChart(buf, COMMON)
+    Call setChart(fr, COMMON)
     
     lblCompany.Caption = Trim(fr.header1.CompanyName)
     
@@ -1560,183 +1531,34 @@ Next
 
 End Sub
 
-
-
-Private Function setChartSmall(EmulateData() As WeldData)
-
-
-Dim i As Integer
-Dim bOk As Boolean
-Dim pos As Long
-Dim posStart As Long
-bOk = False
-
-For i = 0 To UBound(EmulateData)
-    If EmulateData(i).WeldStage = BOOST_STAGE Then
-        posStart = i
-        bOk = True
-        Exit For
-    End If
-Next
-
-If bOk = False Then
-    Exit Function
-End If
-
-Dim sTime As Single
-sTime = EmulateData(posStart).Time
-
-For i = posStart To UBound(EmulateData)
-        pos = i
-    If EmulateData(i).Time - sTime > 15 Then
-        pos = i
-        bOk = True
-        Exit For
-    End If
-Next
-
-If bOk = False Then
-    Exit Function
-End If
-
-
-
-
-Dim count As Integer
-count = pos - posStart + 1
-
-ReDim MyData(0 To 4, 0 To count)
-
-MyData(1, 0) = "Force"
-MyData(2, 0) = "Volt"
-MyData(3, 0) = "Amp"
-MyData(4, 0) = "Dist"
-
-
-sTime = EmulateData(posStart).Time
-lblTimeStart.Visible = True
-lblTimeStart.Text = sTime & " + "
-
-i = posStart
-While i <= UBound(EmulateData) And i <= pos
-    MyData(0, i - posStart + 1) = CInt(EmulateData(i).Time - sTime) & Space(1) '注意一定要后面的space(1)，这样做的目的是为了自动显示成标签(字符串类型)
-    i = i + 1
-Wend
-
-For i = posStart To pos
-
-    MyData(1, i + 1 - posStart) = PlcAnalysiser.toForce(EmulateData(i).PsiUpset, EmulateData(i).PsiOpen, fr.analysisDefine)
-    MyData(2, i + 1 - posStart) = EmulateData(i).Volt
-    MyData(3, i + 1 - posStart) = EmulateData(i).Amp
-    MyData(4, i + 1 - posStart) = EmulateData(i).Dist
-Next
-MSChart1.Plot.DataSeriesInRow = True '设置图形按行读取数据
-With MSChart1.Plot.Axis(VtChAxisIdY).ValueScale
-    .Minimum = CInt(GetSetting(App.EXEName, "WeldChartSetting", "AVMin", 0))
-    .Maximum = CInt(GetSetting(App.EXEName, "WeldChartSetting", "AVMax", 1000))
-    .MajorDivision = (.Maximum - .Minimum) / CInt(GetSetting(App.EXEName, "WeldChartSetting", "AVIncr", 100))
-End With
-With MSChart1.Plot.Axis(VtChAxisIdY2).ValueScale
-    .Minimum = CInt(GetSetting(App.EXEName, "WeldChartSetting", "DFMin", 0))
-    .Maximum = CInt(GetSetting(App.EXEName, "WeldChartSetting", "DFMax", 160))
-    .MajorDivision = (.Maximum - .Minimum) / CInt(GetSetting(App.EXEName, "WeldChartSetting", "DFIncr", 16))
-End With
-With MSChart1.Plot.Axis(VtChAxisIdX).ValueScale
-    .Minimum = 0
-    .Maximum = 15
-    .MajorDivision = 8
-End With
-With MSChart1.Plot.Axis(VtChAxisIdX).ValueScale
-    .Minimum = 0
-    .Maximum = 15
-    .MajorDivision = 1
-End With
-With MSChart1.Plot.Axis(VtChAxisIdX).CategoryScale
-    .DivisionsPerLabel = (pos - posStart) / 3
-    .DivisionsPerTick = (pos - posStart) / 3
-End With
-
-MSChart1.ChartData = MyData
+Private Function setChartSmall(fr As FileR)
+    setChart fr, SMALLCOMMON
 End Function
-Private Function setChart(EmulateData() As WeldData, model As ModelConstants)
-Dim TimeMax As Integer
 
-lblTimeStart.Visible = False
+Private Function setChart(fr As FileR, model As ModelConstants)
+    Dim prnt As PictureBox
+    Set prnt = P
+    
+    Dim i As Integer
+    prnt.Cls
 
-TimeMax = CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeMaxCycleTime", 200))
-
-
-Dim count As Integer
-count = CInt(UBound(EmulateData) * TimeMax / EmulateData(UBound(EmulateData) - 1).Time)
-
-ReDim MyData(0 To 4, 0 To count + 1)
-
-MyData(1, 0) = "Force"
-MyData(2, 0) = "Volt"
-MyData(3, 0) = "Amp"
-MyData(4, 0) = "Dist"
-
-Dim i As Integer
-i = 0
-While i <= UBound(EmulateData) And i <= count
-    MyData(0, i + 1) = CInt(EmulateData(i).Time) & Space(1)  '注意一定要后面的space(1)，这样做的目的是为了自动显示成标签(字符串类型)
-    i = i + 1
-Wend
-
-For i = UBound(EmulateData) + 1 To count
-MyData(0, i + 1) = CInt(((i / count) * TimeMax)) & Space(1)   '注意一定要后面的space(1)，这样做的目的是为了自动显示成标签(字符串类型)
-Next
-
-Dim lastv As Integer
-
-
-' issue from american 7
-Dim step As Integer
-step = 1
-If model = PURE Then
-    step = 4
-End If
-
-i = 0
-lastv = 0
-While i <= UBound(EmulateData) And i <= count
-    If i = CInt(i / step) * step Then
-        lastv = i
-        MyData(1, i + 1) = PlcAnalysiser.toForce(EmulateData(i).PsiUpset, EmulateData(i).PsiOpen, fr.analysisDefine)
-        MyData(2, i + 1) = EmulateData(i).Volt
-        MyData(3, i + 1) = EmulateData(i).Amp
-        MyData(4, i + 1) = EmulateData(i).Dist
-    Else
-        MyData(1, i + 1) = PlcAnalysiser.toForce(EmulateData(i).PsiUpset, EmulateData(i).PsiOpen, fr.analysisDefine)
-        MyData(2, i + 1) = EmulateData(i).Volt
-        MyData(3, i + 1) = EmulateData(lastv).Amp
-        MyData(4, i + 1) = EmulateData(i).Dist
-    End If
-    i = i + 1
-Wend
-
-MSChart1.Plot.DataSeriesInRow = True '设置图形按行读取数据
-With MSChart1.Plot.Axis(VtChAxisIdY).ValueScale
-    .Minimum = CInt(GetSetting(App.EXEName, "WeldChartSetting", "AVMin", 0))
-    .Maximum = CInt(GetSetting(App.EXEName, "WeldChartSetting", "AVMax", 1000))
-    .MajorDivision = (.Maximum - .Minimum) / CInt(GetSetting(App.EXEName, "WeldChartSetting", "AVIncr", 100))
-End With
-With MSChart1.Plot.Axis(VtChAxisIdY2).ValueScale
-    .Minimum = CInt(GetSetting(App.EXEName, "WeldChartSetting", "DFMin", 0))
-    .Maximum = CInt(GetSetting(App.EXEName, "WeldChartSetting", "DFMax", 160))
-    .MajorDivision = (.Maximum - .Minimum) / CInt(GetSetting(App.EXEName, "WeldChartSetting", "DFIncr", 16))
-End With
-With MSChart1.Plot.Axis(VtChAxisIdX).ValueScale
-    .Minimum = 0
-    .Maximum = CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeMaxCycleTime", 200))
-    .MajorDivision = (.Maximum - .Minimum) / CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeIncr", 10))
-End With
-With MSChart1.Plot.Axis(VtChAxisIdX).CategoryScale
-    .DivisionsPerLabel = UBound(EmulateData) * CInt(GetSetting(App.EXEName, "WeldChartSetting", "TimeIncr", 20)) / EmulateData(UBound(EmulateData)).Time
-    .DivisionsPerTick = .DivisionsPerLabel
-End With
-MSChart1.ChartData = MyData
-
+    Select Case model
+    Case ModelConstants.COMMON:
+        buf = LoadDataAll(fr.data, fr.header2.RecordCount)
+        Call PrepareDraw(P, 600, P.height - 400, P.width - 1200, -(P.height - 600), buf(0).Time)
+        DrawChartAll P, buf, fr.analysisDefine
+        
+    Case ModelConstants.PURE:
+        buf = LoadDataAllThin(fr.data, fr.header2.RecordCount)
+        Call PrepareDraw(P, 600, P.height - 400, P.width - 1200, -(P.height - 600), buf(0).Time)
+        DrawChartAll P, buf, fr.analysisDefine
+        
+    Case ModelConstants.SMALLCOMMON, ModelConstants.SMALLPURE:
+        buf = LoadDataUpset(fr.data, fr.header2.RecordCount)
+        Call PrepareDraw(P, 600, P.height - 400, P.width - 1200, -(P.height - 600), buf(0).Time)
+        DrawChartUpset P, buf, fr.analysisDefine
+        
+    End Select
 End Function
 
 Private Function anaylize(analysisDefine As WeldAnalysisDefineType, r As WeldAnalysisResultType)
@@ -1906,9 +1728,6 @@ Private Function updateCueControl(con As Control, Succeed As Integer)
 
 End Function
 
-
-
-
 Private Sub cmdShowMode_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 Me.MousePointer = MousePointerConstants.vbHourglass
 
@@ -1917,12 +1736,15 @@ End Sub
 Private Sub cmdViewDataDetail_Click()
 Me.MousePointer = MousePointerConstants.vbHourglass
 
-
 '    If dataForm Is Nothing Then
         Call setDetailData(buf)
   '  End If
     dataForm.Show vbModal
 Me.MousePointer = MousePointerConstants.vbDefault
+End Sub
+
+Private Sub Form_Load()
+    P.AutoRedraw = True
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -1933,37 +1755,35 @@ Private Sub cmdShowMode_Click()
     Me.MousePointer = VtMousePointer.VtMousePointerHourGlass
     If model = COMMON Then
         model = PURE
-        Call setChart(buf, model)
+        Call setChart(fr, model)
     ElseIf model = PURE Then
         model = COMMON
-        Call setChart(buf, model)
+        Call setChart(fr, model)
     End If
     Me.MousePointer = VtMousePointer.VtMousePointerArrow
 End Sub
 
-Private Sub MSChart1_DblClick()
+Private Sub P_DblClick()
 
     If model = COMMON Then
         model = SMALLCOMMON
-        Call setChartSmall(buf)
+        Call setChartSmall(fr)
         cmdShowMode.Enabled = False
     ElseIf model = PURE Then
         model = SMALLPURE
-        Call setChartSmall(buf)
+        Call setChartSmall(fr)
         cmdShowMode.Enabled = False
     ElseIf model = SMALLCOMMON Then
         model = COMMON
-        Call setChart(buf, model)
+        Call setChart(fr, model)
         cmdShowMode.Enabled = True
     
     ElseIf model = SMALLPURE Then
         model = PURE
-        Call setChart(buf, model)
+        Call setChart(fr, model)
         cmdShowMode.Enabled = True
     End If
 End Sub
-
-
 
 Private Function setDetailData(EmulateData() As WeldData)
     
@@ -2025,53 +1845,51 @@ Next
 
 End Function
 
-
-
-Private Sub MSChart1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub P_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+    P.DrawMode = 7
+    P.DrawStyle = 0
+    
+    If inArea Then
+        P.Line (0, lastY)-(P.ScaleWidth, lastY), MASK_COLOR
+        P.Line (lastX, 0)-(lastX, P.ScaleHeight), MASK_COLOR
+        inArea = False
+    End If
+    
     If Button = vbRightButton Then
-        lineH.Left = MSChart1.Left
-        lineH.Width = MSChart1.Width
-        lineH.Top = y * 1.2 + MSChart1.Top
-        
-        lineV.Top = MSChart1.Top
-        lineV.Height = MSChart1.Height
-        lineV.Left = x * 1.28 + MSChart1.Left
-
-        lineH.Visible = True
-        lineV.Visible = True
-    Else
-        lineH.Visible = False
-        lineV.Visible = False
+        lastX = x
+        lastY = y
+        P.Line (0, lastY)-(P.ScaleWidth, lastY), MASK_COLOR
+        P.Line (lastX, 0)-(lastX, P.ScaleHeight), MASK_COLOR
+        inArea = True
     End If
 End Sub
 
-Private Sub MSChart1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-Dim thisTime As Long
-Dim timeSep As Long
-timeSep = 50
-
-    thisTime = timeGetTime
-    If Button = vbRightButton Then
-        If thisTime - lastTime > timeSep Then
-            Me.MousePointer = VtMousePointerArrow
-            lastTime = thisTime
-            
-        lineH.Left = MSChart1.Left
-        lineH.Width = MSChart1.Width
-        lineH.Top = y * 1.2 + MSChart1.Top
-        
-        lineV.Top = MSChart1.Top
-        lineV.Height = MSChart1.Height
-        lineV.Left = x * 1.28 + MSChart1.Left
-        End If
-    Else
-        lineH.Visible = False
-        lineV.Visible = False
+Private Sub P_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+    P.DrawMode = 7
+    P.DrawStyle = 0
+    
+    If inArea Then
+        P.Line (0, lastY)-(P.ScaleWidth, lastY), MASK_COLOR
+        P.Line (lastX, 0)-(lastX, P.ScaleHeight), MASK_COLOR
+        inArea = False
     End If
 
+    If Button = vbRightButton Then
+        lastX = x
+        lastY = y
+        P.Line (0, lastY)-(P.ScaleWidth, lastY), MASK_COLOR
+        P.Line (lastX, 0)-(lastX, P.ScaleHeight), MASK_COLOR
+        inArea = True
+    End If
 End Sub
 
-Private Sub MSChart1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-        lineH.Visible = False
-        lineV.Visible = False
+Private Sub P_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+    P.DrawMode = 7
+    P.DrawStyle = 0
+    
+    If inArea Then
+        P.Line (0, lastY)-(P.ScaleWidth, lastY), MASK_COLOR
+        P.Line (lastX, 0)-(lastX, P.ScaleHeight), MASK_COLOR
+        inArea = False
+    End If
 End Sub

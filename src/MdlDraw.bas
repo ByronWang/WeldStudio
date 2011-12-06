@@ -38,6 +38,29 @@ Public Sub PrintGraph(canvas As Printer, fname As String, fullWeldCycle As Boole
     
 End Sub
 
+Public Function LoadDataAllThin(rs() As Record, count As Integer) As WeldData()
+    Dim i As Integer
+    Dim buf() As WeldData
+    ReDim buf(count - 1)
+    
+    Dim lastv As Integer
+    Dim step As Integer
+
+    step = 4
+    
+    i = 0
+    lastv = 0
+    For i = 0 To count - 1
+        buf(i) = rs(i).data
+        If i = CInt(i / step) * step Then
+            lastv = i
+        Else
+            buf(i).Amp = rs(lastv).data.Amp
+        End If
+    Next
+
+    LoadDataAllThin = buf
+End Function
 
 Public Function LoadDataAll(rs() As Record, count As Integer) As WeldData()
     Dim i As Integer
@@ -154,6 +177,7 @@ Public Sub PrepareDraw(canvas, left As Single, top As Single, width As Single, h
     
     Dim tXLabelOffset, tYLabelOffset As Single
     
+    canvas.DrawMode = 13
     canvas.DrawWidth = 1
     canvas.DrawStyle = 0
     
@@ -163,9 +187,7 @@ Public Sub PrepareDraw(canvas, left As Single, top As Single, width As Single, h
 '    max = 1000
         
     Dim pos As Single
-        
-    'XXXXX
-    canvas.DrawWidth = 1
+    
     'Printer.FontSize = 12
     Printer.FontBold = False
     Printer.ForeColor = vbBlack
@@ -201,12 +223,10 @@ Public Sub PrepareDraw(canvas, left As Single, top As Single, width As Single, h
     Next pos
     
     'Y2
-    canvas.DrawStyle = 1
     For pos = V_Y2_Start To V_Y2_Max Step V_Y2_Major
         canvas.Line (pLeft + 0, pTop + (pos - V_Y2_Start) * y2Scale)-(pLeft + pWidth, pTop + (pos - V_Y2_Start) * y2Scale), GRID_COLOR
     Next pos
 
-    canvas.DrawStyle = 0
     For pos = V_Y2_Start To V_Y2_Max Step V_Y2_Major
         canvas.Line (pLeft + pWidth, pTop + (pos - V_Y2_Start) * y2Scale)-(pLeft + pWidth - tXLabelOffset / 3, pTop + (pos - V_Y2_Start) * y2Scale), GRID_COLOR
     Next pos
