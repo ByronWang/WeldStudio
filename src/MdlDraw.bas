@@ -147,6 +147,10 @@ Public Function DrawData(canvas, ByVal rStart As Single, ByVal rScale As Single,
          canvas.Line (pLeft + fx, pTop + fy)-(pLeft + tx, pTop + ty), color ', &HFF0000 * Rnd(1) + &HFF00 * Rnd(1) + &HFF * Rnd(1)
          fx = tx
          fy = ty
+         
+         If ref(i) >= V_X_Max Then
+            Exit For
+         End If
     Next i
     
 End Function
