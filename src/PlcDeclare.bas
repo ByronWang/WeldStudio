@@ -6,7 +6,7 @@ Public Const JinanMode As String = "J"
 Public Const EngMode As String = "E"
 
 Public Const ReadOnly As Boolean = False
-Public Const WeldNumberMode As String = EngMode   'GeneralMode
+Public Const WeldNumberMode As String = EngMode   'GeneralMode EngMode
 
 Public Const LOAD_ALL_PARAMETER  As Integer = 0
 Public Const LOAD_PULSE_SETTING As Integer = 1
@@ -88,8 +88,8 @@ Type FileHeader1
      
      
      X900 As String * &HA
-     UnitName As String * &H1A
-     Operator As String * &H2
+     unitName As String * &H1A
+     operator As String * &H2
      X922 As String * &HA
      
      X930 As String * &HD0
@@ -277,4 +277,12 @@ Global Const NO As Integer = 2
 Global Const INTERRUPT As Integer = 3
 Global Const NotUsed As Integer = 4
 
+
+Public Function Floor(i As Long, modBy As Long) As Long
+    Floor = CInt(i / modBy)
+    
+    If Floor * modBy > i Then
+        Floor = Floor - 1
+    End If
+End Function
 

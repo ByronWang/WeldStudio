@@ -57,7 +57,7 @@ Private Function IWeldNumber_FromCompact(s As String) As Long
     Dim leadChar As String
     Dim leaveNumber As Long
     
-    leadChar = Left(s, 1)
+    leadChar = UCase(left(s, 1))
     leadNumber = Asc(leadChar) - Asc("A")
 
     leaveNumber = CInt(Mid(s, 2, 4))
@@ -68,22 +68,21 @@ End Function
 Private Function IWeldNumber_ToCompact(n As Long) As String
     Dim leadNumber As Long
     Dim leadChar As String
-    
-    leadNumber = (n / 10000)
-    
+    Dim leaveNumber As Long
+
+    leadNumber = PlcDeclare.Floor(n, 10000)
+    leaveNumber = n - leadNumber * 10000#
+        
     If leadNumber >= 26 Then
         leadNumber = 0
     End If
     
     leadChar = Chr(Asc("A") + leadNumber)
-    
-    Dim leaveNumber As Long
-    leaveNumber = n - 10000# * CInt(n / 10000)
-    
+        
     Dim showString As String
     showString = CStr(leaveNumber)
     
-    IWeldNumber_ToCompact = "" & leadChar & Left("0000", 4 - Len(showString)) & showString
+    IWeldNumber_ToCompact = "" & leadChar & left("0000", 4 - Len(showString)) & showString
 End Function
 
 Private Function IWeldNumber_FromDisplay(sFull As String) As Long

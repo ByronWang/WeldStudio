@@ -61,11 +61,11 @@ Private Function IWeldNumber_Update(str As String) As Boolean
         GoTo CHECK_ERROR
     End If
     
-    If InStr(1, MS_0C, Left(str, 1)) < 0 Then
+    If InStr(1, MS_0C, left(str, 1)) < 0 Then
         GoTo CHECK_ERROR
     End If
     
-    If InStr(1, MS_0C, Left(str, 1)) <> Month(Date) Or CInt(Mid(str, 2, 2)) <> Day(Date) Then
+    If InStr(1, MS_0C, left(str, 1)) <> Month(Date) Or CInt(Mid(str, 2, 2)) <> Day(Date) Then
         GoTo CHECK_ERROR
     End If
     
@@ -83,8 +83,8 @@ Private Function IWeldNumber_FromCompact(s As String) As Long
     Dim leadChar As String
     Dim leaveNumber As Long
     
-    leadChar = Left(s, 1)
-    leadNumber = InStr(1, MS_0C, leadChar) + 1
+    leadChar = left(s, 1)
+    leadNumber = InStr(1, MS_0C, leadChar)
 
     leaveNumber = CInt(Mid(s, 2, 4))
     
@@ -94,22 +94,22 @@ End Function
 Private Function IWeldNumber_ToCompact(n As Long) As String
     Dim leadNumber As Long
     Dim leadChar As String
+    Dim leaveNumber As Long
     
-    leadNumber = (n / 10000)
+    leadNumber = PlcDeclare.Floor(n, 10000)
     
-    If leadNumber >= 12 Then
+    leaveNumber = n - leadNumber * 10000#
+    
+    If leadNumber > 12 Then
         leadNumber = 1
     End If
     
     leadChar = Mid(MS_0C, leadNumber, 1)
     
-    Dim leaveNumber As Long
-    leaveNumber = n - 10000# * CInt(n / 10000)
-    
     Dim showString As String
     showString = CStr(leaveNumber)
     
-    IWeldNumber_ToCompact = "" & leadChar & Left("0000", 4 - Len(showString)) & showString
+    IWeldNumber_ToCompact = "" & leadChar & Format(leaveNumber, "0000")
 End Function
 
 Private Function IWeldNumber_FromDisplay(sFull As String) As Long
@@ -120,7 +120,7 @@ Private Function IWeldNumber_FromDisplay(sFull As String) As Long
     Dim s As String
     s = Mid(sFull, Len(sFull) - 6)
     
-    leadChar = Left(s, 2)
+    leadChar = left(s, 2)
     leadNumber = CInt(leadChar)
 
     leaveNumber = CInt(Mid(s, 3, 4))
@@ -131,20 +131,19 @@ End Function
 Private Function IWeldNumber_ToDisplay(dat As Date, n As Long) As String
     Dim leadNumber As Long
     Dim leadChar As String
+    Dim leaveNumber As Long
     
-    leadNumber = (n / 10000)
+    leadNumber = PlcDeclare.Floor(n, 10000)
+    leaveNumber = n - leadNumber * 10000#
     
-    If leadNumber >= 12 Then
+    If leadNumber > 12 Then
         leadNumber = 1
     End If
     
     leadChar = Mid(Format(Year(dat), "0000"), 3) & Format(leadNumber, "00")
-    
-    Dim leaveNumber As Long
-    leaveNumber = n - 10000# * CInt(n / 10000)
-    
+        
     Dim showString As String
     showString = Format(leaveNumber, "0000")
     
-    IWeldNumber_ToDisplay = "" & leadChar & Left("0000", 4 - Len(showString)) & showString
+    IWeldNumber_ToDisplay = "" & leadChar & Format(leaveNumber, "0000")
 End Function
