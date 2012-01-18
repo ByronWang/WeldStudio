@@ -246,7 +246,7 @@ On Error GoTo ERROR_HANDLE
         Printer.Orientation = vbPRORLandscape
         
         If UCase(Right(fname, 4)) = ".WLD" Then
-            Dim f As New FrmChart
+            Dim f As New FrmChart_800_600
             f.Load fname
             PrintChart f
             PrintGraph Printer, fname, OptMode(0).Value

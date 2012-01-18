@@ -5,7 +5,7 @@ Const SUCCEED_COLOR As Long = &HFF00&
 Const FAIL_COLOR As Long = &HFF&
 Const NOTUSED_COLOR As Long = &HFFFFFF
 
-Public Function PrintChart(fc As FrmChart)
+Public Function PrintChart(fc As FrmChart_800_600)
 Printer.Orientation = vbPRORLandscape
         
 '        fc.MSChart1.EditCopy

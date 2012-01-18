@@ -158,7 +158,7 @@ End Sub
 Private Sub mnuFile_click()
     If WeldMDIForm.ActiveForm Is Nothing Then
         mnuPrint.Enabled = False
-    ElseIf TypeOf WeldMDIForm.ActiveForm Is FrmChart Or TypeOf WeldMDIForm.ActiveForm Is FrmDailyReport Then
+    ElseIf TypeOf WeldMDIForm.ActiveForm Is FrmChart_800_600 Or TypeOf WeldMDIForm.ActiveForm Is FrmDailyReport Then
         mnuPrint.Enabled = True
     Else
         mnuPrint.Enabled = False
@@ -178,8 +178,8 @@ On Error GoTo ErrorHandle
         Exit Sub
     End If
 
-    If TypeOf f Is FrmChart Then
-        Dim fc As FrmChart
+    If TypeOf f Is FrmChart_800_600 Then
+        Dim fc As FrmChart_800_600
         Set fc = f
         For i = 1 To Printer.Copies
             Call PrintChart(fc)
@@ -249,7 +249,7 @@ On Error GoTo ERROR_HANDLE
     
     Dim i As Integer
     Dim f As Form
-    Dim fc As FrmChart
+    Dim fc As FrmChart_800_600
     Dim fd As FrmDailyReport
     
     CommonDialog1.CancelError = True
@@ -258,7 +258,7 @@ On Error GoTo ERROR_HANDLE
         
         For i = 0 To Forms.count - 1
             Set f = Forms(i)
-            If TypeOf f Is FrmChart Then
+            If TypeOf f Is FrmChart_800_600 Then
                 Set fc = f
                 If UCase(fc.weldFileName) = UCase(CommonDialog1.FileName) Then
                     fc.SetFocus
@@ -267,7 +267,7 @@ On Error GoTo ERROR_HANDLE
             End If
         Next i
                 
-        Set fc = New FrmChart
+        Set fc = New FrmChart_800_600
         fc.Load CommonDialog1.FileName
         fc.Caption = CommonDialog1.FileName
         fc.Show
