@@ -15,7 +15,7 @@ Folder=D:\WeldStudio
 
 [Package|WMSPackage|Root]
 SubWizProgID=PDWizard.SetupPkgSubWiz
-BuildFolder=D:\PackageOffice
+BuildFolder=D:\PackageOffice_800_600
 
 [Package|WMSPackage|Configure DAO ISAMs]
 Applicable=No
@@ -54,7 +54,6 @@ c:\windows\system32\hhctrl.ocx=
 d:\weldstudio\wmshelp.chm=
 
 [Package|WMSPackage|Files In Project]
-D:\WeldStudio\WMSOffice.exe=Yes
 C:\WINDOWS\system32\msvbvm60.dll=Yes
 C:\WINDOWS\system32\oleaut32.dll=Yes
 C:\WINDOWS\system32\olepro32.dll=Yes
@@ -77,6 +76,7 @@ D:\WeldStudio\T0039.WLD=Yes
 C:\WINDOWS\hh.exe=No
 D:\WeldStudio\WMSHelp.chm=No
 D:\WeldStudio\WMSOfficeHelp.chm=Yes
+D:\WMSOffice_800_600.exe=Yes
 
 [Package|WMSPackage|Configure Registry Files]
 Applicable=No
@@ -119,6 +119,7 @@ D:\WeldStudio\wms.chm=$(AppPath)
 D:\WeldStudio\WMSHelp.chm=$(AppPath)
 D:\WeldStudio\WMSOffice.exe=$(AppPath)
 D:\WeldStudio\WMSOfficeHelp.chm=$(AppPath)
+D:\WMSOffice_800_600.exe=$(AppPath)
 
 [Package|WMSPackage|Configure Shared Files]
 Applicable=Yes
@@ -129,19 +130,20 @@ D:\WeldStudio\wms.chm=No
 D:\WeldStudio\WMSHelp.chm=No
 D:\WeldStudio\WMSOffice.exe=No
 D:\WeldStudio\WMSOfficeHelp.chm=No
+D:\WMSOffice_800_600.exe=No
 
 [Package|WMSPackage|Distribution]
 Type=single
 Size=
-Title=Weld Monitoring Studio(Office)
+Title=Weld Monitoring Studio(Office 800*600)
 
 [Package|WMSPackage|Package]
-PackageFolder=D:\PackageOffice
+PackageFolder=D:\PackageOffice_800_600
 ProjectFolder=D:\WeldStudio
 ServerSideCab=
-File1=D:\PackageOffice\setup.exe
-File2=D:\PackageOffice\Setup.Lst
-File3=D:\PackageOffice\WMSOffice.CAB
+File1=D:\PackageOffice_800_600\setup.exe
+File2=D:\PackageOffice_800_600\Setup.Lst
+File3=D:\PackageOffice_800_600\WMSOffice_800_600.CAB
 Handler1=PDWizard.FolderDplySubWiz
 Handler2=PDWizard.WebPostDplySubWiz
 
@@ -151,7 +153,7 @@ PrivateGroup0=True
 Parent0=$(Programs)
 
 [Package|WMSPackage|Weld Monitoring Studio]
-Icon1=WMSOffice.exe
+Icon1=WMSOffice_800_600.exe
 Title1=Weld Monitoring Studio(Office)
 StartIn1=$(AppPath)
 Key1=Icon1
