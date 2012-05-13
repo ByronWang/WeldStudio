@@ -400,17 +400,15 @@ Dim sTime As Single
     End If
     
     bIn = False
+    sTime = buf(startPos).Time
     For i = startPos To stopPos
         If buf(i).Amp > analysisDefine.UpsetCurrentMinimum Then
-            If bIn = False Then
-                bIn = True
-                sTime = buf(i).Time
-            End If
         ElseIf bIn = True Then
-            r.UpsetCurrentOnTime = buf(i - 1).Time - sTime
             Exit For
         End If
     Next
+    
+    r.UpsetCurrentOnTime = buf(i).Time - sTime
         
     If analysisDefine.UpsetEnable Then
     If analysisDefine.UpsetMin > r.UpsetRailUsage Or r.UpsetRailUsage > analysisDefine.UpsetMax Then
@@ -515,6 +513,7 @@ Dim lastPos As Integer
 Dim r As WeldAnalysisResultType
 r.Succeed = PlcDeclare.OK
 
+startPos = pos
 
 stage = INIT_STAGE
 For pos = pos To count
@@ -522,8 +521,6 @@ For pos = pos To count
         Exit For
     End If
 Next
-
-startPos = pos
 
 stage = PREFLASH_STAGE
 If buf(pos).WeldStage <> stage Then
