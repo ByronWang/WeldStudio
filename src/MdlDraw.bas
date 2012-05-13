@@ -145,6 +145,10 @@ Public Function DrawData(canvas, ByVal rStart As Single, ByVal rScale As Single,
             dv = 0
         End If
         
+        If dv > dMax Then
+            dv = dMax
+        End If
+        
         tx = (ref(i) - rStart) * rScale
         ty = (dv - dStart) * dScale
         
