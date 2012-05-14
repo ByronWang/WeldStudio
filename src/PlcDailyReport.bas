@@ -47,18 +47,30 @@ Dim pos As Long
 Dim i As Long
 Dim r(100) As DailyReport
 
+Dim oldDaylyReport() As DailyReport
+
+Dim fileExist As Boolean
+fileExist = False
+On Error GoTo HASNOT_FILE
+oldDaylyReport = LoadData(FileName)
+fileExist = True
+
+HASNOT_FILE:
+On Error GoTo 0
+
 
 Open FileName For Binary As #1
     pos = 0
     i = 0
-    
-    While pos < LOF(1)
-        Get 1, pos + 1, r(i)
-        i = i + 1
-        pos = pos + Len(data)
-    Wend
-    
-    
+    If fileExist Then
+    For i = LBound(oldDaylyReport) To UBound(oldDaylyReport)
+        If oldDaylyReport(i).Serial <> data.Serial Or oldDaylyReport(i).Sequence <> data.Sequence Then
+            Put 1, pos + 1, oldDaylyReport(i)
+            pos = pos + Len(data)
+        End If
+    Next i
+    End If
+        
     Put 1, pos + 1, data
     pos = pos + Len(data)
     

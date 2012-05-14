@@ -48,18 +48,18 @@ Begin VB.Form FrmOption
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   6
+      Tab             =   5
       TabsPerRow      =   10
       TabHeight       =   520
       TabCaption(0)   =   "General"
       TabPicture(0)   =   "FrmOption.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame7"
-      Tab(0).Control(1)=   "Frame5"
-      Tab(0).Control(2)=   "CommonDialog1"
-      Tab(0).Control(3)=   "cboLanguage"
-      Tab(0).Control(4)=   "chkOnlineOnStartUp"
-      Tab(0).Control(5)=   "lblLanguage"
+      Tab(0).Control(0)=   "lblLanguage"
+      Tab(0).Control(1)=   "chkOnlineOnStartUp"
+      Tab(0).Control(2)=   "cboLanguage"
+      Tab(0).Control(3)=   "CommonDialog1"
+      Tab(0).Control(4)=   "Frame5"
+      Tab(0).Control(5)=   "Frame7"
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "Simulate"
       TabPicture(1)   =   "FrmOption.frx":0028
@@ -82,30 +82,33 @@ Begin VB.Form FrmOption
       TabCaption(4)   =   "Weld Chart"
       TabPicture(4)   =   "FrmOption.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Frame1(1)"
-      Tab(4).Control(1)=   "Frame1(0)"
-      Tab(4).Control(2)=   "Frame1(2)"
-      Tab(4).Control(3)=   "chkFilterData"
+      Tab(4).Control(0)=   "chkFilterData"
+      Tab(4).Control(1)=   "Frame1(2)"
+      Tab(4).Control(2)=   "Frame1(0)"
+      Tab(4).Control(3)=   "Frame1(1)"
       Tab(4).ControlCount=   4
       TabCaption(5)   =   "Weld Analysis"
       TabPicture(5)   =   "FrmOption.frx":0098
-      Tab(5).ControlEnabled=   0   'False
+      Tab(5).ControlEnabled=   -1  'True
       Tab(5).Control(0)=   "Label1"
+      Tab(5).Control(0).Enabled=   0   'False
       Tab(5).Control(1)=   "Frame6"
+      Tab(5).Control(1).Enabled=   0   'False
       Tab(5).Control(2)=   "Frame1(11)"
+      Tab(5).Control(2).Enabled=   0   'False
       Tab(5).ControlCount=   3
       TabCaption(6)   =   "Weld Recording"
       TabPicture(6)   =   "FrmOption.frx":00B4
-      Tab(6).ControlEnabled=   -1  'True
-      Tab(6).Control(0)=   "Label2"
+      Tab(6).ControlEnabled=   0   'False
+      Tab(6).Control(0)=   "cmdReset"
       Tab(6).Control(0).Enabled=   0   'False
-      Tab(6).Control(1)=   "Frame4"
+      Tab(6).Control(1)=   "chkRecordInterrupts"
       Tab(6).Control(1).Enabled=   0   'False
       Tab(6).Control(2)=   "txtWeldNumber"
       Tab(6).Control(2).Enabled=   0   'False
-      Tab(6).Control(3)=   "chkRecordInterrupts"
+      Tab(6).Control(3)=   "Frame4"
       Tab(6).Control(3).Enabled=   0   'False
-      Tab(6).Control(4)=   "cmdReset"
+      Tab(6).Control(4)=   "Label2"
       Tab(6).Control(4).Enabled=   0   'False
       Tab(6).ControlCount=   5
       Begin VB.Frame Frame7 
@@ -509,7 +512,7 @@ Begin VB.Form FrmOption
       Begin VB.CommandButton cmdReset 
          Caption         =   "Reset"
          Height          =   375
-         Left            =   7200
+         Left            =   -67800
          TabIndex        =   178
          Top             =   720
          Width           =   975
@@ -517,7 +520,7 @@ Begin VB.Form FrmOption
       Begin VB.CheckBox chkRecordInterrupts 
          Caption         =   "Record Interrupts"
          Height          =   375
-         Left            =   4320
+         Left            =   -70680
          TabIndex        =   5
          Top             =   1560
          Width           =   3015
@@ -525,7 +528,7 @@ Begin VB.Form FrmOption
       Begin VB.TextBox txtWeldNumber 
          ForeColor       =   &H00000000&
          Height          =   375
-         Left            =   5400
+         Left            =   -69600
          MaxLength       =   5
          TabIndex        =   4
          Text            =   "A0001"
@@ -536,7 +539,7 @@ Begin VB.Form FrmOption
          Caption         =   $"FrmOption.frx":00D0
          Height          =   1215
          Index           =   11
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   170
          Tag             =   "21900"
          Top             =   4560
@@ -546,6 +549,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   19
             Left            =   6720
+            MaxLength       =   6
             TabIndex        =   32
             Text            =   "82.55"
             Top             =   720
@@ -556,6 +560,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   18
             Left            =   6720
+            MaxLength       =   6
             TabIndex        =   31
             Text            =   "209.05"
             Top             =   360
@@ -566,6 +571,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   17
             Left            =   2760
+            MaxLength       =   5
             TabIndex        =   30
             Text            =   "0"
             Top             =   720
@@ -576,6 +582,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   15
             Left            =   2760
+            MaxLength       =   5
             TabIndex        =   29
             Text            =   "480"
             Top             =   360
@@ -647,7 +654,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame6 
          Caption         =   "Criteria"
          Height          =   3855
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   145
          Top             =   600
          Width           =   10215
@@ -665,6 +672,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   14
                Left            =   1680
+               MaxLength       =   5
                TabIndex        =   28
                Text            =   "30"
                Top             =   720
@@ -715,6 +723,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   12
                Left            =   1680
+               MaxLength       =   5
                TabIndex        =   25
                Text            =   "550"
                Top             =   720
@@ -725,6 +734,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   13
                Left            =   1680
+               MaxLength       =   6
                TabIndex        =   26
                Text            =   "0.80"
                Top             =   1080
@@ -774,6 +784,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   11
                Left            =   1680
+               MaxLength       =   6
                TabIndex        =   22
                Text            =   "2.00"
                Top             =   1080
@@ -784,6 +795,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   10
                Left            =   1680
+               MaxLength       =   5
                TabIndex        =   23
                Text            =   "100"
                Top             =   720
@@ -844,6 +856,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   8
                Left            =   1680
+               MaxLength       =   6
                TabIndex        =   19
                Text            =   "0.75"
                Top             =   720
@@ -854,6 +867,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   9
                Left            =   1680
+               MaxLength       =   6
                TabIndex        =   20
                Text            =   "22.00"
                Top             =   1080
@@ -904,6 +918,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   6
                Left            =   1680
+               MaxLength       =   5
                TabIndex        =   16
                Text            =   "30"
                Top             =   720
@@ -914,6 +929,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   7
                Left            =   1680
+               MaxLength       =   5
                TabIndex        =   17
                Text            =   "60"
                Top             =   1080
@@ -954,6 +970,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   5
                Left            =   1680
+               MaxLength       =   5
                TabIndex        =   14
                Text            =   "20.00"
                Top             =   1080
@@ -964,6 +981,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   4
                Left            =   1680
+               MaxLength       =   5
                TabIndex        =   13
                Text            =   "14.00"
                Top             =   720
@@ -1024,6 +1042,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   2
                Left            =   1680
+               MaxLength       =   5
                TabIndex        =   10
                Text            =   "0.75"
                Top             =   720
@@ -1034,6 +1053,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   3
                Left            =   1680
+               MaxLength       =   5
                TabIndex        =   11
                Text            =   "1.20"
                Top             =   1080
@@ -1074,6 +1094,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   1
                Left            =   1680
+               MaxLength       =   6
                TabIndex        =   8
                Text            =   "0.25"
                Top             =   1080
@@ -1084,6 +1105,7 @@ Begin VB.Form FrmOption
                Height          =   270
                Index           =   0
                Left            =   1680
+               MaxLength       =   6
                TabIndex        =   7
                Text            =   "0.14"
                Top             =   720
@@ -1184,6 +1206,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   8
             Left            =   1440
+            MaxLength       =   6
             TabIndex        =   56
             Text            =   "0"
             Top             =   600
@@ -1194,6 +1217,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   9
             Left            =   1440
+            MaxLength       =   6
             TabIndex        =   57
             Text            =   "0"
             Top             =   960
@@ -1204,6 +1228,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   10
             Left            =   3840
+            MaxLength       =   6
             TabIndex        =   58
             Text            =   "0"
             Top             =   600
@@ -1214,6 +1239,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   11
             Left            =   3840
+            MaxLength       =   6
             TabIndex        =   59
             Text            =   "0"
             Top             =   960
@@ -1338,6 +1364,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   15
             Left            =   3840
+            MaxLength       =   6
             TabIndex        =   64
             Text            =   "0"
             Top             =   960
@@ -1348,6 +1375,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   14
             Left            =   3840
+            MaxLength       =   6
             TabIndex        =   63
             Text            =   "0"
             Top             =   600
@@ -1358,6 +1386,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   13
             Left            =   1440
+            MaxLength       =   6
             TabIndex        =   62
             Text            =   "0"
             Top             =   960
@@ -1368,6 +1397,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   12
             Left            =   1440
+            MaxLength       =   6
             TabIndex        =   61
             Text            =   "0"
             Top             =   600
@@ -1479,6 +1509,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   3
             Left            =   1680
+            MaxLength       =   4
             TabIndex        =   36
             Text            =   "0"
             Top             =   360
@@ -1489,6 +1520,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   4
             Left            =   1680
+            MaxLength       =   4
             TabIndex        =   37
             Text            =   "0"
             Top             =   720
@@ -1499,6 +1531,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   5
             Left            =   1680
+            MaxLength       =   4
             TabIndex        =   38
             Text            =   "0"
             Top             =   1080
@@ -1549,6 +1582,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   2
             Left            =   1680
+            MaxLength       =   4
             TabIndex        =   35
             Text            =   "0"
             Top             =   1080
@@ -1559,6 +1593,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   1
             Left            =   1680
+            MaxLength       =   4
             TabIndex        =   34
             Text            =   "0"
             Top             =   720
@@ -1569,6 +1604,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   0
             Left            =   1680
+            MaxLength       =   4
             TabIndex        =   33
             Text            =   "0"
             Top             =   360
@@ -1619,6 +1655,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   7
             Left            =   2760
+            MaxLength       =   4
             TabIndex        =   40
             Text            =   "0"
             Top             =   705
@@ -1629,6 +1666,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   6
             Left            =   2760
+            MaxLength       =   4
             TabIndex        =   39
             Text            =   "0"
             Top             =   360
@@ -1668,6 +1706,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   0
             Left            =   1440
+            MaxLength       =   4
             TabIndex        =   41
             Text            =   "1000"
             Top             =   360
@@ -1678,6 +1717,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   1
             Left            =   3720
+            MaxLength       =   4
             TabIndex        =   43
             Text            =   "100"
             Top             =   360
@@ -1688,6 +1728,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   2
             Left            =   1440
+            MaxLength       =   4
             TabIndex        =   42
             Text            =   "500"
             Top             =   720
@@ -1698,6 +1739,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   3
             Left            =   3720
+            MaxLength       =   4
             TabIndex        =   44
             Text            =   "50"
             Top             =   720
@@ -1791,6 +1833,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   3
             Left            =   3840
+            MaxLength       =   6
             TabIndex        =   49
             Text            =   "0"
             Top             =   960
@@ -1801,6 +1844,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   2
             Left            =   3840
+            MaxLength       =   6
             TabIndex        =   48
             Text            =   "0"
             Top             =   600
@@ -1811,6 +1855,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   1
             Left            =   1440
+            MaxLength       =   6
             TabIndex        =   47
             Text            =   "0"
             Top             =   960
@@ -1821,6 +1866,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   0
             Left            =   1440
+            MaxLength       =   6
             TabIndex        =   46
             Text            =   "0"
             Top             =   600
@@ -1925,6 +1971,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   4
             Left            =   1440
+            MaxLength       =   6
             TabIndex        =   51
             Text            =   "0"
             Top             =   600
@@ -1935,6 +1982,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   5
             Left            =   1440
+            MaxLength       =   6
             TabIndex        =   52
             Text            =   "0"
             Top             =   960
@@ -1945,6 +1993,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   6
             Left            =   3840
+            MaxLength       =   6
             TabIndex        =   53
             Text            =   "0"
             Top             =   600
@@ -1955,6 +2004,7 @@ Begin VB.Form FrmOption
             Height          =   250
             Index           =   7
             Left            =   3840
+            MaxLength       =   6
             TabIndex        =   54
             Text            =   "0"
             Top             =   960
@@ -2068,7 +2118,7 @@ Begin VB.Form FrmOption
       Begin VB.Frame Frame4 
          Caption         =   "Start Recording"
          Height          =   1935
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   79
          Tag             =   "22100"
          Top             =   600
@@ -2099,6 +2149,7 @@ Begin VB.Form FrmOption
             Height          =   270
             Index           =   2
             Left            =   600
+            MaxLength       =   6
             TabIndex        =   3
             Text            =   "2.50"
             Top             =   1080
@@ -2168,7 +2219,7 @@ Begin VB.Form FrmOption
       Begin VB.Label Label2 
          Caption         =   "Weld Number:"
          Height          =   375
-         Left            =   4200
+         Left            =   -70800
          TabIndex        =   177
          Top             =   840
          Width           =   1335
@@ -2176,7 +2227,7 @@ Begin VB.Form FrmOption
       Begin VB.Label Label1 
          Caption         =   "Label1"
          Height          =   255
-         Left            =   -69360
+         Left            =   5640
          TabIndex        =   146
          Top             =   2040
          Width           =   1815
@@ -2568,7 +2619,7 @@ PlcRes.LoadResFor Me
         WeldAnalysis_Data(14) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "TotalRailUsageTotalRail", 20))
         WeldAnalysis_Data(15) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "InitialVoltage", 430))
         'WeldAnalysis_Data(16) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "BoostSpeedTimeRange", 2))
-        WeldAnalysis_Data(17) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetCurrentMinimum", 100))
+        WeldAnalysis_Data(17) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetCurrentMinimum", 200))
         WeldAnalysis_Data(18) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Pistonside)", 209.55))
         WeldAnalysis_Data(19) = CSng(GetSetting(App.EXEName, "AnalysisDefine", "UpsetDiameter(Rodside)", 82.55))
         
