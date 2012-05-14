@@ -599,10 +599,11 @@ For pos = pos To count
     End If
 Next
 r = PlcAnalysiser.anaForge(buf, lastPos, pos - 1, r)
-r = PlcAnalysiser.anaAll(buf, startPos, pos - 1, r)
  
 '=====================================================
 SHEAR_S:
+r = PlcAnalysiser.anaAll(buf, startPos, pos - 1, r)
+
 stage = SHEAR_STAGE
 If buf(pos).WeldStage <> stage Then
     GoTo FINISH_S
