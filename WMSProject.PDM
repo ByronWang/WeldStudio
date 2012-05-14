@@ -75,10 +75,9 @@ C:\WINDOWS\system32\VB6STKIT.DLL=Yes
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
 D:\WeldStudio\T0039.WLD=Yes
 C:\WINDOWS\hh.exe=No
-
-D:\WeldStudio\WMSHelp.chm=No
 D:\WeldStudio\WMSOfficeHelp.chm=Yes
 C:\WINDOWS\system32\DTL32.DLL=No
+D:\WeldStudio\WMSHelp.chm=No
 
 [Package|WMSPackage|Configure Registry Files]
 Applicable=No
