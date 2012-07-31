@@ -1545,17 +1545,17 @@ Private Function setChart(fr As FileR, model As ModelConstants)
     Select Case model
     Case ModelConstants.COMMON:
         buf = LoadDataAll(fr.data, fr.header2.RecordCount)
-        Call PrepareDraw(P, 600, P.height - 400, P.width - 1200, -(P.height - 600), buf(0).Time)
+        Call PrepareDraw(P, 600, P.height - 700, P.width - 1200, -(P.height - 800), buf(0).Time)
         DrawChartAll P, buf, fr.analysisDefine
         
     Case ModelConstants.PURE:
         buf = LoadDataAllThin(fr.data, fr.header2.RecordCount)
-        Call PrepareDraw(P, 600, P.height - 400, P.width - 1200, -(P.height - 600), buf(0).Time)
+        Call PrepareDraw(P, 600, P.height - 700, P.width - 1200, -(P.height - 800), buf(0).Time)
         DrawChartAll P, buf, fr.analysisDefine
         
     Case ModelConstants.SMALLCOMMON, ModelConstants.SMALLPURE:
         buf = LoadDataUpset(fr.data, fr.header2.RecordCount)
-        Call PrepareDraw(P, 600, P.height - 400, P.width - 1200, -(P.height - 600), buf(0).Time)
+        Call PrepareDraw(P, 600, P.height - 700, P.width - 1200, -(P.height - 800), buf(0).Time)
         DrawChartUpset P, buf, fr.analysisDefine
         
     End Select
