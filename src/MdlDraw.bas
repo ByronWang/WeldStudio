@@ -253,6 +253,34 @@ Public Sub PrepareDraw(canvas, left As Single, top As Single, width As Single, h
     canvas.Line (pLeft + 0, pTop + 0)-(pLeft + pWidth, pTop + 0), Aix_COLOR
     canvas.Line (pLeft + pWidth, pTop + 0)-(pLeft + pWidth, pTop + pHeight), Aix_COLOR
     
+    'NEW Code to draw sample
+    
+    Dim h, w As Single
+    h = canvas.TextHeight(pos)
+    w = canvas.TextWidth(pos)
+        
+    canvas.DrawMode = 13
+    canvas.DrawWidth = 1
+    canvas.DrawStyle = 0
+    
+    Dim step As Single
+    step = 0
+    
+    
+    canvas.Line (pLeft + step, pTop + h + h + h / 2)-(pLeft + step + w, pTop + h + h + h / 2), &H50580
+    canvas.CurrentX = pLeft + step + w + w / 2: canvas.CurrentY = pTop + h + h: canvas.Print "Amp"
+    
+    step = step + w * 5
+    canvas.Line (pLeft + step, pTop + h + h + h / 2)-(pLeft + step + w, pTop + h + h + h / 2), &HFF&
+    canvas.CurrentX = pLeft + step + w + w / 2: canvas.CurrentY = pTop + h + h: canvas.Print "Volt"
+    
+    step = step + w * 5
+    canvas.Line (pLeft + step, pTop + h + h + h / 2)-(pLeft + step + w, pTop + h + h + h / 2), &H700000
+    canvas.CurrentX = pLeft + step + w + w / 2: canvas.CurrentY = pTop + h + h: canvas.Print "Force"
+        
+    step = step + w * 5
+    canvas.Line (pLeft + step, pTop + h + h + h / 2)-(pLeft + step + w, pTop + h + h + h / 2), &HC000&
+    canvas.CurrentX = pLeft + step + w + w / 2: canvas.CurrentY = pTop + h + h: canvas.Print "Dist"
 End Sub
 
 Public Sub DrawChartAll(canvas, data() As WeldData, analysisDefine As WeldAnalysisDefineType)
