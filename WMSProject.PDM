@@ -47,7 +47,6 @@ d:\weldstudio\wmshelp.chm=
 d:\weldstudio\wmsofficehelp.chm=
 
 [Package|WMSPackage|Files Removed]
-c:\windows\system32\comdlg32.ocx=
 c:\windows\system32\dtl32.dll=
 c:\windows\hh.exe=
 c:\windows\system32\hhctrl.ocx=
@@ -68,7 +67,7 @@ C:\WINDOWS\system32\scrrun.dll=Yes
 C:\WINDOWS\system32\msvcrt.dll=Yes
 C:\WINDOWS\system32\MSFLXGRD.OCX=Yes
 C:\WINDOWS\system32\TABCTL32.OCX=Yes
-C:\WINDOWS\system32\COMDLG32.OCX=No
+C:\WINDOWS\system32\COMDLG32.OCX=Yes
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
 C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
 C:\WINDOWS\system32\VB6STKIT.DLL=Yes
